@@ -1,16 +1,5 @@
 
 
-本工程实现：
-
-1. 三地 probe 按 PP 轮询 RRDP `notification.xml`
-2. 生成并上报 `Level1Record`
-3. Collector 使用 SQLite 持久化 Level-1
-4. Collector 自动聚合 `E3-1` / `E3-2`
-5. Probe 缓存并响应最小 Level-2：
-   - `notif_refs`
-   - `path_evidence`
-6. 预留 Routinator 适配层，默认关闭
-
 ## 目录
 
 ```text
