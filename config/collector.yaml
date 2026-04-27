@@ -1,0 +1,27 @@
+listen_host: 0.0.0.0
+listen_port: 28081
+db_path: ./data/collector.sqlite3
+log_file: ./logs/collector/collector.log
+event_window_seconds: 180
+expected_probes:
+  - probe_id: probe-bj
+    location: beijing
+    base_url: http://166.111.121.63:28089
+  - probe_id: probe-cd
+    location: chengdu
+    base_url: http://47.108.137.128:28089
+  - probe_id: probe-sg
+    location: singapore
+    base_url: http://8.219.129.95:28089
+
+
+auto_l2:
+  enabled: true
+  dispatch_timeout_seconds: 15
+  e3_1_min_probes: 2
+  e3_1_min_serial_gap: 3
+  e3_1_max_skew_seconds: 120
+  e3_1_trigger_on_session_divergence: true
+  e3_2_min_failed_probes: 1
+  e3_2_require_success_probe: true
+  e3_2_trigger_notif_refs_when_success_count_at_least: 2
