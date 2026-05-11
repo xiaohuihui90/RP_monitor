@@ -1,0 +1,28 @@
+P8_2_VRP_SIDECAR_GROUP_AUTO_SUPPORT=DONE
+
+sidecar_port = 28114
+sidecar_service = m14_p4_upload_sidecar_v2_group_auto
+
+test_group_id = group_auto_test_28114_20260509T072000Z
+
+expected_behavior:
+  multipart snapshot_group_id should be respected.
+  group_manifest should be created under m14_vrp_snapshots/groups/group_auto_test_28114_20260509T072000Z.
+  snapshot_record.snapshot_group_id should equal test_group_id.
+  group.snapshot_group_id should equal test_group_id.
+
+P8_group_auto_supported = True
+
+runtime_changes:
+  vrp_upload_sidecar_replaced = True
+  vrp_upload_sidecar_port = 28114
+  object_upload_sidecar_28115_unchanged = True
+  collector_main_service_restarted = False
+  probe_restarted = False
+  new_validator_installed = False
+  bgp_data_loaded = False
+
+next_batch:
+  P8-3 VRP group_auto three-probe upload test
+
+P8_2_acceptance = True

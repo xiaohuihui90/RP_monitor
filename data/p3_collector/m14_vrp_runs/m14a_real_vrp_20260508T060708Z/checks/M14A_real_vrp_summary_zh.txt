@@ -1,0 +1,26 @@
+M14-A 真实三地 VRP 输出层最小闭环完成。
+
+run_id = m14a_real_vrp_20260508T060708Z
+
+本次输入为北京、成都、新加坡三地 Routinator 导出的真实 VRP JSON 文件。系统完成 raw VRP 解析、canonical VRP 归一化、vrp_root_v1 计算和低内存 pairwise diff。
+
+核心结果：
+- 三地 raw 输入完整：True
+- 三地 normalized 输出完整：True
+- parse_error_count：0
+- 三地 vrp_root_v1 是否一致：False
+- pairwise entry-level diff 总数：202
+- 最小 Jaccard similarity：0.9998939236926678
+
+三地 VRP 数量：
+- probe-cd：857869
+- probe-bj：857796
+- probe-sg：857859
+
+pairwise 差异：
+- probe-cd_vs_probe-bj：89 条差异，Jaccard = 0.9998962555238106，top_diff_tal = lacnic
+- probe-cd_vs_probe-sg：22 条差异，Jaccard = 0.999974355238234，top_diff_tal = arin
+- probe-bj_vs_probe-sg：91 条差异，Jaccard = 0.9998939236926678，top_diff_tal = lacnic
+
+阶段性解释：
+本次运行说明真实三地 Routinator VRP 输出存在极小规模差异，但差异比例很低。该结果目前只能作为 VRP 输出层差异信号，不能直接确认为 E4。后续需要结合三地导出时间、validator config、object layer、window mapping、fetch completeness 和 infrastructure context 进一步归因。

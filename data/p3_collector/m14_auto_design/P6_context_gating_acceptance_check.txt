@@ -1,0 +1,28 @@
+P6_CONTEXT_GATING_AND_ATTRIBUTION=DONE
+
+snapshot_group_id = group_20260508T064858Z
+auto_run_id = m14a_auto_group_20260508T064858Z
+auto_run_dir = /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_auto_group_20260508T064858Z
+
+scope:
+  P5_auto_vrp_diff_used = True
+  object_context_joined = True
+  validator_config_context_joined = True
+  window_mapping_context_joined = True
+  fetch_completeness_context_joined = True
+  infrastructure_context_joined = True
+  final_verdict_generated = True
+  evidence_pack_generated = True
+
+expected_final_status:
+  final_status = blocked_object_layer_unverified
+  e4_status = blocked
+  confirmed_allowed = False
+
+reason:
+  VRP output diff is observed, but same-window object-layer context is missing.
+
+P6_acceptance = True
+
+next:
+  collect same-window object layer context and rerun final verdict

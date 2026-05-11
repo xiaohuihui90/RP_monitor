@@ -1,0 +1,108 @@
+{
+  "schema": "s3.stage3.m12_r3.5e_5.final_verdict.v1",
+  "created_at_utc": "2026-05-07T03:27:44.594468+00:00",
+  "gate_id": "m12_r3_object_gate_v5_5e_sync_20260506T134612Z",
+  "source_run_id": "m12_r3_5e_sync_export_20260506T134612Z",
+  "acceptance": "pass",
+  "final_status": "object_layer_temporal_version_divergence",
+  "final_attribution": "manifest_version_skew_dominant",
+  "confidence": "medium-high",
+  "e4_status": "not_e4",
+  "active_object_diff_required": false,
+  "records_level_used": "active_manifest",
+  "root_aligned": false,
+  "root_groups": {
+    "sha256:61001921ea1a62e3bc06c3cd19bf5acb03b228085252715580a3b1b96a85b677": [
+      "probe-cd"
+    ],
+    "sha256:c1f079c25b30467080b59aa64dbdbc7b0c50308089fe2ad2e777acb000f68ea3": [
+      "probe-bj"
+    ],
+    "sha256:ad7d7fa009b5e67987481f809fd3233c079ce4778b4a3580ef4b5d19c7587da0": [
+      "probe-sg"
+    ]
+  },
+  "probe_manifest_counts": {
+    "probe-cd": 51685,
+    "probe-bj": 51686,
+    "probe-sg": 51675
+  },
+  "presence_classes": {
+    "probe-cd,probe-bj,probe-sg": 51675,
+    "probe-cd,probe-bj": 10,
+    "probe-bj": 1
+  },
+  "pair_summary": {
+    "probe-cd_vs_probe-bj": {
+      "left": "probe-cd",
+      "right": "probe-bj",
+      "left_count": 51685,
+      "right_count": 51686,
+      "common_count": 51685,
+      "only_left_count": 0,
+      "only_right_count": 1,
+      "same_uri_different_manifest_hash_count": 69,
+      "same_uri_metadata_diff_count": 69,
+      "small_manifest_number_skew_sample_count": 68,
+      "small_manifest_number_skew_ratio": 0.9855072463768116,
+      "jaccard_similarity": 0.9999806524010371
+    },
+    "probe-cd_vs_probe-sg": {
+      "left": "probe-cd",
+      "right": "probe-sg",
+      "left_count": 51685,
+      "right_count": 51675,
+      "common_count": 51675,
+      "only_left_count": 10,
+      "only_right_count": 0,
+      "same_uri_different_manifest_hash_count": 58,
+      "same_uri_metadata_diff_count": 58,
+      "small_manifest_number_skew_sample_count": 57,
+      "small_manifest_number_skew_ratio": 0.9827586206896551,
+      "jaccard_similarity": 0.999806520267002
+    },
+    "probe-bj_vs_probe-sg": {
+      "left": "probe-bj",
+      "right": "probe-sg",
+      "left_count": 51686,
+      "right_count": 51675,
+      "common_count": 51675,
+      "only_left_count": 11,
+      "only_right_count": 0,
+      "same_uri_different_manifest_hash_count": 12,
+      "same_uri_metadata_diff_count": 12,
+      "small_manifest_number_skew_sample_count": 12,
+      "small_manifest_number_skew_ratio": 1.0,
+      "jaccard_similarity": 0.9997871764114074
+    }
+  },
+  "aggregate_metrics": {
+    "all_pairwise_same_uri_manifest_hash_diff_count": 139,
+    "all_pairwise_manifest_presence_diff_count": 22,
+    "all_pairwise_small_manifest_number_skew_sample_count": 137,
+    "small_skew_over_hash_diff_ratio": 0.9856115107913669
+  },
+  "acceptance_checks": {
+    "no_blockers": true,
+    "rejudged_status_is_divergent_candidate": true,
+    "manifest_records_fetched": true,
+    "manifest_attribution_is_version_skew_dominant": true,
+    "active_object_diff_not_required": true,
+    "small_skew_ratio_ge_0_8": true,
+    "not_e4": true
+  },
+  "warnings": [
+    "probe-bj:manifest_parse_failure_observed",
+    "probe-cd:manifest_parse_failure_observed",
+    "probe-sg:expired_manifest_count_above_strict_threshold",
+    "probe-sg:manifest_parse_failure_observed"
+  ],
+  "blockers": [],
+  "not_e4_reason": "This evidence is restricted to the object layer. No validated output-layer VRP digest/root comparison is included.",
+  "decision_basis": [
+    "5E-3B removed false source_run_id and policy_fingerprint blockers via field-compatible rejudgement.",
+    "5E-4A fetched and compared active manifest records across all three probes.",
+    "5E-4B showed that same-URI manifest hash differences are dominated by small manifestNumber skew.",
+    "The divergence is therefore attributed to object-layer temporal/version skew, not validated-output divergence."
+  ]
+}

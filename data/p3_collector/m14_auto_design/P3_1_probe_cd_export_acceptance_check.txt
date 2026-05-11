@@ -1,0 +1,26 @@
+P3_1_PROBE_CD_EXPORT_ONCE=DONE
+
+node = CD2
+probe_id = probe-cd
+location = chengdu
+
+script = scripts/p3/probe_export_vrp_once.py
+latest_dir = data/probe/m14_vrp_export/latest
+
+outputs:
+  data/probe/m14_vrp_export/latest/probe-cd_vrps.raw.json
+  data/probe/m14_vrp_export/latest/probe-cd_vrps.raw.json.gz
+  data/probe/m14_vrp_export/latest/manifest.json
+  data/probe/m14_vrp_export/latest/sha256.txt
+  data/probe/m14_vrp_export/latest/P3_probe_export_acceptance_check.txt
+
+scope:
+  export_once = True
+  gzip_generated = True
+  sha256_generated = True
+  manifest_generated = True
+  upload_ready = True
+  upload_executed = False
+  collector_upload_api_required_in_P4 = True
+
+P3_1_acceptance = True

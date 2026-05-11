@@ -1,0 +1,34 @@
+M14_E4A_CLOSEOUT=DONE
+
+run_id = m14a_auto_group_20260508T064858Z
+snapshot_group_id = group_20260508T064858Z
+
+scope = m14_e4a_cross_region_same_validator
+
+completed_batches:
+  P0_scope_revised = True
+  P1_parameter_enhancement = True
+  P2_evidence_pack_v2 = True
+  P3_object_context_discovery = True
+  P3R_strict_object_context_review = True
+  P4_strict_object_context_gate = True
+
+final_status = blocked_object_layer_unverified
+e4_status = blocked
+confirmed_allowed = False
+
+strict_object_context_available = False
+strict_same_window_object_context_count = 0
+
+e4b_cross_validator = reserved_only
+control_plane_impact = reserved_only
+
+runtime_service_changed = False
+collector_restarted = False
+probe_restarted = False
+new_validator_installed = False
+bgp_data_loaded = False
+
+closeout_summary_doc = /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_closeout/e4a_m14_closeout_20260509T020304Z/docs/M14_E4A_closeout_summary_zh.md
+
+M14_E4A_closeout_acceptance = True

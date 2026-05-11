@@ -1,0 +1,27 @@
+P0_E4A_JOINT_DESIGN_AND_CONFIG=DONE
+
+created_at_utc = 2026-05-09T02:19:58.607258+00:00
+
+scope = m14_e4a_cross_region_same_validator
+e4b_cross_validator = reserved_only
+control_plane_impact = reserved_only
+
+outputs:
+  docs/stage3/M14_E4A_joint_vrp_object_collection_design.md
+  docs/stage3/M14_E4A_joint_vrp_object_collection_software_design.md
+  config/p3/e4a_joint_collect.yaml
+  /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_design/e4a_joint_design_20260509T021839Z/docs/M14_E4A_joint_execution_plan_overview.md
+  /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_design/e4a_joint_design_20260509T021839Z/manifests/P0_e4a_joint_design_manifest.json
+
+required_files_ok = True
+
+runtime_service_changed = False
+collector_restarted = False
+probe_restarted = False
+new_validator_installed = False
+bgp_data_loaded = False
+
+next_batch:
+  P1 成都节点 object snapshot export 单点试跑
+
+P0_acceptance = True

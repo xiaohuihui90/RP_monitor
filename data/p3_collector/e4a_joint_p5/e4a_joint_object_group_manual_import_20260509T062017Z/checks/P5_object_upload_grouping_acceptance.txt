@@ -1,0 +1,71 @@
+P5_THREE_PROBE_OBJECT_UPLOAD_AND_GROUPING=DONE
+
+created_at_utc = 2026-05-09T06:20:29.773163+00:00
+
+snapshot_group_id = group_20260509T031700Z
+import_mode = manual_sz_rz_then_local_28115_import
+
+received_object_probes = ['probe-bj', 'probe-cd', 'probe-sg']
+object_group_complete = True
+vrp_group_complete = False
+joint_group_complete = False
+
+generated_time_min = 2026-05-09T03:17:18.353807+00:00
+generated_time_max = 2026-05-09T06:08:08.914824+00:00
+generated_time_skew_seconds = 10250
+window_mapping_level = weak
+
+probe_checks:
+  probe-cd_ok = True
+  probe-bj_ok = True
+  probe-sg_ok = True
+
+object_inventory_count:
+  probe-cd = 52018
+  probe-bj = 156490
+  probe-sg = 52543
+
+active_manifest_count:
+  probe-cd = 51906
+  probe-bj = 156148
+  probe-sg = 52431
+
+object_source_mode:
+  probe-cd = cache_file_inventory
+  probe-bj = cache_file_inventory
+  probe-sg = cache_file_inventory
+
+object_roots:
+  probe-cd object_set_root = sha256:de9416f62d925db6c035ea192d214e82e8602b3e944d79b402e1f2b0f90175f8
+  probe-bj object_set_root = sha256:93e2d19dd7a5f98226057602d219bc1e13b51931d4410f8ae53c3a46c87ba53b
+  probe-sg object_set_root = sha256:413493f097c1e6920caea6fdedf5755cd3c11f0593dbb4894f09166a3ad26453
+
+effective_object_roots:
+  probe-cd effective_object_root = sha256:8647689c220fea438c84a8cf76907db43405416e2de3b1ad871df0a01de59732
+  probe-bj effective_object_root = sha256:2e7341774893bf85f49a038a6c7df64b015dd797ead4ed68c9326eab390dd32e
+  probe-sg effective_object_root = sha256:afaea19a558d0d6901a13fd6aacb5cb76a5fac4e83176b30ec283dc942fb0c9b
+
+known_limitations:
+  joint_group_complete = False because VRP group has not been joined in this batch.
+  window_mapping_level = weak because current manual fallback imports were not generated in a tight time window.
+  current object_source_mode is cache_file_inventory, not validator active-object decision.
+
+reserved_interfaces:
+  e4b_cross_validator = reserved_only
+  control_plane_impact = reserved_only
+
+runtime_changes:
+  object_upload_sidecar_running = True
+  object_upload_sidecar_port = 28115
+  collector_main_service_restarted = False
+  probe_restarted = False
+  new_validator_installed = False
+  bgp_data_loaded = False
+
+outputs:
+  /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_snapshots/groups/group_20260509T031700Z/joint_group_manifest.json
+
+next_batch:
+  P6 object layer compare
+
+P5_acceptance = True

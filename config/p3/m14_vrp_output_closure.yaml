@@ -1,0 +1,44 @@
+schema: s3.stage3.m14.config.v1
+
+run:
+  default_probes:
+    - probe-cd
+    - probe-bj
+    - probe-sg
+  default_validator: routinator
+  timezone: UTC
+
+input:
+  allow_json: true
+  allow_jsonl: true
+  allow_csv: true
+  require_all_probes: true
+  sample_limit_per_pair: 100
+
+canonicalization:
+  tal_lowercase: true
+  asn_output_prefix: "AS"
+  prefix_strict: false
+  max_length_default_to_prefix_length: true
+  missing_max_length_warning: true
+
+root:
+  name: vrp_root_v1
+  algorithm: sha256
+  include_fields:
+    - canonical_key
+  output_prefix: "sha256:"
+
+diff:
+  pairwise_enabled: true
+  compute_jaccard: true
+  compute_tal_breakdown: true
+  compute_afi_breakdown: true
+  sample_limit_per_pair: 100
+
+m14a_scope:
+  include_object_verdict: false
+  include_validator_config_context: false
+  include_window_context: false
+  include_fetch_context: false
+  include_infrastructure_context: false

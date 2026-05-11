@@ -1,0 +1,26 @@
+M15_WEAK_COMPLETION=DONE
+
+created_at_utc = 2026-05-10T16:44:22Z
+
+snapshot_group_id = group_m15_20260510T162200Z
+
+object_group_complete = True
+object_window_mapping_level = weak
+object_generated_time_skew_seconds = 974
+
+vrp_group_complete = True
+vrp_generated_time_skew_seconds = 29
+
+final_use = diagnostic_only_not_strict_gate
+reason = object layer completed only after delayed probe-cd retry; object generated_time_skew_seconds exceeded strong-window threshold.
+
+link_repair_status:
+  probe-cd object upload link repaired = True
+  explicit config arg required = True
+  do_not_run_object_script_without_config_arg = True
+
+decision:
+  do_not_use_for_strict_m15 = True
+  rerun_new_group_m15 = True
+
+M15_weak_completion_acceptance = True

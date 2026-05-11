@@ -1,0 +1,64 @@
+P9_JOINT_OBJECT_VRP_COLLECTION_STRONG_WINDOW=DONE
+
+created_at_utc = 2026-05-09T14:55:39.399418+00:00
+
+snapshot_group_id = group_joint_20260509T094400Z
+collection_mode = synchronized_same_group_object_plus_vrp
+
+object_group:
+  received_object_probes = ['probe-bj', 'probe-cd', 'probe-sg']
+  object_group_complete = True
+  generated_time_skew_seconds = 15
+  window_mapping_level = strong
+
+vrp_group:
+  received_probes = ['probe-bj', 'probe-cd', 'probe-sg']
+  complete = True
+  generated_time_skew_seconds = 18
+
+object_counts:
+  probe-cd = 104054
+  probe-bj = 156528
+  probe-sg = 52549
+
+vrp_counts:
+  probe-cd = 858945
+  probe-bj = 854242
+  probe-sg = 858935
+
+object_roots:
+  probe-cd object_set_root = sha256:a0029e99281e0bed7dd460cb94cc40f9ce860b84693921f1d161798495a94d31
+  probe-bj object_set_root = sha256:f3aec1e570404417965e9fb18265e7f0ff90d6f4b9ff0cfe688f694dea2efc87
+  probe-sg object_set_root = sha256:afec025f476cf652f94e465415f3e53cfbd1809dc0feba92dc5c8342eb0fce58
+
+effective_object_roots:
+  probe-cd effective_object_root = sha256:9fd6afb40876e4d6e1da3846b077ca76f061fabfbf6d26e0643e6050335e438d
+  probe-bj effective_object_root = sha256:1edef6d81c947852de739c1f3495e094730ee4108edc76184a3f85414c98c143
+  probe-sg effective_object_root = sha256:bcb54d8bcb7d36824666f51f9e9a1ced3fa836badc74baa5d21c54c653a3afac
+
+acceptance:
+  object_ok = True
+  vrp_ok = True
+  object_strong_window_ok = True
+  vrp_strong_window_ok = True
+  P9_strong_joint_collection_acceptance = True
+
+runtime_changes:
+  object_upload_sidecar_28115_running = True
+  vrp_upload_sidecar_28114_running = True
+  collector_main_service_restarted = False
+  probe_restarted = False
+  new_validator_installed = False
+  bgp_data_loaded = False
+  cron_enabled = False
+
+reserved_interfaces:
+  e4b_cross_validator = reserved_only
+  control_plane_impact = reserved_only
+
+next_batch:
+  P9-2 run object layer compare for this strong group
+  P9-3 run VRP lowmem diff for this strong group
+  P10 run final object+VRP joint E4-A gate
+
+P9_acceptance = True

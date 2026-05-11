@@ -1,0 +1,36 @@
+P3_MULTINODE_OBJECT_AND_JOINT_LOCAL_EXPORT=DONE
+
+scope = m14_e4a_cross_region_same_validator
+
+completed_nodes:
+  probe-cd = object_snapshot_export_and_joint_manifest_success
+  probe-bj = object_snapshot_export_and_joint_manifest_success
+  probe-sg = object_snapshot_export_and_joint_manifest_success
+
+expected_outputs_per_probe:
+  data/probe/e4a_joint/latest/object/object_snapshot_record.json
+  data/probe/e4a_joint/latest/object/object_snapshot.tar.gz
+  data/probe/e4a_joint/latest/joint_snapshot_manifest.json
+  data/probe/e4a_joint/latest/P1_object_export_acceptance_check.txt
+  data/probe/e4a_joint/latest/P2_joint_manifest_acceptance_check.txt
+
+known_limitations:
+  active_manifest_records_may_be_empty_in_current_lightweight_export
+  vrp_object_time_skew_may_be_weak_because_latest_vrp_snapshot_can_be_old
+  this_batch_does_not_upload_to_collector
+
+reserved_interfaces:
+  e4b_cross_validator = reserved_only
+  control_plane_impact = reserved_only
+
+runtime_service_changed = False
+collector_restarted = False
+probe_restarted = False
+new_validator_installed = False
+bgp_data_loaded = False
+object_upload_executed = False
+
+P3_acceptance = True
+
+next_batch:
+  P4 Collector object upload sidecar on 28115

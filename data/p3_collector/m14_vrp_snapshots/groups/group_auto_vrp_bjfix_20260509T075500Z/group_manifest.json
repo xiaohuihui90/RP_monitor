@@ -1,0 +1,44 @@
+{
+  "schema": "s3.stage3.m14.snapshot_group.v1",
+  "snapshot_group_id": "group_auto_vrp_bjfix_20260509T075500Z",
+  "validator": "routinator",
+  "group_window_seconds": 300,
+  "max_generated_time_skew_seconds": 600,
+  "required_probes": [
+    "probe-cd",
+    "probe-bj",
+    "probe-sg"
+  ],
+  "received_probes": [
+    "probe-bj"
+  ],
+  "complete": false,
+  "generated_time_min": "2026-05-09T07:55:11+00:00",
+  "generated_time_max": "2026-05-09T07:55:11+00:00",
+  "generated_time_skew_seconds": 0,
+  "m14_run_id": null,
+  "created_at_utc": "2026-05-09T07:55:12.140553+00:00",
+  "updated_at_utc": "2026-05-09T07:55:12.140588+00:00",
+  "snapshots": {
+    "probe-bj": {
+      "snapshot_id": "probe-bj_20260509T075511Z",
+      "snapshot_group_id": "group_auto_vrp_bjfix_20260509T075500Z",
+      "probe_id": "probe-bj",
+      "validator": "routinator",
+      "validator_version": "Routinator 0.15.1",
+      "generatedTime": "2026-05-09T07:55:11Z",
+      "export_started_at": "2026-05-09T07:55:11Z",
+      "export_finished_at": "2026-05-09T07:55:11Z",
+      "roa_count": 0,
+      "raw_json_size_bytes": 115,
+      "gzip_size_bytes": 135,
+      "sha256_gzip_expected": "553527e26667dbe253368c93c206aa2397dbb4fa6d7e12ad2dff5c36e749c8cd",
+      "sha256_gzip_actual": "553527e26667dbe253368c93c206aa2397dbb4fa6d7e12ad2dff5c36e749c8cd",
+      "sha256_gzip_ok": true,
+      "gzip_valid": true,
+      "local_path": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_snapshots/groups/group_auto_vrp_bjfix_20260509T075500Z/probe-bj/probe-bj_vrps.raw.json.gz",
+      "received_at_utc": "2026-05-09T07:55:12.140325+00:00",
+      "explicit_snapshot_group_id_used": true
+    }
+  }
+}

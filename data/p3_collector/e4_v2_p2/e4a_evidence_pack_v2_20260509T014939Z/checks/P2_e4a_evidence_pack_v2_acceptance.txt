@@ -1,0 +1,30 @@
+P2_E4A_EVIDENCE_PACK_V2=DONE
+
+run_id = m14a_auto_group_20260508T064858Z
+snapshot_group_id = group_20260508T064858Z
+scope = m14_e4a_cross_region_same_validator
+
+final_status = blocked_object_layer_unverified
+e4_status = blocked
+confirmed_allowed = False
+
+vrp_roots_aligned = False
+all_pairwise_entry_level_diff_count = 440
+min_pairwise_jaccard_similarity = 0.999749378692293
+
+parameter_completeness_ok = True
+all_required_evidence_exists = True
+evidence_pack = /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_auto_group_20260508T064858Z/evidence/m14a_auto_group_20260508T064858Z_e4a_evidence_pack_v2.tar.gz
+evidence_pack_sha256 = 38fbed168cb6920becfaf6a903e9e5a9efaa46742cd41ee146ae7067aa8d0f31
+
+reserved_interfaces:
+  e4b_cross_validator = reserved_only
+  control_plane_impact = reserved_only
+
+runtime_service_changed = False
+collector_restarted = False
+probe_restarted = False
+new_validator_installed = False
+bgp_data_loaded = False
+
+P2_acceptance = True

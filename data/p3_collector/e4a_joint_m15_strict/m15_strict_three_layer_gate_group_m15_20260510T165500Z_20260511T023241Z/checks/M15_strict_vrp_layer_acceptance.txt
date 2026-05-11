@@ -1,0 +1,15 @@
+M15_STRICT_VRP_LAYER_DIFF=DONE
+
+created_at_utc = 2026-05-11T03:08:35.790343+00:00
+
+snapshot_group_id = group_m15_20260510T165500Z
+m14_run_id = m14a_auto_group_m15_20260510T165500Z_m15_strict
+m14_run_dir = /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_auto_group_m15_20260510T165500Z_m15_strict
+
+all_vrp_roots_aligned = False
+all_pairwise_entry_level_diff_count = 5154760
+min_pairwise_jaccard_similarity = 0.0
+
+required_outputs_ok = True
+
+M15_strict_vrp_acceptance = True

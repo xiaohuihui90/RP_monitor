@@ -1,0 +1,24 @@
+P4_1_COLLECTOR_UPLOAD_API_SIDECAR_LOCAL_TEST=DONE
+
+scope:
+  sidecar_script_created = True
+  sidecar_started = True
+  health_check_ok = True
+  local_probe_cd_upload_executed = True
+  gzip_validated_by_collector = True
+  sha256_verified_by_collector = True
+  snapshot_group_created = True
+
+latest_group_id = group_20260508T064858Z
+received_probes = ['probe-cd']
+group_complete = False
+
+expected_current_state:
+  received_probes = ['probe-cd']
+  group_complete = False
+
+note:
+  P4-1 only validates local collector upload API with probe-cd.
+  P4-2 will validate remote HTTP upload from probe-bj and probe-sg.
+
+P4_1_acceptance = True

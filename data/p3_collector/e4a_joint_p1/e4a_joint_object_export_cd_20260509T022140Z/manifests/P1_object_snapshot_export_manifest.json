@@ -1,0 +1,52 @@
+{
+  "schema": "s3.stage3.e4a_joint.p1_object_export_manifest.v1",
+  "created_at_utc": "2026-05-09T02:23:22.379176+00:00",
+  "probe_id": "probe-cd",
+  "location": "chengdu",
+  "snapshot_group_id": "group_20260509T022100Z",
+  "export_id": "20260509T022140Z",
+  "required_files_ok": true,
+  "files": [
+    {
+      "path": "data/probe/e4a_joint/latest/object/object_snapshot_record.json",
+      "exists": true,
+      "size_bytes": 1315,
+      "sha256": "c7ee6d7700da30b9bef1543c3d681fc7d7f6a4d62a156f0373caeff2a6a85baa"
+    },
+    {
+      "path": "data/probe/e4a_joint/latest/object/active_manifest_records.jsonl",
+      "exists": true,
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "data/probe/e4a_joint/latest/object/object_inventory.jsonl",
+      "exists": true,
+      "size_bytes": 28474,
+      "sha256": "bd91bc50d0a18e95b082c8ff6558ae8546fd9fdb722f2eb232f1469c5a62ca4e"
+    },
+    {
+      "path": "data/probe/e4a_joint/latest/object/object_snapshot.tar.gz",
+      "exists": true,
+      "size_bytes": 5362,
+      "sha256": "885bf31f52f63c6e59409b2ff04ee30d2b6b0c34899195724ddd282456de76ed"
+    },
+    {
+      "path": "data/probe/e4a_joint/latest/object/sha256.txt",
+      "exists": true,
+      "size_bytes": 368,
+      "sha256": "2e3a970141a10fbec7159a764a136f05090c967de6c38b99b6fa85db79d45648"
+    },
+    {
+      "path": "data/probe/e4a_joint/latest/object/P1_object_export_acceptance_check.txt",
+      "exists": true,
+      "size_bytes": 1323,
+      "sha256": "3538b97e9ff8c27e694e416605e27c54ef75282907cc9478d951c26e0a54c4f7"
+    }
+  ],
+  "runtime_service_changed": false,
+  "collector_restarted": false,
+  "probe_restarted": false,
+  "new_validator_installed": false,
+  "bgp_data_loaded": false
+}

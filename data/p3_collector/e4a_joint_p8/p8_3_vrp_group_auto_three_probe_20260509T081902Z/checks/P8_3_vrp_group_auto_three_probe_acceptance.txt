@@ -1,0 +1,52 @@
+P8_3_VRP_GROUP_AUTO_THREE_PROBE_UPLOAD=DONE
+
+created_at_utc = 2026-05-09T08:19:03.594838+00:00
+
+snapshot_group_id = group_auto_vrp_20260509T080700Z
+upload_mode = explicit_snapshot_group_id_to_28114
+routinator_bin_policy = explicit_required_no_default_path
+
+received_probes = ['probe-bj', 'probe-cd', 'probe-sg']
+complete = True
+generated_time_min = 2026-05-09T08:07:37+00:00
+generated_time_max = 2026-05-09T08:13:52+00:00
+generated_time_skew_seconds = 375
+m14_run_id = None
+
+probe_checks:
+  probe-cd_ok = True
+  probe-bj_ok = True
+  probe-sg_ok = True
+
+validator_version:
+  probe-cd = Routinator 0.15.1
+  probe-bj = Routinator 0.15.1
+  probe-sg = Routinator 0.15.1
+
+roa_count:
+  probe-cd = 858618
+  probe-bj = 858625
+  probe-sg = 858614
+
+integrity:
+  probe-cd sha256_gzip_ok = True
+  probe-bj sha256_gzip_ok = True
+  probe-sg sha256_gzip_ok = True
+  probe-cd gzip_valid = True
+  probe-bj gzip_valid = True
+  probe-sg gzip_valid = True
+
+runtime_changes:
+  vrp_upload_sidecar_v2_enabled = True
+  vrp_upload_sidecar_port = 28114
+  object_upload_sidecar_28115_unchanged = True
+  collector_main_service_restarted = False
+  probe_restarted = False
+  new_validator_installed = False
+  bgp_data_loaded = False
+
+next_batch:
+  P8-4 run M14 lowmem diff on group_auto VRP group
+  P9 join object + VRP under same group_id
+
+P8_3_acceptance = True

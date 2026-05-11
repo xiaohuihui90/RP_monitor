@@ -1,0 +1,42 @@
+P1_OBJECT_SNAPSHOT_EXPORT=DONE
+
+probe_id = probe-cd
+location = chengdu
+snapshot_group_id = group_joint_20260509T090600Z
+joint_snapshot_id = probe-cd_20260510T163424Z
+export_id = 20260510T163424Z
+
+object_source_mode = cache_file_inventory
+object_snapshot_export_success = True
+source_root_count = 4
+scanned_files = 104072
+object_inventory_count = 104062
+active_manifest_count = 103838
+
+object_set_root_exists = True
+effective_object_root_exists = True
+active_manifest_records_exists = True
+object_inventory_exists = True
+object_snapshot_tar_gz_exists = True
+sha256_txt_exists = True
+
+object_set_root = sha256:ce55b4ae51cb9c63d2f82b98eb97ccf03d34b870a75641b8241d831309331c56
+effective_object_root = sha256:6172b8ae92275acd2b610944f6f855153a5df74445efe090aa7d0f35d7aa501e
+
+warnings = []
+blockers = []
+
+outputs:
+  data/probe/e4a_joint/history/20260510T163424Z/object/object_snapshot_record.json
+  data/probe/e4a_joint/history/20260510T163424Z/object/active_manifest_records.jsonl
+  data/probe/e4a_joint/history/20260510T163424Z/object/object_inventory.jsonl
+  data/probe/e4a_joint/history/20260510T163424Z/object/object_snapshot.tar.gz
+  data/probe/e4a_joint/history/20260510T163424Z/object/sha256.txt
+
+runtime_service_changed = False
+collector_restarted = False
+probe_restarted = False
+new_validator_installed = False
+bgp_data_loaded = False
+
+P1_acceptance = True

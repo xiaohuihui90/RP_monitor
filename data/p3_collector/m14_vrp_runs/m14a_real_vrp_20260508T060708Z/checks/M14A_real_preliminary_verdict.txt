@@ -1,0 +1,25 @@
+M14A_REAL_PRELIMINARY_VERDICT=DONE
+
+run_id = m14a_real_vrp_20260508T060708Z
+
+status = real_vrp_output_diff_observed
+e4_status = not_yet_e4
+confirmed_allowed = False
+
+reason = VRP roots differ across three probes, but object/window/validator/fetch/infrastructure contexts are not yet joined.
+
+key_metrics:
+  probe-cd unique_vrp_count = 857869
+  probe-bj unique_vrp_count = 857796
+  probe-sg unique_vrp_count = 857859
+  all_pairwise_entry_level_diff_count = 202
+  min_pairwise_jaccard_similarity = 0.9998939236926678
+
+pair_summary:
+  probe-cd_vs_probe-bj: diff = 89, top_diff_tal = lacnic
+  probe-cd_vs_probe-sg: diff = 22, top_diff_tal = arin
+  probe-bj_vs_probe-sg: diff = 91, top_diff_tal = lacnic
+
+interpretation:
+  This run shows a small but measurable real-world VRP output difference across Beijing, Chengdu, and Singapore Routinator outputs.
+  This is not E4 yet. Further attribution requires same-window object-layer evidence, validator configuration context, window mapping, fetch completeness, and infrastructure context.

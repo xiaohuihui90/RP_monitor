@@ -1,0 +1,22 @@
+M14A_VRP_MIN_CLOSURE=DONE
+
+run_id = m14a_fixture_20260507T080612Z
+run_dir = /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_fixture_20260507T080612Z
+
+raw_inputs_complete = True
+normalized_outputs_complete = True
+summary_exists = True
+pairwise_diff_exists = True
+all_vrp_roots_aligned = False
+all_pairwise_entry_level_diff_count = 4
+min_pairwise_jaccard_similarity = 0.5
+
+probe_summaries:
+  probe-cd: unique_vrp_count=3 parse_error_count=0 vrp_root_v1=sha256:b8ff7d21ce96eebb51baa263f869f8093336d078972654904bac8f9c5a1096aa
+  probe-bj: unique_vrp_count=3 parse_error_count=0 vrp_root_v1=sha256:6a015f764e5a85cf33ac6a1f111d6dea455e4005bf9ebcea3d48a6cc687a2a35
+  probe-sg: unique_vrp_count=3 parse_error_count=0 vrp_root_v1=sha256:b8ff7d21ce96eebb51baa263f869f8093336d078972654904bac8f9c5a1096aa
+
+outputs:
+  /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_fixture_20260507T080612Z/summaries/m14_vrp_summary.json
+  /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_fixture_20260507T080612Z/diffs/m14_vrp_pairwise_diff.json
+  /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_fixture_20260507T080612Z/diffs/m14_vrp_pairwise_diff_samples.json

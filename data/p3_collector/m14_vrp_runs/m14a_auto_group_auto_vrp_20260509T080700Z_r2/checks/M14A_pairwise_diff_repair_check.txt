@@ -1,0 +1,16 @@
+M14A_PAIRWISE_DIFF_REPAIR=DONE
+
+run_id = m14a_auto_group_auto_vrp_20260509T080700Z_r2
+run_dir = /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_auto_group_auto_vrp_20260509T080700Z_r2
+
+normalized_inputs_used = True
+pairwise_diff_exists = True
+pairwise_diff_samples_exists = True
+
+all_pairwise_entry_level_diff_count = 48
+min_pairwise_jaccard_similarity = 0.9999720484307523
+
+repair_reason:
+  original run_m14a_vrp_min_closure.py generated summary and normalized outputs but did not write pairwise diff files.
+
+M14A_pairwise_repair_acceptance = True

@@ -1,0 +1,119 @@
+{
+  "schema": "s3.stage3.m14.real_preliminary_verdict.v1",
+  "run_id": "m14a_real_vrp_20260508T060708Z",
+  "created_at_utc": "2026-05-08T06:39:26.185259+00:00",
+  "status": "real_vrp_output_diff_observed",
+  "e4_status": "not_yet_e4",
+  "confirmed_allowed": false,
+  "reason": "VRP roots differ across three probes, but same-window object/window/validator/fetch/infrastructure contexts are not yet joined.",
+  "key_metrics": {
+    "all_vrp_roots_aligned": false,
+    "all_pairwise_entry_level_diff_count": 202,
+    "min_pairwise_jaccard_similarity": 0.9998939236926678,
+    "probe_unique_vrp_count": {
+      "probe-cd": 857869,
+      "probe-bj": 857796,
+      "probe-sg": 857859
+    },
+    "probe_parse_error_count": {
+      "probe-cd": 0,
+      "probe-bj": 0,
+      "probe-sg": 0
+    }
+  },
+  "pair_summary": {
+    "probe-cd_vs_probe-bj": {
+      "left_probe": "probe-cd",
+      "right_probe": "probe-bj",
+      "left_count": 857869,
+      "right_count": 857796,
+      "common_count": 857788,
+      "only_left_count": 81,
+      "only_right_count": 8,
+      "entry_level_diff_count": 89,
+      "jaccard_similarity": 0.9998962555238106,
+      "top_diff_tal": "lacnic",
+      "tal_diff_breakdown": {
+        "apnic": 2,
+        "arin": 5,
+        "lacnic": 76,
+        "ripe": 6
+      },
+      "afi_diff_breakdown": {
+        "ipv4": 67,
+        "ipv6": 22
+      },
+      "lowmem_artifacts": {
+        "only_left_file": "diffs/_lowmem_work/probe-cd_vs_probe-bj.only_left.txt",
+        "only_right_file": "diffs/_lowmem_work/probe-cd_vs_probe-bj.only_right.txt",
+        "common_file": "diffs/_lowmem_work/probe-cd_vs_probe-bj.common.txt"
+      }
+    },
+    "probe-cd_vs_probe-sg": {
+      "left_probe": "probe-cd",
+      "right_probe": "probe-sg",
+      "left_count": 857869,
+      "right_count": 857859,
+      "common_count": 857853,
+      "only_left_count": 16,
+      "only_right_count": 6,
+      "entry_level_diff_count": 22,
+      "jaccard_similarity": 0.999974355238234,
+      "top_diff_tal": "arin",
+      "tal_diff_breakdown": {
+        "arin": 10,
+        "lacnic": 2,
+        "ripe": 10
+      },
+      "afi_diff_breakdown": {
+        "ipv4": 11,
+        "ipv6": 11
+      },
+      "lowmem_artifacts": {
+        "only_left_file": "diffs/_lowmem_work/probe-cd_vs_probe-sg.only_left.txt",
+        "only_right_file": "diffs/_lowmem_work/probe-cd_vs_probe-sg.only_right.txt",
+        "common_file": "diffs/_lowmem_work/probe-cd_vs_probe-sg.common.txt"
+      }
+    },
+    "probe-bj_vs_probe-sg": {
+      "left_probe": "probe-bj",
+      "right_probe": "probe-sg",
+      "left_count": 857796,
+      "right_count": 857859,
+      "common_count": 857782,
+      "only_left_count": 14,
+      "only_right_count": 77,
+      "entry_level_diff_count": 91,
+      "jaccard_similarity": 0.9998939236926678,
+      "top_diff_tal": "lacnic",
+      "tal_diff_breakdown": {
+        "apnic": 2,
+        "arin": 7,
+        "lacnic": 74,
+        "ripe": 8
+      },
+      "afi_diff_breakdown": {
+        "ipv4": 70,
+        "ipv6": 21
+      },
+      "lowmem_artifacts": {
+        "only_left_file": "diffs/_lowmem_work/probe-bj_vs_probe-sg.only_left.txt",
+        "only_right_file": "diffs/_lowmem_work/probe-bj_vs_probe-sg.only_right.txt",
+        "common_file": "diffs/_lowmem_work/probe-bj_vs_probe-sg.common.txt"
+      }
+    }
+  },
+  "interpretation": [
+    "This run shows a small but measurable real-world VRP output difference across Beijing, Chengdu, and Singapore Routinator outputs.",
+    "This is not E4 yet.",
+    "Further attribution requires same-window object-layer evidence, validator configuration context, window mapping, fetch completeness, and infrastructure context."
+  ],
+  "next_required_contexts": [
+    "generated_time_alignment",
+    "validator_config_context",
+    "object_layer_context",
+    "window_mapping_context",
+    "fetch_completeness_context",
+    "infrastructure_context"
+  ]
+}

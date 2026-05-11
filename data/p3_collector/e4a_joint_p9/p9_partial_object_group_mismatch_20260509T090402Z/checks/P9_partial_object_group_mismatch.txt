@@ -1,0 +1,18 @@
+P9_PARTIAL_OBJECT_GROUP_MISMATCH=DONE
+
+intended_joint_group_id = group_joint_20260509T085700Z
+
+observed:
+  vrp_probe_cd_group = group_joint_20260509T085700Z
+  object_probe_cd_group = group_auto_20260509T085000Z
+
+decision:
+  do_not_use_this_group_for_formal_P9 = True
+  reason = object layer and VRP layer were not uploaded under the same group_id.
+
+next_required:
+  patch object script to support explicit P5A_GROUP_ID
+  start a fresh group_joint_* group
+  rerun object + VRP upload on all three probes
+
+P9_partial_record = True

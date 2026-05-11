@@ -1,0 +1,24 @@
+M14B_OBJECT_VERDICT_JOIN=DONE
+
+run_id = m14a_fixture_20260507T080612Z
+run_dir = /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_fixture_20260507T080612Z
+
+final_status = not_e4_object_layer_version_skew
+e4_status = not_e4
+confirmed_allowed = False
+primary_attribution = object_layer_temporal_version_divergence
+secondary_attribution = manifest_version_skew_dominant
+confidence = medium-high
+
+vrp_roots_aligned = False
+all_pairwise_entry_level_diff_count = 4
+min_pairwise_jaccard_similarity = 0.5
+
+object_verdict_available = True
+object_final_status = object_layer_temporal_version_divergence
+object_final_attribution = manifest_version_skew_dominant
+object_e4_status = not_e4
+object_layer_version_skew = True
+
+interpretation:
+VRP output differences are downstream of object-layer manifest version skew.

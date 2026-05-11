@@ -1,0 +1,70 @@
+P7_E4A_JOINT_ATTRIBUTION=DONE
+
+created_at_utc = 2026-05-09T06:57:07.524950+00:00
+
+snapshot_group_id = group_auto_20260509T063000Z
+source = periodic_direct_probe_to_collector_28115
+
+final_status = not_e4_object_layer_divergence
+e4_status = blocked
+confirmed_allowed = False
+blocking_layer = object_layer
+confidence = high
+
+object_group_complete = True
+vrp_group_complete = False
+joint_group_complete = False
+
+window_mapping_level = strong
+generated_time_skew_seconds = 268
+
+object_roots_aligned = False
+effective_object_roots_aligned = False
+
+all_pairwise_inventory_diff_count = 208596
+all_pairwise_active_manifest_diff_count = 208596
+
+min_inventory_jaccard_similarity = 0.001283131607170216
+min_active_manifest_jaccard_similarity = 0.00021088957055214724
+
+pair_focus:
+  probe-cd_vs_probe-bj:
+    inventory_entry_level_diff_count = 0
+    inventory_jaccard_similarity = 1.0
+  probe-cd_vs_probe-sg:
+    inventory_entry_level_diff_count = 104298
+    inventory_jaccard_similarity = 0.001283131607170216
+    top_diff_object_type = mft
+  probe-bj_vs_probe-sg:
+    inventory_entry_level_diff_count = 104298
+    inventory_jaccard_similarity = 0.001283131607170216
+    top_diff_object_type = mft
+
+blockers = ['object_set_root_not_aligned', 'effective_object_root_not_aligned']
+warnings = ['vrp_group_not_joined_in_this_batch', 'joint_group_not_complete_because_vrp_layer_not_joined']
+
+interpretation:
+  Object-layer divergence is observed under a strong/acceptable collection window. Therefore current VRP output differences must not be attributed to validator output-layer E4-A. In this run, probe-cd and probe-bj are aligned, while probe-sg diverges at the object layer.
+
+reserved_interfaces:
+  e4b_cross_validator = reserved_only
+  control_plane_impact = reserved_only
+
+runtime_changes:
+  periodic_object_upload_enabled = True
+  object_upload_sidecar_running = True
+  object_upload_sidecar_port = 28115
+  collector_main_service_restarted = False
+  probe_restarted = False
+  new_validator_installed = False
+  bgp_data_loaded = False
+
+outputs:
+  /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_p7/e4a_joint_attribution_20260509T065701Z/verdicts/final_joint_attribution.json
+
+next_required:
+  1. join same-group VRP layer into group_auto collection
+  2. rerun final E4-A gate after VRP layer is collected under the same group_id
+  3. investigate why probe-sg object cache view diverges from probe-cd/probe-bj
+
+P7_acceptance = True

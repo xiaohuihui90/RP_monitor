@@ -1,0 +1,74 @@
+{
+  "schema": "s3.stage3.joint_snapshot_group.v1",
+  "snapshot_group_id": "group_auto_20260509T063000Z",
+  "required_probes": [
+    "probe-cd",
+    "probe-bj",
+    "probe-sg"
+  ],
+  "received_vrp_probes": [],
+  "received_object_probes": [
+    "probe-bj",
+    "probe-cd",
+    "probe-sg"
+  ],
+  "vrp_group_complete": false,
+  "object_group_complete": true,
+  "joint_group_complete": false,
+  "generated_time_min": "2026-05-09T06:34:53.313826+00:00",
+  "generated_time_max": "2026-05-09T06:39:22.250165+00:00",
+  "generated_time_skew_seconds": 268,
+  "window_mapping_level": "strong",
+  "snapshots": {
+    "probe-cd": {
+      "probe_id": "probe-cd",
+      "snapshot_group_id": "group_auto_20260509T063000Z",
+      "joint_snapshot_id": "probe-cd_20260509T063453Z",
+      "object_received": true,
+      "object_snapshot_record_path": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_snapshots/groups/group_auto_20260509T063000Z/probe-cd/object/object_snapshot_record.json",
+      "object_snapshot_tar_gz_path": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_snapshots/groups/group_auto_20260509T063000Z/probe-cd/object/object_snapshot.tar.gz",
+      "object_inventory_count": 52022,
+      "active_manifest_count": 51910,
+      "object_set_root": "sha256:c5b8f8cc7a3d48cae7df773f33776717871524f5de7206518f10de7f174f126e",
+      "effective_object_root": "sha256:da6ae83262973a51fa7b5fd7d06858e3a1add33ec0739848077ab840d4bc6f6d",
+      "object_source_mode": "cache_file_inventory",
+      "object_export_started_at": "2026-05-09T06:34:53.313826+00:00",
+      "object_export_finished_at": "2026-05-09T06:35:04.690790+00:00",
+      "received_at_utc": "2026-05-09T06:35:10.709739+00:00"
+    },
+    "probe-bj": {
+      "probe_id": "probe-bj",
+      "snapshot_group_id": "group_auto_20260509T063000Z",
+      "joint_snapshot_id": "probe-bj_20260509T063715Z",
+      "object_received": true,
+      "object_snapshot_record_path": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_snapshots/groups/group_auto_20260509T063000Z/probe-bj/object/object_snapshot_record.json",
+      "object_snapshot_tar_gz_path": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_snapshots/groups/group_auto_20260509T063000Z/probe-bj/object/object_snapshot.tar.gz",
+      "object_inventory_count": 52022,
+      "active_manifest_count": 51910,
+      "object_set_root": "sha256:c5b8f8cc7a3d48cae7df773f33776717871524f5de7206518f10de7f174f126e",
+      "effective_object_root": "sha256:da6ae83262973a51fa7b5fd7d06858e3a1add33ec0739848077ab840d4bc6f6d",
+      "object_source_mode": "cache_file_inventory",
+      "object_export_started_at": "2026-05-09T06:37:15.695359+00:00",
+      "object_export_finished_at": "2026-05-09T06:37:26.886115+00:00",
+      "received_at_utc": "2026-05-09T06:37:32.804049+00:00"
+    },
+    "probe-sg": {
+      "probe_id": "probe-sg",
+      "snapshot_group_id": "group_auto_20260509T063000Z",
+      "joint_snapshot_id": "probe-sg_20260509T063922Z",
+      "object_received": true,
+      "object_snapshot_record_path": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_snapshots/groups/group_auto_20260509T063000Z/probe-sg/object/object_snapshot_record.json",
+      "object_snapshot_tar_gz_path": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_snapshots/groups/group_auto_20260509T063000Z/probe-sg/object/object_snapshot.tar.gz",
+      "object_inventory_count": 52544,
+      "active_manifest_count": 52432,
+      "object_set_root": "sha256:d415423b8f82019f9f1d292c8a1f3d1d718f6f4e1b68c855c2129fc752fb3b30",
+      "effective_object_root": "sha256:8c3669badeaf38f2c3f762a9f7dcf3b267abbe76fd00bf57461f628365f1da20",
+      "object_source_mode": "cache_file_inventory",
+      "object_export_started_at": "2026-05-09T06:39:22.250165+00:00",
+      "object_export_finished_at": "2026-05-09T06:39:56.962323+00:00",
+      "received_at_utc": "2026-05-09T06:40:08.508804+00:00"
+    }
+  },
+  "created_at_utc": "2026-05-09T06:35:10.709685+00:00",
+  "updated_at_utc": "2026-05-09T06:40:08.508837+00:00"
+}

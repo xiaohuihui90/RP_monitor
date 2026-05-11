@@ -1,0 +1,22 @@
+M15_STRONG_GROUP_PREFLIGHT=DONE
+
+created_at_utc = 2026-05-10T15:50:13.424812+00:00
+
+cd_vrp_count = 859130
+bj_vrp_count = 859124
+sg_vrp_count = 859115
+
+cd_ok_gt_800k = True
+bj_ok_gt_800k = True
+sg_ok_gt_800k = True
+
+cd_vrp_28114_ok = True
+cd_object_28115_ok = True
+
+warnings = []
+blockers = []
+
+next_batch:
+  Batch 6-1 / generate group_m15_* and synchronized three-layer collection
+
+M15_preflight_acceptance = True

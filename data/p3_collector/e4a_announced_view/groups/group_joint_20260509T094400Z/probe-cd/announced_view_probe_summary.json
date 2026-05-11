@@ -1,0 +1,17 @@
+{
+  "schema": "s3.stage3.m15.announced_view_probe_summary.v1",
+  "probe_id": "probe-cd",
+  "location": "chengdu",
+  "snapshot_group_id": "group_joint_20260509T094400Z",
+  "collection_mode": "retrofit_or_diagnostic",
+  "export_id": "20260509T161216Z",
+  "pp_count": 3,
+  "success_count": 3,
+  "failure_count": 0,
+  "announced_view_root_v1": "sha256:36ed6b1ae5678e907a10a63f26d6c80d122d640cf900c7bfe72c3eeaf5a9f367",
+  "records_file": "data/probe/e4a_announced_view/history/20260509T161216Z/announced_view_records.jsonl",
+  "started_at_utc": "2026-05-09T16:12:16.740106+00:00",
+  "finished_at_utc": "2026-05-09T16:12:34.335608+00:00",
+  "warnings": [],
+  "blockers": []
+}

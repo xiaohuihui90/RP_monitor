@@ -1,0 +1,26 @@
+M14DE_CONTEXTS_AND_EVIDENCE_PACK=DONE
+
+run_id = m14a_fixture_20260507T080612Z
+run_dir = /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_fixture_20260507T080612Z
+
+final_status = not_e4_object_layer_version_skew
+e4_status = not_e4
+confirmed_allowed = False
+
+window_context_available = False
+window_mapping_level = missing
+window_acceptable_mapping = False
+
+fetch_context_available = False
+rp_fetch_completeness_verified = False
+
+infrastructure_context_available = False
+infrastructure_risk_absent = None
+
+blockers = []
+warnings = ['M14-B only joins object verdict; validator_config/window/fetch/infrastructure contexts are not joined yet.', 'fetch_completeness_missing_or_unverified_but_object_layer_version_skew_has_priority', 'infrastructure_context_missing_or_risk_unknown_but_object_layer_version_skew_has_priority', 'runtime_process_fingerprint_not_aligned_diagnostic', 'validator_environment_drift_observed_but_object_layer_version_skew_has_priority', 'window_mapping_missing_or_not_acceptable_but_object_layer_version_skew_has_priority']
+
+interpretation:
+For the current run, object-layer version skew remains the dominant explanation.
+Window/fetch/infrastructure contexts are attached as gating context.
+Because these contexts are missing or unverified, they would block E4 confirmed in future non-object-skew cases.

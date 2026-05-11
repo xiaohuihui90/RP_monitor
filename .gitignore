@@ -1,48 +1,65 @@
-# Runtime data
-data/
-logs/
-tmp/
-cache/
-artifacts/
-outputs/
+
 archive/
 archives/
-
-# RPKI / validator outputs
-*.raw.json
-*.raw.json.gz
-*.jsonl.gz
-*.tar.gz
-*.tgz
-*.zip
-*.xz
+artifacts/
+*.bak
 *.bz2
-
-# Local env / configs
-*.env
-.env
-*.local
-*.secret
-*.key
-*.pem
+*.cache
+cache/
+config/**/*.env
+config/p3/*.env
+config/**/*private*
+config/**/*secret*
 *.crt
-*.p12
-*.pfx
-
-# Python
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-.ipynb_checkpoints/
-
-# Editor / OS
-.vscode/
-.idea/
-.DS_Store
-
-# Project-specific runtime folders
+data/
+data/**/archive*.tar.gz
+data/**/evidence/*.tar.gz
+data/**/history/*/*.raw.json
+data/**/history/*/*.raw.json.gz
+data/**/logs/
+data/**/normalized_vrps/
 data/p3_collector/
 data/probe/
+data/**/raw_vrps/
+*.db
+.DS_Store
+*.dump
+# Editor / OS
+*.env
+.env
+# Extra safety for S3 runtime outputs
+.idea/
+.ipynb_checkpoints/
+*.jsonl.gz
+*.key
+# Large S3 runtime folders
+*.local
+# Local env / configs
+# Local machine configs
+logs/
 logs/p3/
-config/p3/*.env
+outputs/
+*.p12
+*.parquet
+*.pcap
+*.pem
+*.pfx
+# Project-specific runtime folders
+*.pyc
+__pycache__/
+*.pyd
+*.pyo
+# Python
+*.raw.json
+*.raw.json.gz
+# RPKI / validator outputs
+# Runtime data
+*.secret
+*.sqlite
+*.tar.gz
+*.tgz
+*.tmp
+tmp/
+.vscode/
+*.xz
+*.zip

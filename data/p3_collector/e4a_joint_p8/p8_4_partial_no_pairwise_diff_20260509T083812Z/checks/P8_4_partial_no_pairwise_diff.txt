@@ -1,0 +1,19 @@
+P8_4_PARTIAL_NO_PAIRWISE_DIFF=DONE
+
+snapshot_group_id = group_auto_vrp_20260509T080700Z
+partial_run_id = m14a_auto_group_auto_vrp_20260509T080700Z_r1
+partial_run_dir = /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_auto_group_auto_vrp_20260509T080700Z_r1
+
+completed:
+  raw_inputs_valid = True
+  normalized_outputs_generated = True
+  vrp_summary_generated = True
+
+missing:
+  m14_vrp_pairwise_diff.json = True
+
+decision:
+  do_not_accept_P8_4 = True
+  rerun_with_clean_r2_run_dir = True
+
+P8_4_partial_record = True

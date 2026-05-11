@@ -1,0 +1,42 @@
+P1_OBJECT_SNAPSHOT_EXPORT=DONE
+
+probe_id = probe-sg
+location = singapore
+snapshot_group_id = group_20260509T031700Z
+joint_snapshot_id = probe-sg_20260509T060808Z
+export_id = 20260509T060808Z
+
+object_source_mode = cache_file_inventory
+object_snapshot_export_success = True
+source_root_count = 1
+scanned_files = 52548
+object_inventory_count = 52543
+active_manifest_count = 52431
+
+object_set_root_exists = True
+effective_object_root_exists = True
+active_manifest_records_exists = True
+object_inventory_exists = True
+object_snapshot_tar_gz_exists = True
+sha256_txt_exists = True
+
+object_set_root = sha256:413493f097c1e6920caea6fdedf5755cd3c11f0593dbb4894f09166a3ad26453
+effective_object_root = sha256:afaea19a558d0d6901a13fd6aacb5cb76a5fac4e83176b30ec283dc942fb0c9b
+
+warnings = []
+blockers = []
+
+outputs:
+  data/probe/e4a_joint/history/20260509T060808Z/object/object_snapshot_record.json
+  data/probe/e4a_joint/history/20260509T060808Z/object/active_manifest_records.jsonl
+  data/probe/e4a_joint/history/20260509T060808Z/object/object_inventory.jsonl
+  data/probe/e4a_joint/history/20260509T060808Z/object/object_snapshot.tar.gz
+  data/probe/e4a_joint/history/20260509T060808Z/object/sha256.txt
+
+runtime_service_changed = False
+collector_restarted = False
+probe_restarted = False
+new_validator_installed = False
+bgp_data_loaded = False
+
+P1_acceptance = True

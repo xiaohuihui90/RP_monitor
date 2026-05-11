@@ -1,0 +1,112 @@
+{
+  "schema": "s3.stage3.e4a_joint.p5_object_group_manifest.v1",
+  "created_at_utc": "2026-05-09T06:20:29.773289+00:00",
+  "snapshot_group_id": "group_20260509T031700Z",
+  "import_mode": "manual_sz_rz_then_local_28115_import",
+  "group_dir": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_snapshots/groups/group_20260509T031700Z",
+  "joint_group_manifest": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_snapshots/groups/group_20260509T031700Z/joint_group_manifest.json",
+  "received_object_probes": [
+    "probe-bj",
+    "probe-cd",
+    "probe-sg"
+  ],
+  "object_group_complete": true,
+  "vrp_group_complete": false,
+  "joint_group_complete": false,
+  "generated_time_min": "2026-05-09T03:17:18.353807+00:00",
+  "generated_time_max": "2026-05-09T06:08:08.914824+00:00",
+  "generated_time_skew_seconds": 10250,
+  "window_mapping_level": "weak",
+  "probe_checks": {
+    "probe-cd": true,
+    "probe-bj": true,
+    "probe-sg": true
+  },
+  "records": {
+    "probe-cd": {
+      "schema": "s3.stage3.e4a.object_upload_record.v1",
+      "status": "ok",
+      "probe_id": "probe-cd",
+      "snapshot_group_id": "group_20260509T031700Z",
+      "joint_snapshot_id": "probe-cd_20260509T031718Z",
+      "received_at_utc": "2026-05-09T03:20:30.133369+00:00",
+      "object_dir": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_snapshots/groups/group_20260509T031700Z/probe-cd/object",
+      "sha256_expected": "49161e6c0fbb27c6251f61eb639ce71cf23a8b4d85fe2fa025fdbda36d7e5204",
+      "sha256_actual": "49161e6c0fbb27c6251f61eb639ce71cf23a8b4d85fe2fa025fdbda36d7e5204",
+      "sha256_ok": true,
+      "tar_valid": true,
+      "extracted_files": [
+        "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_snapshots/groups/group_20260509T031700Z/probe-cd/object/object_snapshot_record.json",
+        "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_snapshots/groups/group_20260509T031700Z/probe-cd/object/object_inventory.jsonl",
+        "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_snapshots/groups/group_20260509T031700Z/probe-cd/object/active_manifest_records.jsonl"
+      ],
+      "object_inventory_count": 52018,
+      "active_manifest_count": 51906,
+      "object_set_root": "sha256:de9416f62d925db6c035ea192d214e82e8602b3e944d79b402e1f2b0f90175f8",
+      "effective_object_root": "sha256:8647689c220fea438c84a8cf76907db43405416e2de3b1ad871df0a01de59732",
+      "object_source_mode": "cache_file_inventory",
+      "blockers": []
+    },
+    "probe-bj": {
+      "schema": "s3.stage3.e4a.object_upload_record.v1",
+      "status": "ok",
+      "probe_id": "probe-bj",
+      "snapshot_group_id": "group_20260509T031700Z",
+      "joint_snapshot_id": "probe-bj_20260509T060739Z",
+      "received_at_utc": "2026-05-09T06:17:28.112796+00:00",
+      "object_dir": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_snapshots/groups/group_20260509T031700Z/probe-bj/object",
+      "sha256_expected": "e350696ac073ea8364db063543d1adc65d7262db42aac47317b14c55f4ff7934",
+      "sha256_actual": "e350696ac073ea8364db063543d1adc65d7262db42aac47317b14c55f4ff7934",
+      "sha256_ok": true,
+      "tar_valid": true,
+      "extracted_files": [
+        "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_snapshots/groups/group_20260509T031700Z/probe-bj/object/object_snapshot_record.json",
+        "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_snapshots/groups/group_20260509T031700Z/probe-bj/object/object_inventory.jsonl",
+        "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_snapshots/groups/group_20260509T031700Z/probe-bj/object/active_manifest_records.jsonl"
+      ],
+      "object_inventory_count": 156490,
+      "active_manifest_count": 156148,
+      "object_set_root": "sha256:93e2d19dd7a5f98226057602d219bc1e13b51931d4410f8ae53c3a46c87ba53b",
+      "effective_object_root": "sha256:2e7341774893bf85f49a038a6c7df64b015dd797ead4ed68c9326eab390dd32e",
+      "object_source_mode": "cache_file_inventory",
+      "blockers": []
+    },
+    "probe-sg": {
+      "schema": "s3.stage3.e4a.object_upload_record.v1",
+      "status": "ok",
+      "probe_id": "probe-sg",
+      "snapshot_group_id": "group_20260509T031700Z",
+      "joint_snapshot_id": "probe-sg_20260509T060808Z",
+      "received_at_utc": "2026-05-09T06:17:34.963407+00:00",
+      "object_dir": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_snapshots/groups/group_20260509T031700Z/probe-sg/object",
+      "sha256_expected": "f088907173973da8851b581c7fffeee013737d41918f368cd7971aadb5e5c7c7",
+      "sha256_actual": "f088907173973da8851b581c7fffeee013737d41918f368cd7971aadb5e5c7c7",
+      "sha256_ok": true,
+      "tar_valid": true,
+      "extracted_files": [
+        "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_snapshots/groups/group_20260509T031700Z/probe-sg/object/object_snapshot_record.json",
+        "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_snapshots/groups/group_20260509T031700Z/probe-sg/object/object_inventory.jsonl",
+        "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_snapshots/groups/group_20260509T031700Z/probe-sg/object/active_manifest_records.jsonl"
+      ],
+      "object_inventory_count": 52543,
+      "active_manifest_count": 52431,
+      "object_set_root": "sha256:413493f097c1e6920caea6fdedf5755cd3c11f0593dbb4894f09166a3ad26453",
+      "effective_object_root": "sha256:afaea19a558d0d6901a13fd6aacb5cb76a5fac4e83176b30ec283dc942fb0c9b",
+      "object_source_mode": "cache_file_inventory",
+      "blockers": []
+    }
+  },
+  "reserved_interfaces": {
+    "e4b_cross_validator": "reserved_only",
+    "control_plane_impact": "reserved_only"
+  },
+  "runtime_changes": {
+    "object_upload_sidecar_running": true,
+    "object_upload_sidecar_port": 28115,
+    "collector_main_service_restarted": false,
+    "probe_restarted": false,
+    "new_validator_installed": false,
+    "bgp_data_loaded": false
+  },
+  "P5_acceptance": true
+}

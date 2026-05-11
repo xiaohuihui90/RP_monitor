@@ -1,0 +1,162 @@
+[
+  {
+    "uri": "cache://.rpki-cache/repository/rsync/krill.ipgua.com/repo/pongery/0/BDD4451C46A2D9A578C4C015D6BC9425C6577FE2.mft",
+    "sha256": "f4b4bdd8b537a65ef4f81db090aa491eccc46711e863f202407b54b670a35380",
+    "object_type": "mft",
+    "size_bytes": 1880,
+    "source_root": "/home/zhangxiaohui/.rpki-cache",
+    "evidence_level": "cache_file_inventory"
+  },
+  {
+    "uri": "cache://.rpki-cache/repository/rsync/krill.ipgua.com/repo/pongery/0/ED42F9C384F588482A56A937C446B70EB594BD3F.mft",
+    "sha256": "48fe61bfc81ce11ee26985cb59db1cf19684fc1eef033b8af71f8b5e23a495c6",
+    "object_type": "mft",
+    "size_bytes": 1932,
+    "source_root": "/home/zhangxiaohui/.rpki-cache",
+    "evidence_level": "cache_file_inventory"
+  },
+  {
+    "uri": "cache://.rpki-cache/repository/rsync/krill.ipgua.com/repo/pongery/4/953F58832273DFD14187910ADCB3972B70B9BD3A.mft",
+    "sha256": "e91a5d77e28fa71de6ce18dd9e1fdd789fb46ae91afd3fa52e93f0021273e411",
+    "object_type": "mft",
+    "size_bytes": 2225,
+    "source_root": "/home/zhangxiaohui/.rpki-cache",
+    "evidence_level": "cache_file_inventory"
+  },
+  {
+    "uri": "cache://.rpki-cache/repository/rsync/krill.ipgua.com/repo/pongery/4/A0E52AE2A6674D4C7481A57558337E89666096A5.mft",
+    "sha256": "3dbe6fac29982f4301476113ae79c451ce58195e3b8875c3ab2d6477eb5f0a47",
+    "object_type": "mft",
+    "size_bytes": 1898,
+    "source_root": "/home/zhangxiaohui/.rpki-cache",
+    "evidence_level": "cache_file_inventory"
+  },
+  {
+    "uri": "cache://.rpki-cache/repository/rsync/rpki.komorebi.network/repo/komorebi/0/9E501456E122798BDB8F739545BF6148C7CD1165.mft",
+    "sha256": "89deefb4eaede8a034d16da10078f916f79eccffabd3673eb3425fff9989ec87",
+    "object_type": "mft",
+    "size_bytes": 1999,
+    "source_root": "/home/zhangxiaohui/.rpki-cache",
+    "evidence_level": "cache_file_inventory"
+  },
+  {
+    "uri": "cache://.rpki-cache/repository/rsync/rpki.komorebi.network/repo/komorebi/5/421B765C540F139258E8C8E64499AC6317AE6F93.mft",
+    "sha256": "be7fcaabeef1a9092323725828fe5fea9c2b2477ea95c0af140d1cff3db3b131",
+    "object_type": "mft",
+    "size_bytes": 2854,
+    "source_root": "/home/zhangxiaohui/.rpki-cache",
+    "evidence_level": "cache_file_inventory"
+  },
+  {
+    "uri": "cache://.rpki-cache/repository/rsync/rpki.komorebi.network/repo/komorebi/6/496B62D685F3CAF2E690022C12571B0DD3C6A8E5.mft",
+    "sha256": "40cde25bc7445f3ef11f6a449c1925371898b68dbdaab688dd35e60b54709d71",
+    "object_type": "mft",
+    "size_bytes": 2026,
+    "source_root": "/home/zhangxiaohui/.rpki-cache",
+    "evidence_level": "cache_file_inventory"
+  },
+  {
+    "uri": "cache://.rpki-cache/repository/rsync/rsync.rp.ki/repo/aci/1/04C3A5EF440A7931A7BB6DC0A08211C490E209E3.mft",
+    "sha256": "f47fc01056c25939c7c9aa7b4f1f19a976b55d783c13a41db7f66e8dc7417116",
+    "object_type": "mft",
+    "size_bytes": 2211,
+    "source_root": "/home/zhangxiaohui/.rpki-cache",
+    "evidence_level": "cache_file_inventory"
+  },
+  {
+    "uri": "cache://.rpki-cache/repository/rsync/rsync.rp.ki/repo/clonoth/1/C23A7169F6499DD2815C9178A890BC4C0514DDF9.mft",
+    "sha256": "c4c14afb6c5a94515aae76fb2b976e81d69d4ef74b1b5ffd75ea6689f41875d4",
+    "object_type": "mft",
+    "size_bytes": 2380,
+    "source_root": "/home/zhangxiaohui/.rpki-cache",
+    "evidence_level": "cache_file_inventory"
+  },
+  {
+    "uri": "cache://.rpki-cache/repository/rsync/rsync.rp.ki/repo/misakaio/0/9CF05E7024D4A487E0B79E2F57525BF345DB53EC.mft",
+    "sha256": "667502f0d81b43253be7aa095793501cd6efad738cb851616d24295b9a2868c8",
+    "object_type": "mft",
+    "size_bytes": 2914,
+    "source_root": "/home/zhangxiaohui/.rpki-cache",
+    "evidence_level": "cache_file_inventory"
+  },
+  {
+    "uri": "cache://.rpki-cache/repository/rsync/rsync.rp.ki/repo/misakaio/1/27904CFE041547C56F20BA5B1BB37BC33E8A13D3.mft",
+    "sha256": "e2eb7bb8b3d3fb576185d7ba8ab267f67b35ce3e44550bf1a7220bc9c4a108c8",
+    "object_type": "mft",
+    "size_bytes": 3952,
+    "source_root": "/home/zhangxiaohui/.rpki-cache",
+    "evidence_level": "cache_file_inventory"
+  },
+  {
+    "uri": "cache://.rpki-cache/repository/rsync/rsync.rp.ki/repo/misakaio/2/359A4B6C6D3713CFF3636207DE9839058B51815B.mft",
+    "sha256": "77e8e4545eead93784b6845b5dc8015aa96e5293943e101ae56dd96146ad1b91",
+    "object_type": "mft",
+    "size_bytes": 3986,
+    "source_root": "/home/zhangxiaohui/.rpki-cache",
+    "evidence_level": "cache_file_inventory"
+  },
+  {
+    "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/1/F03205B3993400CC3FC657EFE68E0696DA332458.mft",
+    "sha256": "82d8d3e01084511549b34d622f351c1204c5528cca49ed72c395c1693a66b09c",
+    "object_type": "mft",
+    "size_bytes": 138,
+    "source_root": "/home/zhangxiaohui/.rpki-cache",
+    "evidence_level": "cache_file_inventory"
+  },
+  {
+    "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/10/C5D9C68A36AE4EEAFED3C1CB551AB4B493922316.mft",
+    "sha256": "02da620b2b903f58535b3702c2e6a3f864e0ac6e55b7ff7f5d1c4a3370d4f68e",
+    "object_type": "mft",
+    "size_bytes": 139,
+    "source_root": "/home/zhangxiaohui/.rpki-cache",
+    "evidence_level": "cache_file_inventory"
+  },
+  {
+    "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/11/4B734CA25B04A198F3EFF79C293351606470223F.mft",
+    "sha256": "a42f6e94403955688272178e9cf4b3473a705da79656764a294dcc5ee945955e",
+    "object_type": "mft",
+    "size_bytes": 139,
+    "source_root": "/home/zhangxiaohui/.rpki-cache",
+    "evidence_level": "cache_file_inventory"
+  },
+  {
+    "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/14/A1AE71CDA837CEEF69CE114D701C8650A0A8FAA9.mft",
+    "sha256": "8ac47e0dbbb729f7911c4ff9fb0243c7e9267f2b39b6f7cc2201f2e0c9376d2e",
+    "object_type": "mft",
+    "size_bytes": 139,
+    "source_root": "/home/zhangxiaohui/.rpki-cache",
+    "evidence_level": "cache_file_inventory"
+  },
+  {
+    "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/15/24B0A526F8120A0F8142D2BD3B4644C8E1BDAD50.mft",
+    "sha256": "75c9111497d2615d425aa980145268610d7af1b0a74ae24a1d2faacbf59c26ec",
+    "object_type": "mft",
+    "size_bytes": 139,
+    "source_root": "/home/zhangxiaohui/.rpki-cache",
+    "evidence_level": "cache_file_inventory"
+  },
+  {
+    "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/16/84473C6B34C577A1F9F67605C4A8045E5F4D35A8.mft",
+    "sha256": "1098f5102e703d5b6bdab5e6e0b41ede6800690339dd4c9ecee3323932b3b44a",
+    "object_type": "mft",
+    "size_bytes": 139,
+    "source_root": "/home/zhangxiaohui/.rpki-cache",
+    "evidence_level": "cache_file_inventory"
+  },
+  {
+    "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/17/D659A7AF0FA7DCA33194D352FC97140AE70E8E3A.mft",
+    "sha256": "9aabe7a6ede761eec248eb012011b0c263b1cad1c689ffcd691723d322472f47",
+    "object_type": "mft",
+    "size_bytes": 139,
+    "source_root": "/home/zhangxiaohui/.rpki-cache",
+    "evidence_level": "cache_file_inventory"
+  },
+  {
+    "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/3/2A073E1D59E0A99185723C6F720CDDD629B831D3.mft",
+    "sha256": "ebd0dd1c044a64d2a6698d42756491144996813c71838b3542109109c8be4559",
+    "object_type": "mft",
+    "size_bytes": 138,
+    "source_root": "/home/zhangxiaohui/.rpki-cache",
+    "evidence_level": "cache_file_inventory"
+  }
+]

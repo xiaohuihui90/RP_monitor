@@ -1,0 +1,29 @@
+P3_SAME_WINDOW_OBJECT_CONTEXT_DISCOVERY=DONE
+
+run_id = m14a_auto_group_20260508T064858Z
+snapshot_group_id = group_20260508T064858Z
+
+searched_json_file_count = 94
+object_signal_candidate_count = 34
+same_window_candidate_count = 4
+historical_or_unmapped_candidate_count = 30
+
+object_context_available = True
+mapping_level = same_snapshot_group
+hard_blockers = []
+
+expected_behavior:
+  if object_context_available = False, keep final_status blocked_object_layer_unverified
+  do_not_reuse_historical_m13_object_verdict_as_same_window = True
+
+reserved_interfaces:
+  e4b_cross_validator = reserved_only
+  control_plane_impact = reserved_only
+
+runtime_service_changed = False
+collector_restarted = False
+probe_restarted = False
+new_validator_installed = False
+bgp_data_loaded = False
+
+P3_acceptance = True

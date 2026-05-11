@@ -1,0 +1,30 @@
+P3_PROBE_EXPORT_ONCE=DONE
+
+probe_id = probe-cd
+location = chengdu
+export_id = 20260508T064858Z
+out_root = /home/zhangxiaohui/s3_stage3_v3_code/data/probe/m14_vrp_export
+
+export_status = success
+upload_ready = True
+upload_status = not_uploaded_p3_export_only
+used_refresh = False
+
+validator = routinator
+validator_version = Routinator 0.15.1
+generatedTime = 2026-05-08T06:48:58Z
+roa_count = 857819
+raw_json_size_bytes = 74390167
+gzip_size_bytes = 4343054
+sha256_raw = 0a06d7cab51a863fbd88156b906dc2c7bcabbe4005946e30294a31707b0ce06d
+sha256_gzip = 1b722106cb8cc2cea65e5666a961d79b495cbed34e479f7c4542018c64b9fb64
+
+outputs:
+  /home/zhangxiaohui/s3_stage3_v3_code/data/probe/m14_vrp_export/history/20260508T064858Z/probe-cd_vrps.raw.json
+  /home/zhangxiaohui/s3_stage3_v3_code/data/probe/m14_vrp_export/history/20260508T064858Z/probe-cd_vrps.raw.json.gz
+  /home/zhangxiaohui/s3_stage3_v3_code/data/probe/m14_vrp_export/history/20260508T064858Z/manifest.json
+  /home/zhangxiaohui/s3_stage3_v3_code/data/probe/m14_vrp_export/history/20260508T064858Z/sha256.txt
+  /home/zhangxiaohui/s3_stage3_v3_code/data/probe/m14_vrp_export/latest/manifest.json
+  /home/zhangxiaohui/s3_stage3_v3_code/data/probe/m14_vrp_export/latest/sha256.txt
+
+P3_export_acceptance = True

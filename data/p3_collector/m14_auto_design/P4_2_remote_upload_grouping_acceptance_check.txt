@@ -1,0 +1,22 @@
+P4_2_REMOTE_UPLOAD_AND_GROUPING=DONE
+
+snapshot_group_id = group_20260508T064858Z
+validator = routinator
+
+received_probes = ['probe-bj', 'probe-cd', 'probe-sg']
+group_complete = True
+generated_time_min = 2026-05-08T06:48:58+00:00
+generated_time_max = 2026-05-08T06:56:20+00:00
+generated_time_skew_seconds = 442
+
+probe_checks:
+  probe-cd_ok = True
+  probe-bj_ok = True
+  probe-sg_ok = True
+
+expected:
+  all_three_probes_received = True
+  group_complete = True
+  generated_time_skew_seconds <= 600
+
+P4_2_acceptance = True

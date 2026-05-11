@@ -1,0 +1,50 @@
+P10_FINAL_JOINT_E4A_GATE=DONE
+
+created_at_utc = 2026-05-09T15:33:49.175200+00:00
+
+snapshot_group_id = group_joint_20260509T094400Z
+
+final_status = not_e4_object_layer_divergence
+e4_status = blocked
+confirmed_allowed = False
+blocking_layer = object_layer
+confidence = high
+
+object_group_complete = True
+vrp_group_complete = True
+object_window_strong = True
+vrp_window_strong = True
+
+object_generated_time_skew_seconds = 15
+vrp_generated_time_skew_seconds = 18
+
+object_roots_aligned = False
+effective_object_roots_aligned = False
+object_inventory_diff_count = 625544
+active_manifest_diff_count = 624856
+
+all_vrp_roots_aligned = False
+vrp_pairwise_entry_level_diff_count = 9722
+vrp_min_pairwise_jaccard_similarity = 0.9943412194608036
+
+blockers = ['object_layer_divergence_observed']
+warnings = []
+
+interpretation:
+  Object-layer divergence is observed under a strong same-group collection window. Therefore VRP differences must not be attributed to validator output-layer E4-A.
+
+evidence_pack = /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_p10/p10_final_joint_e4a_gate_20260509T153324Z/evidence/group_joint_20260509T094400Z_p10_final_joint_e4a_gate_evidence.tar.gz
+evidence_pack_sha256 = c329157c49bc5ea958f0935baf6dfdd09e245cdddb347dc2bcccbb2759167748
+
+runtime_changes:
+  collector_main_service_restarted = False
+  probe_restarted = False
+  new_validator_installed = False
+  bgp_data_loaded = False
+  cron_enabled = False
+
+reserved_interfaces:
+  e4b_cross_validator = reserved_only
+  control_plane_impact = reserved_only
+
+P10_acceptance = True

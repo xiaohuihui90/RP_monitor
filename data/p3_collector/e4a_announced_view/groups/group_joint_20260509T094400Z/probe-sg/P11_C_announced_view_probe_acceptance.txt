@@ -1,0 +1,35 @@
+P11_C_ANNOUNCED_VIEW_PROBE=DONE
+
+created_at_utc = 2026-05-10T13:29:15.729303+00:00
+
+probe_id = probe-sg
+location = singapore
+snapshot_group_id = group_joint_20260509T094400Z
+collection_mode = retrofit_or_diagnostic
+export_id = 20260510T132914Z
+
+pp_count = 3
+success_count = 3
+failure_count = 0
+
+announced_view_root_exists = True
+records_exists = True
+summary_exists = True
+sha256_txt_exists = True
+
+warnings = []
+blockers = []
+
+runtime_changes:
+  collector_main_service_restarted = False
+  probe_restarted = False
+  new_validator_installed = False
+  bgp_data_loaded = False
+  cron_enabled = False
+
+outputs:
+  data/probe/e4a_announced_view/history/20260510T132914Z/announced_view_records.jsonl
+  data/probe/e4a_announced_view/history/20260510T132914Z/announced_view_probe_summary.json
+  data/probe/e4a_announced_view/history/20260510T132914Z/sha256.txt
+
+P11_C_probe_acceptance = True

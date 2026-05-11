@@ -1,0 +1,18 @@
+{
+  "schema": "s3.stage3.e4a.vrp_group_auto_export_manifest.v1",
+  "probe_id": "probe-bj",
+  "location": "beijing",
+  "snapshot_group_id": "group_auto_vrp_20260509T072200Z",
+  "export_id": "20260509T073059Z",
+  "validator": "routinator",
+  "validator_version": "Routinator 0.15.1",
+  "generatedTime": "2026-05-09T07:30:59Z",
+  "export_started_at": "2026-05-09T07:30:59Z",
+  "export_finished_at": "2026-05-09T07:32:12Z",
+  "roa_count": 858625,
+  "router_key_count": 0,
+  "aspa_count": 0,
+  "raw_json_size_bytes": 74454153,
+  "used_noupdate": true,
+  "upload_ready": true
+}

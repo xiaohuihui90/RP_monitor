@@ -1,0 +1,52 @@
+{
+  "schema": "s3.stage3.m14.vrp_snapshot_manifest.v1",
+  "probe_id": "probe-sg",
+  "location": "singapore",
+  "validator": "routinator",
+  "validator_version": "Routinator 0.15.1",
+  "export_started_at": "2026-05-08T06:56:20.131636+00:00",
+  "export_finished_at": "2026-05-08T06:58:04.161073+00:00",
+  "generatedTime": "2026-05-08T06:56:20Z",
+  "routinator_metadata": {
+    "generated": 1778223380,
+    "generatedTime": "2026-05-08T06:56:20Z"
+  },
+  "raw_json_size_bytes": 74388968,
+  "gzip_size_bytes": 4342899,
+  "roa_count": 857805,
+  "sha256_raw": "99585c99a71fb40b91dc851e9f92f27096f8757de153d0065fa0831cd9387470",
+  "sha256_gzip": "6f1d036c857f30e2a10e74f718aacb9a1b1f2ceb3672241521d255ecd4567739",
+  "raw_json_file": "/home/zhangxiaohui/s3_stage3_v3_code/data/probe/m14_vrp_export/history/20260508T065620Z/probe-sg_vrps.raw.json",
+  "gzip_file": "/home/zhangxiaohui/s3_stage3_v3_code/data/probe/m14_vrp_export/history/20260508T065620Z/probe-sg_vrps.raw.json.gz",
+  "sha256_file": "/home/zhangxiaohui/s3_stage3_v3_code/data/probe/m14_vrp_export/history/20260508T065620Z/sha256.txt",
+  "used_refresh": false,
+  "export_status": "success",
+  "attempts": [
+    {
+      "name": "primary",
+      "noupdate": true,
+      "command": [
+        "routinator",
+        "vrps",
+        "--format",
+        "json",
+        "--noupdate",
+        "--output",
+        "/home/zhangxiaohui/s3_stage3_v3_code/data/probe/m14_vrp_export/history/20260508T065620Z/probe-sg_vrps.raw.json"
+      ],
+      "returncode": 0,
+      "validation": {
+        "reason": "ok",
+        "size_bytes": 74388968,
+        "roa_count": 857805,
+        "generatedTime": "2026-05-08T06:56:20Z",
+        "metadata": {
+          "generated": 1778223380,
+          "generatedTime": "2026-05-08T06:56:20Z"
+        }
+      }
+    }
+  ],
+  "upload_ready": true,
+  "upload_status": "not_uploaded_p3_export_only"
+}

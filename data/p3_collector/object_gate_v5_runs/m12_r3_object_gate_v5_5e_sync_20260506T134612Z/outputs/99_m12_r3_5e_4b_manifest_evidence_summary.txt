@@ -1,0 +1,92 @@
+gate_id = m12_r3_object_gate_v5_5e_sync_20260506T134612Z
+source_run_id = m12_r3_5e_sync_export_20260506T134612Z
+records_level = active_manifest
+input_rejudged_status = divergent_candidate
+input_rejudged_confidence = medium
+attribution = manifest_version_skew_dominant
+confidence = medium-high
+needs_active_object_diff = False
+explanation = Most same-URI manifest hash differences are accompanied by small manifestNumber skew. This indicates cross-probe observation of adjacent repository publication versions.
+warnings = ['probe-bj:manifest_parse_failure_observed', 'probe-cd:manifest_parse_failure_observed', 'probe-sg:expired_manifest_count_above_strict_threshold', 'probe-sg:manifest_parse_failure_observed']
+blockers = []
+not_e4_reason = This evidence is restricted to the object layer. No validated output-layer VRP digest/root comparison is included.
+
+aggregate_metrics:
+  all_pairwise_same_uri_manifest_hash_diff_count = 139
+  all_pairwise_manifest_presence_diff_count = 22
+  all_pairwise_small_manifest_number_skew_sample_count = 137
+  small_skew_over_hash_diff_ratio = 0.9856115107913669
+
+probe_manifest_counts:
+  probe-cd = 51685
+  probe-bj = 51686
+  probe-sg = 51675
+
+presence_classes:
+  probe-cd,probe-bj,probe-sg = 51675
+  probe-cd,probe-bj = 10
+  probe-bj = 1
+
+pair_summary:
+  probe-cd_vs_probe-bj:
+    left = probe-cd
+    right = probe-bj
+    left_count = 51685
+    right_count = 51686
+    common_count = 51685
+    only_left_count = 0
+    only_right_count = 1
+    same_uri_different_manifest_hash_count = 69
+    same_uri_metadata_diff_count = 69
+    small_manifest_number_skew_sample_count = 68
+    small_manifest_number_skew_ratio = 0.9855072463768116
+    jaccard_similarity = 0.9999806524010371
+  probe-cd_vs_probe-sg:
+    left = probe-cd
+    right = probe-sg
+    left_count = 51685
+    right_count = 51675
+    common_count = 51675
+    only_left_count = 10
+    only_right_count = 0
+    same_uri_different_manifest_hash_count = 58
+    same_uri_metadata_diff_count = 58
+    small_manifest_number_skew_sample_count = 57
+    small_manifest_number_skew_ratio = 0.9827586206896551
+    jaccard_similarity = 0.999806520267002
+  probe-bj_vs_probe-sg:
+    left = probe-bj
+    right = probe-sg
+    left_count = 51686
+    right_count = 51675
+    common_count = 51675
+    only_left_count = 11
+    only_right_count = 0
+    same_uri_different_manifest_hash_count = 12
+    same_uri_metadata_diff_count = 12
+    small_manifest_number_skew_sample_count = 12
+    small_manifest_number_skew_ratio = 1.0
+    jaccard_similarity = 0.9997871764114074
+
+sample_evidence_overview:
+  probe-cd_vs_probe-bj:
+    only_left_samples = 0
+    only_right_samples = 1
+    same_uri_hash_diff_samples = 10
+    small_skew_samples = 10
+  probe-cd_vs_probe-sg:
+    only_left_samples = 10
+    only_right_samples = 0
+    same_uri_hash_diff_samples = 10
+    small_skew_samples = 10
+  probe-bj_vs_probe-sg:
+    only_left_samples = 10
+    only_right_samples = 0
+    same_uri_hash_diff_samples = 10
+    small_skew_samples = 10
+
+interpretation:
+ - Manifest-level evidence explains most root divergence.
+ - The dominant pattern is adjacent manifest version skew across probes.
+ - This should be treated as object-layer temporal/version divergence, not E4.
+ - Active object diff is optional unless stronger URI/file-level evidence is required.

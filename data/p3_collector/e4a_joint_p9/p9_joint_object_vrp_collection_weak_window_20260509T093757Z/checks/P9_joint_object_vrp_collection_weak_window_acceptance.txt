@@ -1,0 +1,67 @@
+P9_JOINT_OBJECT_VRP_COLLECTION_WEAK_WINDOW=DONE
+
+created_at_utc = 2026-05-09T09:38:08.816746+00:00
+
+snapshot_group_id = group_joint_20260509T090600Z
+collection_mode = manual_same_group_object_plus_vrp
+
+object_group:
+  received_object_probes = ['probe-bj', 'probe-cd', 'probe-sg']
+  object_group_complete = True
+  generated_time_skew_seconds = 1519
+  window_mapping_level = weak
+
+vrp_group:
+  received_probes = ['probe-bj', 'probe-cd', 'probe-sg']
+  complete = True
+  generated_time_skew_seconds = 910
+
+object_counts:
+  probe-cd = 104046
+  probe-bj = 156515
+  probe-sg = 52545
+
+vrp_counts:
+  probe-cd = 858820
+  probe-bj = 858624
+  probe-sg = 858819
+
+object_roots:
+  probe-cd object_set_root = sha256:50cbc5e58563b827a61d5caa5e94819aeb716c0cf145614b1c09bb91afaa47ab
+  probe-bj object_set_root = sha256:201b2e6df6ab7e88294a28ff73a7b7b6e520e3a147b828257889e042ca3d4e42
+  probe-sg object_set_root = sha256:5dcae9dda563c1404e20b3e8e108cc391f8fa1537d180d41f7e03e1c0becf732
+
+effective_object_roots:
+  probe-cd effective_object_root = sha256:53c1f90d10556ea3acae25ddd196cd8a65eed4c255f00bd90b592a4ec4bf6e4f
+  probe-bj effective_object_root = sha256:a714f1ccd4a0d4679aaa6755f7554c9089d52f2d63bf17e399902125ce5cd0df
+  probe-sg effective_object_root = sha256:6a8394bdd4ffa9e370b66a4e5d2b81fb6f42b0063936cd99616fecf3b0c1e1a3
+
+acceptance:
+  object_ok = True
+  vrp_ok = True
+  P9_joint_collection_acceptance = True
+  P9_strict_same_window_acceptance = False
+
+decision:
+  engineering_collection_pipeline_passed = True
+  strict_E4A_input_ready = False
+  reason = object/VRP groups are complete, but time skew exceeds strict same-window threshold.
+
+runtime_changes:
+  object_upload_sidecar_28115_running = True
+  vrp_upload_sidecar_28114_running = True
+  collector_main_service_restarted = False
+  probe_restarted = False
+  new_validator_installed = False
+  bgp_data_loaded = False
+  cron_enabled = False
+
+reserved_interfaces:
+  e4b_cross_validator = reserved_only
+  control_plane_impact = reserved_only
+
+next_batch:
+  rerun P9 with tighter timing to obtain strong-window group
+  then run object compare, VRP diff, and final E4-A joint gate
+
+P9_acceptance = True

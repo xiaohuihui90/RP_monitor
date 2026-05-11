@@ -1,0 +1,14 @@
+{
+  "schema": "s3.stage3.e4a_joint.p9_joint_collection_weak_window_manifest.v1",
+  "created_at_utc": "2026-05-09T09:38:08.816871+00:00",
+  "snapshot_group_id": "group_joint_20260509T090600Z",
+  "object_group_manifest": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_snapshots/groups/group_joint_20260509T090600Z/joint_group_manifest.json",
+  "vrp_group_manifest": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_snapshots/groups/group_joint_20260509T090600Z/group_manifest.json",
+  "object_ok": true,
+  "vrp_ok": true,
+  "object_generated_time_skew_seconds": 1519,
+  "vrp_generated_time_skew_seconds": 910,
+  "strict_same_window_ok": false,
+  "P9_joint_collection_acceptance": true,
+  "P9_strict_same_window_acceptance": false
+}

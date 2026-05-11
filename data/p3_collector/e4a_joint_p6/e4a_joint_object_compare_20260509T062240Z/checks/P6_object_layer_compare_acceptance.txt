@@ -1,0 +1,38 @@
+P6_OBJECT_LAYER_COMPARE=DONE
+
+created_at_utc = 2026-05-09T06:23:12.671664+00:00
+
+snapshot_group_id = group_20260509T031700Z
+
+object_group_complete = True
+vrp_group_complete = False
+joint_group_complete = False
+
+window_mapping_level = weak
+generated_time_skew_seconds = 10250
+
+object_roots_aligned = False
+effective_object_roots_aligned = False
+
+all_pairwise_inventory_diff_count = 521434
+all_pairwise_active_manifest_diff_count = 520926
+
+min_inventory_jaccard_similarity = 0.0004786223334753246
+min_active_manifest_jaccard_similarity = 0.0
+
+final_status = object_layer_divergence_observed_weak_window
+e4_gate_recommendation = do_not_confirm_e4
+
+warnings = ['object_set_roots_not_aligned', 'effective_object_roots_not_aligned', 'object_snapshot_window_mapping_weak']
+blockers = []
+
+interpretation:
+  Object-layer roots and inventories diverge across probes. Therefore current VRP output difference cannot be attributed to validator output logic alone. However, this batch has weak time-window mapping, so the result is diagnostic rather than strict same-window evidence.
+
+outputs:
+  /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_p6/e4a_joint_object_compare_20260509T062240Z/outputs/object_layer_compare_summary.json
+  /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_p6/e4a_joint_object_compare_20260509T062240Z/diffs/object_inventory_pairwise_diff.json
+  /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_p6/e4a_joint_object_compare_20260509T062240Z/diffs/active_manifest_pairwise_diff.json
+  /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_p6/e4a_joint_object_compare_20260509T062240Z/verdicts/object_layer_verdict.json
+
+P6_acceptance = True

@@ -1,0 +1,169 @@
+{
+  "schema": "s3.stage3.m15.announced_view_group_manifest.v1",
+  "created_at_utc": "2026-05-10T15:08:32.848412+00:00",
+  "snapshot_group_id": "group_joint_20260509T094400Z",
+  "collection_mode": "retrofit_or_diagnostic",
+  "required_probes": [
+    "probe-cd",
+    "probe-bj",
+    "probe-sg"
+  ],
+  "received_probes": [
+    "probe-bj",
+    "probe-cd",
+    "probe-sg"
+  ],
+  "announced_view_group_complete": true,
+  "pp_scope": [
+    "arin",
+    "ripe",
+    "apnic"
+  ],
+  "generated_time_min": "2026-05-09T16:12:16.740106+00:00",
+  "generated_time_max": "2026-05-10T13:29:15.728688+00:00",
+  "generated_time_skew_seconds": 76618,
+  "window_mapping_level": "weak_or_unknown",
+  "strict_announced_view_aligned": false,
+  "semantic_announced_view_aligned": true,
+  "probe_roots": {
+    "probe-cd": "sha256:36ed6b1ae5678e907a10a63f26d6c80d122d640cf900c7bfe72c3eeaf5a9f367",
+    "probe-bj": "sha256:07e41bb50f03355d5d08e506b7b4d916f4ee3c14b0e9a2e6a1678db1860ec1cf",
+    "probe-sg": "sha256:8379fe68358148cb22d7afc8ccf40c650630d95b4271cc90f8953070cd82e3c6"
+  },
+  "pp_summary": {
+    "arin": {
+      "strict_aligned": false,
+      "semantic_aligned": true,
+      "field_aligned": {
+        "fetch_status": true,
+        "session_id": true,
+        "serial": false,
+        "notification_digest": false,
+        "snapshot_hash": false,
+        "delta_hash_chain_root": false
+      },
+      "values_by_probe": {
+        "fetch_status": {
+          "probe-cd": "success",
+          "probe-bj": "success",
+          "probe-sg": "success"
+        },
+        "session_id": {
+          "probe-cd": "222bc4dd-08cd-46c3-b744-f99835520fa4",
+          "probe-bj": "222bc4dd-08cd-46c3-b744-f99835520fa4",
+          "probe-sg": "222bc4dd-08cd-46c3-b744-f99835520fa4"
+        },
+        "serial": {
+          "probe-cd": 119292,
+          "probe-bj": 119421,
+          "probe-sg": 119422
+        },
+        "notification_digest": {
+          "probe-cd": "sha256:84681b00aa20c9a5ce84f3008c9c56933aea6f4314712e9dbd9aa975314f7528",
+          "probe-bj": "sha256:e55e0f77ddf31f2850200a0aa9b68b7664adc988eaa440c182af769e0407ed37",
+          "probe-sg": "sha256:f012267113a2b28552e3a82b54c1ef78ec9416d49327c12b61ccba1ff30e0425"
+        },
+        "snapshot_hash": {
+          "probe-cd": "2358342ecfcaba4941e8436db0c5330cc75fba0dd51e47f2664e5950e1a48901",
+          "probe-bj": "e0230b158814b774b3fd49746375226c2b1682075472d4b5cd328eafcba5198d",
+          "probe-sg": "41cbfaba58b43a2e8d95befe6963a11025bbec7603e8b0ed9310c4a1712c724e"
+        },
+        "delta_hash_chain_root": {
+          "probe-cd": "sha256:eb224012136510f204b439ff209f581736fb22749b0f3e1c5c4e4be84fb38a9b",
+          "probe-bj": "sha256:0d3e085040e6ca0c8671fdac31e62e1d954225f6436a217be92f52956c91161c",
+          "probe-sg": "sha256:2ff000f43044bf331e3cd53ccf0560b3a83af98d282343bcf0abfd62286a0fc0"
+        }
+      }
+    },
+    "ripe": {
+      "strict_aligned": false,
+      "semantic_aligned": true,
+      "field_aligned": {
+        "fetch_status": true,
+        "session_id": true,
+        "serial": false,
+        "notification_digest": false,
+        "snapshot_hash": false,
+        "delta_hash_chain_root": false
+      },
+      "values_by_probe": {
+        "fetch_status": {
+          "probe-cd": "success",
+          "probe-bj": "success",
+          "probe-sg": "success"
+        },
+        "session_id": {
+          "probe-cd": "172322cf-c642-4e6f-806c-bd2375d8001a",
+          "probe-bj": "172322cf-c642-4e6f-806c-bd2375d8001a",
+          "probe-sg": "172322cf-c642-4e6f-806c-bd2375d8001a"
+        },
+        "serial": {
+          "probe-cd": 198074,
+          "probe-bj": 198190,
+          "probe-sg": 198190
+        },
+        "notification_digest": {
+          "probe-cd": "sha256:8f4e29aa649218a503e9fb7c9cecb6517ed19baef908e84a67f2e69c15cfbdb4",
+          "probe-bj": "sha256:00eb895cdd73e55fb18f7c49801266ff5305bfa388830dbd03e0d61e095ff228",
+          "probe-sg": "sha256:00eb895cdd73e55fb18f7c49801266ff5305bfa388830dbd03e0d61e095ff228"
+        },
+        "snapshot_hash": {
+          "probe-cd": "5e853792b6f95090b26cd5f64049e11f7cc8b699537832a38d7fb58bebdda4a1",
+          "probe-bj": "94446b17190e7e3c8ed7b890d557856260d6d2de1fd2b74927de5c74983cc826",
+          "probe-sg": "94446b17190e7e3c8ed7b890d557856260d6d2de1fd2b74927de5c74983cc826"
+        },
+        "delta_hash_chain_root": {
+          "probe-cd": "sha256:56056dab862c941b99eeec6c07c37c4211ba75951d91cc648ddecfb1560e2fc8",
+          "probe-bj": "sha256:72a93d1989124e755644eb6ba385f0796931809fa212a58a77303491350817bf",
+          "probe-sg": "sha256:72a93d1989124e755644eb6ba385f0796931809fa212a58a77303491350817bf"
+        }
+      }
+    },
+    "apnic": {
+      "strict_aligned": false,
+      "semantic_aligned": true,
+      "field_aligned": {
+        "fetch_status": true,
+        "session_id": true,
+        "serial": false,
+        "notification_digest": false,
+        "snapshot_hash": false,
+        "delta_hash_chain_root": false
+      },
+      "values_by_probe": {
+        "fetch_status": {
+          "probe-cd": "success",
+          "probe-bj": "success",
+          "probe-sg": "success"
+        },
+        "session_id": {
+          "probe-cd": "8dad0cc8-0bc8-4021-88ed-e75e295df946",
+          "probe-bj": "8dad0cc8-0bc8-4021-88ed-e75e295df946",
+          "probe-sg": "8dad0cc8-0bc8-4021-88ed-e75e295df946"
+        },
+        "serial": {
+          "probe-cd": 46717,
+          "probe-bj": 46744,
+          "probe-sg": 46746
+        },
+        "notification_digest": {
+          "probe-cd": "sha256:56de78d954c7c2895cbb4287b1227dd504b47013b99c32b174f8910a8163fdb4",
+          "probe-bj": "sha256:adb73d443e9284db6a2bc431e2992f65229788e147347035d331c57e428a1a1a",
+          "probe-sg": "sha256:5d09d604c6aa5648c42afb634671c9ce2cb567d39921f52b30f466498d3b2015"
+        },
+        "snapshot_hash": {
+          "probe-cd": "2b64898c05c8038a362e2fd5d728b8f07ffa2b49c4680d8c70fe7d40b850ac60",
+          "probe-bj": "65814068cc342ed80989e7d5810683a686bfe614edf990704392157b65263a40",
+          "probe-sg": "253df18276cdacbd096a61c099068700688dad7968283ef73ea97bb53bcc7633"
+        },
+        "delta_hash_chain_root": {
+          "probe-cd": "sha256:738b53bef9a2257ff8587104fea08d9336174446b0cf07a31ff35051f2d4dc63",
+          "probe-bj": "sha256:53f9dce38d23e45db7f234dc08d9a89c800af188e4b6ee32db865af4fab335c3",
+          "probe-sg": "sha256:4c5c1386d738a8de414e52ba6373544074705dfbff5ae4f932efcf849abb5974"
+        }
+      }
+    }
+  },
+  "warnings": [],
+  "blockers": []
+}

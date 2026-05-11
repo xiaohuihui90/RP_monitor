@@ -1,0 +1,37 @@
+P2_JOINT_SNAPSHOT_MANIFEST=DONE
+
+probe_id = probe-sg
+location = singapore
+snapshot_group_id = group_20260509T031700Z
+joint_snapshot_id = probe-sg_20260509T060808Z
+export_id = 20260509T060808Z
+
+vrp_snapshot_available = True
+object_snapshot_available = True
+joint_snapshot_manifest_exists = True
+joint_snapshot_upload_ready = True
+
+vrp_generatedTime = 2026-05-08T06:56:20Z
+object_export_started_at = 2026-05-09T06:08:08.914824+00:00
+vrp_object_time_skew_seconds = 83508
+window_mapping_level = weak_or_unknown
+
+object_inventory_count = 52543
+active_manifest_count = 52431
+object_set_root = sha256:413493f097c1e6920caea6fdedf5755cd3c11f0593dbb4894f09166a3ad26453
+effective_object_root = sha256:afaea19a558d0d6901a13fd6aacb5cb76a5fac4e83176b30ec283dc942fb0c9b
+
+warnings = ['vrp_object_time_skew_above_600_seconds']
+blockers = []
+
+reserved_interfaces:
+  e4b_cross_validator = reserved_only
+  control_plane_impact = reserved_only
+
+runtime_service_changed = False
+collector_restarted = False
+probe_restarted = False
+new_validator_installed = False
+bgp_data_loaded = False
+
+P2_acceptance = True

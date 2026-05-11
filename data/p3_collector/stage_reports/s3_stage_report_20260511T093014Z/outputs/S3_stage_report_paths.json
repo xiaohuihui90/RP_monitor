@@ -1,0 +1,10 @@
+{
+  "m15_closeout_manifest": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_m15_closeout/m15_p11_three_layer_closeout_group_m15_20260510T165500Z_20260511T031244Z/manifests/M15_P11_three_layer_closeout_manifest.json",
+  "m15_closeout_acceptance": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_m15_closeout/m15_p11_three_layer_closeout_group_m15_20260510T165500Z_20260511T031244Z/checks/M15_P11_three_layer_closeout_acceptance.txt",
+  "m15_three_layer_verdict": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_m15_strict/m15_strict_three_layer_gate_group_m15_20260510T165500Z_20260511T023241Z/verdicts/three_layer_final_verdict.json",
+  "m15_l1_manifest": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_m15_l1/m15_l1_announced_view_group_group_m15_20260510T165500Z_20260511T022201Z/outputs/announced_view_group_manifest.json",
+  "m15_object_verdict": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_m15_strict/m15_strict_three_layer_gate_group_m15_20260510T165500Z_20260511T023241Z/verdicts/object_layer_verdict.json",
+  "m15_vrp_summary": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_m15_strict/m15_strict_three_layer_gate_group_m15_20260510T165500Z_20260511T023241Z/outputs/m14_vrp_summary.json",
+  "m15_vrp_diff": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_m15_strict/m15_strict_three_layer_gate_group_m15_20260510T165500Z_20260511T023241Z/outputs/m14_vrp_pairwise_diff.json",
+  "m15_weak_acceptance": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_m15_weak_runs/m15_weak_completion_group_m15_20260510T162200Z_20260510T164422Z/checks/M15_weak_completion_acceptance.txt"
+}

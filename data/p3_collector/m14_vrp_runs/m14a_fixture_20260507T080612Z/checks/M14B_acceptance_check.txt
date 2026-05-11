@@ -1,0 +1,17 @@
+M14B_OBJECT_VERDICT_JOIN=DONE
+
+run_id = m14a_fixture_20260507T080612Z
+final_status = not_e4_object_layer_version_skew
+e4_status = not_e4
+confirmed_allowed = False
+
+object_verdict_used = True
+object_layer_version_skew = True
+expected_for_current_m13_case = not_e4_object_layer_version_skew
+m14b_acceptance = True
+
+outputs:
+  /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_fixture_20260507T080612Z/verdicts/final_verdict_m14.json
+  /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_fixture_20260507T080612Z/verdicts/99_m14_vrp_output_verdict.txt
+  /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_fixture_20260507T080612Z/verdicts/99_m14_paper_ready_conclusion_zh.txt
+  /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_fixture_20260507T080612Z/inputs/object_verdict_ref.json

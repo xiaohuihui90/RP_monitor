@@ -1,0 +1,37 @@
+P1_M14_PARAMETER_ENHANCEMENT_E4A=DONE
+
+run_id = m14a_auto_group_20260508T064858Z
+scope = m14_e4a_cross_region_same_validator
+
+outputs:
+  /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_auto_group_20260508T064858Z/diffs/m14_vrp_pairwise_diff_enriched.json
+  /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_auto_group_20260508T064858Z/inputs/validator_output_records_v2.json
+  /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_auto_group_20260508T064858Z/inputs/validator_fingerprint_summary.json
+  /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_auto_group_20260508T064858Z/inputs/control_plane_impact_placeholder.json
+  /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_auto_group_20260508T064858Z/checks/m14_parameter_completeness.json
+  /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4_v2_p1/e4a_m14_parameter_enhancement_20260509T014645Z/docs/P1_m14_parameter_enhancement_summary.md
+
+checks:
+  vrp_count_exists = True
+  vrp_digest_exists = True
+  vrp_root_v1_exists = True
+  vrp_set_path_exists = True
+  vrp_set_diff_exists = True
+  common_vrps_path_exists = True
+  only_left_vrps_path_exists = True
+  only_right_vrps_path_exists = True
+  affected_prefix_count_exists = True
+  affected_asn_count_exists = True
+  validator_fingerprint_summary_exists = True
+
+reserved_interfaces:
+  e4b_cross_validator = reserved_only
+  control_plane_impact = reserved_only
+
+runtime_service_changed = False
+collector_restarted = False
+probe_restarted = False
+new_validator_installed = False
+bgp_data_loaded = False
+
+P1_acceptance = True

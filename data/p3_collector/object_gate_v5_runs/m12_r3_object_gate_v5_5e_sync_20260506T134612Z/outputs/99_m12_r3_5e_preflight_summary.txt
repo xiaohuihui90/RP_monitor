@@ -1,0 +1,56 @@
+gate_id = m12_r3_object_gate_v5_5e_sync_20260506T134612Z
+source_run_id = m12_r3_5e_sync_export_20260506T134612Z
+status = ok
+warnings = []
+blockers = []
+
+=== probe-bj beijing http://166.111.121.63:28089 ===
+health_ok = True
+  health.status = ok
+  health.probe_id = probe-bj
+output_summary_ok = True
+  output_summary.base_url = http://127.0.0.1:8423
+  output_summary.validator_version = routinator/0.15.1
+  output_summary.validator_state = ready
+  output_summary.vrp_count = 854077.0
+  output_summary.valid_manifests = 51680
+  output_summary.last_update_done = 2026-05-06T13:39:38.378990716+00:00
+  output_summary.status_summary_digest = e7d8f0c4758fa403eec5c85c8be5513dd26d6ebf27da5927f22d621a1f05f6c9
+jobs_ok = True
+  jobs_count_returned = 2
+  job m12_r3_effective_object_export_m12_effective_object_20260506_bj_cache_source_fix_probe-bj_20260506T071302Z status=success source_run_id=m12_effective_object_20260506_bj_cache_source_fix compact_ready=True records_ready=True
+  job m12_r3_effective_object_export_m12_effective_object_20260504T053134Z_probe-bj_20260505T041521Z status=success source_run_id=m12_effective_object_20260504T053134Z compact_ready=True records_ready=True
+
+=== probe-cd chengdu http://127.0.0.1:28089 ===
+health_ok = True
+  health.status = ok
+  health.probe_id = probe-cd
+output_summary_ok = True
+  output_summary.base_url = http://127.0.0.1:8323
+  output_summary.validator_version = routinator/0.15.1
+  output_summary.validator_state = ready
+  output_summary.vrp_count = 854085.0
+  output_summary.valid_manifests = 51679
+  output_summary.last_update_done = 2026-05-06T13:36:01.119274261+00:00
+  output_summary.status_summary_digest = 8533be9f5d874556679a4bed077b2968404a7b9068cccde3d61847938e82d93d
+jobs_ok = True
+  jobs_count_returned = 2
+  job m12_r3_effective_object_export_m12_effective_object_20260504T053134Z_probe-cd_20260505T014642Z status=success source_run_id=m12_effective_object_20260504T053134Z compact_ready=True records_ready=True
+  job m12_r3_effective_object_export_m12_effective_object_20260504T053134Z_probe-cd_20260505T012253Z status=success source_run_id=m12_effective_object_20260504T053134Z compact_ready=True records_ready=True
+
+=== probe-sg singapore http://8.219.129.95:28089 ===
+health_ok = True
+  health.status = ok
+  health.probe_id = probe-sg
+output_summary_ok = True
+  output_summary.base_url = http://127.0.0.1:8323
+  output_summary.validator_version = routinator/0.15.1
+  output_summary.validator_state = ready
+  output_summary.vrp_count = 854061.0
+  output_summary.valid_manifests = 51669
+  output_summary.last_update_done = 2026-05-06T13:40:23.135069273+00:00
+  output_summary.status_summary_digest = 13f00bf5a4e5138b2cdc37fa6520ac3f67419476cf8b21a2f22c3ffe285febf8
+jobs_ok = True
+  jobs_count_returned = 1
+  job m12_r3_effective_object_export_m12_effective_object_20260504T053134Z_probe-sg_20260505T031400Z status=success source_run_id=m12_effective_object_20260504T053134Z compact_ready=True records_ready=True
+

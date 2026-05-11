@@ -1,0 +1,25 @@
+P6_CONTEXT_GATING_AND_EVIDENCE_PACK=DONE
+
+run_id = m14a_auto_group_20260508T064858Z
+snapshot_group_id = group_20260508T064858Z
+
+final_status = blocked_object_layer_unverified
+e4_status = blocked
+confirmed_allowed = False
+
+object_context_joined = True
+validator_config_context_joined = True
+window_mapping_context_joined = True
+fetch_completeness_context_joined = True
+infrastructure_context_joined = True
+
+object_context_available = False
+same_window_object_context_missing = True
+final_blocked_by_object_context = True
+
+evidence_index_exists = True
+evidence_pack_exists = True
+all_required_evidence_exists = True
+evidence_pack_sha256 = d14bbddff753f8cacf540e21114dc314332cb2f4caf4fac714b8e063179a58ce
+
+P6_acceptance = True

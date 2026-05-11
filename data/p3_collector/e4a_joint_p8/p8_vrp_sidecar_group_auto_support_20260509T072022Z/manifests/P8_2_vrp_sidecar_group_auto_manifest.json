@@ -1,0 +1,17 @@
+{
+  "schema": "s3.stage3.e4a_joint.p8_2_vrp_sidecar_group_auto_manifest.v1",
+  "sidecar_port": 28114,
+  "sidecar_service": "m14_p4_upload_sidecar_v2_group_auto",
+  "test_group_id": "group_auto_test_28114_20260509T072000Z",
+  "P8_group_auto_supported": true,
+  "runtime_changes": {
+    "vrp_upload_sidecar_replaced": true,
+    "vrp_upload_sidecar_port": 28114,
+    "object_upload_sidecar_28115_unchanged": true,
+    "collector_main_service_restarted": false,
+    "probe_restarted": false,
+    "new_validator_installed": false,
+    "bgp_data_loaded": false
+  },
+  "P8_2_acceptance": true
+}

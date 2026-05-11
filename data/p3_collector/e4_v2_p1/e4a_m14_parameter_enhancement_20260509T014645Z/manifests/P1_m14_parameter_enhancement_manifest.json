@@ -1,0 +1,53 @@
+{
+  "schema": "s3.stage3.e4a.p1_manifest.v1",
+  "created_at_utc": "2026-05-09T01:47:37.974827+00:00",
+  "run_id": "m14a_auto_group_20260508T064858Z",
+  "scope": "m14_e4a_cross_region_same_validator",
+  "e4b_cross_validator": "reserved_only",
+  "control_plane_impact": "reserved_only",
+  "required_files_ok": true,
+  "files": [
+    {
+      "path": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_auto_group_20260508T064858Z/diffs/m14_vrp_pairwise_diff_enriched.json",
+      "exists": true,
+      "size_bytes": 12106,
+      "sha256": "ce5ef0b85c8922eaf81938c12f8ad24d945b1554ce44719a946bffbfdd67277f"
+    },
+    {
+      "path": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_auto_group_20260508T064858Z/inputs/validator_output_records_v2.json",
+      "exists": true,
+      "size_bytes": 3298,
+      "sha256": "e4966efd9f5a94a6d5db85be3d20ed42a230a3d8e2819433fbcfeda9d2eedba1"
+    },
+    {
+      "path": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_auto_group_20260508T064858Z/inputs/validator_fingerprint_summary.json",
+      "exists": true,
+      "size_bytes": 1384,
+      "sha256": "510d9dcb981e299a494ac2a9982636d2cef3d40e9a10e8aa6bda3fc61311a3e2"
+    },
+    {
+      "path": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_auto_group_20260508T064858Z/inputs/control_plane_impact_placeholder.json",
+      "exists": true,
+      "size_bytes": 373,
+      "sha256": "e86c3877c661d6a50404cfc623f52ff52d7f4aacb911eee73ac3f23fe1be78d6"
+    },
+    {
+      "path": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_auto_group_20260508T064858Z/checks/m14_parameter_completeness.json",
+      "exists": true,
+      "size_bytes": 1049,
+      "sha256": "765ba7d0bdd900302e87d3c78d2c1690bd3d77d42446a4b36cfc65ef952519b2"
+    },
+    {
+      "path": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4_v2_p1/e4a_m14_parameter_enhancement_20260509T014645Z/checks/P1_m14_parameter_enhancement_acceptance.txt",
+      "exists": true,
+      "size_bytes": 1651,
+      "sha256": "b5c913086b1aa985cbf48c8b86f6a050aace8cd81aedcdcb05d0542105e842f1"
+    },
+    {
+      "path": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4_v2_p1/e4a_m14_parameter_enhancement_20260509T014645Z/docs/P1_m14_parameter_enhancement_summary.md",
+      "exists": true,
+      "size_bytes": 2197,
+      "sha256": "de538177905f306287fe09ce34994146e167f522067510389652328a5c020b69"
+    }
+  ]
+}

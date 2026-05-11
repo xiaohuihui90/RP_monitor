@@ -1,0 +1,1562 @@
+{
+  "probe-cd_vs_probe-bj": {
+    "pair": "probe-cd_vs_probe-bj",
+    "left_probe": "probe-cd",
+    "right_probe": "probe-bj",
+    "left_count": 51906,
+    "right_count": 156148,
+    "common_count": 0,
+    "only_left_count": 51906,
+    "only_right_count": 156148,
+    "entry_level_diff_count": 208054,
+    "jaccard_similarity": 0.0,
+    "top_diff_object_type": "mft",
+    "diff_object_type_breakdown_sampled": {
+      "mft": 151906
+    },
+    "only_left_samples": [
+      {
+        "uri": "cache://.rpki-cache/repository/rsync/krill.ipgua.com/repo/pongery/0/BDD4451C46A2D9A578C4C015D6BC9425C6577FE2.mft",
+        "sha256": "f4b4bdd8b537a65ef4f81db090aa491eccc46711e863f202407b54b670a35380",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/rsync/krill.ipgua.com/repo/pongery/0/ED42F9C384F588482A56A937C446B70EB594BD3F.mft",
+        "sha256": "48fe61bfc81ce11ee26985cb59db1cf19684fc1eef033b8af71f8b5e23a495c6",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/rsync/krill.ipgua.com/repo/pongery/4/953F58832273DFD14187910ADCB3972B70B9BD3A.mft",
+        "sha256": "e91a5d77e28fa71de6ce18dd9e1fdd789fb46ae91afd3fa52e93f0021273e411",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/rsync/krill.ipgua.com/repo/pongery/4/A0E52AE2A6674D4C7481A57558337E89666096A5.mft",
+        "sha256": "3dbe6fac29982f4301476113ae79c451ce58195e3b8875c3ab2d6477eb5f0a47",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/rsync/rpki.komorebi.network/repo/komorebi/0/9E501456E122798BDB8F739545BF6148C7CD1165.mft",
+        "sha256": "89deefb4eaede8a034d16da10078f916f79eccffabd3673eb3425fff9989ec87",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/rsync/rpki.komorebi.network/repo/komorebi/5/421B765C540F139258E8C8E64499AC6317AE6F93.mft",
+        "sha256": "be7fcaabeef1a9092323725828fe5fea9c2b2477ea95c0af140d1cff3db3b131",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/rsync/rpki.komorebi.network/repo/komorebi/6/496B62D685F3CAF2E690022C12571B0DD3C6A8E5.mft",
+        "sha256": "40cde25bc7445f3ef11f6a449c1925371898b68dbdaab688dd35e60b54709d71",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/rsync/rsync.rp.ki/repo/aci/1/04C3A5EF440A7931A7BB6DC0A08211C490E209E3.mft",
+        "sha256": "f47fc01056c25939c7c9aa7b4f1f19a976b55d783c13a41db7f66e8dc7417116",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/rsync/rsync.rp.ki/repo/clonoth/1/C23A7169F6499DD2815C9178A890BC4C0514DDF9.mft",
+        "sha256": "c4c14afb6c5a94515aae76fb2b976e81d69d4ef74b1b5ffd75ea6689f41875d4",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/rsync/rsync.rp.ki/repo/misakaio/0/9CF05E7024D4A487E0B79E2F57525BF345DB53EC.mft",
+        "sha256": "667502f0d81b43253be7aa095793501cd6efad738cb851616d24295b9a2868c8",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/rsync/rsync.rp.ki/repo/misakaio/1/27904CFE041547C56F20BA5B1BB37BC33E8A13D3.mft",
+        "sha256": "e2eb7bb8b3d3fb576185d7ba8ab267f67b35ce3e44550bf1a7220bc9c4a108c8",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/rsync/rsync.rp.ki/repo/misakaio/2/359A4B6C6D3713CFF3636207DE9839058B51815B.mft",
+        "sha256": "77e8e4545eead93784b6845b5dc8015aa96e5293943e101ae56dd96146ad1b91",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/1/F03205B3993400CC3FC657EFE68E0696DA332458.mft",
+        "sha256": "9c35bc2a3fc17ade115aba71d8fad752e75fd0a7891fa694c0de4bd695bc888b",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/10/C5D9C68A36AE4EEAFED3C1CB551AB4B493922316.mft",
+        "sha256": "631fc1eb8ef970835f7870e607f7fde6bb65557e576dc3f7e6ecbf2d862e0300",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/11/4B734CA25B04A198F3EFF79C293351606470223F.mft",
+        "sha256": "303fbe8f7465956cc5c92beb0d13cb28ed2f4d51c96710ca19eccc51a60446ca",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/14/A1AE71CDA837CEEF69CE114D701C8650A0A8FAA9.mft",
+        "sha256": "9c4a091fe921b8e323a5b74f57292f46af4a9a1462a00228057af00b998780e5",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/15/24B0A526F8120A0F8142D2BD3B4644C8E1BDAD50.mft",
+        "sha256": "3e32b9500c530bc9494aef2bf590b2c700f1b618ee91fcbca78e2abce0da8ba8",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/16/84473C6B34C577A1F9F67605C4A8045E5F4D35A8.mft",
+        "sha256": "7d819feec8f294fc1522bbc7f93f82a95209ebd98d1fb7a990d191ac063211ef",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/17/D659A7AF0FA7DCA33194D352FC97140AE70E8E3A.mft",
+        "sha256": "4e3b6728550d4e2619f67ff257b0766020f2264c99c7e31c7137b713053881a2",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/3/2A073E1D59E0A99185723C6F720CDDD629B831D3.mft",
+        "sha256": "932e4c6c87e6c359c13d3ec44d76698db3fa6454c013884ff932b35f6fe0a738",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/5/4F03B5F168F388E0EBBBD830C91C970FFEAB87F2.mft",
+        "sha256": "af251b8bf4809e09c1cc0aff01f5608fd85eb38feac9a68bfaa3daf6abf0433b",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/8/BB6ECAF29F33D987EBADDCEB29EDA7691AA6709F.mft",
+        "sha256": "c2ae9cf9261db4b4abfb78e6ea4eadb39df4c23132121c05cef32ec22b674b1e",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/alias.rpki-measurement.site/916b4785f84a33cbd64c45381f8a6f9fd3a64c1be3d92e1df4ad2745d5b326eb/rsync/alias.rpki-measurement.site/repo/child_alias_ca/0/9D4FD76D76DD07FAFE59A29260D84DDA1D6E007B.mft",
+        "sha256": "b10e89ae9da350b89bdfc35e46caf95d5ff01e72323e233f3618247b422b499c",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/ca.nat.moe/eb1beea9bced71b6fcf518538c93281d258d5b514fe23c991cbae423206b9a87/rsync/ca.nat.moe/repo/NATOLAB/2/16257C19668C6713C4012B101E646266CD77B50D.mft",
+        "sha256": "10c55957196bfdcbf8a58cc2e77beadafdaf7e458ad00572facfb275643b57de",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/ca.rg.net/bed0abda204532b1c121355ceb0f5cf6a619fabe65aa134618f99c49c375bb61/rsync/ca.rg.net/rpki/RGnet-OU/bW-_qXU9uNhGQz21NR2ansB8lr0.mft",
+        "sha256": "2ac792928ce1842b43b72cd8b394ec22a374bb56b9d9d6093ab7e5ee91cb9880",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/chloe.sobornost.net/a4ae76c5702d98db9df10a8a83f3450d9d07f06afd431e60721be71a84cf15b4/rsync/chloe.sobornost.net/rpki/RIPE-nljobsnijders/yqgF26w2R0m5sRVZCrbvD5cM29g.mft",
+        "sha256": "e75cdf39051817c111d838d71555d71b7264698585e1253cf1a9031269d446a1",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/cloudie.rpki.app/e8942bd642855097259f18b58c6dbebc79371ccdde4fe073e9d2a003260739db/rsync/cloudie-repo.rpki.app/repo/CLOUDIE-RPKI/1/E5187D4DA87619D3DBB9750E83D19E5B7F803271.mft",
+        "sha256": "6a9b29510d4a1c88a32e38e384574888dab0cc84ff18ceaee83e528e57c609ab",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/cloudie.rpki.app/e8942bd642855097259f18b58c6dbebc79371ccdde4fe073e9d2a003260739db/rsync/cloudie-repo.rpki.app/repo/CLOUDIE-RPKI/2/6BEC1AED6508BB07511B01B177551792DAEB2C90.mft",
+        "sha256": "d52a42ca0a9e0fb6585a1d87e07112d1bae04de07d2a5e6f9656233f83ba3d0c",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/cloudie.rpki.app/e8942bd642855097259f18b58c6dbebc79371ccdde4fe073e9d2a003260739db/rsync/cloudie-repo.rpki.app/repo/CLOUDIE-RPKI/3/5C141522AC497C4CE7BEA4BC850EBD379EC6D4F1.mft",
+        "sha256": "556c7eb095b5a32514db7805727561160af6d917ad55022d39d5a1dd81483896",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/cloudie.rpki.app/e8942bd642855097259f18b58c6dbebc79371ccdde4fe073e9d2a003260739db/rsync/cloudie-repo.rpki.app/repo/CLOUDIE-RPKI/4/8FC3CFB5DF3E8F721C08B8B5FE7F61D67B0BE13B.mft",
+        "sha256": "d3ecb265be7f7ec886dd595be5c5913035eff252f3dd43e0291c390bd31f8602",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/cloudie.rpki.app/e8942bd642855097259f18b58c6dbebc79371ccdde4fe073e9d2a003260739db/rsync/cloudie-repo.rpki.app/repo/XODOTECH/1/A8D2D3F3BCD791CA864229775A010A2B5B0BFEBE.mft",
+        "sha256": "cbca7a7cac461be409b5314cfe88ea9f11b9acc10f8dd7aefd0a9b7d4f056ce3",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/cloudie.rpki.app/e8942bd642855097259f18b58c6dbebc79371ccdde4fe073e9d2a003260739db/rsync/cloudie-repo.rpki.app/repo/XODOTECH/2/BB8FFC85C94D66F197FE39C60C7BE5E67D20DB2D.mft",
+        "sha256": "677d714ca06c4f65cc942cdfc67f591b77554891adca84854ce42467e41a96f8",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.47272.net/456c2ffd3d745be13bbb4d1df2ca9219c9c9356492c9e8047a45d058b2f3d14a/rsync/krill.47272.net/repo/HYEHOST/0/4ADD5466723084490EF491C619B8BC61A328A8B6.mft",
+        "sha256": "b836b0a32b6a927bf82d24cbcc0af13e1217c7eca8bf9f33ebe8eb57139c8457",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.47272.net/456c2ffd3d745be13bbb4d1df2ca9219c9c9356492c9e8047a45d058b2f3d14a/rsync/krill.47272.net/repo/HYEHOST/1/80F5022D6A89F4EA57AB0F6131D33661AAC30BE9.mft",
+        "sha256": "1e12693724f001916ecfa096c1febbb70f6f3ce13428f06d04c3c9fc5ecdef54",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.47272.net/456c2ffd3d745be13bbb4d1df2ca9219c9c9356492c9e8047a45d058b2f3d14a/rsync/krill.47272.net/repo/HYEHOST/4/6A085FFB2907E47D476E04DACC9BB9C537740CA5.mft",
+        "sha256": "3ce9ad72dd6294bcc532e4fb4c82806d7abafebccdd619234e23ded62f82c4ba",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.47272.net/456c2ffd3d745be13bbb4d1df2ca9219c9c9356492c9e8047a45d058b2f3d14a/rsync/krill.47272.net/repo/HYEHOST/5/C3CF41898936CB9C573DB1EAAB94C6E669951FD7.mft",
+        "sha256": "5b76d82219c1c7d612cf6bc728998428b7810f5c5d100f6bf4c21cde09822bb0",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.accuristechnologies.ca/d0e973b2ede97952511ea64cfb3cff0690527bb4a4f4f0979514cb8ac4f2fb9d/rsync/krill.accuristechnologies.ca/repo/Accuris-Technologies/0/8B83C5DA03B3CC029D95215A01320597814B38F0.mft",
+        "sha256": "acd134a2ec2124e1b4048dea09cd211dc5666181259f53b0f093ee906627050d",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.accuristechnologies.ca/d0e973b2ede97952511ea64cfb3cff0690527bb4a4f4f0979514cb8ac4f2fb9d/rsync/krill.accuristechnologies.ca/repo/Accuris-Technologies/3/80E44F09FF201CB2BC67B16D490F7A6D10CD9DF1.mft",
+        "sha256": "503ceb8878ea5c10b2238b9edf1ff02e709b70b7521a00ba5a0241581051794d",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.accuristechnologies.ca/d0e973b2ede97952511ea64cfb3cff0690527bb4a4f4f0979514cb8ac4f2fb9d/rsync/krill.accuristechnologies.ca/repo/Accuris-Technologies/5/BF478777D82C496225D8A1EBCE4FB4D3D9EF7D52.mft",
+        "sha256": "16495b91e26d81689475ca0410a251b15b99e33c3895cdf6a6dc24651a3d89ee",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.byhill.de/1c4fff654b65f0e9aea3ca39eb7605eb2c252fa047792b2595a806b422f27ca4/rsync/krill.byhill.de/repo/byhill-ca/0/F2ADBCD3E44C2B9CF63C25F6594F643284A5980E.mft",
+        "sha256": "42f16b026cf5d26b982449d264efc2dec1439dd14704a4232d5361dd8dbd8bca",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.byhill.de/1c4fff654b65f0e9aea3ca39eb7605eb2c252fa047792b2595a806b422f27ca4/rsync/krill.byhill.de/repo/byhill-ca/1/F55C2745322CEC1805815DCD65BC6AFFD99168DA.mft",
+        "sha256": "345bccedc73deecda47fc13d45a9c3ab3ce2b6d3802447788d6bc710d3ad1e94",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.ca-bc-01.ssmidge.xyz/ce7953206a0fb2222eb3598e4e5528dfa0db370c3ba43299ed1daca939b72a51/rsync/krill.ca-bc-01.ssmidge.xyz/repo/AS199177/1/ABC3F3F257AB62A5C3E4FFB5FC64C5D2DF7EAD40.mft",
+        "sha256": "13a56b898f06945525fb389acb6fe0c0c4b76f25628af074ade836cc45f50e03",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.ca-bc-01.ssmidge.xyz/ce7953206a0fb2222eb3598e4e5528dfa0db370c3ba43299ed1daca939b72a51/rsync/krill.ca-bc-01.ssmidge.xyz/repo/SsmidgeLLC/2/EEF3EC40152A747D52835AE8973E7DC8C193A840.mft",
+        "sha256": "b0013a9342218dfddb2c1f183463d81bd88a098865cc72c1954732b9949f6f5d",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.ca-bc-01.ssmidge.xyz/ce7953206a0fb2222eb3598e4e5528dfa0db370c3ba43299ed1daca939b72a51/rsync/krill.ca-bc-01.ssmidge.xyz/repo/SsmidgeLLC/3/5344A7147C3BDF128B91CB0E4B659E3DA3046121.mft",
+        "sha256": "582fd08070fce942b9cd8aab1780e335cbcce541beec1ac7b4956ec0e1e4269a",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.ipgua.com:3030/47f2a909deda1a52ecf5154a19375fe917c05af7c746a3f2783a0e3a4f04bfad/rsync/krill.ipgua.com/repo/pongery/0/BDD4451C46A2D9A578C4C015D6BC9425C6577FE2.mft",
+        "sha256": "7347a4b3448f51b962fa23724aa40da2511f044268087b6c861670294a00b652",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.ipgua.com:3030/47f2a909deda1a52ecf5154a19375fe917c05af7c746a3f2783a0e3a4f04bfad/rsync/krill.ipgua.com/repo/pongery/0/ED42F9C384F588482A56A937C446B70EB594BD3F.mft",
+        "sha256": "67ce3785f6a6d3a56a40b164f4a1e7f81457f04fb499fa9f593f1851e8929301",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.ipgua.com:3030/47f2a909deda1a52ecf5154a19375fe917c05af7c746a3f2783a0e3a4f04bfad/rsync/krill.ipgua.com/repo/pongery/4/953F58832273DFD14187910ADCB3972B70B9BD3A.mft",
+        "sha256": "2f7961bfde3c7f2768822cb79979e8708864d8ffaf5ad9d3c9da28e53f5082ef",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.ipgua.com:3030/47f2a909deda1a52ecf5154a19375fe917c05af7c746a3f2783a0e3a4f04bfad/rsync/krill.ipgua.com/repo/pongery/4/A0E52AE2A6674D4C7481A57558337E89666096A5.mft",
+        "sha256": "cc43dc029f94d03b4864136b52d384003df8a446c1bf48c619d277dc462cd136",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.peering.ee.columbia.edu/9fb53b5343a3e44c25284dec9cec067ffda844019137a01e0fa505638fb8d415/rsync/krill.peering.ee.columbia.edu/repo/lifeng-hitcowhorse/0/160FD21A976A19A7B81A59AAFA69F6A0AFE36D0C.mft",
+        "sha256": "e1ce596845aa820cea3912c97a64cc308dbacc2f0faf45847f912d6fcc086dba",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.peering.ee.columbia.edu/9fb53b5343a3e44c25284dec9cec067ffda844019137a01e0fa505638fb8d415/rsync/krill.peering.ee.columbia.edu/repo/peering-testbed/0/3F8EBCC0428DD608F39D858BE891B85B0032681A.mft",
+        "sha256": "5c0aa0f578284b1f5566ea0373d3862ee3f405f1d8ef85def34127cd1d1a2059",
+        "object_type": "mft"
+      }
+    ],
+    "only_right_samples": [
+      {
+        "uri": "cache://.rpki-cache/repository/rsync/krill.ipgua.com/repo/pongery/0/BDD4451C46A2D9A578C4C015D6BC9425C6577FE2.mft",
+        "sha256": "cca6a613766ba849103c02b57b2a52db1a749ba6bad46a7fa828a9fd542a65ed",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/rsync/krill.ipgua.com/repo/pongery/0/ED42F9C384F588482A56A937C446B70EB594BD3F.mft",
+        "sha256": "340b9049abeb52a3fddfaaea5f02918f17c9f81eb364b3c6a3ddbd7fe87e61c2",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/rsync/krill.ipgua.com/repo/pongery/4/953F58832273DFD14187910ADCB3972B70B9BD3A.mft",
+        "sha256": "2c29255ae4ac81ca986182d8f4447ecb6b42089278c55042ee7778c4ab270434",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/rsync/krill.ipgua.com/repo/pongery/4/A0E52AE2A6674D4C7481A57558337E89666096A5.mft",
+        "sha256": "c895c4ccc5af6699347673702483cc6a0f19c09be077d58f5ff5f7cb3522b621",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/rsync/repodepot.wildtky.com/repo/WTA_CA_Apr26/0/BE41309CDB56AFF84ECABAD01972BD900090668E.mft",
+        "sha256": "0bd8a8c83acbec68abcb67f1b572ac6f4efc70019b001d8faff636c5b1f14739",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/rsync/rpki.komorebi.network/repo/komorebi/0/9E501456E122798BDB8F739545BF6148C7CD1165.mft",
+        "sha256": "1c03b988ab5dbe4e39145deb583b6eac12aaeb8a866302be84674a2830f8680e",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/rsync/rpki.komorebi.network/repo/komorebi/5/421B765C540F139258E8C8E64499AC6317AE6F93.mft",
+        "sha256": "f8b6c33661e4dfa06e5bedd93be5455e0baad8e667faaff8e82a655c907a6300",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/rsync/rpki.komorebi.network/repo/komorebi/6/496B62D685F3CAF2E690022C12571B0DD3C6A8E5.mft",
+        "sha256": "6ed9f2eb918b87a3b6dae655a9f31492c0b238cc9e26706c7b0ed64c3145977a",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/rsync/rsync.rp.ki/repo/aci/1/04C3A5EF440A7931A7BB6DC0A08211C490E209E3.mft",
+        "sha256": "12a533ad5a8fb89e8ae75838507a1a228ec23020e89d2e35db4e597c491150cb",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/rsync/rsync.rp.ki/repo/clonoth/1/C23A7169F6499DD2815C9178A890BC4C0514DDF9.mft",
+        "sha256": "71b1a046784a63f8145b988df5768985cdc56d9d6d2e670f5f5b1aa7f3205468",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/rsync/rsync.rp.ki/repo/misakaio/0/9CF05E7024D4A487E0B79E2F57525BF345DB53EC.mft",
+        "sha256": "0de0e2fe1c67ee6593e6245b5bc90d894e9f09924f4e0c252fdb326350ac4a9f",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/rsync/rsync.rp.ki/repo/misakaio/1/27904CFE041547C56F20BA5B1BB37BC33E8A13D3.mft",
+        "sha256": "2f94a201b6622c862b52e7809c00b6311d86b8fc91b74be19648c27a3fbaf848",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/rsync/rsync.rp.ki/repo/misakaio/2/359A4B6C6D3713CFF3636207DE9839058B51815B.mft",
+        "sha256": "32beefa8ebf5bc822f0a39a5bd532a37fa81fef9cd71076cde067329c54ad9b0",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/1/F03205B3993400CC3FC657EFE68E0696DA332458.mft",
+        "sha256": "7ff9ecb3c93959b596c90822ec1ef280d56d79c152ddd9fdbfeebbd87fc51366",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/10/C5D9C68A36AE4EEAFED3C1CB551AB4B493922316.mft",
+        "sha256": "f98f051d0edb885383f49b434d9e207dc985320ddfe21626e0e266223e8f59ee",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/11/4B734CA25B04A198F3EFF79C293351606470223F.mft",
+        "sha256": "ba157ea81a8d1c0e151c9eb1e49cef888d05060483700fda780c982ff6ce7d12",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/14/A1AE71CDA837CEEF69CE114D701C8650A0A8FAA9.mft",
+        "sha256": "42ca65576bc8b048e90ca60a0559be3d5dbb9384650b9de4835466fe01ee1af9",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/15/24B0A526F8120A0F8142D2BD3B4644C8E1BDAD50.mft",
+        "sha256": "ab0c203a24f20c893b22022b4a699b991f009d93704ee8e5a6476182c86657cf",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/16/84473C6B34C577A1F9F67605C4A8045E5F4D35A8.mft",
+        "sha256": "4a96159374d501b87e155985522d5a0696f0b49a0cb3bd56d139c66d268e2eae",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/17/D659A7AF0FA7DCA33194D352FC97140AE70E8E3A.mft",
+        "sha256": "d439475556ab95757bdc39582be3dbe5d14528cea3cece7a3d6326cb6d381d00",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/3/2A073E1D59E0A99185723C6F720CDDD629B831D3.mft",
+        "sha256": "4309c3dca07f9413377057c3671b44118bb75f906c0fd381ee802c3b47a21c24",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/5/4F03B5F168F388E0EBBBD830C91C970FFEAB87F2.mft",
+        "sha256": "5b82c6b589717123a62ee2ffb3e39911884239450059ae5f100597a8f11b2696",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/8/BB6ECAF29F33D987EBADDCEB29EDA7691AA6709F.mft",
+        "sha256": "f2eb9421a8f41c3dcbdfb1b4c3a7476d6662b97ffee791974b396dd1f54d3e2d",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/alias.rpki-measurement.site/916b4785f84a33cbd64c45381f8a6f9fd3a64c1be3d92e1df4ad2745d5b326eb/rsync/alias.rpki-measurement.site/repo/child_alias_ca/0/9D4FD76D76DD07FAFE59A29260D84DDA1D6E007B.mft",
+        "sha256": "a00475e9756f2e3d2d65ef3b80dc88dca09d72668d2be0ab261654c37794efab",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/ca.nat.moe/eb1beea9bced71b6fcf518538c93281d258d5b514fe23c991cbae423206b9a87/rsync/ca.nat.moe/repo/NATOLAB/2/16257C19668C6713C4012B101E646266CD77B50D.mft",
+        "sha256": "dcc32324604ccab143930550c1710093a5d19711e8d685afa5d12508f153f519",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/ca.rg.net/bed0abda204532b1c121355ceb0f5cf6a619fabe65aa134618f99c49c375bb61/rsync/ca.rg.net/rpki/RGnet-OU/bW-_qXU9uNhGQz21NR2ansB8lr0.mft",
+        "sha256": "607e2eb7ce436ca4d4f5830c5753e334848c061fa72b3fb2762ec5a0ac04d2ae",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/chloe.sobornost.net/a4ae76c5702d98db9df10a8a83f3450d9d07f06afd431e60721be71a84cf15b4/rsync/chloe.sobornost.net/rpki/RIPE-nljobsnijders/yqgF26w2R0m5sRVZCrbvD5cM29g.mft",
+        "sha256": "2187fc26584d52495766787e8b17542225f9818f211da8b01f23827d93ac0383",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/cloudie.rpki.app/e8942bd642855097259f18b58c6dbebc79371ccdde4fe073e9d2a003260739db/rsync/cloudie-repo.rpki.app/repo/CLOUDIE-RPKI/1/E5187D4DA87619D3DBB9750E83D19E5B7F803271.mft",
+        "sha256": "ac03d73398708e38b7af4ef19da5372b2dce4b75e6dc1d1a0c15c6eeae6ed252",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/cloudie.rpki.app/e8942bd642855097259f18b58c6dbebc79371ccdde4fe073e9d2a003260739db/rsync/cloudie-repo.rpki.app/repo/CLOUDIE-RPKI/2/6BEC1AED6508BB07511B01B177551792DAEB2C90.mft",
+        "sha256": "d59ba4966f48bfb4ed33b9717fbd693348e5d9e7ffc220f917e8181d9434ef30",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/cloudie.rpki.app/e8942bd642855097259f18b58c6dbebc79371ccdde4fe073e9d2a003260739db/rsync/cloudie-repo.rpki.app/repo/CLOUDIE-RPKI/3/5C141522AC497C4CE7BEA4BC850EBD379EC6D4F1.mft",
+        "sha256": "394f329f640634b250cee802b553ff68d67e9b545d49784919e7062a0d65dc71",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/cloudie.rpki.app/e8942bd642855097259f18b58c6dbebc79371ccdde4fe073e9d2a003260739db/rsync/cloudie-repo.rpki.app/repo/CLOUDIE-RPKI/4/8FC3CFB5DF3E8F721C08B8B5FE7F61D67B0BE13B.mft",
+        "sha256": "989126e639ffc3dd65bcd4ba7df85a694978f1cb79f2136033d7d0cfcafbd425",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/cloudie.rpki.app/e8942bd642855097259f18b58c6dbebc79371ccdde4fe073e9d2a003260739db/rsync/cloudie-repo.rpki.app/repo/XODOTECH/1/A8D2D3F3BCD791CA864229775A010A2B5B0BFEBE.mft",
+        "sha256": "e93fa68bb5173e6d7b7030a5dda7e3f29632f7da8ab039f4168a278fcd837270",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/cloudie.rpki.app/e8942bd642855097259f18b58c6dbebc79371ccdde4fe073e9d2a003260739db/rsync/cloudie-repo.rpki.app/repo/XODOTECH/2/BB8FFC85C94D66F197FE39C60C7BE5E67D20DB2D.mft",
+        "sha256": "f9a4e05c8344f72ffdef92f9f6b1c72290f85d93c619152dabd71d2a62481e3b",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.47272.net/456c2ffd3d745be13bbb4d1df2ca9219c9c9356492c9e8047a45d058b2f3d14a/rsync/krill.47272.net/repo/HYEHOST/0/4ADD5466723084490EF491C619B8BC61A328A8B6.mft",
+        "sha256": "5ea80d29b1221f418346c42e186434683c8765af1a9d94533a52945687aed8b3",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.47272.net/456c2ffd3d745be13bbb4d1df2ca9219c9c9356492c9e8047a45d058b2f3d14a/rsync/krill.47272.net/repo/HYEHOST/1/80F5022D6A89F4EA57AB0F6131D33661AAC30BE9.mft",
+        "sha256": "ace5348c5460ac306818d270a2d728c891e72da10026ec343ae133d9091a8ceb",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.47272.net/456c2ffd3d745be13bbb4d1df2ca9219c9c9356492c9e8047a45d058b2f3d14a/rsync/krill.47272.net/repo/HYEHOST/4/6A085FFB2907E47D476E04DACC9BB9C537740CA5.mft",
+        "sha256": "c98f3fcba2806f301d5263e0dd3866e507d722872b3bdc432307a5575d327744",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.47272.net/456c2ffd3d745be13bbb4d1df2ca9219c9c9356492c9e8047a45d058b2f3d14a/rsync/krill.47272.net/repo/HYEHOST/5/C3CF41898936CB9C573DB1EAAB94C6E669951FD7.mft",
+        "sha256": "c239cf6c710a96ac2bd33dca70d2484e7aadc2ac90c27a6be243c3569c42841a",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.accuristechnologies.ca/d0e973b2ede97952511ea64cfb3cff0690527bb4a4f4f0979514cb8ac4f2fb9d/rsync/krill.accuristechnologies.ca/repo/Accuris-Technologies/0/8B83C5DA03B3CC029D95215A01320597814B38F0.mft",
+        "sha256": "9b5ec7ce7efdaeaaa903f4c724244e9de2458844bdd3fc35270af1cd5977dab2",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.accuristechnologies.ca/d0e973b2ede97952511ea64cfb3cff0690527bb4a4f4f0979514cb8ac4f2fb9d/rsync/krill.accuristechnologies.ca/repo/Accuris-Technologies/3/80E44F09FF201CB2BC67B16D490F7A6D10CD9DF1.mft",
+        "sha256": "c485c7e1ca4861adfb1d0781456da46f0d97d92775e4722a2fdcfb458987a03d",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.accuristechnologies.ca/d0e973b2ede97952511ea64cfb3cff0690527bb4a4f4f0979514cb8ac4f2fb9d/rsync/krill.accuristechnologies.ca/repo/Accuris-Technologies/5/BF478777D82C496225D8A1EBCE4FB4D3D9EF7D52.mft",
+        "sha256": "13fdc6da3c8323cd144afe3c6119ff35bf99da94d4da50f2bd8c45a4f7a1fa28",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.byhill.de/1c4fff654b65f0e9aea3ca39eb7605eb2c252fa047792b2595a806b422f27ca4/rsync/krill.byhill.de/repo/byhill-ca/0/F2ADBCD3E44C2B9CF63C25F6594F643284A5980E.mft",
+        "sha256": "69c8e6f8a52a940f6ef68525daf986f223ab2a6f869ecc979fc5f267364e6594",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.byhill.de/1c4fff654b65f0e9aea3ca39eb7605eb2c252fa047792b2595a806b422f27ca4/rsync/krill.byhill.de/repo/byhill-ca/1/F55C2745322CEC1805815DCD65BC6AFFD99168DA.mft",
+        "sha256": "2311fa09b30444f6f97296299159d8c8c7d287685917c2b58bc1377412bdef94",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.ca-bc-01.ssmidge.xyz/ce7953206a0fb2222eb3598e4e5528dfa0db370c3ba43299ed1daca939b72a51/rsync/krill.ca-bc-01.ssmidge.xyz/repo/AS199177/1/ABC3F3F257AB62A5C3E4FFB5FC64C5D2DF7EAD40.mft",
+        "sha256": "3f04c3196defb2d40258a22b9490ea193ae22856f6e112622702251155b52bed",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.ca-bc-01.ssmidge.xyz/ce7953206a0fb2222eb3598e4e5528dfa0db370c3ba43299ed1daca939b72a51/rsync/krill.ca-bc-01.ssmidge.xyz/repo/SsmidgeLLC/2/EEF3EC40152A747D52835AE8973E7DC8C193A840.mft",
+        "sha256": "f498af2504b490bd4863cec79d3340d7887b468e91df81d8c05d7424d25f966c",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.ca-bc-01.ssmidge.xyz/ce7953206a0fb2222eb3598e4e5528dfa0db370c3ba43299ed1daca939b72a51/rsync/krill.ca-bc-01.ssmidge.xyz/repo/SsmidgeLLC/3/5344A7147C3BDF128B91CB0E4B659E3DA3046121.mft",
+        "sha256": "a9e0fa389d9e3ba23758b04f52b3fc203e8256c6988fd025499a616104b5af18",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.ipgua.com:3030/47f2a909deda1a52ecf5154a19375fe917c05af7c746a3f2783a0e3a4f04bfad/rsync/krill.ipgua.com/repo/pongery/0/BDD4451C46A2D9A578C4C015D6BC9425C6577FE2.mft",
+        "sha256": "fafa97e0969af0d2a1958b2c0d959b3ae4a148d78d6f23ac98bd3762b55aee31",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.ipgua.com:3030/47f2a909deda1a52ecf5154a19375fe917c05af7c746a3f2783a0e3a4f04bfad/rsync/krill.ipgua.com/repo/pongery/0/ED42F9C384F588482A56A937C446B70EB594BD3F.mft",
+        "sha256": "dc123a7169c2dd4baec0a4c7f11ad26ae9c86dc01b14d5bb21c92794a7c791aa",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.ipgua.com:3030/47f2a909deda1a52ecf5154a19375fe917c05af7c746a3f2783a0e3a4f04bfad/rsync/krill.ipgua.com/repo/pongery/4/953F58832273DFD14187910ADCB3972B70B9BD3A.mft",
+        "sha256": "b388b70a2032c20024fdf30315eb196cc5d5337ccb3faecc49e6c07a96372c54",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.ipgua.com:3030/47f2a909deda1a52ecf5154a19375fe917c05af7c746a3f2783a0e3a4f04bfad/rsync/krill.ipgua.com/repo/pongery/4/A0E52AE2A6674D4C7481A57558337E89666096A5.mft",
+        "sha256": "82abdd1bc05e54916f05e399b16ed5ad850c54801ad8caaaed398c95a791ef28",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.peering.ee.columbia.edu/9fb53b5343a3e44c25284dec9cec067ffda844019137a01e0fa505638fb8d415/rsync/krill.peering.ee.columbia.edu/repo/lifeng-hitcowhorse/0/160FD21A976A19A7B81A59AAFA69F6A0AFE36D0C.mft",
+        "sha256": "a0a912b4c42239d4c5a52ab7bacbfaca84fb6d00fa147fa9c3e6ee7b218fc4f1",
+        "object_type": "mft"
+      }
+    ]
+  },
+  "probe-cd_vs_probe-sg": {
+    "pair": "probe-cd_vs_probe-sg",
+    "left_probe": "probe-cd",
+    "right_probe": "probe-sg",
+    "left_count": 51906,
+    "right_count": 52431,
+    "common_count": 22,
+    "only_left_count": 51884,
+    "only_right_count": 52409,
+    "entry_level_diff_count": 104293,
+    "jaccard_similarity": 0.0002108996788573072,
+    "top_diff_object_type": "mft",
+    "diff_object_type_breakdown_sampled": {
+      "mft": 104293
+    },
+    "only_left_samples": [
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/1/F03205B3993400CC3FC657EFE68E0696DA332458.mft",
+        "sha256": "9c35bc2a3fc17ade115aba71d8fad752e75fd0a7891fa694c0de4bd695bc888b",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/10/C5D9C68A36AE4EEAFED3C1CB551AB4B493922316.mft",
+        "sha256": "631fc1eb8ef970835f7870e607f7fde6bb65557e576dc3f7e6ecbf2d862e0300",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/11/4B734CA25B04A198F3EFF79C293351606470223F.mft",
+        "sha256": "303fbe8f7465956cc5c92beb0d13cb28ed2f4d51c96710ca19eccc51a60446ca",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/14/A1AE71CDA837CEEF69CE114D701C8650A0A8FAA9.mft",
+        "sha256": "9c4a091fe921b8e323a5b74f57292f46af4a9a1462a00228057af00b998780e5",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/15/24B0A526F8120A0F8142D2BD3B4644C8E1BDAD50.mft",
+        "sha256": "3e32b9500c530bc9494aef2bf590b2c700f1b618ee91fcbca78e2abce0da8ba8",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/16/84473C6B34C577A1F9F67605C4A8045E5F4D35A8.mft",
+        "sha256": "7d819feec8f294fc1522bbc7f93f82a95209ebd98d1fb7a990d191ac063211ef",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/17/D659A7AF0FA7DCA33194D352FC97140AE70E8E3A.mft",
+        "sha256": "4e3b6728550d4e2619f67ff257b0766020f2264c99c7e31c7137b713053881a2",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/3/2A073E1D59E0A99185723C6F720CDDD629B831D3.mft",
+        "sha256": "932e4c6c87e6c359c13d3ec44d76698db3fa6454c013884ff932b35f6fe0a738",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/5/4F03B5F168F388E0EBBBD830C91C970FFEAB87F2.mft",
+        "sha256": "af251b8bf4809e09c1cc0aff01f5608fd85eb38feac9a68bfaa3daf6abf0433b",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/8/BB6ECAF29F33D987EBADDCEB29EDA7691AA6709F.mft",
+        "sha256": "c2ae9cf9261db4b4abfb78e6ea4eadb39df4c23132121c05cef32ec22b674b1e",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/alias.rpki-measurement.site/916b4785f84a33cbd64c45381f8a6f9fd3a64c1be3d92e1df4ad2745d5b326eb/rsync/alias.rpki-measurement.site/repo/child_alias_ca/0/9D4FD76D76DD07FAFE59A29260D84DDA1D6E007B.mft",
+        "sha256": "b10e89ae9da350b89bdfc35e46caf95d5ff01e72323e233f3618247b422b499c",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/ca.nat.moe/eb1beea9bced71b6fcf518538c93281d258d5b514fe23c991cbae423206b9a87/rsync/ca.nat.moe/repo/NATOLAB/2/16257C19668C6713C4012B101E646266CD77B50D.mft",
+        "sha256": "10c55957196bfdcbf8a58cc2e77beadafdaf7e458ad00572facfb275643b57de",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/ca.rg.net/bed0abda204532b1c121355ceb0f5cf6a619fabe65aa134618f99c49c375bb61/rsync/ca.rg.net/rpki/RGnet-OU/bW-_qXU9uNhGQz21NR2ansB8lr0.mft",
+        "sha256": "2ac792928ce1842b43b72cd8b394ec22a374bb56b9d9d6093ab7e5ee91cb9880",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/chloe.sobornost.net/a4ae76c5702d98db9df10a8a83f3450d9d07f06afd431e60721be71a84cf15b4/rsync/chloe.sobornost.net/rpki/RIPE-nljobsnijders/yqgF26w2R0m5sRVZCrbvD5cM29g.mft",
+        "sha256": "e75cdf39051817c111d838d71555d71b7264698585e1253cf1a9031269d446a1",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/cloudie.rpki.app/e8942bd642855097259f18b58c6dbebc79371ccdde4fe073e9d2a003260739db/rsync/cloudie-repo.rpki.app/repo/CLOUDIE-RPKI/1/E5187D4DA87619D3DBB9750E83D19E5B7F803271.mft",
+        "sha256": "6a9b29510d4a1c88a32e38e384574888dab0cc84ff18ceaee83e528e57c609ab",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/cloudie.rpki.app/e8942bd642855097259f18b58c6dbebc79371ccdde4fe073e9d2a003260739db/rsync/cloudie-repo.rpki.app/repo/CLOUDIE-RPKI/2/6BEC1AED6508BB07511B01B177551792DAEB2C90.mft",
+        "sha256": "d52a42ca0a9e0fb6585a1d87e07112d1bae04de07d2a5e6f9656233f83ba3d0c",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/cloudie.rpki.app/e8942bd642855097259f18b58c6dbebc79371ccdde4fe073e9d2a003260739db/rsync/cloudie-repo.rpki.app/repo/CLOUDIE-RPKI/3/5C141522AC497C4CE7BEA4BC850EBD379EC6D4F1.mft",
+        "sha256": "556c7eb095b5a32514db7805727561160af6d917ad55022d39d5a1dd81483896",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/cloudie.rpki.app/e8942bd642855097259f18b58c6dbebc79371ccdde4fe073e9d2a003260739db/rsync/cloudie-repo.rpki.app/repo/CLOUDIE-RPKI/4/8FC3CFB5DF3E8F721C08B8B5FE7F61D67B0BE13B.mft",
+        "sha256": "d3ecb265be7f7ec886dd595be5c5913035eff252f3dd43e0291c390bd31f8602",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/cloudie.rpki.app/e8942bd642855097259f18b58c6dbebc79371ccdde4fe073e9d2a003260739db/rsync/cloudie-repo.rpki.app/repo/XODOTECH/1/A8D2D3F3BCD791CA864229775A010A2B5B0BFEBE.mft",
+        "sha256": "cbca7a7cac461be409b5314cfe88ea9f11b9acc10f8dd7aefd0a9b7d4f056ce3",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/cloudie.rpki.app/e8942bd642855097259f18b58c6dbebc79371ccdde4fe073e9d2a003260739db/rsync/cloudie-repo.rpki.app/repo/XODOTECH/2/BB8FFC85C94D66F197FE39C60C7BE5E67D20DB2D.mft",
+        "sha256": "677d714ca06c4f65cc942cdfc67f591b77554891adca84854ce42467e41a96f8",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.47272.net/456c2ffd3d745be13bbb4d1df2ca9219c9c9356492c9e8047a45d058b2f3d14a/rsync/krill.47272.net/repo/HYEHOST/0/4ADD5466723084490EF491C619B8BC61A328A8B6.mft",
+        "sha256": "b836b0a32b6a927bf82d24cbcc0af13e1217c7eca8bf9f33ebe8eb57139c8457",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.47272.net/456c2ffd3d745be13bbb4d1df2ca9219c9c9356492c9e8047a45d058b2f3d14a/rsync/krill.47272.net/repo/HYEHOST/1/80F5022D6A89F4EA57AB0F6131D33661AAC30BE9.mft",
+        "sha256": "1e12693724f001916ecfa096c1febbb70f6f3ce13428f06d04c3c9fc5ecdef54",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.47272.net/456c2ffd3d745be13bbb4d1df2ca9219c9c9356492c9e8047a45d058b2f3d14a/rsync/krill.47272.net/repo/HYEHOST/4/6A085FFB2907E47D476E04DACC9BB9C537740CA5.mft",
+        "sha256": "3ce9ad72dd6294bcc532e4fb4c82806d7abafebccdd619234e23ded62f82c4ba",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.47272.net/456c2ffd3d745be13bbb4d1df2ca9219c9c9356492c9e8047a45d058b2f3d14a/rsync/krill.47272.net/repo/HYEHOST/5/C3CF41898936CB9C573DB1EAAB94C6E669951FD7.mft",
+        "sha256": "5b76d82219c1c7d612cf6bc728998428b7810f5c5d100f6bf4c21cde09822bb0",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.accuristechnologies.ca/d0e973b2ede97952511ea64cfb3cff0690527bb4a4f4f0979514cb8ac4f2fb9d/rsync/krill.accuristechnologies.ca/repo/Accuris-Technologies/0/8B83C5DA03B3CC029D95215A01320597814B38F0.mft",
+        "sha256": "acd134a2ec2124e1b4048dea09cd211dc5666181259f53b0f093ee906627050d",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.accuristechnologies.ca/d0e973b2ede97952511ea64cfb3cff0690527bb4a4f4f0979514cb8ac4f2fb9d/rsync/krill.accuristechnologies.ca/repo/Accuris-Technologies/3/80E44F09FF201CB2BC67B16D490F7A6D10CD9DF1.mft",
+        "sha256": "503ceb8878ea5c10b2238b9edf1ff02e709b70b7521a00ba5a0241581051794d",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.accuristechnologies.ca/d0e973b2ede97952511ea64cfb3cff0690527bb4a4f4f0979514cb8ac4f2fb9d/rsync/krill.accuristechnologies.ca/repo/Accuris-Technologies/5/BF478777D82C496225D8A1EBCE4FB4D3D9EF7D52.mft",
+        "sha256": "16495b91e26d81689475ca0410a251b15b99e33c3895cdf6a6dc24651a3d89ee",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.byhill.de/1c4fff654b65f0e9aea3ca39eb7605eb2c252fa047792b2595a806b422f27ca4/rsync/krill.byhill.de/repo/byhill-ca/0/F2ADBCD3E44C2B9CF63C25F6594F643284A5980E.mft",
+        "sha256": "42f16b026cf5d26b982449d264efc2dec1439dd14704a4232d5361dd8dbd8bca",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.byhill.de/1c4fff654b65f0e9aea3ca39eb7605eb2c252fa047792b2595a806b422f27ca4/rsync/krill.byhill.de/repo/byhill-ca/1/F55C2745322CEC1805815DCD65BC6AFFD99168DA.mft",
+        "sha256": "345bccedc73deecda47fc13d45a9c3ab3ce2b6d3802447788d6bc710d3ad1e94",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.ca-bc-01.ssmidge.xyz/ce7953206a0fb2222eb3598e4e5528dfa0db370c3ba43299ed1daca939b72a51/rsync/krill.ca-bc-01.ssmidge.xyz/repo/AS199177/1/ABC3F3F257AB62A5C3E4FFB5FC64C5D2DF7EAD40.mft",
+        "sha256": "13a56b898f06945525fb389acb6fe0c0c4b76f25628af074ade836cc45f50e03",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.ca-bc-01.ssmidge.xyz/ce7953206a0fb2222eb3598e4e5528dfa0db370c3ba43299ed1daca939b72a51/rsync/krill.ca-bc-01.ssmidge.xyz/repo/SsmidgeLLC/2/EEF3EC40152A747D52835AE8973E7DC8C193A840.mft",
+        "sha256": "b0013a9342218dfddb2c1f183463d81bd88a098865cc72c1954732b9949f6f5d",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.ca-bc-01.ssmidge.xyz/ce7953206a0fb2222eb3598e4e5528dfa0db370c3ba43299ed1daca939b72a51/rsync/krill.ca-bc-01.ssmidge.xyz/repo/SsmidgeLLC/3/5344A7147C3BDF128B91CB0E4B659E3DA3046121.mft",
+        "sha256": "582fd08070fce942b9cd8aab1780e335cbcce541beec1ac7b4956ec0e1e4269a",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.ipgua.com:3030/47f2a909deda1a52ecf5154a19375fe917c05af7c746a3f2783a0e3a4f04bfad/rsync/krill.ipgua.com/repo/pongery/0/BDD4451C46A2D9A578C4C015D6BC9425C6577FE2.mft",
+        "sha256": "7347a4b3448f51b962fa23724aa40da2511f044268087b6c861670294a00b652",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.ipgua.com:3030/47f2a909deda1a52ecf5154a19375fe917c05af7c746a3f2783a0e3a4f04bfad/rsync/krill.ipgua.com/repo/pongery/0/ED42F9C384F588482A56A937C446B70EB594BD3F.mft",
+        "sha256": "67ce3785f6a6d3a56a40b164f4a1e7f81457f04fb499fa9f593f1851e8929301",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.ipgua.com:3030/47f2a909deda1a52ecf5154a19375fe917c05af7c746a3f2783a0e3a4f04bfad/rsync/krill.ipgua.com/repo/pongery/4/953F58832273DFD14187910ADCB3972B70B9BD3A.mft",
+        "sha256": "2f7961bfde3c7f2768822cb79979e8708864d8ffaf5ad9d3c9da28e53f5082ef",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.ipgua.com:3030/47f2a909deda1a52ecf5154a19375fe917c05af7c746a3f2783a0e3a4f04bfad/rsync/krill.ipgua.com/repo/pongery/4/A0E52AE2A6674D4C7481A57558337E89666096A5.mft",
+        "sha256": "cc43dc029f94d03b4864136b52d384003df8a446c1bf48c619d277dc462cd136",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.peering.ee.columbia.edu/9fb53b5343a3e44c25284dec9cec067ffda844019137a01e0fa505638fb8d415/rsync/krill.peering.ee.columbia.edu/repo/lifeng-hitcowhorse/0/160FD21A976A19A7B81A59AAFA69F6A0AFE36D0C.mft",
+        "sha256": "e1ce596845aa820cea3912c97a64cc308dbacc2f0faf45847f912d6fcc086dba",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.peering.ee.columbia.edu/9fb53b5343a3e44c25284dec9cec067ffda844019137a01e0fa505638fb8d415/rsync/krill.peering.ee.columbia.edu/repo/peering-testbed/0/3F8EBCC0428DD608F39D858BE891B85B0032681A.mft",
+        "sha256": "5c0aa0f578284b1f5566ea0373d3862ee3f405f1d8ef85def34127cd1d1a2059",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.rg.net/98d6c3f668bec61f492a9da2511cfeee5dbaaedacc9bd4fecb89500c3d0fcc16/rsync/krill.rg.net/repo/rpki-beacons-ca/0/656E4422ABF129649200EB019A815F2B12236E92.mft",
+        "sha256": "ff8062a8e98d908e8c6c4620b3b09cd732afa13bfc711ee49a71164d662a1a7f",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.rpki-measurement.site/5eabd25dba00fd9ab8c5a4bf47f418d63b0cf9141da7bc5a6459c5c71d7f05cc/rsync/krill.rpki-measurement.site/repo/measurements/2/325627320199C076DC2D552334D2FEB715E4EDD7.mft",
+        "sha256": "bf61f739fe652c23a7c2d772dc939bd25305c764303823bbf7385ceaecd76d9d",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.signalx.cloud/957fb5ac4000a67434f736d6c24717d8ca8713682d5585601cf817050271c04a/rsync/krill.signalx.cloud/repo/signalx-rpki/3/8770188F7F0D18A86637EF0EE75EE2B70D810A7C.mft",
+        "sha256": "897516b2b39c99feec4ede7297bd6c8ff69e25f49b9ff2209f60ab8c7f856728",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.signalx.cloud/957fb5ac4000a67434f736d6c24717d8ca8713682d5585601cf817050271c04a/rsync/krill.signalx.cloud/repo/signalx-rpki/4/02B5CF163150ADD82E90362AE55F3173D9749F05.mft",
+        "sha256": "5fb68aae0a24f455038ffe9c76867782c76de1603a6b69bec46b63d7f0d2f4ff",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.signalx.cloud/957fb5ac4000a67434f736d6c24717d8ca8713682d5585601cf817050271c04a/rsync/krill.signalx.cloud/repo/signalx-rpki/6/88332C8750CC71629E694FDDB3615AE083589921.mft",
+        "sha256": "240971f51916cfe316a4b81a4fac90e9bd2c34b0c16e3c325ed06016c8be02bf",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.starlamp.su/1464f6fa2006c1f59cc29dc3c2c92e4eb8efd26aa7213638d8622025c520b64d/rsync/krill.starlamp.su/repo/starlamp/0/8568BF579F56F4139D364514D84EA5EE01CC8048.mft",
+        "sha256": "5db87169ef19fe7c73d120675077bd766a1875b701a84fa5d053b5de22357599",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.sy5.nsw.au.infininet.com.au/4e9d8bfe71878b2fc35435cb842be8648fc34cb847e2abf12e5f311e9204aa14/rsync/krill.sy5.nsw.au.infininet.com.au/repo/BGP-Exchange/2/DD8984A82671DD60AA7980ACF2402EF6DA98721C.mft",
+        "sha256": "bc5a63fbaabd5142016d8528e6f0e7e4b48908602c9f8a15ee9ec9693608191c",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/magellan.ipxo.com/0cf22cf06878a00183e4460062d87c555595ff1f8b19481d051207ffb0f5771f/rsync/r.magellan.ipxo.com/repo/30327b9e-227a-4ebd-825b-3b98095dc927-0/0/AEF766F103B2EF99DF8C71978A7FE519D730B155.mft",
+        "sha256": "27897a102dff2c8b3a77f553c3cbbc9d93652670d186e4ef97092d1e8a18c73b",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/magellan.ipxo.com/0cf22cf06878a00183e4460062d87c555595ff1f8b19481d051207ffb0f5771f/rsync/r.magellan.ipxo.com/repo/528a218f-ad28-40d2-bd7f-350eada3d705-0/0/D34606949D385DB42714FE71274FAC9948EF279C.mft",
+        "sha256": "61dc165e0cd9c1e1deb9fdaee9a6fdbdb818b7849a8c80b03423832b82c9b189",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/magellan.ipxo.com/0cf22cf06878a00183e4460062d87c555595ff1f8b19481d051207ffb0f5771f/rsync/r.magellan.ipxo.com/repo/a0375b39-f949-4cb5-b519-f94008b1654c-0/0/B354D328CBBFD1EF3CD29268A23B0FCC60E3A2C5.mft",
+        "sha256": "70dedd99820be810095a6ef347313922252ed66114d8cdd5c2795ce036e0eb75",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/magellan.ipxo.com/0cf22cf06878a00183e4460062d87c555595ff1f8b19481d051207ffb0f5771f/rsync/r.magellan.ipxo.com/repo/a6f2147a-de8a-4440-bca2-6d8b7c876fda-0/0/2A2FB4DB0AA4D006958316872E467B554E0FD0BE.mft",
+        "sha256": "62c20c0358d251862f0b6ff27672e097c632601b0ec98fdb7778146ba8ffa874",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/magellan.ipxo.com/0cf22cf06878a00183e4460062d87c555595ff1f8b19481d051207ffb0f5771f/rsync/r.magellan.ipxo.com/repo/ddd1818b-9fbf-440c-aaec-44a4d1590f87-0/0/C972E8671DEDC43FE908B548531C969A051CD34C.mft",
+        "sha256": "15afca26d1eb9f0d60285d776868971d32b03db74864f3f7b108c37edb251ffd",
+        "object_type": "mft"
+      }
+    ],
+    "only_right_samples": [
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/1/F03205B3993400CC3FC657EFE68E0696DA332458.mft",
+        "sha256": "82d8d3e01084511549b34d622f351c1204c5528cca49ed72c395c1693a66b09c",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/10/C5D9C68A36AE4EEAFED3C1CB551AB4B493922316.mft",
+        "sha256": "02da620b2b903f58535b3702c2e6a3f864e0ac6e55b7ff7f5d1c4a3370d4f68e",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/11/4B734CA25B04A198F3EFF79C293351606470223F.mft",
+        "sha256": "a42f6e94403955688272178e9cf4b3473a705da79656764a294dcc5ee945955e",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/14/A1AE71CDA837CEEF69CE114D701C8650A0A8FAA9.mft",
+        "sha256": "8ac47e0dbbb729f7911c4ff9fb0243c7e9267f2b39b6f7cc2201f2e0c9376d2e",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/15/24B0A526F8120A0F8142D2BD3B4644C8E1BDAD50.mft",
+        "sha256": "75c9111497d2615d425aa980145268610d7af1b0a74ae24a1d2faacbf59c26ec",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/16/84473C6B34C577A1F9F67605C4A8045E5F4D35A8.mft",
+        "sha256": "1098f5102e703d5b6bdab5e6e0b41ede6800690339dd4c9ecee3323932b3b44a",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/17/D659A7AF0FA7DCA33194D352FC97140AE70E8E3A.mft",
+        "sha256": "9aabe7a6ede761eec248eb012011b0c263b1cad1c689ffcd691723d322472f47",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/3/2A073E1D59E0A99185723C6F720CDDD629B831D3.mft",
+        "sha256": "ebd0dd1c044a64d2a6698d42756491144996813c71838b3542109109c8be4559",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/5/4F03B5F168F388E0EBBBD830C91C970FFEAB87F2.mft",
+        "sha256": "61e42adce55c8d8caaa003ee2b58263d3c93154111b8db2533e0e1fd7fd9066c",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/8/BB6ECAF29F33D987EBADDCEB29EDA7691AA6709F.mft",
+        "sha256": "76270630aaafd5f7cc5d297cf7c57253162cd4d9c2191efca47ae9d771f6128b",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/alias.rpki-measurement.site/916b4785f84a33cbd64c45381f8a6f9fd3a64c1be3d92e1df4ad2745d5b326eb/rsync/alias.rpki-measurement.site/repo/child_alias_ca/0/9D4FD76D76DD07FAFE59A29260D84DDA1D6E007B.mft",
+        "sha256": "eaff4cca850777bd4f67c811f10a1ac2481ee8ff258f1f61bf4e68a4191ecd75",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/ca.nat.moe/eb1beea9bced71b6fcf518538c93281d258d5b514fe23c991cbae423206b9a87/rsync/ca.nat.moe/repo/NATOLAB/2/16257C19668C6713C4012B101E646266CD77B50D.mft",
+        "sha256": "a2e55562346bb0aeb95b07ef2585938cf5f14dd01d178d04fbe399eb909688b7",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/ca.rg.net/bed0abda204532b1c121355ceb0f5cf6a619fabe65aa134618f99c49c375bb61/rsync/ca.rg.net/rpki/RGnet-OU/bW-_qXU9uNhGQz21NR2ansB8lr0.mft",
+        "sha256": "3d73f9aaf1a0a5bf5980356f432b8ddebb221ef4b8d70553b46f4099277f3ca1",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/chloe.sobornost.net/a4ae76c5702d98db9df10a8a83f3450d9d07f06afd431e60721be71a84cf15b4/rsync/chloe.sobornost.net/rpki/RIPE-nljobsnijders/yqgF26w2R0m5sRVZCrbvD5cM29g.mft",
+        "sha256": "a8d5358dac27b435731a33affd4298f449f43bd41109d5f65d9b1954e2d180fd",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/cloudie.rpki.app/e8942bd642855097259f18b58c6dbebc79371ccdde4fe073e9d2a003260739db/rsync/cloudie-repo.rpki.app/repo/CLOUDIE-RPKI/1/E5187D4DA87619D3DBB9750E83D19E5B7F803271.mft",
+        "sha256": "58e6da4ee226011097807a2663a0627d5c179e7791b3bcb35de99ab82b0e5465",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/cloudie.rpki.app/e8942bd642855097259f18b58c6dbebc79371ccdde4fe073e9d2a003260739db/rsync/cloudie-repo.rpki.app/repo/CLOUDIE-RPKI/2/6BEC1AED6508BB07511B01B177551792DAEB2C90.mft",
+        "sha256": "eec91d9c784e9d0437c1b85fc89f57751737ed7cd867196692b533fb079b240d",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/cloudie.rpki.app/e8942bd642855097259f18b58c6dbebc79371ccdde4fe073e9d2a003260739db/rsync/cloudie-repo.rpki.app/repo/CLOUDIE-RPKI/3/5C141522AC497C4CE7BEA4BC850EBD379EC6D4F1.mft",
+        "sha256": "9114b56dfde56ebb64e2d3fb5c635af68c5ddd9413129e5b15d1d92dd5451ba4",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/cloudie.rpki.app/e8942bd642855097259f18b58c6dbebc79371ccdde4fe073e9d2a003260739db/rsync/cloudie-repo.rpki.app/repo/CLOUDIE-RPKI/4/8FC3CFB5DF3E8F721C08B8B5FE7F61D67B0BE13B.mft",
+        "sha256": "3f3ab40ee7a41214916987d822a3cdb6ae654f43f799758027d9eb2c5a9e4401",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/cloudie.rpki.app/e8942bd642855097259f18b58c6dbebc79371ccdde4fe073e9d2a003260739db/rsync/cloudie-repo.rpki.app/repo/XODOTECH/1/A8D2D3F3BCD791CA864229775A010A2B5B0BFEBE.mft",
+        "sha256": "c8e6b39bbdd2a8d93b1b3db953f03982386f2ba69c726522a3d0648fc0cac586",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/cloudie.rpki.app/e8942bd642855097259f18b58c6dbebc79371ccdde4fe073e9d2a003260739db/rsync/cloudie-repo.rpki.app/repo/XODOTECH/2/BB8FFC85C94D66F197FE39C60C7BE5E67D20DB2D.mft",
+        "sha256": "c71ab3b1a6e6d52c7b3a50070340a40850ac03b57c0178e6dbc21dea72728339",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.47272.net/456c2ffd3d745be13bbb4d1df2ca9219c9c9356492c9e8047a45d058b2f3d14a/rsync/krill.47272.net/repo/HYEHOST/0/4ADD5466723084490EF491C619B8BC61A328A8B6.mft",
+        "sha256": "481836cd6614b213787f60b2f9f1a7d5903f9ab9abb781d943193c28d99c9bf8",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.47272.net/456c2ffd3d745be13bbb4d1df2ca9219c9c9356492c9e8047a45d058b2f3d14a/rsync/krill.47272.net/repo/HYEHOST/1/80F5022D6A89F4EA57AB0F6131D33661AAC30BE9.mft",
+        "sha256": "6f6f60590e219c5baf09f9a4c154e242fee9261b04fb0f377c942f60cb8b32d1",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.47272.net/456c2ffd3d745be13bbb4d1df2ca9219c9c9356492c9e8047a45d058b2f3d14a/rsync/krill.47272.net/repo/HYEHOST/4/6A085FFB2907E47D476E04DACC9BB9C537740CA5.mft",
+        "sha256": "c5ffaf9cba2a1c3c972340e196930fa4e262fd6b0b160f50874bb553274798f3",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.47272.net/456c2ffd3d745be13bbb4d1df2ca9219c9c9356492c9e8047a45d058b2f3d14a/rsync/krill.47272.net/repo/HYEHOST/5/C3CF41898936CB9C573DB1EAAB94C6E669951FD7.mft",
+        "sha256": "ec2bd4a2a79e96c3d1195846d63c74f50996fa76e916fa3ec5f285088a43b730",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.accuristechnologies.ca/d0e973b2ede97952511ea64cfb3cff0690527bb4a4f4f0979514cb8ac4f2fb9d/rsync/krill.accuristechnologies.ca/repo/Accuris-Technologies/0/8B83C5DA03B3CC029D95215A01320597814B38F0.mft",
+        "sha256": "49452c9c37f51dec79bd834cc4fe416196e4ef67503edfd14703af530ea35251",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.accuristechnologies.ca/d0e973b2ede97952511ea64cfb3cff0690527bb4a4f4f0979514cb8ac4f2fb9d/rsync/krill.accuristechnologies.ca/repo/Accuris-Technologies/3/80E44F09FF201CB2BC67B16D490F7A6D10CD9DF1.mft",
+        "sha256": "c8700572505b0abaf0ea8177001411601e2dc1c5b2bb6d65556025dc4898d246",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.accuristechnologies.ca/d0e973b2ede97952511ea64cfb3cff0690527bb4a4f4f0979514cb8ac4f2fb9d/rsync/krill.accuristechnologies.ca/repo/Accuris-Technologies/5/BF478777D82C496225D8A1EBCE4FB4D3D9EF7D52.mft",
+        "sha256": "dcd7641a6a87d9bc8237affbeab544efab7b3a9ed842b050c5b37091ec10822f",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.byhill.de/1c4fff654b65f0e9aea3ca39eb7605eb2c252fa047792b2595a806b422f27ca4/rsync/krill.byhill.de/repo/byhill-ca/0/F2ADBCD3E44C2B9CF63C25F6594F643284A5980E.mft",
+        "sha256": "13705a57bf60f0bb58589f31ca5c2507a3215927307b52e7903c295516061dd5",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.byhill.de/1c4fff654b65f0e9aea3ca39eb7605eb2c252fa047792b2595a806b422f27ca4/rsync/krill.byhill.de/repo/byhill-ca/1/F55C2745322CEC1805815DCD65BC6AFFD99168DA.mft",
+        "sha256": "77c32801b8b7a3501be249927677a0a10eb1fb01e9690966470fe4e79c2b1bb8",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.ca-bc-01.ssmidge.xyz/ce7953206a0fb2222eb3598e4e5528dfa0db370c3ba43299ed1daca939b72a51/rsync/krill.ca-bc-01.ssmidge.xyz/repo/AS199177/1/ABC3F3F257AB62A5C3E4FFB5FC64C5D2DF7EAD40.mft",
+        "sha256": "ddd6f02cc6294af8d3aea4a1e9ec67d03aae01db673689d07d8d686983f62c69",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.ca-bc-01.ssmidge.xyz/ce7953206a0fb2222eb3598e4e5528dfa0db370c3ba43299ed1daca939b72a51/rsync/krill.ca-bc-01.ssmidge.xyz/repo/SsmidgeLLC/2/EEF3EC40152A747D52835AE8973E7DC8C193A840.mft",
+        "sha256": "c3aa9c28c2f1f2f36fb01c8d16a51b19a60f2e1ea70395428db3be14b38426d0",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.ca-bc-01.ssmidge.xyz/ce7953206a0fb2222eb3598e4e5528dfa0db370c3ba43299ed1daca939b72a51/rsync/krill.ca-bc-01.ssmidge.xyz/repo/SsmidgeLLC/3/5344A7147C3BDF128B91CB0E4B659E3DA3046121.mft",
+        "sha256": "1d9fb3803a75d3cf58e574904019a6a2119922f933cfeed860a0d1bdb0b8af85",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.ipgua.com:3030/47f2a909deda1a52ecf5154a19375fe917c05af7c746a3f2783a0e3a4f04bfad/rsync/krill.ipgua.com/repo/pongery/0/BDD4451C46A2D9A578C4C015D6BC9425C6577FE2.mft",
+        "sha256": "f3f7e584ec142c76d525e52a1dbf4e26a40f859674e3eb95799e0af7b65bfccc",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.ipgua.com:3030/47f2a909deda1a52ecf5154a19375fe917c05af7c746a3f2783a0e3a4f04bfad/rsync/krill.ipgua.com/repo/pongery/0/ED42F9C384F588482A56A937C446B70EB594BD3F.mft",
+        "sha256": "cd76a5c1a33535cce5ba376117c9b4cfe874d25a1922fb3169bfadbce95b44b1",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.ipgua.com:3030/47f2a909deda1a52ecf5154a19375fe917c05af7c746a3f2783a0e3a4f04bfad/rsync/krill.ipgua.com/repo/pongery/4/953F58832273DFD14187910ADCB3972B70B9BD3A.mft",
+        "sha256": "ce3f6a811fdac204b9c2126672441edf9a83d2ab8406c1a625002bedc8f02db9",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.ipgua.com:3030/47f2a909deda1a52ecf5154a19375fe917c05af7c746a3f2783a0e3a4f04bfad/rsync/krill.ipgua.com/repo/pongery/4/A0E52AE2A6674D4C7481A57558337E89666096A5.mft",
+        "sha256": "4f8291d372bd893edaa2087c60c8b47e8d8cf374b4d318461b45a0c0e4c84453",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.peering.ee.columbia.edu/9fb53b5343a3e44c25284dec9cec067ffda844019137a01e0fa505638fb8d415/rsync/krill.peering.ee.columbia.edu/repo/lifeng-hitcowhorse/0/160FD21A976A19A7B81A59AAFA69F6A0AFE36D0C.mft",
+        "sha256": "ebf2fb69ec501daf591c57d88b7c2f8011d7eaf67594b0a5958d709045afcff8",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.peering.ee.columbia.edu/9fb53b5343a3e44c25284dec9cec067ffda844019137a01e0fa505638fb8d415/rsync/krill.peering.ee.columbia.edu/repo/peering-testbed/0/3F8EBCC0428DD608F39D858BE891B85B0032681A.mft",
+        "sha256": "d73a306f979a8f7398649d24476859d1fd7f48a0b3ade010d01f3f26551c1477",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.rg.net/98d6c3f668bec61f492a9da2511cfeee5dbaaedacc9bd4fecb89500c3d0fcc16/rsync/krill.rg.net/repo/rpki-beacons-ca/0/656E4422ABF129649200EB019A815F2B12236E92.mft",
+        "sha256": "1010203c0070dca42998a01b236a45cf7bd1eaf86dd8c28eb071dbf6ccf1fa23",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.rpki-measurement.site/5eabd25dba00fd9ab8c5a4bf47f418d63b0cf9141da7bc5a6459c5c71d7f05cc/rsync/krill.rpki-measurement.site/repo/measurements/2/325627320199C076DC2D552334D2FEB715E4EDD7.mft",
+        "sha256": "82d109b0c8dfadd169879e7992eb55ee091a656904a766c021e77da681b3a80d",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.signalx.cloud/957fb5ac4000a67434f736d6c24717d8ca8713682d5585601cf817050271c04a/rsync/krill.signalx.cloud/repo/signalx-rpki/3/8770188F7F0D18A86637EF0EE75EE2B70D810A7C.mft",
+        "sha256": "7ca86c2e52bb113b9253a1dca41895a98b6cdadc76627c58cc656b9b527e7e93",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.signalx.cloud/957fb5ac4000a67434f736d6c24717d8ca8713682d5585601cf817050271c04a/rsync/krill.signalx.cloud/repo/signalx-rpki/4/02B5CF163150ADD82E90362AE55F3173D9749F05.mft",
+        "sha256": "f970c2410f8d350a4e0ff5f73ee9ac67a3d5ff912f69445ec25e92fd88bb9170",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.signalx.cloud/957fb5ac4000a67434f736d6c24717d8ca8713682d5585601cf817050271c04a/rsync/krill.signalx.cloud/repo/signalx-rpki/6/88332C8750CC71629E694FDDB3615AE083589921.mft",
+        "sha256": "e27c235abe1cb7604b64c1e7c7d8cb90aef4505a0ff5bcc32e3d742593cf2081",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.starlamp.su/1464f6fa2006c1f59cc29dc3c2c92e4eb8efd26aa7213638d8622025c520b64d/rsync/krill.starlamp.su/repo/starlamp/0/8568BF579F56F4139D364514D84EA5EE01CC8048.mft",
+        "sha256": "94c2558b08e46f82f8e4294e7cd93423ebb4fae72067d795b36c5878d5a31739",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.sy5.nsw.au.infininet.com.au/4e9d8bfe71878b2fc35435cb842be8648fc34cb847e2abf12e5f311e9204aa14/rsync/krill.sy5.nsw.au.infininet.com.au/repo/BGP-Exchange/2/DD8984A82671DD60AA7980ACF2402EF6DA98721C.mft",
+        "sha256": "debe54290f2c8bc99d5396f6c4c5de24567b88a0ccbe77adb1b41e87279b3761",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/magellan.ipxo.com/0cf22cf06878a00183e4460062d87c555595ff1f8b19481d051207ffb0f5771f/rsync/r.magellan.ipxo.com/repo/30327b9e-227a-4ebd-825b-3b98095dc927-0/0/AEF766F103B2EF99DF8C71978A7FE519D730B155.mft",
+        "sha256": "66b150207562143b1594f979ab18372370a2290021c20e06cda2f394b856bce8",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/magellan.ipxo.com/0cf22cf06878a00183e4460062d87c555595ff1f8b19481d051207ffb0f5771f/rsync/r.magellan.ipxo.com/repo/528a218f-ad28-40d2-bd7f-350eada3d705-0/0/D34606949D385DB42714FE71274FAC9948EF279C.mft",
+        "sha256": "a3686471d765658d0d51594e49a6d0b9cd7091c52f71e38c8fc4d21a8758f0be",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/magellan.ipxo.com/0cf22cf06878a00183e4460062d87c555595ff1f8b19481d051207ffb0f5771f/rsync/r.magellan.ipxo.com/repo/a0375b39-f949-4cb5-b519-f94008b1654c-0/0/B354D328CBBFD1EF3CD29268A23B0FCC60E3A2C5.mft",
+        "sha256": "38ab428114d05f5551b5ea97aa42085ff13ce1356ac03d285fd7dd71082afd3a",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/magellan.ipxo.com/0cf22cf06878a00183e4460062d87c555595ff1f8b19481d051207ffb0f5771f/rsync/r.magellan.ipxo.com/repo/a6f2147a-de8a-4440-bca2-6d8b7c876fda-0/0/2A2FB4DB0AA4D006958316872E467B554E0FD0BE.mft",
+        "sha256": "ef08d7f1734b03ad06bbdbd9c9c1477a98790cd99d5889009ee88ab7845f8577",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/magellan.ipxo.com/0cf22cf06878a00183e4460062d87c555595ff1f8b19481d051207ffb0f5771f/rsync/r.magellan.ipxo.com/repo/ddd1818b-9fbf-440c-aaec-44a4d1590f87-0/0/C972E8671DEDC43FE908B548531C969A051CD34C.mft",
+        "sha256": "612055b1b35680276ad4f41e61a83a837d4bbe0427b42c42700c821878f020e3",
+        "object_type": "mft"
+      }
+    ]
+  },
+  "probe-bj_vs_probe-sg": {
+    "pair": "probe-bj_vs_probe-sg",
+    "left_probe": "probe-bj",
+    "right_probe": "probe-sg",
+    "left_count": 156148,
+    "right_count": 52431,
+    "common_count": 0,
+    "only_left_count": 156148,
+    "only_right_count": 52431,
+    "entry_level_diff_count": 208579,
+    "jaccard_similarity": 0.0,
+    "top_diff_object_type": "mft",
+    "diff_object_type_breakdown_sampled": {
+      "mft": 152431
+    },
+    "only_left_samples": [
+      {
+        "uri": "cache://.rpki-cache/repository/rsync/krill.ipgua.com/repo/pongery/0/BDD4451C46A2D9A578C4C015D6BC9425C6577FE2.mft",
+        "sha256": "cca6a613766ba849103c02b57b2a52db1a749ba6bad46a7fa828a9fd542a65ed",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/rsync/krill.ipgua.com/repo/pongery/0/ED42F9C384F588482A56A937C446B70EB594BD3F.mft",
+        "sha256": "340b9049abeb52a3fddfaaea5f02918f17c9f81eb364b3c6a3ddbd7fe87e61c2",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/rsync/krill.ipgua.com/repo/pongery/4/953F58832273DFD14187910ADCB3972B70B9BD3A.mft",
+        "sha256": "2c29255ae4ac81ca986182d8f4447ecb6b42089278c55042ee7778c4ab270434",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/rsync/krill.ipgua.com/repo/pongery/4/A0E52AE2A6674D4C7481A57558337E89666096A5.mft",
+        "sha256": "c895c4ccc5af6699347673702483cc6a0f19c09be077d58f5ff5f7cb3522b621",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/rsync/repodepot.wildtky.com/repo/WTA_CA_Apr26/0/BE41309CDB56AFF84ECABAD01972BD900090668E.mft",
+        "sha256": "0bd8a8c83acbec68abcb67f1b572ac6f4efc70019b001d8faff636c5b1f14739",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/rsync/rpki.komorebi.network/repo/komorebi/0/9E501456E122798BDB8F739545BF6148C7CD1165.mft",
+        "sha256": "1c03b988ab5dbe4e39145deb583b6eac12aaeb8a866302be84674a2830f8680e",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/rsync/rpki.komorebi.network/repo/komorebi/5/421B765C540F139258E8C8E64499AC6317AE6F93.mft",
+        "sha256": "f8b6c33661e4dfa06e5bedd93be5455e0baad8e667faaff8e82a655c907a6300",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/rsync/rpki.komorebi.network/repo/komorebi/6/496B62D685F3CAF2E690022C12571B0DD3C6A8E5.mft",
+        "sha256": "6ed9f2eb918b87a3b6dae655a9f31492c0b238cc9e26706c7b0ed64c3145977a",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/rsync/rsync.rp.ki/repo/aci/1/04C3A5EF440A7931A7BB6DC0A08211C490E209E3.mft",
+        "sha256": "12a533ad5a8fb89e8ae75838507a1a228ec23020e89d2e35db4e597c491150cb",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/rsync/rsync.rp.ki/repo/clonoth/1/C23A7169F6499DD2815C9178A890BC4C0514DDF9.mft",
+        "sha256": "71b1a046784a63f8145b988df5768985cdc56d9d6d2e670f5f5b1aa7f3205468",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/rsync/rsync.rp.ki/repo/misakaio/0/9CF05E7024D4A487E0B79E2F57525BF345DB53EC.mft",
+        "sha256": "0de0e2fe1c67ee6593e6245b5bc90d894e9f09924f4e0c252fdb326350ac4a9f",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/rsync/rsync.rp.ki/repo/misakaio/1/27904CFE041547C56F20BA5B1BB37BC33E8A13D3.mft",
+        "sha256": "2f94a201b6622c862b52e7809c00b6311d86b8fc91b74be19648c27a3fbaf848",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/rsync/rsync.rp.ki/repo/misakaio/2/359A4B6C6D3713CFF3636207DE9839058B51815B.mft",
+        "sha256": "32beefa8ebf5bc822f0a39a5bd532a37fa81fef9cd71076cde067329c54ad9b0",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/1/F03205B3993400CC3FC657EFE68E0696DA332458.mft",
+        "sha256": "7ff9ecb3c93959b596c90822ec1ef280d56d79c152ddd9fdbfeebbd87fc51366",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/10/C5D9C68A36AE4EEAFED3C1CB551AB4B493922316.mft",
+        "sha256": "f98f051d0edb885383f49b434d9e207dc985320ddfe21626e0e266223e8f59ee",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/11/4B734CA25B04A198F3EFF79C293351606470223F.mft",
+        "sha256": "ba157ea81a8d1c0e151c9eb1e49cef888d05060483700fda780c982ff6ce7d12",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/14/A1AE71CDA837CEEF69CE114D701C8650A0A8FAA9.mft",
+        "sha256": "42ca65576bc8b048e90ca60a0559be3d5dbb9384650b9de4835466fe01ee1af9",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/15/24B0A526F8120A0F8142D2BD3B4644C8E1BDAD50.mft",
+        "sha256": "ab0c203a24f20c893b22022b4a699b991f009d93704ee8e5a6476182c86657cf",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/16/84473C6B34C577A1F9F67605C4A8045E5F4D35A8.mft",
+        "sha256": "4a96159374d501b87e155985522d5a0696f0b49a0cb3bd56d139c66d268e2eae",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/17/D659A7AF0FA7DCA33194D352FC97140AE70E8E3A.mft",
+        "sha256": "d439475556ab95757bdc39582be3dbe5d14528cea3cece7a3d6326cb6d381d00",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/3/2A073E1D59E0A99185723C6F720CDDD629B831D3.mft",
+        "sha256": "4309c3dca07f9413377057c3671b44118bb75f906c0fd381ee802c3b47a21c24",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/5/4F03B5F168F388E0EBBBD830C91C970FFEAB87F2.mft",
+        "sha256": "5b82c6b589717123a62ee2ffb3e39911884239450059ae5f100597a8f11b2696",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/8/BB6ECAF29F33D987EBADDCEB29EDA7691AA6709F.mft",
+        "sha256": "f2eb9421a8f41c3dcbdfb1b4c3a7476d6662b97ffee791974b396dd1f54d3e2d",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/alias.rpki-measurement.site/916b4785f84a33cbd64c45381f8a6f9fd3a64c1be3d92e1df4ad2745d5b326eb/rsync/alias.rpki-measurement.site/repo/child_alias_ca/0/9D4FD76D76DD07FAFE59A29260D84DDA1D6E007B.mft",
+        "sha256": "a00475e9756f2e3d2d65ef3b80dc88dca09d72668d2be0ab261654c37794efab",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/ca.nat.moe/eb1beea9bced71b6fcf518538c93281d258d5b514fe23c991cbae423206b9a87/rsync/ca.nat.moe/repo/NATOLAB/2/16257C19668C6713C4012B101E646266CD77B50D.mft",
+        "sha256": "dcc32324604ccab143930550c1710093a5d19711e8d685afa5d12508f153f519",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/ca.rg.net/bed0abda204532b1c121355ceb0f5cf6a619fabe65aa134618f99c49c375bb61/rsync/ca.rg.net/rpki/RGnet-OU/bW-_qXU9uNhGQz21NR2ansB8lr0.mft",
+        "sha256": "607e2eb7ce436ca4d4f5830c5753e334848c061fa72b3fb2762ec5a0ac04d2ae",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/chloe.sobornost.net/a4ae76c5702d98db9df10a8a83f3450d9d07f06afd431e60721be71a84cf15b4/rsync/chloe.sobornost.net/rpki/RIPE-nljobsnijders/yqgF26w2R0m5sRVZCrbvD5cM29g.mft",
+        "sha256": "2187fc26584d52495766787e8b17542225f9818f211da8b01f23827d93ac0383",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/cloudie.rpki.app/e8942bd642855097259f18b58c6dbebc79371ccdde4fe073e9d2a003260739db/rsync/cloudie-repo.rpki.app/repo/CLOUDIE-RPKI/1/E5187D4DA87619D3DBB9750E83D19E5B7F803271.mft",
+        "sha256": "ac03d73398708e38b7af4ef19da5372b2dce4b75e6dc1d1a0c15c6eeae6ed252",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/cloudie.rpki.app/e8942bd642855097259f18b58c6dbebc79371ccdde4fe073e9d2a003260739db/rsync/cloudie-repo.rpki.app/repo/CLOUDIE-RPKI/2/6BEC1AED6508BB07511B01B177551792DAEB2C90.mft",
+        "sha256": "d59ba4966f48bfb4ed33b9717fbd693348e5d9e7ffc220f917e8181d9434ef30",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/cloudie.rpki.app/e8942bd642855097259f18b58c6dbebc79371ccdde4fe073e9d2a003260739db/rsync/cloudie-repo.rpki.app/repo/CLOUDIE-RPKI/3/5C141522AC497C4CE7BEA4BC850EBD379EC6D4F1.mft",
+        "sha256": "394f329f640634b250cee802b553ff68d67e9b545d49784919e7062a0d65dc71",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/cloudie.rpki.app/e8942bd642855097259f18b58c6dbebc79371ccdde4fe073e9d2a003260739db/rsync/cloudie-repo.rpki.app/repo/CLOUDIE-RPKI/4/8FC3CFB5DF3E8F721C08B8B5FE7F61D67B0BE13B.mft",
+        "sha256": "989126e639ffc3dd65bcd4ba7df85a694978f1cb79f2136033d7d0cfcafbd425",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/cloudie.rpki.app/e8942bd642855097259f18b58c6dbebc79371ccdde4fe073e9d2a003260739db/rsync/cloudie-repo.rpki.app/repo/XODOTECH/1/A8D2D3F3BCD791CA864229775A010A2B5B0BFEBE.mft",
+        "sha256": "e93fa68bb5173e6d7b7030a5dda7e3f29632f7da8ab039f4168a278fcd837270",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/cloudie.rpki.app/e8942bd642855097259f18b58c6dbebc79371ccdde4fe073e9d2a003260739db/rsync/cloudie-repo.rpki.app/repo/XODOTECH/2/BB8FFC85C94D66F197FE39C60C7BE5E67D20DB2D.mft",
+        "sha256": "f9a4e05c8344f72ffdef92f9f6b1c72290f85d93c619152dabd71d2a62481e3b",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.47272.net/456c2ffd3d745be13bbb4d1df2ca9219c9c9356492c9e8047a45d058b2f3d14a/rsync/krill.47272.net/repo/HYEHOST/0/4ADD5466723084490EF491C619B8BC61A328A8B6.mft",
+        "sha256": "5ea80d29b1221f418346c42e186434683c8765af1a9d94533a52945687aed8b3",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.47272.net/456c2ffd3d745be13bbb4d1df2ca9219c9c9356492c9e8047a45d058b2f3d14a/rsync/krill.47272.net/repo/HYEHOST/1/80F5022D6A89F4EA57AB0F6131D33661AAC30BE9.mft",
+        "sha256": "ace5348c5460ac306818d270a2d728c891e72da10026ec343ae133d9091a8ceb",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.47272.net/456c2ffd3d745be13bbb4d1df2ca9219c9c9356492c9e8047a45d058b2f3d14a/rsync/krill.47272.net/repo/HYEHOST/4/6A085FFB2907E47D476E04DACC9BB9C537740CA5.mft",
+        "sha256": "c98f3fcba2806f301d5263e0dd3866e507d722872b3bdc432307a5575d327744",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.47272.net/456c2ffd3d745be13bbb4d1df2ca9219c9c9356492c9e8047a45d058b2f3d14a/rsync/krill.47272.net/repo/HYEHOST/5/C3CF41898936CB9C573DB1EAAB94C6E669951FD7.mft",
+        "sha256": "c239cf6c710a96ac2bd33dca70d2484e7aadc2ac90c27a6be243c3569c42841a",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.accuristechnologies.ca/d0e973b2ede97952511ea64cfb3cff0690527bb4a4f4f0979514cb8ac4f2fb9d/rsync/krill.accuristechnologies.ca/repo/Accuris-Technologies/0/8B83C5DA03B3CC029D95215A01320597814B38F0.mft",
+        "sha256": "9b5ec7ce7efdaeaaa903f4c724244e9de2458844bdd3fc35270af1cd5977dab2",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.accuristechnologies.ca/d0e973b2ede97952511ea64cfb3cff0690527bb4a4f4f0979514cb8ac4f2fb9d/rsync/krill.accuristechnologies.ca/repo/Accuris-Technologies/3/80E44F09FF201CB2BC67B16D490F7A6D10CD9DF1.mft",
+        "sha256": "c485c7e1ca4861adfb1d0781456da46f0d97d92775e4722a2fdcfb458987a03d",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.accuristechnologies.ca/d0e973b2ede97952511ea64cfb3cff0690527bb4a4f4f0979514cb8ac4f2fb9d/rsync/krill.accuristechnologies.ca/repo/Accuris-Technologies/5/BF478777D82C496225D8A1EBCE4FB4D3D9EF7D52.mft",
+        "sha256": "13fdc6da3c8323cd144afe3c6119ff35bf99da94d4da50f2bd8c45a4f7a1fa28",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.byhill.de/1c4fff654b65f0e9aea3ca39eb7605eb2c252fa047792b2595a806b422f27ca4/rsync/krill.byhill.de/repo/byhill-ca/0/F2ADBCD3E44C2B9CF63C25F6594F643284A5980E.mft",
+        "sha256": "69c8e6f8a52a940f6ef68525daf986f223ab2a6f869ecc979fc5f267364e6594",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.byhill.de/1c4fff654b65f0e9aea3ca39eb7605eb2c252fa047792b2595a806b422f27ca4/rsync/krill.byhill.de/repo/byhill-ca/1/F55C2745322CEC1805815DCD65BC6AFFD99168DA.mft",
+        "sha256": "2311fa09b30444f6f97296299159d8c8c7d287685917c2b58bc1377412bdef94",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.ca-bc-01.ssmidge.xyz/ce7953206a0fb2222eb3598e4e5528dfa0db370c3ba43299ed1daca939b72a51/rsync/krill.ca-bc-01.ssmidge.xyz/repo/AS199177/1/ABC3F3F257AB62A5C3E4FFB5FC64C5D2DF7EAD40.mft",
+        "sha256": "3f04c3196defb2d40258a22b9490ea193ae22856f6e112622702251155b52bed",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.ca-bc-01.ssmidge.xyz/ce7953206a0fb2222eb3598e4e5528dfa0db370c3ba43299ed1daca939b72a51/rsync/krill.ca-bc-01.ssmidge.xyz/repo/SsmidgeLLC/2/EEF3EC40152A747D52835AE8973E7DC8C193A840.mft",
+        "sha256": "f498af2504b490bd4863cec79d3340d7887b468e91df81d8c05d7424d25f966c",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.ca-bc-01.ssmidge.xyz/ce7953206a0fb2222eb3598e4e5528dfa0db370c3ba43299ed1daca939b72a51/rsync/krill.ca-bc-01.ssmidge.xyz/repo/SsmidgeLLC/3/5344A7147C3BDF128B91CB0E4B659E3DA3046121.mft",
+        "sha256": "a9e0fa389d9e3ba23758b04f52b3fc203e8256c6988fd025499a616104b5af18",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.ipgua.com:3030/47f2a909deda1a52ecf5154a19375fe917c05af7c746a3f2783a0e3a4f04bfad/rsync/krill.ipgua.com/repo/pongery/0/BDD4451C46A2D9A578C4C015D6BC9425C6577FE2.mft",
+        "sha256": "fafa97e0969af0d2a1958b2c0d959b3ae4a148d78d6f23ac98bd3762b55aee31",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.ipgua.com:3030/47f2a909deda1a52ecf5154a19375fe917c05af7c746a3f2783a0e3a4f04bfad/rsync/krill.ipgua.com/repo/pongery/0/ED42F9C384F588482A56A937C446B70EB594BD3F.mft",
+        "sha256": "dc123a7169c2dd4baec0a4c7f11ad26ae9c86dc01b14d5bb21c92794a7c791aa",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.ipgua.com:3030/47f2a909deda1a52ecf5154a19375fe917c05af7c746a3f2783a0e3a4f04bfad/rsync/krill.ipgua.com/repo/pongery/4/953F58832273DFD14187910ADCB3972B70B9BD3A.mft",
+        "sha256": "b388b70a2032c20024fdf30315eb196cc5d5337ccb3faecc49e6c07a96372c54",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.ipgua.com:3030/47f2a909deda1a52ecf5154a19375fe917c05af7c746a3f2783a0e3a4f04bfad/rsync/krill.ipgua.com/repo/pongery/4/A0E52AE2A6674D4C7481A57558337E89666096A5.mft",
+        "sha256": "82abdd1bc05e54916f05e399b16ed5ad850c54801ad8caaaed398c95a791ef28",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.peering.ee.columbia.edu/9fb53b5343a3e44c25284dec9cec067ffda844019137a01e0fa505638fb8d415/rsync/krill.peering.ee.columbia.edu/repo/lifeng-hitcowhorse/0/160FD21A976A19A7B81A59AAFA69F6A0AFE36D0C.mft",
+        "sha256": "a0a912b4c42239d4c5a52ab7bacbfaca84fb6d00fa147fa9c3e6ee7b218fc4f1",
+        "object_type": "mft"
+      }
+    ],
+    "only_right_samples": [
+      {
+        "uri": "cache://.rpki-cache/repository/rsync/krill.ipgua.com/repo/pongery/0/BDD4451C46A2D9A578C4C015D6BC9425C6577FE2.mft",
+        "sha256": "f4b4bdd8b537a65ef4f81db090aa491eccc46711e863f202407b54b670a35380",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/rsync/krill.ipgua.com/repo/pongery/0/ED42F9C384F588482A56A937C446B70EB594BD3F.mft",
+        "sha256": "48fe61bfc81ce11ee26985cb59db1cf19684fc1eef033b8af71f8b5e23a495c6",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/rsync/krill.ipgua.com/repo/pongery/4/953F58832273DFD14187910ADCB3972B70B9BD3A.mft",
+        "sha256": "e91a5d77e28fa71de6ce18dd9e1fdd789fb46ae91afd3fa52e93f0021273e411",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/rsync/krill.ipgua.com/repo/pongery/4/A0E52AE2A6674D4C7481A57558337E89666096A5.mft",
+        "sha256": "3dbe6fac29982f4301476113ae79c451ce58195e3b8875c3ab2d6477eb5f0a47",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/rsync/rpki.komorebi.network/repo/komorebi/0/9E501456E122798BDB8F739545BF6148C7CD1165.mft",
+        "sha256": "89deefb4eaede8a034d16da10078f916f79eccffabd3673eb3425fff9989ec87",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/rsync/rpki.komorebi.network/repo/komorebi/5/421B765C540F139258E8C8E64499AC6317AE6F93.mft",
+        "sha256": "be7fcaabeef1a9092323725828fe5fea9c2b2477ea95c0af140d1cff3db3b131",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/rsync/rpki.komorebi.network/repo/komorebi/6/496B62D685F3CAF2E690022C12571B0DD3C6A8E5.mft",
+        "sha256": "40cde25bc7445f3ef11f6a449c1925371898b68dbdaab688dd35e60b54709d71",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/rsync/rsync.rp.ki/repo/aci/1/04C3A5EF440A7931A7BB6DC0A08211C490E209E3.mft",
+        "sha256": "f47fc01056c25939c7c9aa7b4f1f19a976b55d783c13a41db7f66e8dc7417116",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/rsync/rsync.rp.ki/repo/clonoth/1/C23A7169F6499DD2815C9178A890BC4C0514DDF9.mft",
+        "sha256": "c4c14afb6c5a94515aae76fb2b976e81d69d4ef74b1b5ffd75ea6689f41875d4",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/rsync/rsync.rp.ki/repo/misakaio/0/9CF05E7024D4A487E0B79E2F57525BF345DB53EC.mft",
+        "sha256": "667502f0d81b43253be7aa095793501cd6efad738cb851616d24295b9a2868c8",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/rsync/rsync.rp.ki/repo/misakaio/1/27904CFE041547C56F20BA5B1BB37BC33E8A13D3.mft",
+        "sha256": "e2eb7bb8b3d3fb576185d7ba8ab267f67b35ce3e44550bf1a7220bc9c4a108c8",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/rsync/rsync.rp.ki/repo/misakaio/2/359A4B6C6D3713CFF3636207DE9839058B51815B.mft",
+        "sha256": "77e8e4545eead93784b6845b5dc8015aa96e5293943e101ae56dd96146ad1b91",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/1/F03205B3993400CC3FC657EFE68E0696DA332458.mft",
+        "sha256": "82d8d3e01084511549b34d622f351c1204c5528cca49ed72c395c1693a66b09c",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/10/C5D9C68A36AE4EEAFED3C1CB551AB4B493922316.mft",
+        "sha256": "02da620b2b903f58535b3702c2e6a3f864e0ac6e55b7ff7f5d1c4a3370d4f68e",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/11/4B734CA25B04A198F3EFF79C293351606470223F.mft",
+        "sha256": "a42f6e94403955688272178e9cf4b3473a705da79656764a294dcc5ee945955e",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/14/A1AE71CDA837CEEF69CE114D701C8650A0A8FAA9.mft",
+        "sha256": "8ac47e0dbbb729f7911c4ff9fb0243c7e9267f2b39b6f7cc2201f2e0c9376d2e",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/15/24B0A526F8120A0F8142D2BD3B4644C8E1BDAD50.mft",
+        "sha256": "75c9111497d2615d425aa980145268610d7af1b0a74ae24a1d2faacbf59c26ec",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/16/84473C6B34C577A1F9F67605C4A8045E5F4D35A8.mft",
+        "sha256": "1098f5102e703d5b6bdab5e6e0b41ede6800690339dd4c9ecee3323932b3b44a",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/17/D659A7AF0FA7DCA33194D352FC97140AE70E8E3A.mft",
+        "sha256": "9aabe7a6ede761eec248eb012011b0c263b1cad1c689ffcd691723d322472f47",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/3/2A073E1D59E0A99185723C6F720CDDD629B831D3.mft",
+        "sha256": "ebd0dd1c044a64d2a6698d42756491144996813c71838b3542109109c8be4559",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/5/4F03B5F168F388E0EBBBD830C91C970FFEAB87F2.mft",
+        "sha256": "61e42adce55c8d8caaa003ee2b58263d3c93154111b8db2533e0e1fd7fd9066c",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/8/BB6ECAF29F33D987EBADDCEB29EDA7691AA6709F.mft",
+        "sha256": "76270630aaafd5f7cc5d297cf7c57253162cd4d9c2191efca47ae9d771f6128b",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/alias.rpki-measurement.site/916b4785f84a33cbd64c45381f8a6f9fd3a64c1be3d92e1df4ad2745d5b326eb/rsync/alias.rpki-measurement.site/repo/child_alias_ca/0/9D4FD76D76DD07FAFE59A29260D84DDA1D6E007B.mft",
+        "sha256": "eaff4cca850777bd4f67c811f10a1ac2481ee8ff258f1f61bf4e68a4191ecd75",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/ca.nat.moe/eb1beea9bced71b6fcf518538c93281d258d5b514fe23c991cbae423206b9a87/rsync/ca.nat.moe/repo/NATOLAB/2/16257C19668C6713C4012B101E646266CD77B50D.mft",
+        "sha256": "a2e55562346bb0aeb95b07ef2585938cf5f14dd01d178d04fbe399eb909688b7",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/ca.rg.net/bed0abda204532b1c121355ceb0f5cf6a619fabe65aa134618f99c49c375bb61/rsync/ca.rg.net/rpki/RGnet-OU/bW-_qXU9uNhGQz21NR2ansB8lr0.mft",
+        "sha256": "3d73f9aaf1a0a5bf5980356f432b8ddebb221ef4b8d70553b46f4099277f3ca1",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/chloe.sobornost.net/a4ae76c5702d98db9df10a8a83f3450d9d07f06afd431e60721be71a84cf15b4/rsync/chloe.sobornost.net/rpki/RIPE-nljobsnijders/yqgF26w2R0m5sRVZCrbvD5cM29g.mft",
+        "sha256": "a8d5358dac27b435731a33affd4298f449f43bd41109d5f65d9b1954e2d180fd",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/cloudie.rpki.app/e8942bd642855097259f18b58c6dbebc79371ccdde4fe073e9d2a003260739db/rsync/cloudie-repo.rpki.app/repo/CLOUDIE-RPKI/1/E5187D4DA87619D3DBB9750E83D19E5B7F803271.mft",
+        "sha256": "58e6da4ee226011097807a2663a0627d5c179e7791b3bcb35de99ab82b0e5465",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/cloudie.rpki.app/e8942bd642855097259f18b58c6dbebc79371ccdde4fe073e9d2a003260739db/rsync/cloudie-repo.rpki.app/repo/CLOUDIE-RPKI/2/6BEC1AED6508BB07511B01B177551792DAEB2C90.mft",
+        "sha256": "eec91d9c784e9d0437c1b85fc89f57751737ed7cd867196692b533fb079b240d",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/cloudie.rpki.app/e8942bd642855097259f18b58c6dbebc79371ccdde4fe073e9d2a003260739db/rsync/cloudie-repo.rpki.app/repo/CLOUDIE-RPKI/3/5C141522AC497C4CE7BEA4BC850EBD379EC6D4F1.mft",
+        "sha256": "9114b56dfde56ebb64e2d3fb5c635af68c5ddd9413129e5b15d1d92dd5451ba4",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/cloudie.rpki.app/e8942bd642855097259f18b58c6dbebc79371ccdde4fe073e9d2a003260739db/rsync/cloudie-repo.rpki.app/repo/CLOUDIE-RPKI/4/8FC3CFB5DF3E8F721C08B8B5FE7F61D67B0BE13B.mft",
+        "sha256": "3f3ab40ee7a41214916987d822a3cdb6ae654f43f799758027d9eb2c5a9e4401",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/cloudie.rpki.app/e8942bd642855097259f18b58c6dbebc79371ccdde4fe073e9d2a003260739db/rsync/cloudie-repo.rpki.app/repo/XODOTECH/1/A8D2D3F3BCD791CA864229775A010A2B5B0BFEBE.mft",
+        "sha256": "c8e6b39bbdd2a8d93b1b3db953f03982386f2ba69c726522a3d0648fc0cac586",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/cloudie.rpki.app/e8942bd642855097259f18b58c6dbebc79371ccdde4fe073e9d2a003260739db/rsync/cloudie-repo.rpki.app/repo/XODOTECH/2/BB8FFC85C94D66F197FE39C60C7BE5E67D20DB2D.mft",
+        "sha256": "c71ab3b1a6e6d52c7b3a50070340a40850ac03b57c0178e6dbc21dea72728339",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.47272.net/456c2ffd3d745be13bbb4d1df2ca9219c9c9356492c9e8047a45d058b2f3d14a/rsync/krill.47272.net/repo/HYEHOST/0/4ADD5466723084490EF491C619B8BC61A328A8B6.mft",
+        "sha256": "481836cd6614b213787f60b2f9f1a7d5903f9ab9abb781d943193c28d99c9bf8",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.47272.net/456c2ffd3d745be13bbb4d1df2ca9219c9c9356492c9e8047a45d058b2f3d14a/rsync/krill.47272.net/repo/HYEHOST/1/80F5022D6A89F4EA57AB0F6131D33661AAC30BE9.mft",
+        "sha256": "6f6f60590e219c5baf09f9a4c154e242fee9261b04fb0f377c942f60cb8b32d1",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.47272.net/456c2ffd3d745be13bbb4d1df2ca9219c9c9356492c9e8047a45d058b2f3d14a/rsync/krill.47272.net/repo/HYEHOST/4/6A085FFB2907E47D476E04DACC9BB9C537740CA5.mft",
+        "sha256": "c5ffaf9cba2a1c3c972340e196930fa4e262fd6b0b160f50874bb553274798f3",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.47272.net/456c2ffd3d745be13bbb4d1df2ca9219c9c9356492c9e8047a45d058b2f3d14a/rsync/krill.47272.net/repo/HYEHOST/5/C3CF41898936CB9C573DB1EAAB94C6E669951FD7.mft",
+        "sha256": "ec2bd4a2a79e96c3d1195846d63c74f50996fa76e916fa3ec5f285088a43b730",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.accuristechnologies.ca/d0e973b2ede97952511ea64cfb3cff0690527bb4a4f4f0979514cb8ac4f2fb9d/rsync/krill.accuristechnologies.ca/repo/Accuris-Technologies/0/8B83C5DA03B3CC029D95215A01320597814B38F0.mft",
+        "sha256": "49452c9c37f51dec79bd834cc4fe416196e4ef67503edfd14703af530ea35251",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.accuristechnologies.ca/d0e973b2ede97952511ea64cfb3cff0690527bb4a4f4f0979514cb8ac4f2fb9d/rsync/krill.accuristechnologies.ca/repo/Accuris-Technologies/3/80E44F09FF201CB2BC67B16D490F7A6D10CD9DF1.mft",
+        "sha256": "c8700572505b0abaf0ea8177001411601e2dc1c5b2bb6d65556025dc4898d246",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.accuristechnologies.ca/d0e973b2ede97952511ea64cfb3cff0690527bb4a4f4f0979514cb8ac4f2fb9d/rsync/krill.accuristechnologies.ca/repo/Accuris-Technologies/5/BF478777D82C496225D8A1EBCE4FB4D3D9EF7D52.mft",
+        "sha256": "dcd7641a6a87d9bc8237affbeab544efab7b3a9ed842b050c5b37091ec10822f",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.byhill.de/1c4fff654b65f0e9aea3ca39eb7605eb2c252fa047792b2595a806b422f27ca4/rsync/krill.byhill.de/repo/byhill-ca/0/F2ADBCD3E44C2B9CF63C25F6594F643284A5980E.mft",
+        "sha256": "13705a57bf60f0bb58589f31ca5c2507a3215927307b52e7903c295516061dd5",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.byhill.de/1c4fff654b65f0e9aea3ca39eb7605eb2c252fa047792b2595a806b422f27ca4/rsync/krill.byhill.de/repo/byhill-ca/1/F55C2745322CEC1805815DCD65BC6AFFD99168DA.mft",
+        "sha256": "77c32801b8b7a3501be249927677a0a10eb1fb01e9690966470fe4e79c2b1bb8",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.ca-bc-01.ssmidge.xyz/ce7953206a0fb2222eb3598e4e5528dfa0db370c3ba43299ed1daca939b72a51/rsync/krill.ca-bc-01.ssmidge.xyz/repo/AS199177/1/ABC3F3F257AB62A5C3E4FFB5FC64C5D2DF7EAD40.mft",
+        "sha256": "ddd6f02cc6294af8d3aea4a1e9ec67d03aae01db673689d07d8d686983f62c69",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.ca-bc-01.ssmidge.xyz/ce7953206a0fb2222eb3598e4e5528dfa0db370c3ba43299ed1daca939b72a51/rsync/krill.ca-bc-01.ssmidge.xyz/repo/SsmidgeLLC/2/EEF3EC40152A747D52835AE8973E7DC8C193A840.mft",
+        "sha256": "c3aa9c28c2f1f2f36fb01c8d16a51b19a60f2e1ea70395428db3be14b38426d0",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.ca-bc-01.ssmidge.xyz/ce7953206a0fb2222eb3598e4e5528dfa0db370c3ba43299ed1daca939b72a51/rsync/krill.ca-bc-01.ssmidge.xyz/repo/SsmidgeLLC/3/5344A7147C3BDF128B91CB0E4B659E3DA3046121.mft",
+        "sha256": "1d9fb3803a75d3cf58e574904019a6a2119922f933cfeed860a0d1bdb0b8af85",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.ipgua.com:3030/47f2a909deda1a52ecf5154a19375fe917c05af7c746a3f2783a0e3a4f04bfad/rsync/krill.ipgua.com/repo/pongery/0/BDD4451C46A2D9A578C4C015D6BC9425C6577FE2.mft",
+        "sha256": "f3f7e584ec142c76d525e52a1dbf4e26a40f859674e3eb95799e0af7b65bfccc",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.ipgua.com:3030/47f2a909deda1a52ecf5154a19375fe917c05af7c746a3f2783a0e3a4f04bfad/rsync/krill.ipgua.com/repo/pongery/0/ED42F9C384F588482A56A937C446B70EB594BD3F.mft",
+        "sha256": "cd76a5c1a33535cce5ba376117c9b4cfe874d25a1922fb3169bfadbce95b44b1",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.ipgua.com:3030/47f2a909deda1a52ecf5154a19375fe917c05af7c746a3f2783a0e3a4f04bfad/rsync/krill.ipgua.com/repo/pongery/4/953F58832273DFD14187910ADCB3972B70B9BD3A.mft",
+        "sha256": "ce3f6a811fdac204b9c2126672441edf9a83d2ab8406c1a625002bedc8f02db9",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.ipgua.com:3030/47f2a909deda1a52ecf5154a19375fe917c05af7c746a3f2783a0e3a4f04bfad/rsync/krill.ipgua.com/repo/pongery/4/A0E52AE2A6674D4C7481A57558337E89666096A5.mft",
+        "sha256": "4f8291d372bd893edaa2087c60c8b47e8d8cf374b4d318461b45a0c0e4c84453",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.peering.ee.columbia.edu/9fb53b5343a3e44c25284dec9cec067ffda844019137a01e0fa505638fb8d415/rsync/krill.peering.ee.columbia.edu/repo/lifeng-hitcowhorse/0/160FD21A976A19A7B81A59AAFA69F6A0AFE36D0C.mft",
+        "sha256": "ebf2fb69ec501daf591c57d88b7c2f8011d7eaf67594b0a5958d709045afcff8",
+        "object_type": "mft"
+      },
+      {
+        "uri": "cache://.rpki-cache/repository/stored/rrdp/krill.peering.ee.columbia.edu/9fb53b5343a3e44c25284dec9cec067ffda844019137a01e0fa505638fb8d415/rsync/krill.peering.ee.columbia.edu/repo/peering-testbed/0/3F8EBCC0428DD608F39D858BE891B85B0032681A.mft",
+        "sha256": "d73a306f979a8f7398649d24476859d1fd7f48a0b3ade010d01f3f26551c1477",
+        "object_type": "mft"
+      }
+    ]
+  }
+}

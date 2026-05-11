@@ -1,0 +1,59 @@
+gate_id = m12_r3_object_gate_v5_5e_sync_20260506T134612Z
+source_run_id = m12_r3_5e_sync_export_20260506T134612Z
+records_level = active_manifest
+records_fetched = True
+input_rejudged_status = divergent_candidate
+input_rejudged_confidence = medium
+candidate_causes = ['probe-bj_probe-sg_manifest_uri_sets_almost_identical', 'probe-bj_vs_probe-sg:manifest_presence_diff', 'probe-bj_vs_probe-sg:same_uri_manifest_hash_diff', 'probe-cd_probe-bj_manifest_uri_sets_almost_identical', 'probe-cd_probe-sg_manifest_uri_sets_almost_identical', 'probe-cd_vs_probe-bj:manifest_presence_diff', 'probe-cd_vs_probe-bj:same_uri_manifest_hash_diff', 'probe-cd_vs_probe-sg:manifest_presence_diff', 'probe-cd_vs_probe-sg:same_uri_manifest_hash_diff', 'three_probe_active_manifest_counts_close']
+warnings = ['probe-bj:manifest_parse_failure_observed', 'probe-cd:manifest_parse_failure_observed', 'probe-sg:expired_manifest_count_above_strict_threshold', 'probe-sg:manifest_parse_failure_observed']
+blockers = []
+not_e4_reason = This is active manifest/object-layer evidence only. Validated output-layer VRP digest/root comparison is not included.
+
+probe_manifest_counts:
+  probe-cd = 51685
+  probe-bj = 51686
+  probe-sg = 51675
+
+presence_classes:
+  probe-cd,probe-bj,probe-sg = 51675
+  probe-cd,probe-bj = 10
+  probe-bj = 1
+
+pairwise:
+  probe-cd_vs_probe-bj:
+    left_count = 51685
+    right_count = 51686
+    common_count = 51685
+    only_left_count = 0
+    only_right_count = 1
+    same_uri_different_manifest_hash_count = 69
+    same_uri_metadata_diff_count = 69
+    small_manifest_number_skew_sample_count = 68
+    jaccard_similarity = 0.9999806524010371
+  probe-cd_vs_probe-sg:
+    left_count = 51685
+    right_count = 51675
+    common_count = 51675
+    only_left_count = 10
+    only_right_count = 0
+    same_uri_different_manifest_hash_count = 58
+    same_uri_metadata_diff_count = 58
+    small_manifest_number_skew_sample_count = 57
+    jaccard_similarity = 0.999806520267002
+  probe-bj_vs_probe-sg:
+    left_count = 51686
+    right_count = 51675
+    common_count = 51675
+    only_left_count = 11
+    only_right_count = 0
+    same_uri_different_manifest_hash_count = 12
+    same_uri_metadata_diff_count = 12
+    small_manifest_number_skew_sample_count = 12
+    jaccard_similarity = 0.9997871764114074
+
+interpretation:
+ - Field-compatible rejudgement confirmed this is not a false blocker case.
+ - Three probes have close active manifest counts, but effective_object_root_v5 still differs.
+ - Manifest-level records have been fetched and compared.
+ - If same_uri_different_manifest_hash_count is non-zero, divergence is likely due to different active manifest versions or repository synchronization skew.
+ - This remains object-layer evidence, not E4 validated-output evidence.

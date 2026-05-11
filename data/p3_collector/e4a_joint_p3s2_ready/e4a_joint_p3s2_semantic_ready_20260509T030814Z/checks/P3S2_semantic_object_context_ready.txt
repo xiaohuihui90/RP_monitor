@@ -1,0 +1,37 @@
+P3S2_SEMANTIC_OBJECT_CONTEXT_READY=DONE
+
+scope = m14_e4a_cross_region_same_validator
+
+semantic_object_snapshot_status:
+  probe-cd = True
+  probe-bj = True
+  probe-sg = True
+
+object_source_mode:
+  probe-cd = cache_file_inventory
+  probe-bj = cache_file_inventory
+  probe-sg = cache_file_inventory
+
+known_limitations:
+  current snapshots are not yet strict same-window with fresh VRP export
+  vrp_object_time_skew may still be weak_or_unknown
+  cache_file_inventory is lightweight object context, not full validator active-object decision
+
+reserved_interfaces:
+  e4b_cross_validator = reserved_only
+  control_plane_impact = reserved_only
+
+runtime_service_changed = False
+collector_restarted = False
+probe_restarted = False
+new_validator_installed = False
+bgp_data_loaded = False
+object_upload_executed = False
+
+decision:
+  P4_object_upload_sidecar_can_start = True
+
+P3S2_acceptance = True
+
+next_batch:
+  P4 Collector object upload sidecar on 28115

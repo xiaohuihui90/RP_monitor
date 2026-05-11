@@ -1,0 +1,42 @@
+S3_SERVICE_STATUS_SNAPSHOT
+created_at_utc = 2026-05-11T09:30:24Z
+
+[CD2 local health]
+
+========== collector 28081 ==========
+{"status":"ok","service":"collector"}
+========== probe 28089 ==========
+{"status":"ok","probe_id":"probe-cd"}
+========== vrp sidecar 28114 ==========
+{
+  "status": "ok",
+  "service": "m14_p4_upload_sidecar_v2_group_auto",
+  "root": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_snapshots",
+  "time": "2026-05-11T09:30:24.518473+00:00"
+}
+========== object sidecar 28115 ==========
+{
+  "status": "ok",
+  "service": "e4a_object_upload_sidecar",
+  "port": 28115,
+  "root": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_snapshots",
+  "time": "2026-05-11T09:30:24.531175+00:00"
+}
+========== process ==========
+systemd+    1479    1335  0  2024 ?        00:06:56 /usr/local/atlas/bb-13.3/usr/sbin/telnetd -b 127.0.0.1 -p 2023 -P /var/atlas-probe/run/telnetd-port2023-pid.vol
+systemd+    1491    1335  0  2024 ?        00:23:55 /usr/local/atlas/bb-13.3/bin/perd -c /var/atlas-probe/crons/main -A 9801 -P /var/atlas-probe/run/perd-main.pid.vol
+systemd+    1498    1494  0  2024 ?        00:55:00 /usr/local/atlas/bb-13.3/bin/eooqd /var/atlas-probe/crons/oneoff -A 9809 -P /var/atlas-probe/run/eooqd.pid.vol -i 9
+systemd+  906578    1335  0  2025 ?        01:50:43 /usr/local/atlas/bb-13.3/bin/eperd -c /var/atlas-probe/crons/7 -A 9807 -P /var/atlas-probe/run/perd-7.pid.vol -O /home/atlas/data/new/7 -i 7
+zhangxi+ 2227106       1  0 May02 ?        00:00:00 bash scripts/run_collector.sh
+zhangxi+ 2227108 2227106  3 May02 ?        06:50:32 /home/zhangxiaohui/installers/ENTER/envs/s3-radar/bin/python3.11 /home/zhangxiaohui/installers/ENTER/envs/s3-radar/bin/uvicorn collector.app:app --host 0.0.0.0 --port 28081
+zhangxi+ 2246822       1  6 May03 ?        13:01:20 /home/zhangxiaohui/.cargo/bin/routinator server --http 127.0.0.1:8323 --rtr 127.0.0.1:3323
+zhangxi+ 2308544       1  0 May05 ?        00:21:37 /home/zhangxiaohui/installers/ENTER/envs/s3-radar/bin/python -m uvicorn probe.app:app --host 0.0.0.0 --port 28089
+systemd+ 2445501    1335  0 May08 ?        00:00:10 /usr/bin/ssh -i /var/atlas-probe/etc/probe_key -o ServerAliveInterval 60 -o StrictHostKeyChecking yes -o UserKnownHostsFile /var/atlas-probe/.ssh/known_hosts -R 2023:127.0.0.1:2023 -L 8080:127.0.0.1:8080 -p 443 atlas@ctr-dub-sw01.atlas.prod.ripe.net KEEP
+zhangxi+ 2463707       1  0 May09 ?        00:01:23 python scripts/p3/run_e4a_object_upload_sidecar.py --host 0.0.0.0 --port 28115 --root /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_snapshots
+zhangxi+ 2468549       1  0 May09 ?        00:00:19 python scripts/p3/run_m14_p4_upload_sidecar_v2_group_auto.py --host 127.0.0.1 --port 28116 --root /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_snapshots_v2_test
+zhangxi+ 2468594       1  0 May09 ?        00:00:26 python scripts/p3/run_m14_p4_upload_sidecar_v2_group_auto.py --host 0.0.0.0 --port 28114 --root /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_snapshots
+zhangxi+ 3207174       1  0 Mar20 ?        00:00:04 bash -c while true; do bash ~/s3_radar/scripts/snapshot_collector.sh; sleep 600; done
+
+========== crontab ==========
+*/10 * * * * source ~/.bashrc && conda activate s3-radar && cd ~/s3_stage1_v4_code && python scripts/run_time_window_mapping_once.py >> ~/s3_runtime/time_window_mapper.log 2>&1
+*/30 * * * * /bin/bash /home/zhangxiaohui/s3_stage2_dev_code/scripts/prune_object_shadow_index_cron.sh

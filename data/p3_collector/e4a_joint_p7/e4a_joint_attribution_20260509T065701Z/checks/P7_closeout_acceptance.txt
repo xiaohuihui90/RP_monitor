@@ -1,0 +1,33 @@
+P7_E4A_JOINT_ATTRIBUTION_CLOSEOUT=DONE
+
+snapshot_group_id = group_auto_20260509T063000Z
+source = periodic_direct_probe_to_collector_28115
+
+final_status = not_e4_object_layer_divergence
+e4_status = blocked
+confirmed_allowed = False
+blocking_layer = object_layer
+confidence = high
+
+object_group_complete = True
+vrp_group_complete = False
+joint_group_complete = False
+
+window_mapping_level = strong
+generated_time_skew_seconds = 268
+
+key_finding:
+  probe-cd_vs_probe-bj object layer aligned.
+  probe-cd_vs_probe-sg object layer diverged.
+  probe-bj_vs_probe-sg object layer diverged.
+
+decision:
+  do_not_confirm_e4a = True
+  reason = object layer divergence observed under strong window.
+
+next_required:
+  join same-group VRP layer into group_auto collection
+  rerun final E4-A gate after same-group VRP layer is available
+  investigate probe-sg object cache divergence
+
+P7_closeout_acceptance = True

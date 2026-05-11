@@ -1,0 +1,43 @@
+gate_id = m12_r3_object_gate_v5_5e_sync_20260506T134612Z
+expected_source_run_id = m12_r3_5e_sync_export_20260506T134612Z
+expected_policy_fingerprint = sha256:3a400a525459e130867f9b7181772b574ac6368d24eab727dcb5d839475b556e
+
+=== probe-cd ===
+start_request.source_run_id = m12_r3_5e_sync_export_20260506T134612Z
+start_request.policy_fingerprint = sha256:3a400a525459e130867f9b7181772b574ac6368d24eab727dcb5d839475b556e
+final_status.source_run_id = m12_r3_5e_sync_export_20260506T134612Z
+final_status.policy_fingerprint = sha256:3a400a525459e130867f9b7181772b574ac6368d24eab727dcb5d839475b556e
+compact.source_run_id = None
+compact.policy_fingerprint = None
+compact.effective_policy_fingerprint = sha256:3a400a525459e130867f9b7181772b574ac6368d24eab727dcb5d839475b556e
+compact.source_method = stored_wrapper_manifest_only_v1
+compact.method = None
+compact.root = sha256:61001921ea1a62e3bc06c3cd19bf5acb03b228085252715580a3b1b96a85b677
+compact.counts = {'active_manifest_count': 51685, 'expired_manifest_count': 5, 'active_object_record_count': 472596}
+
+=== probe-bj ===
+start_request.source_run_id = m12_r3_5e_sync_export_20260506T134612Z
+start_request.policy_fingerprint = sha256:3a400a525459e130867f9b7181772b574ac6368d24eab727dcb5d839475b556e
+final_status.source_run_id = m12_r3_5e_sync_export_20260506T134612Z
+final_status.policy_fingerprint = sha256:3a400a525459e130867f9b7181772b574ac6368d24eab727dcb5d839475b556e
+compact.source_run_id = None
+compact.policy_fingerprint = None
+compact.effective_policy_fingerprint = sha256:3a400a525459e130867f9b7181772b574ac6368d24eab727dcb5d839475b556e
+compact.source_method = stored_wrapper_manifest_only_v1
+compact.method = None
+compact.root = sha256:c1f079c25b30467080b59aa64dbdbc7b0c50308089fe2ad2e777acb000f68ea3
+compact.counts = {'active_manifest_count': 51686, 'expired_manifest_count': 1, 'active_object_record_count': 472582}
+
+=== probe-sg ===
+start_request.source_run_id = m12_r3_5e_sync_export_20260506T134612Z
+start_request.policy_fingerprint = sha256:3a400a525459e130867f9b7181772b574ac6368d24eab727dcb5d839475b556e
+final_status.source_run_id = m12_r3_5e_sync_export_20260506T134612Z
+final_status.policy_fingerprint = sha256:3a400a525459e130867f9b7181772b574ac6368d24eab727dcb5d839475b556e
+compact.source_run_id = None
+compact.policy_fingerprint = None
+compact.effective_policy_fingerprint = sha256:3a400a525459e130867f9b7181772b574ac6368d24eab727dcb5d839475b556e
+compact.source_method = stored_wrapper_manifest_only_v1
+compact.method = None
+compact.root = sha256:ad7d7fa009b5e67987481f809fd3233c079ce4778b4a3580ef4b5d19c7587da0
+compact.counts = {'active_manifest_count': 51675, 'expired_manifest_count': 527, 'active_object_record_count': 472553}
+

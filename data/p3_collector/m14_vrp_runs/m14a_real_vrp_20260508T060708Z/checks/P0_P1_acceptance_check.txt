@@ -1,0 +1,23 @@
+P0_P1_M14_REAL_ARCHIVE_AND_PRELIMINARY_VERDICT=DONE
+
+run_id = m14a_real_vrp_20260508T060708Z
+run_dir = /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_real_vrp_20260508T060708Z
+
+P0_archive:
+  archive_manifest = /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_real_archive/m14a_real_vrp_20260508T060708Z_archive_manifest.json
+  archive_tar_gz = /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_real_archive/m14a_real_vrp_20260508T060708Z_m14a_real_vrp_archive.tar.gz
+  archive_sha256 = /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_real_archive/m14a_real_vrp_20260508T060708Z_m14a_real_vrp_archive.tar.gz.sha256
+
+P1_preliminary_verdict:
+  preliminary_verdict_txt = /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_real_vrp_20260508T060708Z/checks/M14A_real_preliminary_verdict.txt
+  preliminary_verdict_json = /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_real_vrp_20260508T060708Z/checks/M14A_real_preliminary_verdict.json
+
+status = real_vrp_output_diff_observed
+e4_status = not_yet_e4
+confirmed_allowed = False
+
+key_metrics:
+  all_pairwise_entry_level_diff_count = 202
+  min_pairwise_jaccard_similarity = 0.9998939236926678
+
+P0_P1_acceptance = True

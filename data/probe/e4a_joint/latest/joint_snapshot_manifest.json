@@ -1,0 +1,65 @@
+{
+  "schema": "s3.stage3.joint_snapshot_manifest.v1",
+  "created_at_utc": "2026-05-10T16:55:59.411217+00:00",
+  "snapshot_group_id": "group_m15_20260510T165500Z",
+  "joint_snapshot_id": "probe-cd_20260510T165517Z",
+  "probe_id": "probe-cd",
+  "location": "chengdu",
+  "export_id": "20260510T165517Z",
+  "generated_time": "2026-05-10T16:55:17.578083+00:00",
+  "vrp_snapshot": {
+    "available": true,
+    "validator": "routinator",
+    "validator_version": "Routinator 0.15.1",
+    "generatedTime": "2026-05-08T06:48:58Z",
+    "export_started_at": "2026-05-08T06:48:58.142386+00:00",
+    "export_finished_at": "2026-05-08T06:50:14.809020+00:00",
+    "vrp_count": 857819,
+    "unique_vrp_count": 857819,
+    "vrp_root_v1": null,
+    "vrp_digest": null,
+    "raw_json_size_bytes": 74390167,
+    "gzip_size_bytes": 4343054,
+    "vrp_gzip_path": "data/probe/m14_vrp_export/latest/probe-cd_vrps.raw.json.gz",
+    "sha256_gzip": "1b722106cb8cc2cea65e5666a961d79b495cbed34e479f7c4542018c64b9fb64"
+  },
+  "object_snapshot": {
+    "available": true,
+    "object_set_root": "sha256:b374992b0ef6fff1d1f82ee2fac7b21e4b7769e48d16a8e019ce40b205f1f029",
+    "effective_object_root": "sha256:e67f89eaa0b785df07be803e0ab56ca9a201b332a8fc61fa6f7de9351068eabf",
+    "object_inventory_count": 104062,
+    "active_manifest_count": 103838,
+    "active_manifest_records_path": "object/active_manifest_records.jsonl",
+    "object_inventory_path": "object/object_inventory.jsonl",
+    "object_snapshot_tar_gz": "object/object_snapshot.tar.gz",
+    "sha256_tar_gz": "82f8b85d716e94bce1ff86730a1fc0b6121c18b68445f84524c99a526b06e797",
+    "object_export_started_at": "2026-05-10T16:55:17.578083+00:00",
+    "object_export_finished_at": "2026-05-10T16:55:45.495676+00:00",
+    "warnings": [],
+    "blockers": []
+  },
+  "joint_timing": {
+    "vrp_generatedTime": "2026-05-08T06:48:58Z",
+    "object_export_started_at": "2026-05-10T16:55:17.578083+00:00",
+    "object_export_finished_at": "2026-05-10T16:55:45.495676+00:00",
+    "vrp_object_time_skew_seconds": 209179,
+    "mapping_level": "weak_or_unknown"
+  },
+  "validator_context": {
+    "validator_name": "routinator",
+    "validator_version": "Routinator 0.15.1",
+    "fingerprint_level": "partial",
+    "config_hash": null,
+    "tal_set_hash": null,
+    "runtime_process_fingerprint": null
+  },
+  "reserved_interfaces": {
+    "e4b_cross_validator": "reserved_only",
+    "control_plane_impact": "reserved_only"
+  },
+  "warnings": [
+    "vrp_object_time_skew_above_600_seconds"
+  ],
+  "blockers": [],
+  "upload_ready": true
+}

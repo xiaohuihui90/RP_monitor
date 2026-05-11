@@ -1,0 +1,33 @@
+P0_E4_V2_SCOPE_REVISED=DONE
+
+created_at_utc = 2026-05-09T01:42:54.608352+00:00
+
+active_scope = m14_e4a_cross_region_same_validator
+e4b_cross_validator = reserved_only
+control_plane_impact = reserved_only
+
+doc_dir = /home/zhangxiaohui/s3_stage3_v3_code/docs/stage3/e4_v2
+baseline_dir = /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4_v2_baseline/e4_v2_scope_revised_20260509T014139Z
+
+outputs:
+  /home/zhangxiaohui/s3_stage3_v3_code/docs/stage3/e4_v2/E4_v2_scope_revised.md
+  /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4_v2_baseline/e4_v2_scope_revised_20260509T014139Z/configs/e4_v2_scope.yaml
+  /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4_v2_baseline/e4_v2_scope_revised_20260509T014139Z/current_state/current_scope_state.json
+
+required_files_ok = True
+required_files_missing = []
+
+scope:
+  runtime_service_changed = False
+  collector_restarted = False
+  probe_restarted = False
+  new_validator_installed = False
+  bgp_data_loaded = False
+  documentation_landed = True
+  e4b_interface_reserved = True
+  impact_interface_reserved = True
+
+next_batch:
+  P1 M14 parameter enhancement for E4-A baseline
+
+P0_acceptance = True

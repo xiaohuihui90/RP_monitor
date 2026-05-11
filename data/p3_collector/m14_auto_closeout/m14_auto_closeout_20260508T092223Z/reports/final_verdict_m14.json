@@ -1,0 +1,115 @@
+{
+  "schema": "s3.stage3.m14.final_verdict.v1",
+  "run_id": "m14a_auto_group_20260508T064858Z",
+  "snapshot_group_id": "group_20260508T064858Z",
+  "created_at_utc": "2026-05-08T09:15:45.503084+00:00",
+  "final_status": "blocked_object_layer_unverified",
+  "e4_status": "blocked",
+  "confirmed_allowed": false,
+  "blockers": [
+    "same_window_object_layer_context_missing"
+  ],
+  "warnings": [
+    "vrp_output_diff_observed_but_same_window_object_context_missing"
+  ],
+  "vrp_output": {
+    "all_vrp_roots_aligned": false,
+    "all_pairwise_entry_level_diff_count": 440,
+    "min_pairwise_jaccard_similarity": 0.999749378692293
+  },
+  "contexts": {
+    "object_layer": {
+      "schema": "s3.stage3.m14.object_layer_context.v1",
+      "available": false,
+      "source": null,
+      "mapping_level": "missing",
+      "object_roots_aligned": null,
+      "object_layer_temporal_version_divergence": null,
+      "final_attribution": null,
+      "confidence": null,
+      "hard_blockers": [
+        "same_window_object_layer_context_missing"
+      ],
+      "interpretation": "No same-window object-layer verdict is available for this uploaded VRP snapshot group."
+    },
+    "validator_config": {
+      "schema": "s3.stage3.m14.validator_config_context.v1",
+      "available": true,
+      "source": "snapshot_group_manifest",
+      "validator_type_aligned": true,
+      "validator_version_aligned": true,
+      "validator_versions": {
+        "probe-cd": "Routinator 0.15.1",
+        "probe-bj": "Routinator 0.15.1",
+        "probe-sg": "Routinator 0.15.1"
+      },
+      "config_fingerprint_aligned": null,
+      "stable_config_fingerprint_aligned": null,
+      "runtime_process_fingerprint_aligned": null,
+      "tal_set_aligned": null,
+      "fallback_policy_aligned": null,
+      "local_filter_policy_aligned": null,
+      "refresh_interval_aligned": null,
+      "validator_environment_aligned_for_confirmed": false,
+      "hard_blockers": [],
+      "unknown_fields": [
+        "config_fingerprint_aligned",
+        "stable_config_fingerprint_aligned",
+        "runtime_process_fingerprint_aligned",
+        "tal_set_aligned",
+        "fallback_policy_aligned",
+        "local_filter_policy_aligned",
+        "refresh_interval_aligned"
+      ],
+      "interpretation": "Validator version is checked from uploaded manifests; full config/TAL/policy fingerprints are not yet verified."
+    },
+    "window_mapping": {
+      "schema": "s3.stage3.m14.window_mapping_context.v1",
+      "available": true,
+      "source": "snapshot_group_manifest",
+      "mapping_level": "acceptable_but_not_strong",
+      "strong_mapping": false,
+      "acceptable_mapping": true,
+      "generated_time_min": "2026-05-08T06:48:58+00:00",
+      "generated_time_max": "2026-05-08T06:56:20+00:00",
+      "generated_time_skew_seconds": 442,
+      "group_window_seconds": 300,
+      "max_generated_time_skew_seconds": 600,
+      "interpretation": "GeneratedTime skew is acceptable for grouping but not strong because it exceeds the 300-second group window."
+    },
+    "fetch_completeness": {
+      "schema": "s3.stage3.m14.fetch_completeness_context.v1",
+      "available": true,
+      "source": "snapshot_group_upload_records",
+      "uploaded_snapshot_integrity_verified": true,
+      "rp_fetch_completeness_verified": false,
+      "repository_status_complete": null,
+      "all_target_pp_success": null,
+      "hard_blockers": [
+        "rp_fetch_completeness_unverified"
+      ],
+      "interpretation": "Collector verified uploaded gzip and sha256, but RP repository fetch completeness is not yet joined."
+    },
+    "infrastructure": {
+      "schema": "s3.stage3.m14.infrastructure_context.v1",
+      "available": false,
+      "risk_absent": null,
+      "dns_risk_absent": null,
+      "tls_risk_absent": null,
+      "http_risk_absent": null,
+      "cdn_geo_risk_absent": null,
+      "hard_blockers": [
+        "infrastructure_context_missing"
+      ],
+      "interpretation": "Infrastructure context is not yet collected for this snapshot group."
+    }
+  },
+  "interpretation": "VRP output differences are observed, but this run cannot be promoted to E4 because same-window object-layer context is missing. Additional validator/fetch/infra context also remains incomplete for E4 confirmed.",
+  "next_steps": [
+    "Collect same-window object-layer context for this snapshot group.",
+    "Collect full validator config/TAL/policy fingerprints.",
+    "Join RP repository fetch completeness context.",
+    "Join DNS/TLS/HTTP infrastructure context.",
+    "Re-run final verdict after contexts are available."
+  ]
+}

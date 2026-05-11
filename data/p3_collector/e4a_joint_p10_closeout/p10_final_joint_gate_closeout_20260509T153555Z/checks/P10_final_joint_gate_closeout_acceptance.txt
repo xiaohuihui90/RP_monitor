@@ -1,0 +1,38 @@
+P10_FINAL_JOINT_GATE_CLOSEOUT=DONE
+
+snapshot_group_id = group_joint_20260509T094400Z
+
+final_status = not_e4_object_layer_divergence
+e4_status = blocked
+confirmed_allowed = False
+blocking_layer = object_layer
+confidence = high
+
+key_findings:
+  1. Strong-window same-group joint collection was successful.
+  2. Object layer diverged under strong collection window.
+  3. VRP output layer also diverged, with 9722 pairwise entry-level differences.
+  4. Because object layer is already divergent, VRP differences must not be attributed to validator output-layer E4-A.
+
+object_layer:
+  object_roots_aligned = False
+  effective_object_roots_aligned = False
+  all_pairwise_inventory_diff_count = 625544
+  all_pairwise_active_manifest_diff_count = 624856
+  min_inventory_jaccard_similarity = 0.00044535563182910627
+  min_active_manifest_jaccard_similarity = 3.07675740537048e-05
+
+vrp_layer:
+  all_vrp_roots_aligned = False
+  all_pairwise_entry_level_diff_count = 9722
+  min_pairwise_jaccard_similarity = 0.9943412194608036
+
+decision:
+  do_not_confirm_e4a = True
+  reason = object layer divergence observed under strong same-group window.
+
+reserved_interfaces:
+  e4b_cross_validator = reserved_only
+  control_plane_impact = reserved_only
+
+P10_closeout_acceptance = True

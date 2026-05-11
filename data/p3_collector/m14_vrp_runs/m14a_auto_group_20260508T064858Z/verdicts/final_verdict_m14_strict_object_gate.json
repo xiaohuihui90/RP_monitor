@@ -1,0 +1,48 @@
+{
+  "schema": "s3.stage3.e4a.strict_object_gate_final.v1",
+  "created_at_utc": "2026-05-09T02:01:09.363647+00:00",
+  "run_id": "m14a_auto_group_20260508T064858Z",
+  "snapshot_group_id": "group_20260508T064858Z",
+  "scope": "m14_e4a_cross_region_same_validator",
+  "comparison_type": "cross_region_same_validator",
+  "validator": "routinator",
+  "strict_review": {
+    "original_same_window_candidate_count": 4,
+    "strict_same_window_object_context_count": 0,
+    "strict_object_context_available": false,
+    "interpretation": "Original discovery candidates are not sufficient as strict object-layer evidence.",
+    "rejected_candidate_paths": [
+      "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_auto_group_20260508T064858Z/evidence/e4a_evidence_index_v2.json",
+      "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_auto_group_20260508T064858Z/evidence/m14_p6_evidence_index.json",
+      "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_auto_group_20260508T064858Z/verdicts/final_verdict_m14.json",
+      "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_auto_group_20260508T064858Z/verdicts/preliminary_verdict.json"
+    ]
+  },
+  "vrp_metrics": {
+    "all_vrp_roots_aligned": false,
+    "all_pairwise_entry_level_diff_count": 440,
+    "min_pairwise_jaccard_similarity": 0.999749378692293
+  },
+  "final_status": "blocked_object_layer_unverified",
+  "e4_status": "blocked",
+  "confirmed_allowed": false,
+  "blockers": [
+    "same_window_object_layer_context_missing"
+  ],
+  "warnings": [
+    "original_object_context_discovery_candidates_rejected_by_strict_review",
+    "vrp_output_diff_observed_but_strict_same_window_object_context_missing"
+  ],
+  "reserved_interfaces": {
+    "e4b_cross_validator": "reserved_only",
+    "control_plane_impact": "reserved_only"
+  },
+  "runtime_safety": {
+    "runtime_service_changed": false,
+    "collector_restarted": false,
+    "probe_restarted": false,
+    "new_validator_installed": false,
+    "bgp_data_loaded": false
+  },
+  "interpretation": "The non-strict discovery found candidates under the same M14 snapshot group, but strict review shows they are M14 verdict/evidence files rather than real object-layer observations. Therefore the E4-A VRP divergence must remain blocked by missing same-window object context."
+}

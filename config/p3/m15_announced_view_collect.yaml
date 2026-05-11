@@ -1,0 +1,33 @@
+schema: s3.stage3.m15.announced_view_collect_config.v1
+
+snapshot_group_id: group_joint_20260509T094400Z
+collection_mode: retrofit_or_diagnostic
+
+http:
+  timeout_seconds: 20
+  user_agent: "s3-radar-m15-announced-view/1.0"
+
+pp_scope:
+  - pp_id: arin
+    rir: arin
+    notification_uri: https://rrdp-rps.arin.net/notification.xml
+    enabled: true
+
+  - pp_id: ripe
+    rir: ripe
+    notification_uri: https://rrdp.ripe.net/notification.xml
+    enabled: true
+
+  - pp_id: apnic
+    rir: apnic
+    notification_uri: https://rrdp.apnic.net/notification.xml
+    enabled: true
+
+digest_policy:
+  notification_digest_mode: raw_bytes_sha256
+  delta_hash_chain_root_mode: canonical_serial_uri_hash_v1
+  announced_view_root_mode: canonical_pp_record_v1
+
+output:
+  out_root: data/probe/e4a_announced_view
+  store_raw_notification: true

@@ -1,0 +1,64 @@
+{
+  "schema": "s3.stage3.e4a_joint.p2_joint_manifest_manifest.v1",
+  "created_at_utc": "2026-05-09T02:25:40.865617+00:00",
+  "probe_id": "probe-cd",
+  "location": "chengdu",
+  "snapshot_group_id": "group_20260509T022100Z",
+  "export_id": "20260509T022140Z",
+  "joint_snapshot_id": "probe-cd_20260509T022140Z",
+  "vrp_snapshot_available": true,
+  "object_snapshot_available": true,
+  "joint_snapshot_upload_ready": true,
+  "window_mapping_level": "weak_or_unknown",
+  "vrp_object_time_skew_seconds": 70438,
+  "required_files_ok": true,
+  "files": [
+    {
+      "path": "data/probe/e4a_joint/latest/joint_snapshot_manifest.json",
+      "exists": true,
+      "size_bytes": 2622,
+      "sha256": "ed6afb48d148d132b8c59efc7e1ca20729f8736f3352a163b89848adb09a9bc2"
+    },
+    {
+      "path": "data/probe/e4a_joint/latest/sha256.txt",
+      "exists": true,
+      "size_bytes": 656,
+      "sha256": "fb720fb934b61f6570d66b6fd1ad80650d431ba8143382170ccf26d9c33fee9a"
+    },
+    {
+      "path": "data/probe/e4a_joint/latest/P2_joint_manifest_acceptance_check.txt",
+      "exists": true,
+      "size_bytes": 1110,
+      "sha256": "1a615b28038805bb1ac676c7136fcbb215dde8e4bacd5cc4d9e8dee21f799a68"
+    },
+    {
+      "path": "data/probe/e4a_joint/latest/object/object_snapshot_record.json",
+      "exists": true,
+      "size_bytes": 1315,
+      "sha256": "c7ee6d7700da30b9bef1543c3d681fc7d7f6a4d62a156f0373caeff2a6a85baa"
+    },
+    {
+      "path": "data/probe/e4a_joint/latest/object/object_snapshot.tar.gz",
+      "exists": true,
+      "size_bytes": 5362,
+      "sha256": "885bf31f52f63c6e59409b2ff04ee30d2b6b0c34899195724ddd282456de76ed"
+    },
+    {
+      "path": "data/probe/e4a_joint/latest/vrp/manifest.json",
+      "exists": true,
+      "size_bytes": 1868,
+      "sha256": "a743f3f1551c9143ad4bc8b10ef93e78f241e5ed2ad9f9dcb43742c338a808d3"
+    },
+    {
+      "path": "data/probe/e4a_joint/latest/vrp/sha256.txt",
+      "exists": true,
+      "size_bytes": 181,
+      "sha256": "9ed77e34e57d3d9a4aa6f2db75085f840873a6291279a46e243f4ef50acd169e"
+    }
+  ],
+  "runtime_service_changed": false,
+  "collector_restarted": false,
+  "probe_restarted": false,
+  "new_validator_installed": false,
+  "bgp_data_loaded": false
+}

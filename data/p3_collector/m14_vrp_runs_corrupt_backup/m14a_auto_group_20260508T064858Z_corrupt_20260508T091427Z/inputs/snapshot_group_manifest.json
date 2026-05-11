@@ -1,0 +1,83 @@
+{
+  "schema": "s3.stage3.m14.snapshot_group.v1",
+  "snapshot_group_id": "group_20260508T064858Z",
+  "validator": "routinator",
+  "group_window_seconds": 300,
+  "max_generated_time_skew_seconds": 600,
+  "required_probes": [
+    "probe-cd",
+    "probe-bj",
+    "probe-sg"
+  ],
+  "received_probes": [
+    "probe-bj",
+    "probe-cd",
+    "probe-sg"
+  ],
+  "complete": true,
+  "generated_time_min": "2026-05-08T06:48:58+00:00",
+  "generated_time_max": "2026-05-08T06:56:20+00:00",
+  "generated_time_skew_seconds": 442,
+  "m14_run_id": null,
+  "created_at_utc": "2026-05-08T07:07:17.435678+00:00",
+  "updated_at_utc": "2026-05-08T08:39:13.699207+00:00",
+  "snapshots": {
+    "probe-cd": {
+      "snapshot_id": "probe-cd_20260508T064858Z",
+      "snapshot_group_id": "group_20260508T064858Z",
+      "probe_id": "probe-cd",
+      "validator": "routinator",
+      "validator_version": "Routinator 0.15.1",
+      "generatedTime": "2026-05-08T06:48:58Z",
+      "export_started_at": "2026-05-08T06:48:58.142386+00:00",
+      "export_finished_at": "2026-05-08T06:50:14.809020+00:00",
+      "roa_count": 857819,
+      "raw_json_size_bytes": 74390167,
+      "gzip_size_bytes": 4343054,
+      "sha256_gzip_expected": "1b722106cb8cc2cea65e5666a961d79b495cbed34e479f7c4542018c64b9fb64",
+      "sha256_gzip_actual": "1b722106cb8cc2cea65e5666a961d79b495cbed34e479f7c4542018c64b9fb64",
+      "sha256_gzip_ok": true,
+      "gzip_valid": true,
+      "local_path": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_snapshots/groups/group_20260508T064858Z/probe-cd/probe-cd_vrps.raw.json.gz",
+      "received_at_utc": "2026-05-08T07:07:40.895095+00:00"
+    },
+    "probe-bj": {
+      "snapshot_id": "probe-bj_20260508T065410Z",
+      "snapshot_group_id": "group_20260508T064858Z",
+      "probe_id": "probe-bj",
+      "validator": "routinator",
+      "validator_version": "Routinator 0.15.1",
+      "generatedTime": "2026-05-08T06:54:10Z",
+      "export_started_at": "2026-05-08T06:54:10.544296+00:00",
+      "export_finished_at": "2026-05-08T06:54:56.768048+00:00",
+      "roa_count": 857716,
+      "raw_json_size_bytes": 74381178,
+      "gzip_size_bytes": 4342089,
+      "sha256_gzip_expected": "53804523140da8755c8187651523d5f32c4102d9e5f0d2349203c4ad57496e95",
+      "sha256_gzip_actual": "53804523140da8755c8187651523d5f32c4102d9e5f0d2349203c4ad57496e95",
+      "sha256_gzip_ok": true,
+      "gzip_valid": true,
+      "local_path": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_snapshots/groups/group_20260508T064858Z/probe-bj/probe-bj_vrps.raw.json.gz",
+      "received_at_utc": "2026-05-08T08:38:57.017817+00:00"
+    },
+    "probe-sg": {
+      "snapshot_id": "probe-sg_20260508T065620Z",
+      "snapshot_group_id": "group_20260508T064858Z",
+      "probe_id": "probe-sg",
+      "validator": "routinator",
+      "validator_version": "Routinator 0.15.1",
+      "generatedTime": "2026-05-08T06:56:20Z",
+      "export_started_at": "2026-05-08T06:56:20.131636+00:00",
+      "export_finished_at": "2026-05-08T06:58:04.161073+00:00",
+      "roa_count": 857805,
+      "raw_json_size_bytes": 74388968,
+      "gzip_size_bytes": 4342899,
+      "sha256_gzip_expected": "6f1d036c857f30e2a10e74f718aacb9a1b1f2ceb3672241521d255ecd4567739",
+      "sha256_gzip_actual": "6f1d036c857f30e2a10e74f718aacb9a1b1f2ceb3672241521d255ecd4567739",
+      "sha256_gzip_ok": true,
+      "gzip_valid": true,
+      "local_path": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_snapshots/groups/group_20260508T064858Z/probe-sg/probe-sg_vrps.raw.json.gz",
+      "received_at_utc": "2026-05-08T08:39:13.698864+00:00"
+    }
+  }
+}

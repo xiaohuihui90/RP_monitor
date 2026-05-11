@@ -1,0 +1,24 @@
+M14DE_CONTEXTS_AND_EVIDENCE_PACK=DONE
+
+run_id = m14a_fixture_20260507T080612Z
+final_status = not_e4_object_layer_version_skew
+e4_status = not_e4
+confirmed_allowed = False
+
+window_context_used = True
+fetch_context_used = True
+infrastructure_context_used = True
+
+window_context_available = False
+fetch_context_available = False
+infrastructure_context_available = False
+
+object_skew_priority_preserved = True
+m14de_acceptance = True
+
+outputs:
+  /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_fixture_20260507T080612Z/verdicts/final_verdict_m14.json
+  /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_fixture_20260507T080612Z/verdicts/99_m14_contexts_verdict.txt
+  /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_fixture_20260507T080612Z/inputs/window_mapping_context_ref.json
+  /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_fixture_20260507T080612Z/inputs/fetch_completeness_context_ref.json
+  /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_fixture_20260507T080612Z/inputs/infrastructure_context_ref.json

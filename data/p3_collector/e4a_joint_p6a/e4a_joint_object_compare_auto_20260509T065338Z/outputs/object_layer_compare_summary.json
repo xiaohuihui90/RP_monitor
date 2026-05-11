@@ -1,0 +1,94 @@
+{
+  "schema": "s3.stage3.e4a.object_layer_compare_summary.v1",
+  "created_at_utc": "2026-05-09T06:54:15.918537+00:00",
+  "snapshot_group_id": "group_auto_20260509T063000Z",
+  "group_dir": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_snapshots/groups/group_auto_20260509T063000Z",
+  "required_probes": [
+    "probe-cd",
+    "probe-bj",
+    "probe-sg"
+  ],
+  "received_object_probes": [
+    "probe-bj",
+    "probe-cd",
+    "probe-sg"
+  ],
+  "object_group_complete": true,
+  "vrp_group_complete": false,
+  "joint_group_complete": false,
+  "generated_time_skew_seconds": 268,
+  "window_mapping_level": "strong",
+  "probe_summary": {
+    "probe-cd": {
+      "object_inventory_count_recorded": 52022,
+      "object_inventory_count_loaded": 52022,
+      "active_manifest_count_recorded": 51910,
+      "active_manifest_count_loaded": 51910,
+      "object_set_root": "sha256:c5b8f8cc7a3d48cae7df773f33776717871524f5de7206518f10de7f174f126e",
+      "effective_object_root": "sha256:da6ae83262973a51fa7b5fd7d06858e3a1add33ec0739848077ab840d4bc6f6d",
+      "object_source_mode": "cache_file_inventory",
+      "inventory_type_breakdown": {
+        "aspa": 3,
+        "crl": 12,
+        "mft": 51910,
+        "roa": 90,
+        "cer": 7
+      },
+      "active_type_breakdown": {
+        "mft": 51910
+      }
+    },
+    "probe-bj": {
+      "object_inventory_count_recorded": 52022,
+      "object_inventory_count_loaded": 52022,
+      "active_manifest_count_recorded": 51910,
+      "active_manifest_count_loaded": 51910,
+      "object_set_root": "sha256:c5b8f8cc7a3d48cae7df773f33776717871524f5de7206518f10de7f174f126e",
+      "effective_object_root": "sha256:da6ae83262973a51fa7b5fd7d06858e3a1add33ec0739848077ab840d4bc6f6d",
+      "object_source_mode": "cache_file_inventory",
+      "inventory_type_breakdown": {
+        "aspa": 3,
+        "crl": 12,
+        "mft": 51910,
+        "roa": 90,
+        "cer": 7
+      },
+      "active_type_breakdown": {
+        "mft": 51910
+      }
+    },
+    "probe-sg": {
+      "object_inventory_count_recorded": 52544,
+      "object_inventory_count_loaded": 52544,
+      "active_manifest_count_recorded": 52432,
+      "active_manifest_count_loaded": 52432,
+      "object_set_root": "sha256:d415423b8f82019f9f1d292c8a1f3d1d718f6f4e1b68c855c2129fc752fb3b30",
+      "effective_object_root": "sha256:8c3669badeaf38f2c3f762a9f7dcf3b267abbe76fd00bf57461f628365f1da20",
+      "object_source_mode": "cache_file_inventory",
+      "inventory_type_breakdown": {
+        "aspa": 3,
+        "crl": 12,
+        "mft": 52432,
+        "roa": 90,
+        "cer": 7
+      },
+      "active_type_breakdown": {
+        "mft": 52432
+      }
+    }
+  },
+  "object_roots_aligned": false,
+  "effective_object_roots_aligned": false,
+  "all_pairwise_inventory_diff_count": 208596,
+  "all_pairwise_active_manifest_diff_count": 208596,
+  "min_inventory_jaccard_similarity": 0.001283131607170216,
+  "min_active_manifest_jaccard_similarity": 0.00021088957055214724,
+  "final_status": "object_layer_divergence_observed",
+  "e4_gate_recommendation": "do_not_confirm_e4",
+  "warnings": [
+    "object_set_roots_not_aligned",
+    "effective_object_roots_not_aligned"
+  ],
+  "blockers": [],
+  "explanation": "Object-layer roots and inventories diverge across probes. Therefore current VRP output difference cannot be attributed to validator output logic alone."
+}

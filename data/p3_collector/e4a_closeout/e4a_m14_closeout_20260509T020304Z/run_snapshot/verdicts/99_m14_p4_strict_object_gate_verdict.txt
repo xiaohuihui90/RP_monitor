@@ -1,0 +1,36 @@
+P4_STRICT_OBJECT_CONTEXT_GATE_FINAL=DONE
+
+run_id = m14a_auto_group_20260508T064858Z
+snapshot_group_id = group_20260508T064858Z
+
+original_same_window_candidate_count = 4
+strict_same_window_object_context_count = 0
+strict_object_context_available = False
+
+final_status = blocked_object_layer_unverified
+e4_status = blocked
+confirmed_allowed = False
+
+vrp_roots_aligned = False
+all_pairwise_entry_level_diff_count = 440
+min_pairwise_jaccard_similarity = 0.999749378692293
+
+blockers = ['same_window_object_layer_context_missing']
+warnings = ['original_object_context_discovery_candidates_rejected_by_strict_review', 'vrp_output_diff_observed_but_strict_same_window_object_context_missing']
+
+reserved_interfaces:
+  e4b_cross_validator = reserved_only
+  control_plane_impact = reserved_only
+
+runtime_service_changed = False
+collector_restarted = False
+probe_restarted = False
+new_validator_installed = False
+bgp_data_loaded = False
+
+interpretation:
+  Original same-window candidates were rejected by strict review.
+  They are M14 verdict/evidence files, not object_set_root or effective_object_root evidence.
+  The final E4-A status must remain blocked_object_layer_unverified.
+
+P4_acceptance = True

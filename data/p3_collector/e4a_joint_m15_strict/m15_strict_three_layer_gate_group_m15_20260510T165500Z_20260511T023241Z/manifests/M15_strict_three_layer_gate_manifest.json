@@ -1,0 +1,12 @@
+{
+  "schema": "s3.stage3.m15.strict_three_layer_gate_manifest.v1",
+  "created_at_utc": "2026-05-11T03:08:53Z",
+  "snapshot_group_id": "group_m15_20260510T165500Z",
+  "m15_strict_id": "m15_strict_three_layer_gate_group_m15_20260510T165500Z_20260511T023241Z",
+  "m15_strict_dir": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_m15_strict/m15_strict_three_layer_gate_group_m15_20260510T165500Z_20260511T023241Z",
+  "l1_dir": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_m15_l1/m15_l1_announced_view_group_group_m15_20260510T165500Z_20260511T022201Z",
+  "object_group_dir": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_snapshots/groups/group_m15_20260510T165500Z",
+  "vrp_group_dir": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_snapshots/groups/group_m15_20260510T165500Z",
+  "final_verdict": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_m15_strict/m15_strict_three_layer_gate_group_m15_20260510T165500Z_20260511T023241Z/verdicts/three_layer_final_verdict.json",
+  "P11_D_acceptance": true
+}

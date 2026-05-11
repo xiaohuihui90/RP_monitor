@@ -1,0 +1,17 @@
+P5_M14A_AUTO_PRELIMINARY_VERDICT=DONE
+
+run_id = m14a_auto_group_20260508T064858Z
+snapshot_group_id = group_20260508T064858Z
+
+status = real_vrp_output_diff_observed
+e4_status = not_yet_e4
+confirmed_allowed = False
+
+all_vrp_roots_aligned = False
+all_pairwise_entry_level_diff_count = 440
+min_pairwise_jaccard_similarity = 0.999749378692293
+generated_time_skew_seconds = 442
+
+interpretation:
+  P5 auto run has completed VRP output comparison from a complete uploaded snapshot group.
+  This is still not E4 confirmed because P6 contexts are not joined yet.

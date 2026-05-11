@@ -1,0 +1,45 @@
+M15_P11_THREE_LAYER_CLOSEOUT=DONE
+
+created_at_utc = 2026-05-11T03:13:04Z
+
+snapshot_group_id = group_m15_20260510T165500Z
+
+strict_three_layer_gate = DONE
+
+final_status = not_e4_object_layer_divergence_under_aligned_l1
+e4_status = blocked
+confirmed_allowed = False
+blocking_layer = object_layer
+attribution_layer = object_view
+confidence = high
+
+layer_status:
+  announced_view_complete = True
+  announced_view_strong = True
+  announced_view_aligned = True
+
+  object_view_complete = True
+  object_view_strong = True
+  object_view_aligned = False
+
+  vrp_view_complete = True
+  vrp_view_strong = True
+  vrp_view_aligned = False
+
+engineering_conclusion:
+  The S3 system has completed a strict three-layer joint attribution loop.
+  Under a strong same-window group, the announced view is aligned, but the object view diverges.
+  Therefore VRP output divergence is blocked at the object layer and must not be attributed to validator-only E4 behavior.
+
+known_notes:
+  vrp_pairwise_diff_count should be treated as diagnostic in this run and may require canonical-key verification before publication use.
+  object_source_mode remains cache/object inventory based and should be described as an engineering limitation.
+
+runtime_changes:
+  collector_main_service_restarted = False
+  probe_restarted = False
+  new_validator_installed = False
+  bgp_data_loaded = False
+  cron_enabled = False
+
+M15_closeout_acceptance = True

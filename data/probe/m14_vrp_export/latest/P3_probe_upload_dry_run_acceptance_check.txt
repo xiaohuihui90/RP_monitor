@@ -1,0 +1,30 @@
+P3_PROBE_UPLOAD_DRY_RUN=DONE
+
+snapshot_dir = /home/zhangxiaohui/s3_stage3_v3_code/data/probe/m14_vrp_export/latest
+collector_url = http://47.108.137.128:28081
+upload_api = /api/v1/m14/vrp/upload
+upload_url = http://47.108.137.128:28081/api/v1/m14/vrp/upload
+
+probe_id = probe-cd
+validator = routinator
+validator_version = Routinator 0.15.1
+generatedTime = 2026-05-08T06:48:58Z
+roa_count = 857819
+
+manifest_exists = True
+sha256_txt_exists = True
+gzip_file = /home/zhangxiaohui/s3_stage3_v3_code/data/probe/m14_vrp_export/latest/probe-cd_vrps.raw.json.gz
+gzip_exists = True
+gzip_valid = True
+sha256_ok = True
+manifest_upload_ready = True
+computed_upload_ready = True
+
+dry_run = True
+real_http_post_executed = False
+collector_upload_api_required_in_P4 = True
+
+outputs:
+  /home/zhangxiaohui/s3_stage3_v3_code/data/probe/m14_vrp_export/latest/upload_request_preview.json
+
+P3_upload_dry_run_acceptance = True

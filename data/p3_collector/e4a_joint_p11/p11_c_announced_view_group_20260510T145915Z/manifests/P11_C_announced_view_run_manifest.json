@@ -1,0 +1,19 @@
+{
+  "schema": "s3.stage3.m15.p11_c_announced_view_run_manifest.v1",
+  "created_at_utc": "2026-05-10T15:08:32.849223+00:00",
+  "snapshot_group_id": "group_joint_20260509T094400Z",
+  "p11_c_id": "p11_c_announced_view_group_20260510T145915Z",
+  "p11_c_dir": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_p11/p11_c_announced_view_group_20260510T145915Z",
+  "group_dir": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_announced_view/groups/group_joint_20260509T094400Z",
+  "announced_view_group_manifest": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_p11/p11_c_announced_view_group_20260510T145915Z/outputs/announced_view_group_manifest.json",
+  "announced_view_pairwise_diff": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_p11/p11_c_announced_view_group_20260510T145915Z/diffs/announced_view_pairwise_diff.json",
+  "announced_view_group_complete": true,
+  "strict_announced_view_aligned": false,
+  "semantic_announced_view_aligned": true,
+  "all_pairwise_diff_count": 8,
+  "window_mapping_level": "weak_or_unknown",
+  "generated_time_skew_seconds": 76618,
+  "warnings": [],
+  "blockers": [],
+  "P11_C_acceptance": true
+}

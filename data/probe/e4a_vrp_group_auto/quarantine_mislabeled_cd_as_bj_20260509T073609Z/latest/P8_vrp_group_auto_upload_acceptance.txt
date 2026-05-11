@@ -1,0 +1,19 @@
+P8_VRP_GROUP_AUTO_UPLOAD_ONCE=DONE
+
+probe_id = probe-bj
+location = beijing
+snapshot_group_id = group_auto_vrp_20260509T072200Z
+export_id = 20260509T073059Z
+
+collector_url = http://47.108.137.128:28114/api/v1/m14/vrp/upload
+validator = routinator
+validator_version = Routinator 0.15.1
+
+generatedTime = 2026-05-09T07:30:59Z
+export_started_at = 2026-05-09T07:30:59Z
+export_finished_at = 2026-05-09T07:32:12Z
+
+upload_response = data/probe/e4a_vrp_group_auto/latest/upload_responses/probe-bj_group_auto_vrp_20260509T072200Z_vrp_upload_response.json
+upload_status = success
+
+P8_vrp_upload_acceptance = True

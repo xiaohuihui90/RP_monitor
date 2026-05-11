@@ -1,0 +1,444 @@
+{
+  "schema": "s3.stage3.m12_r3.5e_4b.manifest_evidence_summary.v1",
+  "created_at_utc": "2026-05-06T15:37:56.483658+00:00",
+  "gate_id": "m12_r3_object_gate_v5_5e_sync_20260506T134612Z",
+  "source_run_id": "m12_r3_5e_sync_export_20260506T134612Z",
+  "records_level": "active_manifest",
+  "input_rejudged_status": "divergent_candidate",
+  "input_rejudged_confidence": "medium",
+  "root_groups": {
+    "sha256:61001921ea1a62e3bc06c3cd19bf5acb03b228085252715580a3b1b96a85b677": [
+      "probe-cd"
+    ],
+    "sha256:c1f079c25b30467080b59aa64dbdbc7b0c50308089fe2ad2e777acb000f68ea3": [
+      "probe-bj"
+    ],
+    "sha256:ad7d7fa009b5e67987481f809fd3233c079ce4778b4a3580ef4b5d19c7587da0": [
+      "probe-sg"
+    ]
+  },
+  "probe_manifest_counts": {
+    "probe-cd": 51685,
+    "probe-bj": 51686,
+    "probe-sg": 51675
+  },
+  "presence_classes": {
+    "probe-cd,probe-bj,probe-sg": 51675,
+    "probe-cd,probe-bj": 10,
+    "probe-bj": 1
+  },
+  "pair_summary": {
+    "probe-cd_vs_probe-bj": {
+      "left": "probe-cd",
+      "right": "probe-bj",
+      "left_count": 51685,
+      "right_count": 51686,
+      "common_count": 51685,
+      "only_left_count": 0,
+      "only_right_count": 1,
+      "same_uri_different_manifest_hash_count": 69,
+      "same_uri_metadata_diff_count": 69,
+      "small_manifest_number_skew_sample_count": 68,
+      "small_manifest_number_skew_ratio": 0.9855072463768116,
+      "jaccard_similarity": 0.9999806524010371
+    },
+    "probe-cd_vs_probe-sg": {
+      "left": "probe-cd",
+      "right": "probe-sg",
+      "left_count": 51685,
+      "right_count": 51675,
+      "common_count": 51675,
+      "only_left_count": 10,
+      "only_right_count": 0,
+      "same_uri_different_manifest_hash_count": 58,
+      "same_uri_metadata_diff_count": 58,
+      "small_manifest_number_skew_sample_count": 57,
+      "small_manifest_number_skew_ratio": 0.9827586206896551,
+      "jaccard_similarity": 0.999806520267002
+    },
+    "probe-bj_vs_probe-sg": {
+      "left": "probe-bj",
+      "right": "probe-sg",
+      "left_count": 51686,
+      "right_count": 51675,
+      "common_count": 51675,
+      "only_left_count": 11,
+      "only_right_count": 0,
+      "same_uri_different_manifest_hash_count": 12,
+      "same_uri_metadata_diff_count": 12,
+      "small_manifest_number_skew_sample_count": 12,
+      "small_manifest_number_skew_ratio": 1.0,
+      "jaccard_similarity": 0.9997871764114074
+    }
+  },
+  "sample_evidence": {
+    "probe-cd_vs_probe-bj": {
+      "only_left": [],
+      "only_right": [
+        "rsync://repository.lacnic.net/rpki/lacnic/FE6C9AD908600C598711EB9767A285533C47FC8CE42B64E3A0EC137491441912/0/FB6B536E5AC0568F18F52C4985E67BCFBB7AEE72.mft"
+      ],
+      "same_uri_different_manifest_hash": [
+        {
+          "manifest_uri": "rsync://repository.lacnic.net/rpki/lacnic/0DD292B211724DECDC303751DB85B62ACD69B3210F8A70B4BD72E6FD73412E0A/0/B3B26F6DCE0D551DF8808E116531308AEF126A54.mft",
+          "probe-cd": {
+            "manifest_der_hash": "sha256:d34f0d2c3d8fa33d88faf5b73dc307831bafb796a863cee9734682be590bda0e",
+            "manifest_number": "401",
+            "manifest_number_int": 401,
+            "this_update": "2026-05-05T04:12:05+00:00",
+            "next_update": "2026-05-09T13:24:05+00:00",
+            "time_status": "current",
+            "file_count": 8
+          },
+          "probe-bj": {
+            "manifest_der_hash": "sha256:ec982252e340f5076f03cae7dc4f4b9b28e40914468fb40c213f135f468df1ad",
+            "manifest_number": "402",
+            "manifest_number_int": 402,
+            "this_update": "2026-05-06T13:22:00+00:00",
+            "next_update": "2026-05-12T05:24:00+00:00",
+            "time_status": "current",
+            "file_count": 8
+          }
+        },
+        {
+          "manifest_uri": "rsync://repository.lacnic.net/rpki/lacnic/3E25666FB3BD6768A2D88508B9BE17D643503F0FBDBF76530665B222B14C15F5/0/9DC3C9B20BE671410A46EE7B1491D1EDFCF8D3FF.mft",
+          "probe-cd": {
+            "manifest_der_hash": "sha256:a0b09538d636fb13ab2b89e4230f9670351f9e3a3336ddc1c825b23384b15df7",
+            "manifest_number": "388",
+            "manifest_number_int": 388,
+            "this_update": "2026-05-04T19:56:41+00:00",
+            "next_update": "2026-05-09T13:18:41+00:00",
+            "time_status": "current",
+            "file_count": 2
+          },
+          "probe-bj": {
+            "manifest_der_hash": "sha256:99ef8da5987e31f02efce1926b1286bd1533ef8598d15bdbe8e636d829792136",
+            "manifest_number": "389",
+            "manifest_number_int": 389,
+            "this_update": "2026-05-06T13:16:59+00:00",
+            "next_update": "2026-05-11T09:35:59+00:00",
+            "time_status": "current",
+            "file_count": 2
+          }
+        },
+        {
+          "manifest_uri": "rsync://repository.lacnic.net/rpki/lacnic/4FF28C2A9BCF30534EC68F72583E74EB84115B0740831C75BAE56ACB2A958E29/0/340F738BBE0963168846CC0EBA641A4246C73DA2.mft",
+          "probe-cd": {
+            "manifest_der_hash": "sha256:955db7f4b310d8ed97a25c790bd394e39fbd92f18a2f43ae35a1a5f3f5fd3f43",
+            "manifest_number": "399",
+            "manifest_number_int": 399,
+            "this_update": "2026-05-04T13:53:04+00:00",
+            "next_update": "2026-05-09T13:18:04+00:00",
+            "time_status": "current",
+            "file_count": 2
+          },
+          "probe-bj": {
+            "manifest_der_hash": "sha256:3b9a5008c728353d469a9f0786cb33da71502e8d23bb40f93741a6ed4d3b92fb",
+            "manifest_number": "400",
+            "manifest_number_int": 400,
+            "this_update": "2026-05-06T13:16:58+00:00",
+            "next_update": "2026-05-11T03:33:58+00:00",
+            "time_status": "current",
+            "file_count": 2
+          }
+        },
+        {
+          "manifest_uri": "rsync://repository.lacnic.net/rpki/lacnic/7884ED7C3480EF4CA98888836D406E9097A38AA938DB6DB1F003EDAD4556C571/0/B167745D3C13890CC27EF4697BB0058F2C2076C8.mft",
+          "probe-cd": {
+            "manifest_der_hash": "sha256:bda9d25f30988232456c7c9eba522810a45655fe59a90b79a4505269f109bbc0",
+            "manifest_number": "395",
+            "manifest_number_int": 395,
+            "this_update": "2026-05-03T22:43:30+00:00",
+            "next_update": "2026-05-09T13:20:30+00:00",
+            "time_status": "current",
+            "file_count": 6
+          },
+          "probe-bj": {
+            "manifest_der_hash": "sha256:afd676a1e0762b8d6569ae26151b892ced7f162eb43d507ed4fc20493cad15ff",
+            "manifest_number": "396",
+            "manifest_number_int": 396,
+            "this_update": "2026-05-06T13:16:57+00:00",
+            "next_update": "2026-05-11T09:02:57+00:00",
+            "time_status": "current",
+            "file_count": 6
+          }
+        },
+        {
+          "manifest_uri": "rsync://repository.lacnic.net/rpki/lacnic/9D7DD4937B63A683B9BF81631E20DBA403FFE434FD4861D98DE839478345B033/0/2AB6FC0008E3CB5A059B1D935090BD3A42310F93.mft",
+          "probe-cd": {
+            "manifest_der_hash": "sha256:0d0985e9d76fd8be80227a7fbbdb7db3b310e970522f19b7258310faed457507",
+            "manifest_number": "240",
+            "manifest_number_int": 240,
+            "this_update": "2026-05-05T04:07:02+00:00",
+            "next_update": "2026-05-09T13:18:02+00:00",
+            "time_status": "current",
+            "file_count": 4
+          },
+          "probe-bj": {
+            "manifest_der_hash": "sha256:4af4fcf9ba37e4631a161707417055a2d8742d7b6c63ca3c0924ce44f4f4ebc8",
+            "manifest_number": "241",
+            "manifest_number_int": 241,
+            "this_update": "2026-05-06T13:16:59+00:00",
+            "next_update": "2026-05-12T11:11:59+00:00",
+            "time_status": "current",
+            "file_count": 4
+          }
+        },
+        {
+          "manifest_uri": "rsync://repository.lacnic.net/rpki/lacnic/C154DC6889E51919AF7524A66F2383AC7C10E6499A785A24B6654105CF04A223/0/1CF3A7C8B869FEDE23D6DD16E8DA1FB80C686C7D.mft",
+          "probe-cd": {
+            "manifest_der_hash": "sha256:b6d930ab72a10ce6d084f9db699cea1b912df8f3b2e971bce487f0d2482587ec",
+            "manifest_number": "399",
+            "manifest_number_int": 399,
+            "this_update": "2026-05-04T05:27:57+00:00",
+            "next_update": "2026-05-09T13:25:57+00:00",
+            "time_status": "current",
+            "file_count": 4
+          },
+          "probe-bj": {
+            "manifest_der_hash": "sha256:c68165a8fac7a32ff38bd2d70198a868b14ea41490d2ae8931122324e344c53d",
+            "manifest_number": "400",
+            "manifest_number_int": 400,
+            "this_update": "2026-05-06T13:21:59+00:00",
+            "next_update": "2026-05-10T19:47:59+00:00",
+            "time_status": "current",
+            "file_count": 4
+          }
+        },
+        {
+          "manifest_uri": "rsync://repository.lacnic.net/rpki/lacnic/D51E710FF13F37B1CA129726FAFCC6032A15D2141234C847B7D13ECB1A95A1D5/0/1B5472FEF5D7D950AB298EDD41DEB0D22CA7FE25.mft",
+          "probe-cd": {
+            "manifest_der_hash": "sha256:a16424c095609f8f61512e5aec3796d63feb8691064afffe8332ebdef718e999",
+            "manifest_number": "405",
+            "manifest_number_int": 405,
+            "this_update": "2026-05-03T14:48:51+00:00",
+            "next_update": "2026-05-09T13:22:51+00:00",
+            "time_status": "current",
+            "file_count": 91
+          },
+          "probe-bj": {
+            "manifest_der_hash": "sha256:f253084924be9db0618c85dcc32c7f23d74dcd01b954c1abbaff3a7e09e0f506",
+            "manifest_number": "406",
+            "manifest_number_int": 406,
+            "this_update": "2026-05-06T13:22:01+00:00",
+            "next_update": "2026-05-12T03:54:01+00:00",
+            "time_status": "current",
+            "file_count": 91
+          }
+        },
+        {
+          "manifest_uri": "rsync://repository.lacnic.net/rpki/lacnic/F23301A603E627A876D246E387A187C252007ED947D0581CD15D81064A159A09/0/B723DA031356C8D23A9AE55421F6FA8B94D76B24.mft",
+          "probe-cd": {
+            "manifest_der_hash": "sha256:1755c25cefd0bea681f5ec1bdcea991090fbd571598dd0e6f5733b982a4bfd14",
+            "manifest_number": "398",
+            "manifest_number_int": 398,
+            "this_update": "2026-05-05T03:31:15+00:00",
+            "next_update": "2026-05-09T13:23:15+00:00",
+            "time_status": "current",
+            "file_count": 3
+          },
+          "probe-bj": {
+            "manifest_der_hash": "sha256:4c2827d3ec20110723d93d68bdd876c0a43a14eb034f7f9d59fdd6d289a67132",
+            "manifest_number": "399",
+            "manifest_number_int": 399,
+            "this_update": "2026-05-06T13:21:59+00:00",
+            "next_update": "2026-05-11T16:01:59+00:00",
+            "time_status": "current",
+            "file_count": 3
+          }
+        },
+        {
+          "manifest_uri": "rsync://repository.lacnic.net/rpki/lacnic/FDC3594DD4E54BADE709AC0D255CF279C47716D2E8B3F4D45DC46355899B36D4/0/F25A1B7D8F7ADF94C0DEBE8FEAC1C3BCD6058678.mft",
+          "probe-cd": {
+            "manifest_der_hash": "sha256:47e278784d76abc7fa8495b3e9d90474d7bf96d0f736d3a653aaccc10f386561",
+            "manifest_number": "3103",
+            "manifest_number_int": 3103,
+            "this_update": "2026-05-05T12:45:01+00:00",
+            "next_update": "2026-05-09T20:07:01+00:00",
+            "time_status": "current",
+            "file_count": 3231
+          },
+          "probe-bj": {
+            "manifest_der_hash": "sha256:e0da53f181e1bcbcf45c9f656b3b60e87abba02c26a1f2b07f3b745ee0aba280",
+            "manifest_number": "3104",
+            "manifest_number_int": 3104,
+            "this_update": "2026-05-06T13:20:01+00:00",
+            "next_update": "2026-05-11T09:19:01+00:00",
+            "time_status": "current",
+            "file_count": 3232
+          }
+        },
+        {
+          "manifest_uri": "rsync://rpki-repo.as207960.net/repo/rpki_ca_8b83e631279f4c69a53fab250bbe69db/0/C2724A29EF989A4340933B8130B402DD4627A501.mft",
+          "probe-cd": {
+            "manifest_der_hash": "sha256:78347096097243a68cb1bf37d1b486fd0c7617b081a362cdcf88497161b7400e",
+            "manifest_number": "821",
+            "manifest_number_int": 821,
+            "this_update": "2026-05-05T19:21:10+00:00",
+            "next_update": "2026-05-06T21:33:10+00:00",
+            "time_status": "current",
+            "file_count": 2
+          },
+          "probe-bj": {
+            "manifest_der_hash": "sha256:af9e965ed13cef7d7870d01c932c6b404d707e6a53b16687cabdc7daa3e6168a",
+            "manifest_number": "822",
+            "manifest_number_int": 822,
+            "this_update": "2026-05-06T13:28:56+00:00",
+            "next_update": "2026-05-07T14:10:56+00:00",
+            "time_status": "current",
+            "file_count": 2
+          }
+        }
+      ],
+      "small_manifest_number_skew": [
+        {
+          "manifest_uri": "rsync://repository.lacnic.net/rpki/lacnic/0DD292B211724DECDC303751DB85B62ACD69B3210F8A70B4BD72E6FD73412E0A/0/B3B26F6DCE0D551DF8808E116531308AEF126A54.mft",
+          "probe-cd": {
+            "manifest_der_hash": "sha256:d34f0d2c3d8fa33d88faf5b73dc307831bafb796a863cee9734682be590bda0e",
+            "manifest_number": "401",
+            "manifest_number_int": 401,
+            "this_update": "2026-05-05T04:12:05+00:00",
+            "next_update": "2026-05-09T13:24:05+00:00",
+            "time_status": "current",
+            "file_count": 8
+          },
+          "probe-bj": {
+            "manifest_der_hash": "sha256:ec982252e340f5076f03cae7dc4f4b9b28e40914468fb40c213f135f468df1ad",
+            "manifest_number": "402",
+            "manifest_number_int": 402,
+            "this_update": "2026-05-06T13:22:00+00:00",
+            "next_update": "2026-05-12T05:24:00+00:00",
+            "time_status": "current",
+            "file_count": 8
+          }
+        },
+        {
+          "manifest_uri": "rsync://repository.lacnic.net/rpki/lacnic/3E25666FB3BD6768A2D88508B9BE17D643503F0FBDBF76530665B222B14C15F5/0/9DC3C9B20BE671410A46EE7B1491D1EDFCF8D3FF.mft",
+          "probe-cd": {
+            "manifest_der_hash": "sha256:a0b09538d636fb13ab2b89e4230f9670351f9e3a3336ddc1c825b23384b15df7",
+            "manifest_number": "388",
+            "manifest_number_int": 388,
+            "this_update": "2026-05-04T19:56:41+00:00",
+            "next_update": "2026-05-09T13:18:41+00:00",
+            "time_status": "current",
+            "file_count": 2
+          },
+          "probe-bj": {
+            "manifest_der_hash": "sha256:99ef8da5987e31f02efce1926b1286bd1533ef8598d15bdbe8e636d829792136",
+            "manifest_number": "389",
+            "manifest_number_int": 389,
+            "this_update": "2026-05-06T13:16:59+00:00",
+            "next_update": "2026-05-11T09:35:59+00:00",
+            "time_status": "current",
+            "file_count": 2
+          }
+        },
+        {
+          "manifest_uri": "rsync://repository.lacnic.net/rpki/lacnic/4FF28C2A9BCF30534EC68F72583E74EB84115B0740831C75BAE56ACB2A958E29/0/340F738BBE0963168846CC0EBA641A4246C73DA2.mft",
+          "probe-cd": {
+            "manifest_der_hash": "sha256:955db7f4b310d8ed97a25c790bd394e39fbd92f18a2f43ae35a1a5f3f5fd3f43",
+            "manifest_number": "399",
+            "manifest_number_int": 399,
+            "this_update": "2026-05-04T13:53:04+00:00",
+            "next_update": "2026-05-09T13:18:04+00:00",
+            "time_status": "current",
+            "file_count": 2
+          },
+          "probe-bj": {
+            "manifest_der_hash": "sha256:3b9a5008c728353d469a9f0786cb33da71502e8d23bb40f93741a6ed4d3b92fb",
+            "manifest_number": "400",
+            "manifest_number_int": 400,
+            "this_update": "2026-05-06T13:16:58+00:00",
+            "next_update": "2026-05-11T03:33:58+00:00",
+            "time_status": "current",
+            "file_count": 2
+          }
+        },
+        {
+          "manifest_uri": "rsync://repository.lacnic.net/rpki/lacnic/7884ED7C3480EF4CA98888836D406E9097A38AA938DB6DB1F003EDAD4556C571/0/B167745D3C13890CC27EF4697BB0058F2C2076C8.mft",
+          "probe-cd": {
+            "manifest_der_hash": "sha256:bda9d25f30988232456c7c9eba522810a45655fe59a90b79a4505269f109bbc0",
+            "manifest_number": "395",
+            "manifest_number_int": 395,
+            "this_update": "2026-05-03T22:43:30+00:00",
+            "next_update": "2026-05-09T13:20:30+00:00",
+            "time_status": "current",
+            "file_count": 6
+          },
+          "probe-bj": {
+            "manifest_der_hash": "sha256:afd676a1e0762b8d6569ae26151b892ced7f162eb43d507ed4fc20493cad15ff",
+            "manifest_number": "396",
+            "manifest_number_int": 396,
+            "this_update": "2026-05-06T13:16:57+00:00",
+            "next_update": "2026-05-11T09:02:57+00:00",
+            "time_status": "current",
+            "file_count": 6
+          }
+        },
+        {
+          "manifest_uri": "rsync://repository.lacnic.net/rpki/lacnic/9D7DD4937B63A683B9BF81631E20DBA403FFE434FD4861D98DE839478345B033/0/2AB6FC0008E3CB5A059B1D935090BD3A42310F93.mft",
+          "probe-cd": {
+            "manifest_der_hash": "sha256:0d0985e9d76fd8be80227a7fbbdb7db3b310e970522f19b7258310faed457507",
+            "manifest_number": "240",
+            "manifest_number_int": 240,
+            "this_update": "2026-05-05T04:07:02+00:00",
+            "next_update": "2026-05-09T13:18:02+00:00",
+            "time_status": "current",
+            "file_count": 4
+          },
+          "probe-bj": {
+            "manifest_der_hash": "sha256:4af4fcf9ba37e4631a161707417055a2d8742d7b6c63ca3c0924ce44f4f4ebc8",
+            "manifest_number": "241",
+            "manifest_number_int": 241,
+            "this_update": "2026-05-06T13:16:59+00:00",
+            "next_update": "2026-05-12T11:11:59+00:00",
+            "time_status": "current",
+            "file_count": 4
+          }
+        },
+        {
+          "manifest_uri": "rsync://repository.lacnic.net/rpki/lacnic/C154DC6889E51919AF7524A66F2383AC7C10E6499A785A24B6654105CF04A223/0/1CF3A7C8B869FEDE23D6DD16E8DA1FB80C686C7D.mft",
+          "probe-cd": {
+            "manifest_der_hash": "sha256:b6d930ab72a10ce6d084f9db699cea1b912df8f3b2e971bce487f0d2482587ec",
+            "manifest_number": "399",
+            "manifest_number_int": 399,
+            "this_update": "2026-05-04T05:27:57+00:00",
+            "next_update": "2026-05-09T13:25:57+00:00",
+            "time_status": "current",
+            "file_count": 4
+          },
+          "probe-bj": {
+            "manifest_der_hash": "sha256:c68165a8fac7a32ff38bd2d70198a868b14ea41490d2ae8931122324e344c53d",
+            "manifest_number": "400",
+            "manifest_number_int": 400,
+            "this_update": "2026-05-06T13:21:59+00:00",
+            "next_update": "2026-05-10T19:47:59+00:00",
+            "time_status": "current",
+            "file_count": 4
+          }
+        },
+        {
+          "manifest_uri": "rsync://repository.lacnic.net/rpki/lacnic/D51E710FF13F37B1CA129726FAFCC6032A15D2141234C847B7D13ECB1A95A1D5/0/1B5472FEF5D7D950AB298EDD41DEB0D22CA7FE25.mft",
+          "probe-cd": {
+            "manifest_der_hash": "sha256:a16424c095609f8f61512e5aec3796d63feb8691064afffe8332ebdef718e999",
+            "manifest_number": "405",
+            "manifest_number_int": 405,
+            "this_update": "2026-05-03T14:48:51+00:00",
+            "next_update": "2026-05-09T13:22:51+00:00",
+            "time_status": "current",
+            "file_count": 91
+          },
+          "probe-bj": {
+            "manifest_der_hash": "sha256:f253084924be9db0618c85dcc32c7f23d74dcd01b954c1abbaff3a7e09e0f506",
+            "manifest_number": "406",
+            "manifest_number_int": 406,
+            "this_update": "2026-05-06T13:22:01+00:00",
+            "next_update": "2026-05-12T03:54:01+00:00",
+            "time_status": "current",
+            "file_count": 91
+          }
+        },
+        {
+          "manifest_uri": "rsync://repository.lacnic.net/rpki/lacnic/F23301A603E627A876D246E387A187C252007ED947D0581CD15D81064A159A09/0/B723DA031356C8D23A
+
+WROTE /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/object_gate_v5_runs/m12_r3_object_gate_v5_5e_sync_20260506T134612Z/outputs/manifest_evidence_summary_5e4b.json
+WROTE /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/object_gate_v5_runs/m12_r3_object_gate_v5_5e_sync_20260506T134612Z/outputs/99_m12_r3_5e_4b_manifest_evidence_summary.txt

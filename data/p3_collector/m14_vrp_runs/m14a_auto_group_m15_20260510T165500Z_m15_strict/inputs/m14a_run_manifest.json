@@ -1,0 +1,17 @@
+{
+  "schema": "s3.stage3.m14a.run_manifest.v1",
+  "run_id": "m14a_auto_group_m15_20260510T165500Z_m15_strict",
+  "created_at_utc": "2026-05-11T02:33:28.598602+00:00",
+  "scope": "M14-A minimal VRP closure only",
+  "source_validator": "routinator",
+  "probes": [
+    "probe-cd",
+    "probe-bj",
+    "probe-sg"
+  ],
+  "raw_inputs": {
+    "probe-cd": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_auto_group_m15_20260510T165500Z_m15_strict/raw_vrps/probe-cd_vrps.raw.json",
+    "probe-bj": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_auto_group_m15_20260510T165500Z_m15_strict/raw_vrps/probe-bj_vrps.raw.json",
+    "probe-sg": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_auto_group_m15_20260510T165500Z_m15_strict/raw_vrps/probe-sg_vrps.raw.json"
+  }
+}

@@ -1,0 +1,20 @@
+P2_M14_AUTO_COLLECT_DESIGN=DONE
+
+based_on_real_run_id = m14a_real_vrp_20260508T060708Z
+
+outputs:
+  docs/stage3/M14_VRP_自动化采集与归因软件设计开发文档.md
+  config/p3/m14_vrp_auto_collect.yaml
+  data/p3_collector/m14_auto_design/P2_auto_collect_design_manifest.json
+
+scope:
+  design_doc_landed = True
+  config_landed = True
+  no_runtime_service_changed = True
+  no_probe_service_changed = True
+  no_collector_service_changed = True
+
+next_batch:
+  P3 Probe-side VRP export + gzip + sha256 + manifest
+
+P2_acceptance = True

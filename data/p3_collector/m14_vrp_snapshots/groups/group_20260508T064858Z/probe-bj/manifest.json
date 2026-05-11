@@ -1,0 +1,52 @@
+{
+  "schema": "s3.stage3.m14.vrp_snapshot_manifest.v1",
+  "probe_id": "probe-bj",
+  "location": "beijing",
+  "validator": "routinator",
+  "validator_version": "Routinator 0.15.1",
+  "export_started_at": "2026-05-08T06:54:10.544296+00:00",
+  "export_finished_at": "2026-05-08T06:54:56.768048+00:00",
+  "generatedTime": "2026-05-08T06:54:10Z",
+  "routinator_metadata": {
+    "generated": 1778223250,
+    "generatedTime": "2026-05-08T06:54:10Z"
+  },
+  "raw_json_size_bytes": 74381178,
+  "gzip_size_bytes": 4342089,
+  "roa_count": 857716,
+  "sha256_raw": "64c295db81855a1e73ec4dbabeefa21ac1e32e1b9bd5565b338af671c6d0a155",
+  "sha256_gzip": "53804523140da8755c8187651523d5f32c4102d9e5f0d2349203c4ad57496e95",
+  "raw_json_file": "/home/zhangxiaohui/s3_stage3_v3_code/data/probe/m14_vrp_export/history/20260508T065410Z/probe-bj_vrps.raw.json",
+  "gzip_file": "/home/zhangxiaohui/s3_stage3_v3_code/data/probe/m14_vrp_export/history/20260508T065410Z/probe-bj_vrps.raw.json.gz",
+  "sha256_file": "/home/zhangxiaohui/s3_stage3_v3_code/data/probe/m14_vrp_export/history/20260508T065410Z/sha256.txt",
+  "used_refresh": false,
+  "export_status": "success",
+  "attempts": [
+    {
+      "name": "primary",
+      "noupdate": true,
+      "command": [
+        "/home/zhangxiaohui/.local/bin/routinator-0.15.1",
+        "vrps",
+        "--format",
+        "json",
+        "--noupdate",
+        "--output",
+        "/home/zhangxiaohui/s3_stage3_v3_code/data/probe/m14_vrp_export/history/20260508T065410Z/probe-bj_vrps.raw.json"
+      ],
+      "returncode": 0,
+      "validation": {
+        "reason": "ok",
+        "size_bytes": 74381178,
+        "roa_count": 857716,
+        "generatedTime": "2026-05-08T06:54:10Z",
+        "metadata": {
+          "generated": 1778223250,
+          "generatedTime": "2026-05-08T06:54:10Z"
+        }
+      }
+    }
+  ],
+  "upload_ready": true,
+  "upload_status": "not_uploaded_p3_export_only"
+}

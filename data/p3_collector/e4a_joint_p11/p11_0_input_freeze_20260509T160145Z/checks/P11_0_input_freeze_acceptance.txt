@@ -1,0 +1,38 @@
+P11_0_INPUT_FREEZE=DONE
+
+created_at_utc = 2026-05-09T16:02:37.477470+00:00
+
+snapshot_group_id = group_joint_20260509T094400Z
+
+input_dirs:
+  P11_OBJECT_GROUP_DIR = /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_snapshots/groups/group_joint_20260509T094400Z
+  P11_VRP_GROUP_DIR = /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_snapshots/groups/group_joint_20260509T094400Z
+  P11_P9_2_DIR = data/p3_collector/e4a_joint_p9/p9_2_object_layer_compare_strong_group_20260509T150310Z
+  P11_P9_3_DIR = data/p3_collector/e4a_joint_p9/p9_3_vrp_layer_diff_strong_group_20260509T152606Z
+  P11_P10_DIR = data/p3_collector/e4a_joint_p10/p10_final_joint_e4a_gate_20260509T153324Z
+
+semantic_checks:
+  object_group_complete = True
+  vrp_group_complete = True
+  object_layer_final_status = object_layer_divergence_observed
+  object_layer_e4_gate_recommendation = do_not_confirm_e4
+  p10_final_status = not_e4_object_layer_divergence
+  p10_e4_status = blocked
+  p10_confirmed_allowed = False
+  p10_blocking_layer = object_layer
+
+warnings = []
+blockers = []
+
+runtime_changes:
+  collector_main_service_restarted = False
+  probe_restarted = False
+  new_validator_installed = False
+  bgp_data_loaded = False
+  cron_enabled = False
+
+outputs:
+  /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_p11/p11_0_input_freeze_20260509T160145Z/manifests/P11_0_input_freeze_manifest.json
+  /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_p11/p11_0_input_freeze_20260509T160145Z/outputs/input_snapshot
+
+P11_0_acceptance = True

@@ -1,0 +1,169 @@
+{
+  "schema": "s3.stage3.m15.announced_view_group_manifest.v1",
+  "created_at_utc": "2026-05-11T02:22:02.542032+00:00",
+  "snapshot_group_id": "group_m15_20260510T165500Z",
+  "collection_mode": "retrofit_or_diagnostic",
+  "required_probes": [
+    "probe-cd",
+    "probe-bj",
+    "probe-sg"
+  ],
+  "received_probes": [
+    "probe-bj",
+    "probe-cd",
+    "probe-sg"
+  ],
+  "announced_view_group_complete": true,
+  "pp_scope": [
+    "arin",
+    "ripe",
+    "apnic"
+  ],
+  "generated_time_min": "2026-05-10T16:55:00.074604+00:00",
+  "generated_time_max": "2026-05-10T16:55:17.498157+00:00",
+  "generated_time_skew_seconds": 17,
+  "window_mapping_level": "strong",
+  "strict_announced_view_aligned": true,
+  "semantic_announced_view_aligned": true,
+  "probe_roots": {
+    "probe-cd": "sha256:5dbea10ceaa7f283fa5b1b2a93cc55b4558a90559ac07eacede97755a9f9574a",
+    "probe-bj": "sha256:5dbea10ceaa7f283fa5b1b2a93cc55b4558a90559ac07eacede97755a9f9574a",
+    "probe-sg": "sha256:5dbea10ceaa7f283fa5b1b2a93cc55b4558a90559ac07eacede97755a9f9574a"
+  },
+  "pp_summary": {
+    "arin": {
+      "strict_aligned": true,
+      "semantic_aligned": true,
+      "field_aligned": {
+        "fetch_status": true,
+        "session_id": true,
+        "serial": true,
+        "notification_digest": true,
+        "snapshot_hash": true,
+        "delta_hash_chain_root": true
+      },
+      "values_by_probe": {
+        "fetch_status": {
+          "probe-cd": "success",
+          "probe-bj": "success",
+          "probe-sg": "success"
+        },
+        "session_id": {
+          "probe-cd": "222bc4dd-08cd-46c3-b744-f99835520fa4",
+          "probe-bj": "222bc4dd-08cd-46c3-b744-f99835520fa4",
+          "probe-sg": "222bc4dd-08cd-46c3-b744-f99835520fa4"
+        },
+        "serial": {
+          "probe-cd": 119446,
+          "probe-bj": 119446,
+          "probe-sg": 119446
+        },
+        "notification_digest": {
+          "probe-cd": "sha256:824930adb0460a7a61f346d423b2944b3ee93b38d884edc1d60587bb02fc5499",
+          "probe-bj": "sha256:824930adb0460a7a61f346d423b2944b3ee93b38d884edc1d60587bb02fc5499",
+          "probe-sg": "sha256:824930adb0460a7a61f346d423b2944b3ee93b38d884edc1d60587bb02fc5499"
+        },
+        "snapshot_hash": {
+          "probe-cd": "1873810fe90cc0d3a830a8d3c2a00f986d4d493a0eca71371cb90ce2ec66e8a6",
+          "probe-bj": "1873810fe90cc0d3a830a8d3c2a00f986d4d493a0eca71371cb90ce2ec66e8a6",
+          "probe-sg": "1873810fe90cc0d3a830a8d3c2a00f986d4d493a0eca71371cb90ce2ec66e8a6"
+        },
+        "delta_hash_chain_root": {
+          "probe-cd": "sha256:4e92e9f3e7e01c7bb742c676b2b669ad323d20618ba988ce601e81aa637df238",
+          "probe-bj": "sha256:4e92e9f3e7e01c7bb742c676b2b669ad323d20618ba988ce601e81aa637df238",
+          "probe-sg": "sha256:4e92e9f3e7e01c7bb742c676b2b669ad323d20618ba988ce601e81aa637df238"
+        }
+      }
+    },
+    "ripe": {
+      "strict_aligned": true,
+      "semantic_aligned": true,
+      "field_aligned": {
+        "fetch_status": true,
+        "session_id": true,
+        "serial": true,
+        "notification_digest": true,
+        "snapshot_hash": true,
+        "delta_hash_chain_root": true
+      },
+      "values_by_probe": {
+        "fetch_status": {
+          "probe-cd": "success",
+          "probe-bj": "success",
+          "probe-sg": "success"
+        },
+        "session_id": {
+          "probe-cd": "172322cf-c642-4e6f-806c-bd2375d8001a",
+          "probe-bj": "172322cf-c642-4e6f-806c-bd2375d8001a",
+          "probe-sg": "172322cf-c642-4e6f-806c-bd2375d8001a"
+        },
+        "serial": {
+          "probe-cd": 198205,
+          "probe-bj": 198205,
+          "probe-sg": 198205
+        },
+        "notification_digest": {
+          "probe-cd": "sha256:22390463277e4ab49424b603b59e6c3283bda881dcc12960d4303d5c6b0d7453",
+          "probe-bj": "sha256:22390463277e4ab49424b603b59e6c3283bda881dcc12960d4303d5c6b0d7453",
+          "probe-sg": "sha256:22390463277e4ab49424b603b59e6c3283bda881dcc12960d4303d5c6b0d7453"
+        },
+        "snapshot_hash": {
+          "probe-cd": "3d3924adf479ddf4f105ea317a17a8ceaaf5a7a5cdc5cd16601d9979c48fd48d",
+          "probe-bj": "3d3924adf479ddf4f105ea317a17a8ceaaf5a7a5cdc5cd16601d9979c48fd48d",
+          "probe-sg": "3d3924adf479ddf4f105ea317a17a8ceaaf5a7a5cdc5cd16601d9979c48fd48d"
+        },
+        "delta_hash_chain_root": {
+          "probe-cd": "sha256:cbd50350fb7d93f74ba8ed5b2a726800bc66443b2865f6ee9c29ae467702b55a",
+          "probe-bj": "sha256:cbd50350fb7d93f74ba8ed5b2a726800bc66443b2865f6ee9c29ae467702b55a",
+          "probe-sg": "sha256:cbd50350fb7d93f74ba8ed5b2a726800bc66443b2865f6ee9c29ae467702b55a"
+        }
+      }
+    },
+    "apnic": {
+      "strict_aligned": true,
+      "semantic_aligned": true,
+      "field_aligned": {
+        "fetch_status": true,
+        "session_id": true,
+        "serial": true,
+        "notification_digest": true,
+        "snapshot_hash": true,
+        "delta_hash_chain_root": true
+      },
+      "values_by_probe": {
+        "fetch_status": {
+          "probe-cd": "success",
+          "probe-bj": "success",
+          "probe-sg": "success"
+        },
+        "session_id": {
+          "probe-cd": "8dad0cc8-0bc8-4021-88ed-e75e295df946",
+          "probe-bj": "8dad0cc8-0bc8-4021-88ed-e75e295df946",
+          "probe-sg": "8dad0cc8-0bc8-4021-88ed-e75e295df946"
+        },
+        "serial": {
+          "probe-cd": 46825,
+          "probe-bj": 46825,
+          "probe-sg": 46825
+        },
+        "notification_digest": {
+          "probe-cd": "sha256:f6436aeaa210dc5ae9e0ad69193a45b29a97b2eb8652f8cea97894be0fd9a608",
+          "probe-bj": "sha256:f6436aeaa210dc5ae9e0ad69193a45b29a97b2eb8652f8cea97894be0fd9a608",
+          "probe-sg": "sha256:f6436aeaa210dc5ae9e0ad69193a45b29a97b2eb8652f8cea97894be0fd9a608"
+        },
+        "snapshot_hash": {
+          "probe-cd": "655149c688a4e6cc205c6a0f95109c6679f6c8b8b02a7e4006c79735b8e19139",
+          "probe-bj": "655149c688a4e6cc205c6a0f95109c6679f6c8b8b02a7e4006c79735b8e19139",
+          "probe-sg": "655149c688a4e6cc205c6a0f95109c6679f6c8b8b02a7e4006c79735b8e19139"
+        },
+        "delta_hash_chain_root": {
+          "probe-cd": "sha256:0d1cbb41f1f13a77e2176616e0878971173b997b3138f5738427d721b6cc56ab",
+          "probe-bj": "sha256:0d1cbb41f1f13a77e2176616e0878971173b997b3138f5738427d721b6cc56ab",
+          "probe-sg": "sha256:0d1cbb41f1f13a77e2176616e0878971173b997b3138f5738427d721b6cc56ab"
+        }
+      }
+    }
+  },
+  "warnings": [],
+  "blockers": []
+}

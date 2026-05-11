@@ -1,0 +1,206 @@
+{
+  "ok": true,
+  "http_status": 200,
+  "url": "http://127.0.0.1:28089/api/v1/rp/output-summary",
+  "bytes": 4116,
+  "json": {
+    "probe_id": "probe-cd",
+    "validator_type": "routinator",
+    "base_url": "http://127.0.0.1:8323",
+    "collected_at": "2026-05-06T13:44:39.276570Z",
+    "source_endpoint": "/api/v1/status",
+    "vrp_count": 854085.0,
+    "router_key_count": 0.0,
+    "aspa_count": 0.0,
+    "last_update_done": "2026-05-06T13:36:01.119274261+00:00",
+    "metrics_excerpt": null,
+    "validator_id": null,
+    "validator_version": "routinator/0.15.1",
+    "status_http_code": 200,
+    "validator_state": "ready",
+    "now": "2026-05-06T13:44:39.286529151+00:00",
+    "last_update_start": "2026-05-06T13:28:26.147858842+00:00",
+    "last_update_duration": 454.971,
+    "cycle_age_seconds": 518.157296,
+    "global_vrp_count": 854085,
+    "ipv4_final": 662714,
+    "ipv6_final": 191371,
+    "repository_count": 105,
+    "valid_publication_points": 51679,
+    "rejected_publication_points": 128,
+    "valid_manifests": 51679,
+    "rejected_manifests": 0,
+    "per_tal_vrp_count": {
+      "afrinic": 28289,
+      "apnic": 194322,
+      "arin": 248792,
+      "lacnic": 41838,
+      "ripe": 340844
+    },
+    "tal_summary": {
+      "afrinic": {
+        "vrps_final": 28289,
+        "ipv4_final": 27252,
+        "ipv6_final": 1037,
+        "valid_publication_points": 1332,
+        "rejected_publication_points": 0,
+        "valid_manifests": 1332,
+        "rejected_manifests": 0
+      },
+      "apnic": {
+        "vrps_final": 194322,
+        "ipv4_final": 134285,
+        "ipv6_final": 60037,
+        "valid_publication_points": 12628,
+        "rejected_publication_points": 3,
+        "valid_manifests": 12628,
+        "rejected_manifests": 0
+      },
+      "arin": {
+        "vrps_final": 248792,
+        "ipv4_final": 196187,
+        "ipv6_final": 52605,
+        "valid_publication_points": 8802,
+        "rejected_publication_points": 18,
+        "valid_manifests": 8802,
+        "rejected_manifests": 0
+      },
+      "lacnic": {
+        "vrps_final": 41838,
+        "ipv4_final": 29207,
+        "ipv6_final": 12631,
+        "valid_publication_points": 6593,
+        "rejected_publication_points": 25,
+        "valid_manifests": 6593,
+        "rejected_manifests": 0
+      },
+      "ripe": {
+        "vrps_final": 340844,
+        "ipv4_final": 275783,
+        "ipv6_final": 65061,
+        "valid_publication_points": 22324,
+        "rejected_publication_points": 82,
+        "valid_manifests": 22324,
+        "rejected_manifests": 0
+      }
+    },
+    "raw_status_sha256": "457212a0532ea47b57edf718ecffe13b0a217871323c75f0d76b2ff9ea642583",
+    "status_summary_digest": "8533be9f5d874556679a4bed077b2968404a7b9068cccde3d61847938e82d93d",
+    "repository_summary": {
+      "source": "repositories",
+      "repository_count": 105,
+      "status_counter": {
+        "unknown": 105
+      },
+      "issue_count": 0,
+      "items_digest": "94fe7bf6dfb8ade5710db761f62be27a5c2812d529f827a9ba99ab429b629cc9",
+      "sample": [
+        {
+          "id": "https://akane.maru.co.jp/oshirase.xml",
+          "status": null,
+          "notify_status": null,
+          "payload_status": null,
+          "serial": null,
+          "session_id": null,
+          "last_update": null,
+          "issues_count": 0
+        },
+        {
+          "id": "https://alias.rpki-measurement.site/rrdp/notification.xml",
+          "status": null,
+          "notify_status": null,
+          "payload_status": null,
+          "serial": null,
+          "session_id": null,
+          "last_update": null,
+          "issues_count": 0
+        },
+        {
+          "id": "https://ca.nat.moe/rrdp/notification.xml",
+          "status": null,
+          "notify_status": null,
+          "payload_status": null,
+          "serial": null,
+          "session_id": null,
+          "last_update": null,
+          "issues_count": 0
+        },
+        {
+          "id": "https://ca.rg.net/rrdp/notify.xml",
+          "status": null,
+          "notify_status": null,
+          "payload_status": null,
+          "serial": null,
+          "session_id": null,
+          "last_update": null,
+          "issues_count": 0
+        },
+        {
+          "id": "https://chloe.sobornost.net/rpki/news.xml",
+          "status": null,
+          "notify_status": null,
+          "payload_status": null,
+          "serial": null,
+          "session_id": null,
+          "last_update": null,
+          "issues_count": 0
+        },
+        {
+          "id": "https://cloudie.rpki.app/rrdp/notification.xml",
+          "status": null,
+          "notify_status": null,
+          "payload_status": null,
+          "serial": null,
+          "session_id": null,
+          "last_update": null,
+          "issues_count": 0
+        },
+        {
+          "id": "https://krill.47272.net/rrdp/notification.xml",
+          "status": null,
+          "notify_status": null,
+          "payload_status": null,
+          "serial": null,
+          "session_id": null,
+          "last_update": null,
+          "issues_count": 0
+        },
+        {
+          "id": "https://krill.accuristechnologies.ca/rrdp/notification.xml",
+          "status": null,
+          "notify_status": null,
+          "payload_status": null,
+          "serial": null,
+          "session_id": null,
+          "last_update": null,
+          "issues_count": 0
+        },
+        {
+          "id": "https://krill.byhill.de/rrdp/notification.xml",
+          "status": null,
+          "notify_status": null,
+          "payload_status": null,
+          "serial": null,
+          "session_id": null,
+          "last_update": null,
+          "issues_count": 0
+        },
+        {
+          "id": "https://krill.ca-bc-01.ssmidge.xyz/rrdp/notification.xml",
+          "status": null,
+          "notify_status": null,
+          "payload_status": null,
+          "serial": null,
+          "session_id": null,
+          "last_update": null,
+          "issues_count": 0
+        }
+      ]
+    },
+    "repository_status_digest": "fe724db3dbe519a2c7bb112f7ca1fed5e0fa3143c64251c7acf5145cea8a515e",
+    "location": null,
+    "serial": 250
+  },
+  "error_class": null,
+  "error_message": null
+}

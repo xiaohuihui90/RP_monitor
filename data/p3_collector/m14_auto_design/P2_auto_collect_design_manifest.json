@@ -1,0 +1,22 @@
+{
+  "schema": "s3.stage3.m14.p2.auto_collect_design_manifest.v1",
+  "created_at_utc": "2026-05-08T06:44:45.303975+00:00",
+  "milestone": "P2",
+  "goal": "Land M14 VRP automated collection and attribution design document and config.",
+  "based_on_real_run_id": "m14a_real_vrp_20260508T060708Z",
+  "required_files_ok": true,
+  "required_files_missing": [],
+  "files": [
+    {
+      "path": "docs/stage3/M14_VRP_自动化采集与归因软件设计开发文档.md",
+      "size_bytes": 6843,
+      "sha256": "1c326c338922a5cf3f9db69f390007e7e43baaf2a7a259d1789c0431b326269c"
+    },
+    {
+      "path": "config/p3/m14_vrp_auto_collect.yaml",
+      "size_bytes": 2397,
+      "sha256": "f3f751bea9a89d1c52f1e4e380cbef0ba23687b6b62f215f53ddc5de2ba5e9b3"
+    }
+  ],
+  "next_batch": "P3 Probe-side VRP export + gzip + sha256 + manifest"
+}

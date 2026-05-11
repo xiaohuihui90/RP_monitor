@@ -1,0 +1,37 @@
+P2_JOINT_SNAPSHOT_MANIFEST=DONE
+
+probe_id = probe-cd
+location = chengdu
+snapshot_group_id = group_m15_20260510T165500Z
+joint_snapshot_id = probe-cd_20260510T165517Z
+export_id = 20260510T165517Z
+
+vrp_snapshot_available = True
+object_snapshot_available = True
+joint_snapshot_manifest_exists = True
+joint_snapshot_upload_ready = True
+
+vrp_generatedTime = 2026-05-08T06:48:58Z
+object_export_started_at = 2026-05-10T16:55:17.578083+00:00
+vrp_object_time_skew_seconds = 209179
+window_mapping_level = weak_or_unknown
+
+object_inventory_count = 104062
+active_manifest_count = 103838
+object_set_root = sha256:b374992b0ef6fff1d1f82ee2fac7b21e4b7769e48d16a8e019ce40b205f1f029
+effective_object_root = sha256:e67f89eaa0b785df07be803e0ab56ca9a201b332a8fc61fa6f7de9351068eabf
+
+warnings = ['vrp_object_time_skew_above_600_seconds']
+blockers = []
+
+reserved_interfaces:
+  e4b_cross_validator = reserved_only
+  control_plane_impact = reserved_only
+
+runtime_service_changed = False
+collector_restarted = False
+probe_restarted = False
+new_validator_installed = False
+bgp_data_loaded = False
+
+P2_acceptance = True

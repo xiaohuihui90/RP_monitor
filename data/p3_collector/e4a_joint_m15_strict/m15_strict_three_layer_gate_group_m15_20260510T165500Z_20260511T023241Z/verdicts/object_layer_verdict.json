@@ -1,0 +1,27 @@
+{
+  "schema": "s3.stage3.m15.strict_object_layer_verdict.v1",
+  "created_at_utc": "2026-05-11T02:33:18.734289+00:00",
+  "snapshot_group_id": "group_m15_20260510T165500Z",
+  "object_group_complete": true,
+  "window_mapping_level": "strong",
+  "generated_time_skew_seconds": 16,
+  "object_roots_aligned": false,
+  "effective_object_roots_aligned": false,
+  "object_roots": {
+    "probe-sg": "sha256:0f9e0c3fe3f917e68db50b14ded711d988a1148477e72a63c791dd8ec5a6b5be",
+    "probe-bj": "sha256:3e33b7ac8bd8a04850ddfb205d3a79a11165a2b26d135ec43b915860f5a4292f",
+    "probe-cd": "sha256:b374992b0ef6fff1d1f82ee2fac7b21e4b7769e48d16a8e019ce40b205f1f029"
+  },
+  "effective_object_roots": {
+    "probe-sg": "sha256:8dff17fb8a6f6bdef5f86754428a069518f629b35ad907cf064c1bdfd724c82e",
+    "probe-bj": "sha256:f23e6bed43ee1259bcd22584878367efbebefd0d5fe1d6b2e6f8eba95de923bb",
+    "probe-cd": "sha256:e67f89eaa0b785df07be803e0ab56ca9a201b332a8fc61fa6f7de9351068eabf"
+  },
+  "all_pairwise_inventory_diff_count": 625502,
+  "all_pairwise_active_manifest_diff_count": 624826,
+  "min_inventory_jaccard_similarity": 0.00046835530508357456,
+  "min_active_manifest_jaccard_similarity": 4.230167245430458e-05,
+  "final_status": "object_layer_divergence_observed",
+  "e4_gate_recommendation": "do_not_confirm_e4",
+  "interpretation": "Object-layer roots or inventories diverge across probes under a strong same-window group; do not attribute VRP differences to validator output logic alone."
+}

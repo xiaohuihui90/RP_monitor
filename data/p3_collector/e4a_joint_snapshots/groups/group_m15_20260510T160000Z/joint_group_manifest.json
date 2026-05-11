@@ -1,0 +1,57 @@
+{
+  "schema": "s3.stage3.joint_snapshot_group.v1",
+  "snapshot_group_id": "group_m15_20260510T160000Z",
+  "required_probes": [
+    "probe-cd",
+    "probe-bj",
+    "probe-sg"
+  ],
+  "received_vrp_probes": [],
+  "received_object_probes": [
+    "probe-bj",
+    "probe-sg"
+  ],
+  "vrp_group_complete": false,
+  "object_group_complete": false,
+  "joint_group_complete": false,
+  "generated_time_min": "2026-05-10T16:02:35.628130+00:00",
+  "generated_time_max": "2026-05-10T16:02:48.673628+00:00",
+  "generated_time_skew_seconds": 13,
+  "window_mapping_level": "strong",
+  "snapshots": {
+    "probe-bj": {
+      "probe_id": "probe-bj",
+      "snapshot_group_id": "group_m15_20260510T160000Z",
+      "joint_snapshot_id": "probe-bj_20260510T160235Z",
+      "object_received": true,
+      "object_snapshot_record_path": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_snapshots/groups/group_m15_20260510T160000Z/probe-bj/object/object_snapshot_record.json",
+      "object_snapshot_tar_gz_path": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_snapshots/groups/group_m15_20260510T160000Z/probe-bj/object/object_snapshot.tar.gz",
+      "object_inventory_count": 156546,
+      "active_manifest_count": 156210,
+      "object_set_root": "sha256:ceaad386333631d61945e9ff1f5368401dceeb383717c61da37583b42b34b983",
+      "effective_object_root": "sha256:057b8a3a364bc7c0bd5c87c13ce28c8560bde8932e943d683302df01298ea362",
+      "object_source_mode": "cache_file_inventory",
+      "object_export_started_at": "2026-05-10T16:02:35.628130+00:00",
+      "object_export_finished_at": "2026-05-10T16:03:05.611012+00:00",
+      "received_at_utc": "2026-05-10T16:03:20.696991+00:00"
+    },
+    "probe-sg": {
+      "probe_id": "probe-sg",
+      "snapshot_group_id": "group_m15_20260510T160000Z",
+      "joint_snapshot_id": "probe-sg_20260510T160248Z",
+      "object_received": true,
+      "object_snapshot_record_path": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_snapshots/groups/group_m15_20260510T160000Z/probe-sg/object/object_snapshot_record.json",
+      "object_snapshot_tar_gz_path": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_snapshots/groups/group_m15_20260510T160000Z/probe-sg/object/object_snapshot.tar.gz",
+      "object_inventory_count": 52553,
+      "active_manifest_count": 52441,
+      "object_set_root": "sha256:5e144c675627d2c7a5dff37d0f1abe214b6a277f4b02864c94f7358efca930ee",
+      "effective_object_root": "sha256:7c4db23c798349bf38048a7b2b347db697dcb03e95c00b9e0cfb286a4deba99d",
+      "object_source_mode": "cache_file_inventory",
+      "object_export_started_at": "2026-05-10T16:02:48.673628+00:00",
+      "object_export_finished_at": "2026-05-10T16:03:24.068646+00:00",
+      "received_at_utc": "2026-05-10T16:03:35.979523+00:00"
+    }
+  },
+  "created_at_utc": "2026-05-10T16:03:20.696936+00:00",
+  "updated_at_utc": "2026-05-10T16:03:35.979555+00:00"
+}

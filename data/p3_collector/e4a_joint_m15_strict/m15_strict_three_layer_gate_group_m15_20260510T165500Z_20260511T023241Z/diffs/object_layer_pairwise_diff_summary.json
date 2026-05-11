@@ -1,0 +1,29 @@
+{
+  "schema": "s3.stage3.m15.strict_object_pairwise_diff.v1",
+  "created_at_utc": "2026-05-11T02:33:18.734245+00:00",
+  "snapshot_group_id": "group_m15_20260510T165500Z",
+  "pair_summary": {
+    "probe-cd_vs_probe-bj": {
+      "inventory_diff_count": 260364,
+      "active_manifest_diff_count": 260026,
+      "inventory_jaccard_similarity": 0.00046835530508357456,
+      "active_manifest_jaccard_similarity": 4.230167245430458e-05
+    },
+    "probe-cd_vs_probe-sg": {
+      "inventory_diff_count": 156283,
+      "active_manifest_diff_count": 156171,
+      "inventory_jaccard_similarity": 0.001061048648441345,
+      "active_manifest_jaccard_similarity": 0.00034565530484877583
+    },
+    "probe-bj_vs_probe-sg": {
+      "inventory_diff_count": 208855,
+      "active_manifest_diff_count": 208629,
+      "inventory_jaccard_similarity": 0.0005837963029424291,
+      "active_manifest_jaccard_similarity": 5.272239263803681e-05
+    }
+  },
+  "all_pairwise_inventory_diff_count": 625502,
+  "all_pairwise_active_manifest_diff_count": 624826,
+  "min_inventory_jaccard_similarity": 0.00046835530508357456,
+  "min_active_manifest_jaccard_similarity": 4.230167245430458e-05
+}

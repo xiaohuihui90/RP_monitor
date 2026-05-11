@@ -1,0 +1,130 @@
+{
+  "schema": "s3.stage3.m14.final_verdict.v1",
+  "m14_substage": "M14-D/E",
+  "run_id": "m14a_fixture_20260507T080612Z",
+  "created_at_utc": "2026-05-08T02:54:25.409011+00:00",
+  "final_status": "not_e4_object_layer_version_skew",
+  "e4_status": "not_e4",
+  "confidence": "medium-high",
+  "confirmed_allowed": false,
+  "primary_attribution": "object_layer_temporal_version_divergence",
+  "secondary_attribution": "manifest_version_skew_dominant",
+  "explanation": "VRP output differences are downstream of object-layer manifest version skew.",
+  "vrp_output": {
+    "summary_available": true,
+    "diff_available": true,
+    "samples_available": true,
+    "all_vrp_roots_aligned": false,
+    "all_pairwise_entry_level_diff_count": 4,
+    "min_pairwise_jaccard_similarity": 0.5,
+    "top_diff_tal": "apnic",
+    "tal_concentration_ratio": 1.0
+  },
+  "context": {
+    "object_layer": {
+      "available": true,
+      "final_status": "object_layer_temporal_version_divergence",
+      "final_attribution": "manifest_version_skew_dominant",
+      "e4_status": "not_e4",
+      "confidence": "medium-high",
+      "object_layer_version_skew": true
+    },
+    "validator_config": {
+      "available": true,
+      "validator_type_aligned": true,
+      "validator_version_aligned": false,
+      "config_fingerprint_aligned": false,
+      "stable_config_fingerprint_aligned": false,
+      "runtime_process_fingerprint_aligned": false,
+      "tal_set_aligned": true,
+      "fallback_policy_aligned": true,
+      "local_filter_policy_aligned": true,
+      "refresh_interval_aligned": true,
+      "validator_environment_aligned_for_confirmed": false,
+      "hard_blockers": [
+        "validator_version_not_aligned",
+        "config_fingerprint_not_aligned",
+        "stable_config_fingerprint_not_aligned"
+      ],
+      "warnings": [
+        "runtime_process_fingerprint_not_aligned_diagnostic"
+      ],
+      "unknown_fields": [],
+      "source_schema": "s3.stage3.validator_config_context.v1",
+      "source": "m14c_fallback_from_stage3_review"
+    },
+    "window_mapping": {
+      "available": false,
+      "mapping_level": "missing",
+      "strong_mapping": false,
+      "acceptable_mapping": false,
+      "validator_cycle_skew_seconds": null,
+      "source": "m14d_fallback_missing_context",
+      "source_schema": "s3.stage3.window_mapping_context.v1"
+    },
+    "fetch_completeness": {
+      "available": false,
+      "rp_fetch_completeness_verified": false,
+      "repository_status_complete": false,
+      "all_target_pp_success": null,
+      "source": "m14d_fallback_missing_context",
+      "source_schema": "s3.stage3.fetch_completeness_context.v1"
+    },
+    "infrastructure": {
+      "available": false,
+      "risk_absent": null,
+      "dns_risk_absent": null,
+      "tls_risk_absent": null,
+      "http_risk_absent": null,
+      "cdn_geo_risk_absent": null,
+      "nameserver_roa_risk_absent": null,
+      "pp_server_roa_risk_absent": null,
+      "source": "m14d_fallback_missing_context",
+      "source_schema": "s3.stage3.infrastructure_context.v1"
+    }
+  },
+  "gating": {
+    "G0_vrp_input_integrity": "pass",
+    "G1_vrp_output": "pass_diff_observed",
+    "G2_object_view": "not_e4_object_layer_version_skew",
+    "G3_final": "not_e4_object_layer_version_skew",
+    "G3_validator_environment": "blocked_or_warning",
+    "G4_final_after_validator_context": "not_e4_object_layer_version_skew",
+    "G4_window_mapping": "blocked_or_missing",
+    "G5_fetch_completeness": "blocked_or_missing",
+    "G6_infrastructure": "blocked_or_missing",
+    "G7_final_after_contexts": "not_e4_object_layer_version_skew"
+  },
+  "blockers": [],
+  "warnings": [
+    "M14-B only joins object verdict; validator_config/window/fetch/infrastructure contexts are not joined yet.",
+    "fetch_completeness_missing_or_unverified_but_object_layer_version_skew_has_priority",
+    "infrastructure_context_missing_or_risk_unknown_but_object_layer_version_skew_has_priority",
+    "runtime_process_fingerprint_not_aligned_diagnostic",
+    "validator_environment_drift_observed_but_object_layer_version_skew_has_priority",
+    "window_mapping_missing_or_not_acceptable_but_object_layer_version_skew_has_priority"
+  ],
+  "candidate_causes": [
+    "object_layer_temporal_version_divergence",
+    "manifest_version_skew_dominant"
+  ],
+  "evidence_basis": [
+    "summaries/m14_vrp_summary.json",
+    "diffs/m14_vrp_pairwise_diff.json",
+    "diffs/m14_vrp_pairwise_diff_samples.json",
+    "inputs/object_verdict_ref.json",
+    "inputs/validator_config_context_ref.json",
+    "inputs/window_mapping_context_ref.json",
+    "inputs/fetch_completeness_context_ref.json",
+    "inputs/infrastructure_context_ref.json"
+  ],
+  "recommendations": [
+    "Do not mark this case as E4 if object verdict is manifest_version_skew_dominant.",
+    "Proceed to M14-C to join validator_config_context.",
+    "Proceed to M14-D/E to join window/fetch/infrastructure contexts and package evidence.",
+    "Align validator version/config/TAL/policy before allowing E4 confirmed.",
+    "For current object-skew case, keep not_e4 and do not allow E4 confirmed.",
+    "For future real VRP runs, collect strong window mapping, fetch completeness, and infrastructure context before E4 confirmed."
+  ],
+  "updated_at_utc": "2026-05-08T03:08:34.728955+00:00"
+}

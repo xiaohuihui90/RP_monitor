@@ -1,0 +1,14 @@
+{
+  "schema": "s3.stage3.e4a_joint.p10_final_gate_manifest.v1",
+  "created_at_utc": "2026-05-09T15:33:49.175323+00:00",
+  "snapshot_group_id": "group_joint_20260509T094400Z",
+  "final_status": "not_e4_object_layer_divergence",
+  "e4_status": "blocked",
+  "confirmed_allowed": false,
+  "blocking_layer": "object_layer",
+  "confidence": "high",
+  "final_verdict": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_p10/p10_final_joint_e4a_gate_20260509T153324Z/verdicts/final_joint_e4a_gate.json",
+  "evidence_pack": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_p10/p10_final_joint_e4a_gate_20260509T153324Z/evidence/group_joint_20260509T094400Z_p10_final_joint_e4a_gate_evidence.tar.gz",
+  "evidence_pack_sha256": "c329157c49bc5ea958f0935baf6dfdd09e245cdddb347dc2bcccbb2759167748",
+  "P10_acceptance": true
+}

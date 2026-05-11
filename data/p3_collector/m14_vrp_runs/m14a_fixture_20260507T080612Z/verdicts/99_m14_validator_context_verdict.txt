@@ -1,0 +1,26 @@
+M14C_VALIDATOR_CONTEXT_JOIN=DONE
+
+run_id = m14a_fixture_20260507T080612Z
+run_dir = /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_fixture_20260507T080612Z
+
+final_status = not_e4_object_layer_version_skew
+e4_status = not_e4
+confirmed_allowed = False
+
+validator_context_available = True
+validator_environment_aligned_for_confirmed = False
+validator_type_aligned = True
+validator_version_aligned = False
+config_fingerprint_aligned = False
+stable_config_fingerprint_aligned = False
+tal_set_aligned = True
+fallback_policy_aligned = True
+local_filter_policy_aligned = True
+refresh_interval_aligned = True
+
+hard_blockers = ['validator_version_not_aligned', 'config_fingerprint_not_aligned', 'stable_config_fingerprint_not_aligned']
+warnings = ['M14-B only joins object verdict; validator_config/window/fetch/infrastructure contexts are not joined yet.', 'runtime_process_fingerprint_not_aligned_diagnostic', 'validator_environment_drift_observed_but_object_layer_version_skew_has_priority']
+
+priority_interpretation:
+If object-layer version skew is already proven, M14 keeps not_e4_object_layer_version_skew as the final status.
+Validator environment drift is recorded as warning/context for this run and will block E4 confirmed in future non-object-skew cases.

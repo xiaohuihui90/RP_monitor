@@ -1,0 +1,45 @@
+{
+  "all_pairwise_entry_level_diff_count": 624856,
+  "min_pairwise_jaccard_similarity": 3.07675740537048e-05,
+  "pair_summary": {
+    "probe-cd_vs_probe-bj": {
+      "left_probe": "probe-cd",
+      "right_probe": "probe-bj",
+      "left_count": 103830,
+      "right_count": 156192,
+      "common_count": 8,
+      "union_count": 260014,
+      "only_left_count": 103822,
+      "only_right_count": 156184,
+      "entry_level_diff_count": 260006,
+      "jaccard_similarity": 3.07675740537048e-05,
+      "top_diff_object_type": "mft"
+    },
+    "probe-cd_vs_probe-sg": {
+      "left_probe": "probe-cd",
+      "right_probe": "probe-sg",
+      "left_count": 103830,
+      "right_count": 52437,
+      "common_count": 15,
+      "union_count": 156252,
+      "only_left_count": 103815,
+      "only_right_count": 52422,
+      "entry_level_diff_count": 156237,
+      "jaccard_similarity": 9.599877121572844e-05,
+      "top_diff_object_type": "mft"
+    },
+    "probe-bj_vs_probe-sg": {
+      "left_probe": "probe-bj",
+      "right_probe": "probe-sg",
+      "left_count": 156192,
+      "right_count": 52437,
+      "common_count": 8,
+      "union_count": 208621,
+      "only_left_count": 156184,
+      "only_right_count": 52429,
+      "entry_level_diff_count": 208613,
+      "jaccard_similarity": 3.8347050392817595e-05,
+      "top_diff_object_type": "mft"
+    }
+  }
+}

@@ -1,0 +1,41 @@
+schema: s3.stage3.m12_r3.5e_sync_gate_config.v1
+
+gate:
+  gate_id_prefix: m12_r3_object_gate_v5_5e_sync
+  source_run_id_prefix: m12_r3_5e_sync_export
+  method: stored_wrapper_manifest_only_v1
+  root_version: v5
+  evidence_level: P2
+  policy_fingerprint: sha256:3a400a525459e130867f9b7181772b574ac6368d24eab727dcb5d839475b556e
+
+collector:
+  output_base_dir: data/p3_collector/object_gate_v5_runs
+  poll_interval_seconds: 10
+  export_timeout_seconds: 3600
+  api_timeout_seconds: 60
+  compact_fetch_timeout_seconds: 120
+
+thresholds:
+  active_manifest_min: 50000
+  active_object_record_min: 470000
+  expired_manifest_strict_max: 100
+  expired_manifest_relaxed_max: 1000
+  start_skew_warn_seconds: 120
+  finish_skew_warn_seconds: 600
+
+probes:
+  probe-cd:
+    location: chengdu
+    base_url: http://127.0.0.1:28089
+    validator_id: routinator-cd
+
+  probe-bj:
+    location: beijing
+    base_url: http://166.111.121.63:28089
+    validator_id: routinator-bj
+    expected_stored_root: /home/zhangxiaohui/s3_runtime/routinator_0151/rpki-cache/stored
+
+  probe-sg:
+    location: singapore
+    base_url: http://8.219.129.95:28089
+    validator_id: routinator-sg

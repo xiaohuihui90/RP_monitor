@@ -1,0 +1,23 @@
+M14A_VRP_MIN_CLOSURE=DONE
+
+run_id = m14a_auto_group_20260508T064858Z
+run_dir = /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_auto_group_20260508T064858Z
+method = lowmem_sort_comm_resume
+
+raw_inputs_complete = True
+normalized_outputs_complete = True
+summary_exists = True
+pairwise_diff_exists = True
+all_vrp_roots_aligned = False
+all_pairwise_entry_level_diff_count = 440
+min_pairwise_jaccard_similarity = 0.999749378692293
+
+probe_summaries:
+  probe-cd: unique_vrp_count=857819 parse_error_count=0 vrp_root_v1=sha256:3daab143b2d5b523597b75f4741b5eb23aa19d6d67c126bb24f88fea56d7bc91
+  probe-bj: unique_vrp_count=857716 parse_error_count=0 vrp_root_v1=sha256:51531ad31c4dd61737fd9f422becdb086312bcf7b7dc6e19ae9de260d1268020
+  probe-sg: unique_vrp_count=857805 parse_error_count=0 vrp_root_v1=sha256:1f69e1253cf2404e0b0caca19420ffcf50cba8d568d0990230bb3631e275ea01
+
+pair_summary:
+  probe-cd_vs_probe-bj: left=857819 right=857716 common=857679 only_left=140 only_right=37 jaccard=0.9997936716651745
+  probe-cd_vs_probe-sg: left=857819 right=857805 common=857788 only_left=31 only_right=17 jaccard=0.9999440452487421
+  probe-bj_vs_probe-sg: left=857716 right=857805 common=857653 only_left=63 only_right=152 jaccard=0.999749378692293

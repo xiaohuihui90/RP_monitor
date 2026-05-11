@@ -1,0 +1,1 @@
+M14-D/E 阶段在已完成 VRP 输出层差异检测、object verdict 接入和 validator 配置上下文接入的基础上，进一步接入 window mapping、fetch completeness 和 infrastructure context，并生成最终证据包。对于当前运行，object-layer manifest version skew 仍是主导解释，因此最终保持 not_e4_object_layer_version_skew；缺失或未验证的 window/fetch/infrastructure context 被记录为 gating 上下文，并将在未来非 object-skew case 中阻塞 E4 confirmed。

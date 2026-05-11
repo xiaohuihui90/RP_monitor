@@ -1,0 +1,43 @@
+{
+  "schema": "s3.stage3.m15.p11_d_three_layer_final_verdict.v1",
+  "created_at_utc": "2026-05-11T03:08:44.622213+00:00",
+  "snapshot_group_id": "group_m15_20260510T165500Z",
+  "final_status": "not_e4_object_layer_divergence_under_aligned_l1",
+  "e4_status": "blocked",
+  "confirmed_allowed": false,
+  "blocking_layer": "object_layer",
+  "attribution_layer": "object_view",
+  "confidence": "high",
+  "announced_view": {
+    "complete": true,
+    "window_mapping_level": "strong",
+    "generated_time_skew_seconds": 17,
+    "strict_announced_view_aligned": true,
+    "all_pairwise_diff_count": null
+  },
+  "object_view": {
+    "complete": true,
+    "window_mapping_level": "strong",
+    "generated_time_skew_seconds": 16,
+    "object_roots_aligned": false,
+    "effective_object_roots_aligned": false,
+    "all_pairwise_inventory_diff_count": 625502,
+    "all_pairwise_active_manifest_diff_count": 624826
+  },
+  "vrp_view": {
+    "complete": true,
+    "generated_time_skew_seconds": 21,
+    "all_vrp_roots_aligned": false,
+    "all_pairwise_entry_level_diff_count": 5154760,
+    "min_pairwise_jaccard_similarity": 0.0
+  },
+  "interpretation": "L1 announced view is aligned under a strong same-window group, but L2 object view diverges; therefore observed VRP differences must not be attributed to validator output logic alone.",
+  "inputs": {
+    "announced_view_group_manifest": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_m15_l1/m15_l1_announced_view_group_group_m15_20260510T165500Z_20260511T022201Z/outputs/announced_view_group_manifest.json",
+    "object_group_manifest": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_snapshots/groups/group_m15_20260510T165500Z/joint_group_manifest.json",
+    "object_layer_verdict": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_m15_strict/m15_strict_three_layer_gate_group_m15_20260510T165500Z_20260511T023241Z/verdicts/object_layer_verdict.json",
+    "vrp_group_manifest": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_snapshots/groups/group_m15_20260510T165500Z/group_manifest.json",
+    "vrp_summary": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_m15_strict/m15_strict_three_layer_gate_group_m15_20260510T165500Z_20260511T023241Z/outputs/m14_vrp_summary.json",
+    "vrp_pairwise_diff": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_m15_strict/m15_strict_three_layer_gate_group_m15_20260510T165500Z_20260511T023241Z/outputs/m14_vrp_pairwise_diff.json"
+  }
+}

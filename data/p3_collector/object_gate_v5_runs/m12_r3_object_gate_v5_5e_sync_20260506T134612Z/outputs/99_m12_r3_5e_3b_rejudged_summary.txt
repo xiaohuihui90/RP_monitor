@@ -1,0 +1,29 @@
+gate_id = m12_r3_object_gate_v5_5e_sync_20260506T134612Z
+source_run_id = m12_r3_5e_sync_export_20260506T134612Z
+status = divergent_candidate
+root_aligned = False
+records_required = True
+records_fetched = False
+confidence = medium
+field_compatibility_notes = ['probe-bj:policy_fingerprint_from_effective_policy_fingerprint', 'probe-bj:source_run_id_from_final_status', 'probe-cd:policy_fingerprint_from_effective_policy_fingerprint', 'probe-cd:source_run_id_from_final_status', 'probe-sg:policy_fingerprint_from_effective_policy_fingerprint', 'probe-sg:source_run_id_from_final_status']
+candidate_causes = ['object_layer_effective_root_divergence_candidate', 'previous_probe-bj_low_count_anomaly_explained_by_wrong_or_stale_cache_source', 'probe-bj_cache_source_fix_still_effective']
+warnings = ['probe-bj:manifest_parse_failure_observed', 'probe-cd:manifest_parse_failure_observed', 'probe-sg:expired_manifest_count_above_strict_threshold', 'probe-sg:manifest_parse_failure_observed']
+blockers = []
+not_e4_reason = Current evidence is object-layer effective-object evidence. Validated output-layer VRP/root/digest comparison is not included.
+
+counts:
+  probe-cd {'active_manifest_count': 51685, 'expired_manifest_count': 5, 'active_object_record_count': 472596, 'freeze_window_clean': True}
+  probe-bj {'active_manifest_count': 51686, 'expired_manifest_count': 1, 'active_object_record_count': 472582, 'freeze_window_clean': True}
+  probe-sg {'active_manifest_count': 51675, 'expired_manifest_count': 527, 'active_object_record_count': 472553, 'freeze_window_clean': True}
+
+root_groups:
+  sha256:61001921ea1a62e3bc06c3cd19bf5acb03b228085252715580a3b1b96a85b677 ['probe-cd']
+  sha256:c1f079c25b30467080b59aa64dbdbc7b0c50308089fe2ad2e777acb000f68ea3 ['probe-bj']
+  sha256:ad7d7fa009b5e67987481f809fd3233c079ce4778b4a3580ef4b5d19c7587da0 ['probe-sg']
+
+interpretation:
+ - After field-compatible rejudgement, the false source_run_id/policy_fingerprint blockers are removed.
+ - All three probes completed export successfully and object counts are close.
+ - However effective_object_root_v5 still differs across probes.
+ - This is an object-layer divergent candidate, not an E4 validated-output conclusion.
+ - Records-level manifest/object diff is required before stronger attribution.

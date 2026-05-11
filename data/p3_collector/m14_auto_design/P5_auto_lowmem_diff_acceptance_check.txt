@@ -1,0 +1,26 @@
+P5_COLLECTOR_AUTO_TRIGGER_M14A_LOWMEM_DIFF=DONE
+
+snapshot_group_id = group_20260508T064858Z
+auto_run_id = m14a_auto_group_20260508T064858Z
+auto_run_dir = /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_auto_group_20260508T064858Z
+
+scope:
+  complete_snapshot_group_used = True
+  three_uploaded_vrp_gzip_inputs_used = True
+  raw_inputs_decompressed = True
+  normalized_outputs_generated = True
+  lowmem_pairwise_diff_generated = True
+  preliminary_verdict_generated = True
+  group_manifest_updated_with_run_id = True
+
+outputs:
+  /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_auto_group_20260508T064858Z/summaries/m14_vrp_summary.json
+  /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_auto_group_20260508T064858Z/diffs/m14_vrp_pairwise_diff.json
+  /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_auto_group_20260508T064858Z/diffs/m14_vrp_pairwise_diff_samples.json
+  /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_auto_group_20260508T064858Z/verdicts/preliminary_verdict.json
+  /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_auto_group_20260508T064858Z/checks/P5_acceptance_check.txt
+
+P5_acceptance = True
+
+next_batch:
+  P6 same-window context gating and attribution

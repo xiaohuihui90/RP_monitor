@@ -1,0 +1,85 @@
+{
+  "schema": "s3.stage3.m14.vrp_summary.v1",
+  "run_id": "m14a_auto_group_20260508T064858Z",
+  "created_at_utc": "2026-05-08T09:15:22.392323+00:00",
+  "source": "p5_auto_from_snapshot_group",
+  "snapshot_group_id": "group_20260508T064858Z",
+  "all_vrp_roots_aligned": false,
+  "probe_summaries": {
+    "probe-cd": {
+      "probe_id": "probe-cd",
+      "raw_file": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_auto_group_20260508T064858Z/raw_vrps/probe-cd_vrps.raw.json",
+      "normalized_file": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_auto_group_20260508T064858Z/normalized_vrps/probe-cd_vrp_index.jsonl",
+      "raw_vrp_count": 857819,
+      "unique_vrp_count": 857819,
+      "parse_error_count": 0,
+      "warning_count": 0,
+      "vrp_root_v1": "sha256:3daab143b2d5b523597b75f4741b5eb23aa19d6d67c126bb24f88fea56d7bc91",
+      "tal_breakdown": {
+        "afrinic": 28537,
+        "apnic": 196317,
+        "arin": 250198,
+        "lacnic": 41782,
+        "ripe": 340985
+      },
+      "afi_breakdown": {
+        "ipv4": 663590,
+        "ipv6": 194229
+      },
+      "metadata": {
+        "generated": 1778222938,
+        "generatedTime": "2026-05-08T06:48:58Z"
+      }
+    },
+    "probe-bj": {
+      "probe_id": "probe-bj",
+      "raw_file": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_auto_group_20260508T064858Z/raw_vrps/probe-bj_vrps.raw.json",
+      "normalized_file": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_auto_group_20260508T064858Z/normalized_vrps/probe-bj_vrp_index.jsonl",
+      "raw_vrp_count": 857716,
+      "unique_vrp_count": 857716,
+      "parse_error_count": 0,
+      "warning_count": 0,
+      "vrp_root_v1": "sha256:51531ad31c4dd61737fd9f422becdb086312bcf7b7dc6e19ae9de260d1268020",
+      "tal_breakdown": {
+        "afrinic": 28530,
+        "apnic": 196241,
+        "arin": 250201,
+        "lacnic": 41775,
+        "ripe": 340969
+      },
+      "afi_breakdown": {
+        "ipv4": 663504,
+        "ipv6": 194212
+      },
+      "metadata": {
+        "generated": 1778223250,
+        "generatedTime": "2026-05-08T06:54:10Z"
+      }
+    },
+    "probe-sg": {
+      "probe_id": "probe-sg",
+      "raw_file": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_auto_group_20260508T064858Z/raw_vrps/probe-sg_vrps.raw.json",
+      "normalized_file": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_auto_group_20260508T064858Z/normalized_vrps/probe-sg_vrp_index.jsonl",
+      "raw_vrp_count": 857805,
+      "unique_vrp_count": 857805,
+      "parse_error_count": 0,
+      "warning_count": 0,
+      "vrp_root_v1": "sha256:1f69e1253cf2404e0b0caca19420ffcf50cba8d568d0990230bb3631e275ea01",
+      "tal_breakdown": {
+        "afrinic": 28537,
+        "apnic": 196318,
+        "arin": 250194,
+        "lacnic": 41782,
+        "ripe": 340974
+      },
+      "afi_breakdown": {
+        "ipv4": 663579,
+        "ipv6": 194226
+      },
+      "metadata": {
+        "generated": 1778223380,
+        "generatedTime": "2026-05-08T06:56:20Z"
+      }
+    }
+  }
+}

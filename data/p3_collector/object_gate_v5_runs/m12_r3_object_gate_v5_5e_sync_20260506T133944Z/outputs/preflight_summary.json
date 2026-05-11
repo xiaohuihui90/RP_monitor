@@ -1,0 +1,947 @@
+{
+  "schema": "s3.stage3.m12_r3.5e.preflight_summary.v1",
+  "created_at_utc": "2026-05-06T13:39:44.643852+00:00",
+  "gate_id": "m12_r3_object_gate_v5_5e_sync_20260506T133944Z",
+  "source_run_id": "m12_r3_5e_sync_export_20260506T133944Z",
+  "probes": {
+    "probe-cd": {
+      "probe_id": "probe-cd",
+      "location": "chengdu",
+      "base_url": "http://127.0.0.1:28089",
+      "health_ok": true,
+      "output_summary_ok": true,
+      "jobs_ok": true,
+      "health": {
+        "ok": true,
+        "http_status": 200,
+        "url": "http://127.0.0.1:28089/api/v1/health",
+        "bytes": 37,
+        "json": {
+          "status": "ok",
+          "probe_id": "probe-cd"
+        },
+        "error_class": null,
+        "error_message": null
+      },
+      "output_summary": {
+        "ok": true,
+        "http_status": 200,
+        "url": "http://127.0.0.1:28089/api/v1/rp/output-summary",
+        "bytes": 4116,
+        "json": {
+          "probe_id": "probe-cd",
+          "validator_type": "routinator",
+          "base_url": "http://127.0.0.1:8323",
+          "collected_at": "2026-05-06T13:38:35.721045Z",
+          "source_endpoint": "/api/v1/status",
+          "vrp_count": 854085.0,
+          "router_key_count": 0.0,
+          "aspa_count": 0.0,
+          "last_update_done": "2026-05-06T13:36:01.119274261+00:00",
+          "metrics_excerpt": null,
+          "validator_id": null,
+          "validator_version": "routinator/0.15.1",
+          "status_http_code": 200,
+          "validator_state": "ready",
+          "now": "2026-05-06T13:38:35.730980819+00:00",
+          "last_update_start": "2026-05-06T13:28:26.147858842+00:00",
+          "last_update_duration": 454.971,
+          "cycle_age_seconds": 154.601771,
+          "global_vrp_count": 854085,
+          "ipv4_final": 662714,
+          "ipv6_final": 191371,
+          "repository_count": 105,
+          "valid_publication_points": 51679,
+          "rejected_publication_points": 128,
+          "valid_manifests": 51679,
+          "rejected_manifests": 0,
+          "per_tal_vrp_count": {
+            "afrinic": 28289,
+            "apnic": 194322,
+            "arin": 248792,
+            "lacnic": 41838,
+            "ripe": 340844
+          },
+          "tal_summary": {
+            "afrinic": {
+              "vrps_final": 28289,
+              "ipv4_final": 27252,
+              "ipv6_final": 1037,
+              "valid_publication_points": 1332,
+              "rejected_publication_points": 0,
+              "valid_manifests": 1332,
+              "rejected_manifests": 0
+            },
+            "apnic": {
+              "vrps_final": 194322,
+              "ipv4_final": 134285,
+              "ipv6_final": 60037,
+              "valid_publication_points": 12628,
+              "rejected_publication_points": 3,
+              "valid_manifests": 12628,
+              "rejected_manifests": 0
+            },
+            "arin": {
+              "vrps_final": 248792,
+              "ipv4_final": 196187,
+              "ipv6_final": 52605,
+              "valid_publication_points": 8802,
+              "rejected_publication_points": 18,
+              "valid_manifests": 8802,
+              "rejected_manifests": 0
+            },
+            "lacnic": {
+              "vrps_final": 41838,
+              "ipv4_final": 29207,
+              "ipv6_final": 12631,
+              "valid_publication_points": 6593,
+              "rejected_publication_points": 25,
+              "valid_manifests": 6593,
+              "rejected_manifests": 0
+            },
+            "ripe": {
+              "vrps_final": 340844,
+              "ipv4_final": 275783,
+              "ipv6_final": 65061,
+              "valid_publication_points": 22324,
+              "rejected_publication_points": 82,
+              "valid_manifests": 22324,
+              "rejected_manifests": 0
+            }
+          },
+          "raw_status_sha256": "5a1d6524730b508f20eeefcc28315e61963933612353c26eeee8889a676ba872",
+          "status_summary_digest": "8533be9f5d874556679a4bed077b2968404a7b9068cccde3d61847938e82d93d",
+          "repository_summary": {
+            "source": "repositories",
+            "repository_count": 105,
+            "status_counter": {
+              "unknown": 105
+            },
+            "issue_count": 0,
+            "items_digest": "94fe7bf6dfb8ade5710db761f62be27a5c2812d529f827a9ba99ab429b629cc9",
+            "sample": [
+              {
+                "id": "https://akane.maru.co.jp/oshirase.xml",
+                "status": null,
+                "notify_status": null,
+                "payload_status": null,
+                "serial": null,
+                "session_id": null,
+                "last_update": null,
+                "issues_count": 0
+              },
+              {
+                "id": "https://alias.rpki-measurement.site/rrdp/notification.xml",
+                "status": null,
+                "notify_status": null,
+                "payload_status": null,
+                "serial": null,
+                "session_id": null,
+                "last_update": null,
+                "issues_count": 0
+              },
+              {
+                "id": "https://ca.nat.moe/rrdp/notification.xml",
+                "status": null,
+                "notify_status": null,
+                "payload_status": null,
+                "serial": null,
+                "session_id": null,
+                "last_update": null,
+                "issues_count": 0
+              },
+              {
+                "id": "https://ca.rg.net/rrdp/notify.xml",
+                "status": null,
+                "notify_status": null,
+                "payload_status": null,
+                "serial": null,
+                "session_id": null,
+                "last_update": null,
+                "issues_count": 0
+              },
+              {
+                "id": "https://chloe.sobornost.net/rpki/news.xml",
+                "status": null,
+                "notify_status": null,
+                "payload_status": null,
+                "serial": null,
+                "session_id": null,
+                "last_update": null,
+                "issues_count": 0
+              },
+              {
+                "id": "https://cloudie.rpki.app/rrdp/notification.xml",
+                "status": null,
+                "notify_status": null,
+                "payload_status": null,
+                "serial": null,
+                "session_id": null,
+                "last_update": null,
+                "issues_count": 0
+              },
+              {
+                "id": "https://krill.47272.net/rrdp/notification.xml",
+                "status": null,
+                "notify_status": null,
+                "payload_status": null,
+                "serial": null,
+                "session_id": null,
+                "last_update": null,
+                "issues_count": 0
+              },
+              {
+                "id": "https://krill.accuristechnologies.ca/rrdp/notification.xml",
+                "status": null,
+                "notify_status": null,
+                "payload_status": null,
+                "serial": null,
+                "session_id": null,
+                "last_update": null,
+                "issues_count": 0
+              },
+              {
+                "id": "https://krill.byhill.de/rrdp/notification.xml",
+                "status": null,
+                "notify_status": null,
+                "payload_status": null,
+                "serial": null,
+                "session_id": null,
+                "last_update": null,
+                "issues_count": 0
+              },
+              {
+                "id": "https://krill.ca-bc-01.ssmidge.xyz/rrdp/notification.xml",
+                "status": null,
+                "notify_status": null,
+                "payload_status": null,
+                "serial": null,
+                "session_id": null,
+                "last_update": null,
+                "issues_count": 0
+              }
+            ]
+          },
+          "repository_status_digest": "fe724db3dbe519a2c7bb112f7ca1fed5e0fa3143c64251c7acf5145cea8a515e",
+          "location": null,
+          "serial": 250
+        },
+        "error_class": null,
+        "error_message": null
+      },
+      "jobs": {
+        "ok": true,
+        "http_status": 200,
+        "url": "http://127.0.0.1:28089/api/v1/exports/effective-object/jobs?limit=5",
+        "bytes": 4050,
+        "json": {
+          "schema": "s3.stage3.m12_r3.effective_object_export_job_list.v1",
+          "base_dir": "/home/zhangxiaohui/s3_runtime/effective_object_exports",
+          "jobs": [
+            {
+              "schema": "s3.stage3.m12_r3.effective_object_export_job_status.v1",
+              "export_id": "m12_r3_effective_object_export_m12_effective_object_20260504T053134Z_probe-cd_20260505T014642Z",
+              "probe_id": "probe-cd",
+              "validator_id": "routinator-cd",
+              "probe_location": "chengdu",
+              "source_run_id": "m12_effective_object_20260504T053134Z",
+              "method": "stored_wrapper_manifest_only_v1",
+              "root_version": "v5",
+              "evidence_level": "P2",
+              "policy_fingerprint": "sha256:3a400a525459e130867f9b7181772b574ac6368d24eab727dcb5d839475b556e",
+              "status": "success",
+              "created_at": "2026-05-05T01:46:42.603227+00:00",
+              "started_at": "2026-05-05T01:46:42.604376+00:00",
+              "completed_at": "2026-05-05T01:48:19.744960+00:00",
+              "duration_ms": 97140,
+              "output_dir": "/home/zhangxiaohui/s3_runtime/effective_object_exports/m12_r3_effective_object_export_m12_effective_object_20260504T053134Z_probe-cd_20260505T014642Z",
+              "compact_path": "/home/zhangxiaohui/s3_runtime/effective_object_exports/m12_r3_effective_object_export_m12_effective_object_20260504T053134Z_probe-cd_20260505T014642Z/m12_r2_3f_manifest_only_full_export_compact.json",
+              "summary_path": "/home/zhangxiaohui/s3_runtime/effective_object_exports/m12_r3_effective_object_export_m12_effective_object_20260504T053134Z_probe-cd_20260505T014642Z/m12_r2_3f_manifest_only_full_export_summary.json",
+              "compact_ready": true,
+              "records_ready": true,
+              "download_ready": false,
+              "failure_stage": null,
+              "error_class": null,
+              "error_message": null,
+              "blockers": [],
+              "warnings": [
+                "manifest_parse_failure_observed"
+              ],
+              "compact_excerpt": {
+                "schema": "s3.stage3.m12_r2.stored_manifest_only_full_export_compact.v1",
+                "status": "success",
+                "accepted_for_collector_object_gate_v5": true,
+                "source_method": "stored_wrapper_manifest_only_v1",
+                "root_version": "v5",
+                "evidence_level": "P2",
+                "effective_validator_version": "Routinator 0.15.1",
+                "active_manifest_count": 51659,
+                "active_object_record_count": 472169,
+                "effective_object_root_v5": "sha256:3ae6ed9ed78f058f269c7aa715bc1f0e327b8149bae9afea90c55827da244e33",
+                "freeze_window_clean": true
+              }
+            },
+            {
+              "schema": "s3.stage3.m12_r3.effective_object_export_job_status.v1",
+              "export_id": "m12_r3_effective_object_export_m12_effective_object_20260504T053134Z_probe-cd_20260505T012253Z",
+              "probe_id": "probe-cd",
+              "validator_id": "routinator-cd",
+              "probe_location": "chengdu",
+              "source_run_id": "m12_effective_object_20260504T053134Z",
+              "method": "stored_wrapper_manifest_only_v1",
+              "root_version": "v5",
+              "evidence_level": "P2",
+              "policy_fingerprint": "sha256:3a400a525459e130867f9b7181772b574ac6368d24eab727dcb5d839475b556e",
+              "status": "success",
+              "created_at": "2026-05-05T01:22:53.913685+00:00",
+              "started_at": "2026-05-05T01:22:53.913973+00:00",
+              "completed_at": "2026-05-05T01:24:27.642163+00:00",
+              "duration_ms": 93728,
+              "output_dir": "/home/zhangxiaohui/s3_runtime/effective_object_exports/m12_r3_effective_object_export_m12_effective_object_20260504T053134Z_probe-cd_20260505T012253Z",
+              "compact_path": "/home/zhangxiaohui/s3_runtime/effective_object_exports/m12_r3_effective_object_export_m12_effective_object_20260504T053134Z_probe-cd_20260505T012253Z/m12_r2_3f_manifest_only_full_export_compact.json",
+              "summary_path": "/home/zhangxiaohui/s3_runtime/effective_object_exports/m12_r3_effective_object_export_m12_effective_object_20260504T053134Z_probe-cd_20260505T012253Z/m12_r2_3f_manifest_only_full_export_summary.json",
+              "compact_ready": true,
+              "records_ready": true,
+              "download_ready": false,
+              "failure_stage": null,
+              "error_class": null,
+              "error_message": null,
+              "blockers": [],
+              "warnings": [
+                "manifest_parse_failure_observed"
+              ],
+              "compact_excerpt": {
+                "schema": "s3.stage3.m12_r2.stored_manifest_only_full_export_compact.v1",
+                "status": "success",
+                "accepted_for_collector_object_gate_v5": true,
+                "source_method": "stored_wrapper_manifest_only_v1",
+                "root_version": "v5",
+                "evidence_level": "P2",
+                "effective_validator_version": "Routinator 0.15.1",
+                "active_manifest_count": 51660,
+                "active_object_record_count": 472179,
+                "effective_object_root_v5": "sha256:6325fa0a8c850df601b6e78c3f622da3c55c23e5e531a3367eccc8cbdab48898",
+                "freeze_window_clean": true
+              }
+            }
+          ]
+        },
+        "error_class": null,
+        "error_message": null
+      }
+    },
+    "probe-bj": {
+      "probe_id": "probe-bj",
+      "location": "beijing",
+      "base_url": "http://166.111.121.63:28089",
+      "health_ok": true,
+      "output_summary_ok": true,
+      "jobs_ok": true,
+      "health": {
+        "ok": true,
+        "http_status": 200,
+        "url": "http://166.111.121.63:28089/api/v1/health",
+        "bytes": 37,
+        "json": {
+          "status": "ok",
+          "probe_id": "probe-bj"
+        },
+        "error_class": null,
+        "error_message": null
+      },
+      "output_summary": {
+        "ok": true,
+        "http_status": 200,
+        "url": "http://166.111.121.63:28089/api/v1/rp/output-summary",
+        "bytes": 4115,
+        "json": {
+          "probe_id": "probe-bj",
+          "validator_type": "routinator",
+          "base_url": "http://127.0.0.1:8423",
+          "collected_at": "2026-05-06T13:34:47.583596Z",
+          "source_endpoint": "/api/v1/status",
+          "vrp_count": 854085.0,
+          "router_key_count": 0.0,
+          "aspa_count": 0.0,
+          "last_update_done": "2026-05-06T13:28:27.380277289+00:00",
+          "metrics_excerpt": null,
+          "validator_id": null,
+          "validator_version": "routinator/0.15.1",
+          "status_http_code": 200,
+          "validator_state": "ready",
+          "now": "2026-05-06T13:34:47.597756998+00:00",
+          "last_update_start": "2026-05-06T13:26:52.188338329+00:00",
+          "last_update_duration": 95.192,
+          "cycle_age_seconds": 380.203319,
+          "global_vrp_count": 854085,
+          "ipv4_final": 662713,
+          "ipv6_final": 191372,
+          "repository_count": 105,
+          "valid_publication_points": 51679,
+          "rejected_publication_points": 128,
+          "valid_manifests": 51679,
+          "rejected_manifests": 0,
+          "per_tal_vrp_count": {
+            "afrinic": 28289,
+            "apnic": 194322,
+            "arin": 248792,
+            "lacnic": 41838,
+            "ripe": 340844
+          },
+          "tal_summary": {
+            "afrinic": {
+              "vrps_final": 28289,
+              "ipv4_final": 27252,
+              "ipv6_final": 1037,
+              "valid_publication_points": 1332,
+              "rejected_publication_points": 0,
+              "valid_manifests": 1332,
+              "rejected_manifests": 0
+            },
+            "apnic": {
+              "vrps_final": 194322,
+              "ipv4_final": 134285,
+              "ipv6_final": 60037,
+              "valid_publication_points": 12628,
+              "rejected_publication_points": 3,
+              "valid_manifests": 12628,
+              "rejected_manifests": 0
+            },
+            "arin": {
+              "vrps_final": 248792,
+              "ipv4_final": 196187,
+              "ipv6_final": 52605,
+              "valid_publication_points": 8802,
+              "rejected_publication_points": 18,
+              "valid_manifests": 8802,
+              "rejected_manifests": 0
+            },
+            "lacnic": {
+              "vrps_final": 41838,
+              "ipv4_final": 29207,
+              "ipv6_final": 12631,
+              "valid_publication_points": 6593,
+              "rejected_publication_points": 25,
+              "valid_manifests": 6593,
+              "rejected_manifests": 0
+            },
+            "ripe": {
+              "vrps_final": 340844,
+              "ipv4_final": 275782,
+              "ipv6_final": 65062,
+              "valid_publication_points": 22324,
+              "rejected_publication_points": 82,
+              "valid_manifests": 22324,
+              "rejected_manifests": 0
+            }
+          },
+          "raw_status_sha256": "9ea7cfd8198fd0981f88b09911842b95cf3152a049fe69f8f424f70a9efc4ced",
+          "status_summary_digest": "a23f36cf08ea2e9ab1511b68a6134bb2f38476d4d5c441c103742fbbaf98e570",
+          "repository_summary": {
+            "source": "repositories",
+            "repository_count": 105,
+            "status_counter": {
+              "unknown": 105
+            },
+            "issue_count": 0,
+            "items_digest": "94fe7bf6dfb8ade5710db761f62be27a5c2812d529f827a9ba99ab429b629cc9",
+            "sample": [
+              {
+                "id": "https://akane.maru.co.jp/oshirase.xml",
+                "status": null,
+                "notify_status": null,
+                "payload_status": null,
+                "serial": null,
+                "session_id": null,
+                "last_update": null,
+                "issues_count": 0
+              },
+              {
+                "id": "https://alias.rpki-measurement.site/rrdp/notification.xml",
+                "status": null,
+                "notify_status": null,
+                "payload_status": null,
+                "serial": null,
+                "session_id": null,
+                "last_update": null,
+                "issues_count": 0
+              },
+              {
+                "id": "https://ca.nat.moe/rrdp/notification.xml",
+                "status": null,
+                "notify_status": null,
+                "payload_status": null,
+                "serial": null,
+                "session_id": null,
+                "last_update": null,
+                "issues_count": 0
+              },
+              {
+                "id": "https://ca.rg.net/rrdp/notify.xml",
+                "status": null,
+                "notify_status": null,
+                "payload_status": null,
+                "serial": null,
+                "session_id": null,
+                "last_update": null,
+                "issues_count": 0
+              },
+              {
+                "id": "https://chloe.sobornost.net/rpki/news.xml",
+                "status": null,
+                "notify_status": null,
+                "payload_status": null,
+                "serial": null,
+                "session_id": null,
+                "last_update": null,
+                "issues_count": 0
+              },
+              {
+                "id": "https://cloudie.rpki.app/rrdp/notification.xml",
+                "status": null,
+                "notify_status": null,
+                "payload_status": null,
+                "serial": null,
+                "session_id": null,
+                "last_update": null,
+                "issues_count": 0
+              },
+              {
+                "id": "https://krill.47272.net/rrdp/notification.xml",
+                "status": null,
+                "notify_status": null,
+                "payload_status": null,
+                "serial": null,
+                "session_id": null,
+                "last_update": null,
+                "issues_count": 0
+              },
+              {
+                "id": "https://krill.accuristechnologies.ca/rrdp/notification.xml",
+                "status": null,
+                "notify_status": null,
+                "payload_status": null,
+                "serial": null,
+                "session_id": null,
+                "last_update": null,
+                "issues_count": 0
+              },
+              {
+                "id": "https://krill.byhill.de/rrdp/notification.xml",
+                "status": null,
+                "notify_status": null,
+                "payload_status": null,
+                "serial": null,
+                "session_id": null,
+                "last_update": null,
+                "issues_count": 0
+              },
+              {
+                "id": "https://krill.ca-bc-01.ssmidge.xyz/rrdp/notification.xml",
+                "status": null,
+                "notify_status": null,
+                "payload_status": null,
+                "serial": null,
+                "session_id": null,
+                "last_update": null,
+                "issues_count": 0
+              }
+            ]
+          },
+          "repository_status_digest": "fe724db3dbe519a2c7bb112f7ca1fed5e0fa3143c64251c7acf5145cea8a515e",
+          "location": null,
+          "serial": 409
+        },
+        "error_class": null,
+        "error_message": null
+      },
+      "jobs": {
+        "ok": true,
+        "http_status": 200,
+        "url": "http://166.111.121.63:28089/api/v1/exports/effective-object/jobs?limit=5",
+        "bytes": 4110,
+        "json": {
+          "schema": "s3.stage3.m12_r3.effective_object_export_job_list.v1",
+          "base_dir": "/home/zhangxiaohui/s3_runtime/effective_object_exports",
+          "jobs": [
+            {
+              "schema": "s3.stage3.m12_r3.effective_object_export_job_status.v1",
+              "export_id": "m12_r3_effective_object_export_m12_effective_object_20260506_bj_cache_source_fix_probe-bj_20260506T071302Z",
+              "probe_id": "probe-bj",
+              "validator_id": "routinator-bj",
+              "probe_location": "beijing",
+              "source_run_id": "m12_effective_object_20260506_bj_cache_source_fix",
+              "method": "stored_wrapper_manifest_only_v1",
+              "root_version": "v5",
+              "evidence_level": "P2",
+              "policy_fingerprint": "sha256:3a400a525459e130867f9b7181772b574ac6368d24eab727dcb5d839475b556e",
+              "status": "success",
+              "created_at": "2026-05-06T07:13:02.589017+00:00",
+              "started_at": "2026-05-06T07:13:02.590647+00:00",
+              "completed_at": "2026-05-06T07:14:18.022985+00:00",
+              "duration_ms": 75432,
+              "output_dir": "/home/zhangxiaohui/s3_runtime/effective_object_exports/m12_r3_effective_object_export_m12_effective_object_20260506_bj_cache_source_fix_probe-bj_20260506T071302Z",
+              "compact_path": "/home/zhangxiaohui/s3_runtime/effective_object_exports/m12_r3_effective_object_export_m12_effective_object_20260506_bj_cache_source_fix_probe-bj_20260506T071302Z/m12_r2_3f_manifest_only_full_export_compact.json",
+              "summary_path": "/home/zhangxiaohui/s3_runtime/effective_object_exports/m12_r3_effective_object_export_m12_effective_object_20260506_bj_cache_source_fix_probe-bj_20260506T071302Z/m12_r2_3f_manifest_only_full_export_summary.json",
+              "compact_ready": true,
+              "records_ready": true,
+              "download_ready": false,
+              "failure_stage": null,
+              "error_class": null,
+              "error_message": null,
+              "blockers": [],
+              "warnings": [
+                "manifest_parse_failure_observed"
+              ],
+              "compact_excerpt": {
+                "schema": "s3.stage3.m12_r2.stored_manifest_only_full_export_compact.v1",
+                "status": "success",
+                "accepted_for_collector_object_gate_v5": true,
+                "source_method": "stored_wrapper_manifest_only_v1",
+                "root_version": "v5",
+                "evidence_level": "P2",
+                "effective_validator_version": "Routinator 0.15.1",
+                "active_manifest_count": 51673,
+                "active_object_record_count": 472377,
+                "effective_object_root_v5": "sha256:6f6decd1495b7af31d00330e178adaa5a75c30d8ed168e66eed9912ced1e6503",
+                "freeze_window_clean": true
+              }
+            },
+            {
+              "schema": "s3.stage3.m12_r3.effective_object_export_job_status.v1",
+              "export_id": "m12_r3_effective_object_export_m12_effective_object_20260504T053134Z_probe-bj_20260505T041521Z",
+              "probe_id": "probe-bj",
+              "validator_id": "routinator-bj",
+              "probe_location": "beijing",
+              "source_run_id": "m12_effective_object_20260504T053134Z",
+              "method": "stored_wrapper_manifest_only_v1",
+              "root_version": "v5",
+              "evidence_level": "P2",
+              "policy_fingerprint": "sha256:3a400a525459e130867f9b7181772b574ac6368d24eab727dcb5d839475b556e",
+              "status": "success",
+              "created_at": "2026-05-05T04:15:21.815579+00:00",
+              "started_at": "2026-05-05T04:15:21.817741+00:00",
+              "completed_at": "2026-05-05T04:16:21.459432+00:00",
+              "duration_ms": 59641,
+              "output_dir": "/home/zhangxiaohui/s3_runtime/effective_object_exports/m12_r3_effective_object_export_m12_effective_object_20260504T053134Z_probe-bj_20260505T041521Z",
+              "compact_path": "/home/zhangxiaohui/s3_runtime/effective_object_exports/m12_r3_effective_object_export_m12_effective_object_20260504T053134Z_probe-bj_20260505T041521Z/m12_r2_3f_manifest_only_full_export_compact.json",
+              "summary_path": "/home/zhangxiaohui/s3_runtime/effective_object_exports/m12_r3_effective_object_export_m12_effective_object_20260504T053134Z_probe-bj_20260505T041521Z/m12_r2_3f_manifest_only_full_export_summary.json",
+              "compact_ready": true,
+              "records_ready": true,
+              "download_ready": false,
+              "failure_stage": null,
+              "error_class": null,
+              "error_message": null,
+              "blockers": [],
+              "warnings": [
+                "manifest_parse_failure_observed"
+              ],
+              "compact_excerpt": {
+                "schema": "s3.stage3.m12_r2.stored_manifest_only_full_export_compact.v1",
+                "status": "success",
+                "accepted_for_collector_object_gate_v5": true,
+                "source_method": "stored_wrapper_manifest_only_v1",
+                "root_version": "v5",
+                "evidence_level": "P2",
+                "effective_validator_version": "Routinator 0.15.1",
+                "active_manifest_count": 20926,
+                "active_object_record_count": 280667,
+                "effective_object_root_v5": "sha256:9c15d22853b9f014d211f7efdcb69b0642e467ff0a09b0a44f1bb3370ec7726b",
+                "freeze_window_clean": true
+              }
+            }
+          ]
+        },
+        "error_class": null,
+        "error_message": null
+      }
+    },
+    "probe-sg": {
+      "probe_id": "probe-sg",
+      "location": "singapore",
+      "base_url": "http://8.219.129.95:28089",
+      "health_ok": true,
+      "output_summary_ok": true,
+      "jobs_ok": true,
+      "health": {
+        "ok": true,
+        "http_status": 200,
+        "url": "http://8.219.129.95:28089/api/v1/health",
+        "bytes": 37,
+        "json": {
+          "status": "ok",
+          "probe_id": "probe-sg"
+        },
+        "error_class": null,
+        "error_message": null
+      },
+      "output_summary": {
+        "ok": true,
+        "http_status": 200,
+        "url": "http://8.219.129.95:28089/api/v1/rp/output-summary",
+        "bytes": 4115,
+        "json": {
+          "probe_id": "probe-sg",
+          "validator_type": "routinator",
+          "base_url": "http://127.0.0.1:8323",
+          "collected_at": "2026-05-06T13:35:56.552943Z",
+          "source_endpoint": "/api/v1/status",
+          "vrp_count": 854067.0,
+          "router_key_count": 0.0,
+          "aspa_count": 0.0,
+          "last_update_done": "2026-05-06T13:25:14.728730596+00:00",
+          "metrics_excerpt": null,
+          "validator_id": null,
+          "validator_version": "routinator/0.15.1",
+          "status_http_code": 200,
+          "validator_state": "ready",
+          "now": "2026-05-06T13:35:56.794428240+00:00",
+          "last_update_start": "2026-05-06T13:35:14.729001904+00:00",
+          "last_update_duration": 422.88,
+          "cycle_age_seconds": 641.824213,
+          "global_vrp_count": 854067,
+          "ipv4_final": 662700,
+          "ipv6_final": 191367,
+          "repository_count": 105,
+          "valid_publication_points": 51669,
+          "rejected_publication_points": 138,
+          "valid_manifests": 51669,
+          "rejected_manifests": 0,
+          "per_tal_vrp_count": {
+            "afrinic": 28289,
+            "apnic": 194322,
+            "arin": 248784,
+            "lacnic": 41838,
+            "ripe": 340834
+          },
+          "tal_summary": {
+            "afrinic": {
+              "vrps_final": 28289,
+              "ipv4_final": 27252,
+              "ipv6_final": 1037,
+              "valid_publication_points": 1332,
+              "rejected_publication_points": 0,
+              "valid_manifests": 1332,
+              "rejected_manifests": 0
+            },
+            "apnic": {
+              "vrps_final": 194322,
+              "ipv4_final": 134285,
+              "ipv6_final": 60037,
+              "valid_publication_points": 12625,
+              "rejected_publication_points": 6,
+              "valid_manifests": 12625,
+              "rejected_manifests": 0
+            },
+            "arin": {
+              "vrps_final": 248784,
+              "ipv4_final": 196179,
+              "ipv6_final": 52605,
+              "valid_publication_points": 8799,
+              "rejected_publication_points": 21,
+              "valid_manifests": 8799,
+              "rejected_manifests": 0
+            },
+            "lacnic": {
+              "vrps_final": 41838,
+              "ipv4_final": 29207,
+              "ipv6_final": 12631,
+              "valid_publication_points": 6593,
+              "rejected_publication_points": 25,
+              "valid_manifests": 6593,
+              "rejected_manifests": 0
+            },
+            "ripe": {
+              "vrps_final": 340834,
+              "ipv4_final": 275777,
+              "ipv6_final": 65057,
+              "valid_publication_points": 22320,
+              "rejected_publication_points": 86,
+              "valid_manifests": 22320,
+              "rejected_manifests": 0
+            }
+          },
+          "raw_status_sha256": "5068df554c39a3b3a1d1d80ee1124c8f087ccc46a421ab0482d15ae807b48c62",
+          "status_summary_digest": "0d4a4a4870bb93cb6341b0127ca4499ab4d73d9c2a6f387c124ef85fc8742419",
+          "repository_summary": {
+            "source": "repositories",
+            "repository_count": 105,
+            "status_counter": {
+              "unknown": 105
+            },
+            "issue_count": 0,
+            "items_digest": "94fe7bf6dfb8ade5710db761f62be27a5c2812d529f827a9ba99ab429b629cc9",
+            "sample": [
+              {
+                "id": "https://akane.maru.co.jp/oshirase.xml",
+                "status": null,
+                "notify_status": null,
+                "payload_status": null,
+                "serial": null,
+                "session_id": null,
+                "last_update": null,
+                "issues_count": 0
+              },
+              {
+                "id": "https://alias.rpki-measurement.site/rrdp/notification.xml",
+                "status": null,
+                "notify_status": null,
+                "payload_status": null,
+                "serial": null,
+                "session_id": null,
+                "last_update": null,
+                "issues_count": 0
+              },
+              {
+                "id": "https://ca.nat.moe/rrdp/notification.xml",
+                "status": null,
+                "notify_status": null,
+                "payload_status": null,
+                "serial": null,
+                "session_id": null,
+                "last_update": null,
+                "issues_count": 0
+              },
+              {
+                "id": "https://ca.rg.net/rrdp/notify.xml",
+                "status": null,
+                "notify_status": null,
+                "payload_status": null,
+                "serial": null,
+                "session_id": null,
+                "last_update": null,
+                "issues_count": 0
+              },
+              {
+                "id": "https://chloe.sobornost.net/rpki/news.xml",
+                "status": null,
+                "notify_status": null,
+                "payload_status": null,
+                "serial": null,
+                "session_id": null,
+                "last_update": null,
+                "issues_count": 0
+              },
+              {
+                "id": "https://cloudie.rpki.app/rrdp/notification.xml",
+                "status": null,
+                "notify_status": null,
+                "payload_status": null,
+                "serial": null,
+                "session_id": null,
+                "last_update": null,
+                "issues_count": 0
+              },
+              {
+                "id": "https://krill.47272.net/rrdp/notification.xml",
+                "status": null,
+                "notify_status": null,
+                "payload_status": null,
+                "serial": null,
+                "session_id": null,
+                "last_update": null,
+                "issues_count": 0
+              },
+              {
+                "id": "https://krill.accuristechnologies.ca/rrdp/notification.xml",
+                "status": null,
+                "notify_status": null,
+                "payload_status": null,
+                "serial": null,
+                "session_id": null,
+                "last_update": null,
+                "issues_count": 0
+              },
+              {
+                "id": "https://krill.byhill.de/rrdp/notification.xml",
+                "status": null,
+                "notify_status": null,
+                "payload_status": null,
+                "serial": null,
+                "session_id": null,
+                "last_update": null,
+                "issues_count": 0
+              },
+              {
+                "id": "https://krill.ca-bc-01.ssmidge.xyz/rrdp/notification.xml",
+                "status": null,
+                "notify_status": null,
+                "payload_status": null,
+                "serial": null,
+                "session_id": null,
+                "last_update": null,
+                "issues_count": 0
+              }
+            ]
+          },
+          "repository_status_digest": "fe724db3dbe519a2c7bb112f7ca1fed5e0fa3143c64251c7acf5145cea8a515e",
+          "location": null,
+          "serial": 211
+        },
+        "error_class": null,
+        "error_message": null
+      },
+      "jobs": {
+        "ok": true,
+        "http_status": 200,
+        "url": "http://8.219.129.95:28089/api/v1/exports/effective-object/jobs?limit=5",
+        "bytes": 2136,
+        "json": {
+          "schema": "s3.stage3.m12_r3.effective_object_export_job_list.v1",
+          "base_dir": "/home/zhangxiaohui/s3_runtime/effective_object_exports",
+          "jobs": [
+            {
+              "schema": "s3.stage3.m12_r3.effective_object_export_job_status.v1",
+              "export_id": "m12_r3_effective_object_export_m12_effective_object_20260504T053134Z_probe-sg_20260505T031400Z",
+              "probe_id": "probe-sg",
+              "validator_id": "routinator-sg",
+              "probe_location": "singapore",
+              "source_run_id": "m12_effective_object_20260504T053134Z",
+              "method": "stored_wrapper_manifest_only_v1",
+              "root_version": "v5",
+              "evidence_level": "P2",
+              "policy_fingerprint": "sha256:3a400a525459e130867f9b7181772b574ac6368d24eab727dcb5d839475b556e",
+              "status": "success",
+              "created_at": "2026-05-05T03:14:00.839043+00:00",
+              "started_at": "2026-05-05T03:14:00.840692+00:00",
+              "completed_at": "2026-05-05T03:59:44.726424+00:00",
+              "duration_ms": 2743885,
+              "output_dir": "/home/zhangxiaohui/s3_runtime/effective_object_exports/m12_r3_effective_object_export_m12_effective_object_20260504T053134Z_probe-sg_20260505T031400Z",
+              "compact_path": "/home/zhangxiaohui/s3_runtime/effective_object_exports/m12_r3_effective_object_export_m12_effective_object_20260504T053134Z_probe-sg_20260505T031400Z/m12_r2_3f_manifest_only_full_export_compact.json",
+              "summary_path": "/home/zhangxiaohui/s3_runtime/effective_object_exports/m12_r3_effective_object_export_m12_effective_object_20260504T053134Z_probe-sg_20260505T031400Z/m12_r2_3f_manifest_only_full_export_summary.json",
+              "compact_ready": true,
+              "records_ready": true,
+              "download_ready": false,
+              "failure_stage": null,
+              "error_class": null,
+              "error_message": null,
+              "blockers": [],
+              "warnings": [
+                "freeze_window_not_clean_observed",
+                "manifest_parse_failure_observed"
+              ],
+              "compact_excerpt": {
+                "schema": "s3.stage3.m12_r2.stored_manifest_only_full_export_compact.v1",
+                "status": "success",
+                "accepted_for_collector_object_gate_v5": true,
+                "source_method": "stored_wrapper_manifest_only_v1",
+                "root_version": "v5",
+                "evidence_level": "P2",
+                "effective_validator_version": "Routinator 0.15.1",
+                "active_manifest_count": 51650,
+                "active_object_record_count": 472154,
+                "effective_object_root_v5": "sha256:79e46390ed249935f42a83d40397d237848811a38b9b43b2bbc200a52d775893",
+                "freeze_window_clean": false
+              }
+            }
+          ]
+        },
+        "error_class": null,
+        "error_message": null
+      }
+    }
+  },
+  "warnings": [],
+  "blockers": [],
+  "status": "ok"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "s3.stage3.e4a.p2_archive_manifest.v1",
+  "created_at_utc": "2026-05-09T01:51:28.358016+00:00",
+  "run_id": "m14a_auto_group_20260508T064858Z",
+  "scope": "m14_e4a_cross_region_same_validator",
+  "e4b_cross_validator": "reserved_only",
+  "control_plane_impact": "reserved_only",
+  "run_evidence_index": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_auto_group_20260508T064858Z/evidence/e4a_evidence_index_v2.json",
+  "run_evidence_pack": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_auto_group_20260508T064858Z/evidence/m14a_auto_group_20260508T064858Z_e4a_evidence_pack_v2.tar.gz",
+  "files_count": 3,
+  "files": [
+    {
+      "path": "checks/P2_e4a_evidence_pack_v2_acceptance.txt",
+      "size_bytes": 981,
+      "sha256": "d8d6c5e8a8fd71907ffb2f86f5517034e83eb60ec84510734d64667db6f47a9e"
+    },
+    {
+      "path": "docs/E4A_evidence_pack_v2_summary.md",
+      "size_bytes": 959,
+      "sha256": "ff24b810c679ded941d0767e356b6df1a770bce0a1bdd011cc150d74722bc2de"
+    },
+    {
+      "path": "manifests/e4a_evidence_index_v2.json",
+      "size_bytes": 9147,
+      "sha256": "7ffee3021366e19be3db16af973e896c8ae2d8684ead3f26c4b5d244ff44ddfc"
+    }
+  ]
+}

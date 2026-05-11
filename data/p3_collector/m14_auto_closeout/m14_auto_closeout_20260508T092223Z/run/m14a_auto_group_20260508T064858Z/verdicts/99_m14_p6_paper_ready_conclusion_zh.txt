@@ -1,0 +1,1 @@
+P6 阶段将 P5 自动生成的三地 VRP 输出差异结果接入上下文 gating。本次 run 中三地 VRP roots 不一致，entry-level diff 为 440，最小 Jaccard 为 0.999749378692293。但由于缺少与该 snapshot group 同窗的对象层判定结果，系统不能将该差异提升为 E4。最终状态为 blocked_object_layer_unverified，e4_status 为 blocked，confirmed_allowed 为 False。

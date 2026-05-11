@@ -1,0 +1,17 @@
+{
+  "schema": "s3.stage3.m15.announced_view_probe_summary.v1",
+  "probe_id": "probe-bj",
+  "location": "beijing",
+  "snapshot_group_id": "group_joint_20260509T094400Z",
+  "collection_mode": "retrofit_or_diagnostic",
+  "export_id": "20260510T132546Z",
+  "pp_count": 3,
+  "success_count": 3,
+  "failure_count": 0,
+  "announced_view_root_v1": "sha256:07e41bb50f03355d5d08e506b7b4d916f4ee3c14b0e9a2e6a1678db1860ec1cf",
+  "records_file": "data/probe/e4a_announced_view/history/20260510T132546Z/announced_view_records.jsonl",
+  "started_at_utc": "2026-05-10T13:25:46.730109+00:00",
+  "finished_at_utc": "2026-05-10T13:25:47.867820+00:00",
+  "warnings": [],
+  "blockers": []
+}

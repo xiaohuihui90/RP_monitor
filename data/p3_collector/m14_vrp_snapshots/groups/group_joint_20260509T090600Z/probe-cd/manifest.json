@@ -1,0 +1,18 @@
+{
+  "schema": "s3.stage3.e4a.vrp_group_auto_export_manifest.v1",
+  "probe_id": "probe-cd",
+  "location": "chengdu",
+  "snapshot_group_id": "group_joint_20260509T090600Z",
+  "export_id": "20260509T091901Z",
+  "validator": "routinator",
+  "validator_version": "Routinator 0.15.1",
+  "generatedTime": "2026-05-09T09:19:01Z",
+  "export_started_at": "2026-05-09T09:19:01Z",
+  "export_finished_at": "2026-05-09T09:20:14Z",
+  "roa_count": 858820,
+  "router_key_count": 0,
+  "aspa_count": 0,
+  "raw_json_size_bytes": 74471601,
+  "used_noupdate": true,
+  "upload_ready": true
+}

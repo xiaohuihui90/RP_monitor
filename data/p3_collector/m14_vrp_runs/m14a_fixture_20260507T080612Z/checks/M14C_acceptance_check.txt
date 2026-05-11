@@ -1,0 +1,18 @@
+M14C_VALIDATOR_CONTEXT_JOIN=DONE
+
+run_id = m14a_fixture_20260507T080612Z
+validator_context_used = True
+validator_environment_aligned_for_confirmed = False
+hard_blockers = ['validator_version_not_aligned', 'config_fingerprint_not_aligned', 'stable_config_fingerprint_not_aligned']
+
+final_status = not_e4_object_layer_version_skew
+e4_status = not_e4
+confirmed_allowed = False
+
+object_skew_priority_preserved = True
+m14c_acceptance = True
+
+outputs:
+  /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_fixture_20260507T080612Z/verdicts/final_verdict_m14.json
+  /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_fixture_20260507T080612Z/verdicts/99_m14_validator_context_verdict.txt
+  /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/m14_vrp_runs/m14a_fixture_20260507T080612Z/inputs/validator_config_context_ref.json

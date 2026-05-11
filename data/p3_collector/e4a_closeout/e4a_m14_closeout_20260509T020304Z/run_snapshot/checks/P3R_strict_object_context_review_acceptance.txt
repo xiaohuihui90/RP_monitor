@@ -1,0 +1,16 @@
+P3R_STRICT_OBJECT_CONTEXT_REVIEW=DONE
+
+run_id = m14a_auto_group_20260508T064858Z
+
+original_same_window_candidate_count = 4
+strict_same_window_object_context_count = 0
+strict_object_context_available = False
+
+interpretation:
+  Original discovery candidates are not sufficient as strict object-layer evidence.
+
+decision:
+  if strict_object_context_available = True, proceed to P4 join object context and rerun P6.
+  if strict_object_context_available = False, keep final_status blocked_object_layer_unverified.
+
+P3R_acceptance = True

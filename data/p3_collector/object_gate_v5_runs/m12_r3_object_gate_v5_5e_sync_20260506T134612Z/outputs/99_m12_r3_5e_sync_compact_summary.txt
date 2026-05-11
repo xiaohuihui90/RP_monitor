@@ -1,0 +1,25 @@
+gate_id = m12_r3_object_gate_v5_5e_sync_20260506T134612Z
+source_run_id = m12_r3_5e_sync_export_20260506T134612Z
+status = blocked
+root_aligned = False
+records_required = False
+records_fetched = False
+confidence = low
+candidate_causes = ['previous_probe-bj_low_count_anomaly_explained_by_wrong_or_stale_cache_source', 'probe-bj_cache_source_fix_still_effective']
+warnings = ['probe-bj:manifest_parse_failure_observed', 'probe-cd:manifest_parse_failure_observed', 'probe-sg:expired_manifest_count_above_strict_threshold', 'probe-sg:manifest_parse_failure_observed']
+blockers = ['probe-bj:policy_fingerprint_mismatch', 'probe-bj:source_run_id_mismatch', 'probe-cd:policy_fingerprint_mismatch', 'probe-cd:source_run_id_mismatch', 'probe-sg:policy_fingerprint_mismatch', 'probe-sg:source_run_id_mismatch']
+not_e4_reason = Current evidence is object-layer effective-object evidence. Validated output-layer VRP/root/digest comparison is not included.
+
+counts:
+  probe-cd {'active_manifest_count': 51685, 'expired_manifest_count': 5, 'active_object_record_count': 472596}
+  probe-bj {'active_manifest_count': 51686, 'expired_manifest_count': 1, 'active_object_record_count': 472582}
+  probe-sg {'active_manifest_count': 51675, 'expired_manifest_count': 527, 'active_object_record_count': 472553}
+
+root_groups:
+  sha256:61001921ea1a62e3bc06c3cd19bf5acb03b228085252715580a3b1b96a85b677 ['probe-cd']
+  sha256:c1f079c25b30467080b59aa64dbdbc7b0c50308089fe2ad2e777acb000f68ea3 ['probe-bj']
+  sha256:ad7d7fa009b5e67987481f809fd3233c079ce4778b4a3580ef4b5d19c7587da0 ['probe-sg']
+
+interpretation:
+ - 5E compact gate did not produce a high-confidence aligned result.
+ - Check blockers and warnings before proceeding.

@@ -1,0 +1,26 @@
+P3_PROBE_EXPORT_AND_UPLOAD_DRY_RUN=DONE
+
+scope:
+  probe_export_once_script = implemented
+  probe_upload_dry_run_script = implemented
+  real_http_post_executed = False
+  collector_upload_api_required_in_P4 = True
+
+completed_nodes:
+  probe-cd = export_success_and_upload_dry_run_success
+  probe-bj = export_success_and_upload_dry_run_success
+  probe-sg = export_success_and_upload_dry_run_success
+
+outputs_per_probe:
+  vrps.raw.json
+  vrps.raw.json.gz
+  manifest.json
+  sha256.txt
+  upload_request_preview.json
+  P3_probe_export_acceptance_check.txt
+  P3_probe_upload_dry_run_acceptance_check.txt
+
+P3_acceptance = True
+
+next_batch:
+  P4 Collector upload API and snapshot grouping

@@ -1,0 +1,74 @@
+{
+  "schema": "s3.stage3.joint_snapshot_group.v1",
+  "snapshot_group_id": "group_20260509T031700Z",
+  "required_probes": [
+    "probe-cd",
+    "probe-bj",
+    "probe-sg"
+  ],
+  "received_vrp_probes": [],
+  "received_object_probes": [
+    "probe-bj",
+    "probe-cd",
+    "probe-sg"
+  ],
+  "vrp_group_complete": false,
+  "object_group_complete": true,
+  "joint_group_complete": false,
+  "generated_time_min": "2026-05-09T03:17:18.353807+00:00",
+  "generated_time_max": "2026-05-09T06:08:08.914824+00:00",
+  "generated_time_skew_seconds": 10250,
+  "window_mapping_level": "weak",
+  "snapshots": {
+    "probe-cd": {
+      "probe_id": "probe-cd",
+      "snapshot_group_id": "group_20260509T031700Z",
+      "joint_snapshot_id": "probe-cd_20260509T031718Z",
+      "object_received": true,
+      "object_snapshot_record_path": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_snapshots/groups/group_20260509T031700Z/probe-cd/object/object_snapshot_record.json",
+      "object_snapshot_tar_gz_path": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_snapshots/groups/group_20260509T031700Z/probe-cd/object/object_snapshot.tar.gz",
+      "object_inventory_count": 52018,
+      "active_manifest_count": 51906,
+      "object_set_root": "sha256:de9416f62d925db6c035ea192d214e82e8602b3e944d79b402e1f2b0f90175f8",
+      "effective_object_root": "sha256:8647689c220fea438c84a8cf76907db43405416e2de3b1ad871df0a01de59732",
+      "object_source_mode": "cache_file_inventory",
+      "object_export_started_at": "2026-05-09T03:17:18.353807+00:00",
+      "object_export_finished_at": "2026-05-09T03:17:29.768385+00:00",
+      "received_at_utc": "2026-05-09T03:20:30.133747+00:00"
+    },
+    "probe-bj": {
+      "probe_id": "probe-bj",
+      "snapshot_group_id": "group_20260509T031700Z",
+      "joint_snapshot_id": "probe-bj_20260509T060739Z",
+      "object_received": true,
+      "object_snapshot_record_path": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_snapshots/groups/group_20260509T031700Z/probe-bj/object/object_snapshot_record.json",
+      "object_snapshot_tar_gz_path": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_snapshots/groups/group_20260509T031700Z/probe-bj/object/object_snapshot.tar.gz",
+      "object_inventory_count": 156490,
+      "active_manifest_count": 156148,
+      "object_set_root": "sha256:93e2d19dd7a5f98226057602d219bc1e13b51931d4410f8ae53c3a46c87ba53b",
+      "effective_object_root": "sha256:2e7341774893bf85f49a038a6c7df64b015dd797ead4ed68c9326eab390dd32e",
+      "object_source_mode": "cache_file_inventory",
+      "object_export_started_at": "2026-05-09T06:07:39.800683+00:00",
+      "object_export_finished_at": "2026-05-09T06:08:09.134645+00:00",
+      "received_at_utc": "2026-05-09T06:17:28.113321+00:00"
+    },
+    "probe-sg": {
+      "probe_id": "probe-sg",
+      "snapshot_group_id": "group_20260509T031700Z",
+      "joint_snapshot_id": "probe-sg_20260509T060808Z",
+      "object_received": true,
+      "object_snapshot_record_path": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_snapshots/groups/group_20260509T031700Z/probe-sg/object/object_snapshot_record.json",
+      "object_snapshot_tar_gz_path": "/home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_snapshots/groups/group_20260509T031700Z/probe-sg/object/object_snapshot.tar.gz",
+      "object_inventory_count": 52543,
+      "active_manifest_count": 52431,
+      "object_set_root": "sha256:413493f097c1e6920caea6fdedf5755cd3c11f0593dbb4894f09166a3ad26453",
+      "effective_object_root": "sha256:afaea19a558d0d6901a13fd6aacb5cb76a5fac4e83176b30ec283dc942fb0c9b",
+      "object_source_mode": "cache_file_inventory",
+      "object_export_started_at": "2026-05-09T06:08:08.914824+00:00",
+      "object_export_finished_at": "2026-05-09T06:08:44.272150+00:00",
+      "received_at_utc": "2026-05-09T06:17:34.963839+00:00"
+    }
+  },
+  "created_at_utc": "2026-05-09T03:20:30.133707+00:00",
+  "updated_at_utc": "2026-05-09T06:17:34.963871+00:00"
+}

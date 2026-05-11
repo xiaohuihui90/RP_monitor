@@ -1,0 +1,162 @@
+[
+  {
+    "uri": "cache://.rpki-cache/repository/rsync/krill.ipgua.com/repo/pongery/0/BDD4451C46A2D9A578C4C015D6BC9425C6577FE2.mft",
+    "sha256": "cca6a613766ba849103c02b57b2a52db1a749ba6bad46a7fa828a9fd542a65ed",
+    "object_type": "mft",
+    "size_bytes": 1880,
+    "source_root": "/home/zhangxiaohui/.rpki-cache",
+    "evidence_level": "cache_file_inventory"
+  },
+  {
+    "uri": "cache://.rpki-cache/repository/rsync/krill.ipgua.com/repo/pongery/0/ED42F9C384F588482A56A937C446B70EB594BD3F.mft",
+    "sha256": "340b9049abeb52a3fddfaaea5f02918f17c9f81eb364b3c6a3ddbd7fe87e61c2",
+    "object_type": "mft",
+    "size_bytes": 1932,
+    "source_root": "/home/zhangxiaohui/.rpki-cache",
+    "evidence_level": "cache_file_inventory"
+  },
+  {
+    "uri": "cache://.rpki-cache/repository/rsync/krill.ipgua.com/repo/pongery/4/953F58832273DFD14187910ADCB3972B70B9BD3A.mft",
+    "sha256": "2c29255ae4ac81ca986182d8f4447ecb6b42089278c55042ee7778c4ab270434",
+    "object_type": "mft",
+    "size_bytes": 2225,
+    "source_root": "/home/zhangxiaohui/.rpki-cache",
+    "evidence_level": "cache_file_inventory"
+  },
+  {
+    "uri": "cache://.rpki-cache/repository/rsync/krill.ipgua.com/repo/pongery/4/A0E52AE2A6674D4C7481A57558337E89666096A5.mft",
+    "sha256": "c895c4ccc5af6699347673702483cc6a0f19c09be077d58f5ff5f7cb3522b621",
+    "object_type": "mft",
+    "size_bytes": 1898,
+    "source_root": "/home/zhangxiaohui/.rpki-cache",
+    "evidence_level": "cache_file_inventory"
+  },
+  {
+    "uri": "cache://.rpki-cache/repository/rsync/repodepot.wildtky.com/repo/WTA_CA_Apr26/0/BE41309CDB56AFF84ECABAD01972BD900090668E.mft",
+    "sha256": "0bd8a8c83acbec68abcb67f1b572ac6f4efc70019b001d8faff636c5b1f14739",
+    "object_type": "mft",
+    "size_bytes": 2557,
+    "source_root": "/home/zhangxiaohui/.rpki-cache",
+    "evidence_level": "cache_file_inventory"
+  },
+  {
+    "uri": "cache://.rpki-cache/repository/rsync/rpki.komorebi.network/repo/komorebi/0/9E501456E122798BDB8F739545BF6148C7CD1165.mft",
+    "sha256": "1c03b988ab5dbe4e39145deb583b6eac12aaeb8a866302be84674a2830f8680e",
+    "object_type": "mft",
+    "size_bytes": 1999,
+    "source_root": "/home/zhangxiaohui/.rpki-cache",
+    "evidence_level": "cache_file_inventory"
+  },
+  {
+    "uri": "cache://.rpki-cache/repository/rsync/rpki.komorebi.network/repo/komorebi/5/421B765C540F139258E8C8E64499AC6317AE6F93.mft",
+    "sha256": "f8b6c33661e4dfa06e5bedd93be5455e0baad8e667faaff8e82a655c907a6300",
+    "object_type": "mft",
+    "size_bytes": 2854,
+    "source_root": "/home/zhangxiaohui/.rpki-cache",
+    "evidence_level": "cache_file_inventory"
+  },
+  {
+    "uri": "cache://.rpki-cache/repository/rsync/rpki.komorebi.network/repo/komorebi/6/496B62D685F3CAF2E690022C12571B0DD3C6A8E5.mft",
+    "sha256": "6ed9f2eb918b87a3b6dae655a9f31492c0b238cc9e26706c7b0ed64c3145977a",
+    "object_type": "mft",
+    "size_bytes": 2026,
+    "source_root": "/home/zhangxiaohui/.rpki-cache",
+    "evidence_level": "cache_file_inventory"
+  },
+  {
+    "uri": "cache://.rpki-cache/repository/rsync/rsync.rp.ki/repo/aci/1/04C3A5EF440A7931A7BB6DC0A08211C490E209E3.mft",
+    "sha256": "12a533ad5a8fb89e8ae75838507a1a228ec23020e89d2e35db4e597c491150cb",
+    "object_type": "mft",
+    "size_bytes": 2211,
+    "source_root": "/home/zhangxiaohui/.rpki-cache",
+    "evidence_level": "cache_file_inventory"
+  },
+  {
+    "uri": "cache://.rpki-cache/repository/rsync/rsync.rp.ki/repo/clonoth/1/C23A7169F6499DD2815C9178A890BC4C0514DDF9.mft",
+    "sha256": "71b1a046784a63f8145b988df5768985cdc56d9d6d2e670f5f5b1aa7f3205468",
+    "object_type": "mft",
+    "size_bytes": 2380,
+    "source_root": "/home/zhangxiaohui/.rpki-cache",
+    "evidence_level": "cache_file_inventory"
+  },
+  {
+    "uri": "cache://.rpki-cache/repository/rsync/rsync.rp.ki/repo/misakaio/0/9CF05E7024D4A487E0B79E2F57525BF345DB53EC.mft",
+    "sha256": "0de0e2fe1c67ee6593e6245b5bc90d894e9f09924f4e0c252fdb326350ac4a9f",
+    "object_type": "mft",
+    "size_bytes": 2914,
+    "source_root": "/home/zhangxiaohui/.rpki-cache",
+    "evidence_level": "cache_file_inventory"
+  },
+  {
+    "uri": "cache://.rpki-cache/repository/rsync/rsync.rp.ki/repo/misakaio/1/27904CFE041547C56F20BA5B1BB37BC33E8A13D3.mft",
+    "sha256": "2f94a201b6622c862b52e7809c00b6311d86b8fc91b74be19648c27a3fbaf848",
+    "object_type": "mft",
+    "size_bytes": 3953,
+    "source_root": "/home/zhangxiaohui/.rpki-cache",
+    "evidence_level": "cache_file_inventory"
+  },
+  {
+    "uri": "cache://.rpki-cache/repository/rsync/rsync.rp.ki/repo/misakaio/2/359A4B6C6D3713CFF3636207DE9839058B51815B.mft",
+    "sha256": "32beefa8ebf5bc822f0a39a5bd532a37fa81fef9cd71076cde067329c54ad9b0",
+    "object_type": "mft",
+    "size_bytes": 3986,
+    "source_root": "/home/zhangxiaohui/.rpki-cache",
+    "evidence_level": "cache_file_inventory"
+  },
+  {
+    "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/1/F03205B3993400CC3FC657EFE68E0696DA332458.mft",
+    "sha256": "7ff9ecb3c93959b596c90822ec1ef280d56d79c152ddd9fdbfeebbd87fc51366",
+    "object_type": "mft",
+    "size_bytes": 5694,
+    "source_root": "/home/zhangxiaohui/.rpki-cache",
+    "evidence_level": "cache_file_inventory"
+  },
+  {
+    "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/10/C5D9C68A36AE4EEAFED3C1CB551AB4B493922316.mft",
+    "sha256": "f98f051d0edb885383f49b434d9e207dc985320ddfe21626e0e266223e8f59ee",
+    "object_type": "mft",
+    "size_bytes": 3285,
+    "source_root": "/home/zhangxiaohui/.rpki-cache",
+    "evidence_level": "cache_file_inventory"
+  },
+  {
+    "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/11/4B734CA25B04A198F3EFF79C293351606470223F.mft",
+    "sha256": "ba157ea81a8d1c0e151c9eb1e49cef888d05060483700fda780c982ff6ce7d12",
+    "object_type": "mft",
+    "size_bytes": 6771,
+    "source_root": "/home/zhangxiaohui/.rpki-cache",
+    "evidence_level": "cache_file_inventory"
+  },
+  {
+    "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/14/A1AE71CDA837CEEF69CE114D701C8650A0A8FAA9.mft",
+    "sha256": "42ca65576bc8b048e90ca60a0559be3d5dbb9384650b9de4835466fe01ee1af9",
+    "object_type": "mft",
+    "size_bytes": 5760,
+    "source_root": "/home/zhangxiaohui/.rpki-cache",
+    "evidence_level": "cache_file_inventory"
+  },
+  {
+    "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/15/24B0A526F8120A0F8142D2BD3B4644C8E1BDAD50.mft",
+    "sha256": "ab0c203a24f20c893b22022b4a699b991f009d93704ee8e5a6476182c86657cf",
+    "object_type": "mft",
+    "size_bytes": 3696,
+    "source_root": "/home/zhangxiaohui/.rpki-cache",
+    "evidence_level": "cache_file_inventory"
+  },
+  {
+    "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/16/84473C6B34C577A1F9F67605C4A8045E5F4D35A8.mft",
+    "sha256": "4a96159374d501b87e155985522d5a0696f0b49a0cb3bd56d139c66d268e2eae",
+    "object_type": "mft",
+    "size_bytes": 5295,
+    "source_root": "/home/zhangxiaohui/.rpki-cache",
+    "evidence_level": "cache_file_inventory"
+  },
+  {
+    "uri": "cache://.rpki-cache/repository/stored/rrdp/akane.maru.co.jp/21b663d22830a918e33f10dc49b81aada607fa16b68b1d8ff0cc25d79267f33a/rsync/akane.maru.co.jp/repo/1073c6/17/D659A7AF0FA7DCA33194D352FC97140AE70E8E3A.mft",
+    "sha256": "d439475556ab95757bdc39582be3dbe5d14528cea3cece7a3d6326cb6d381d00",
+    "object_type": "mft",
+    "size_bytes": 3200,
+    "source_root": "/home/zhangxiaohui/.rpki-cache",
+    "evidence_level": "cache_file_inventory"
+  }
+]

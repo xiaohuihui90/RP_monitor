@@ -1,0 +1,28 @@
+P6_CONTEXT_GATING_FINAL_VERDICT=DONE
+
+run_id = m14a_auto_group_20260508T064858Z
+snapshot_group_id = group_20260508T064858Z
+
+final_status = blocked_object_layer_unverified
+e4_status = blocked
+confirmed_allowed = False
+
+vrp_roots_aligned = False
+all_pairwise_entry_level_diff_count = 440
+min_pairwise_jaccard_similarity = 0.999749378692293
+generated_time_skew_seconds = 442
+
+object_context_available = False
+validator_version_aligned = True
+validator_environment_aligned_for_confirmed = False
+window_mapping_level = acceptable_but_not_strong
+window_acceptable_mapping = True
+rp_fetch_completeness_verified = False
+infrastructure_context_available = False
+
+blockers = ['same_window_object_layer_context_missing']
+warnings = ['vrp_output_diff_observed_but_same_window_object_context_missing']
+
+interpretation:
+  VRP output diff has been automatically observed from uploaded three-probe snapshots.
+  The result is blocked before E4 because same-window object-layer context is missing.

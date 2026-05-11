@@ -1,0 +1,19 @@
+P8_VRP_GROUP_AUTO_UPLOAD_ONCE=DONE
+
+probe_id = probe-cd
+location = chengdu
+snapshot_group_id = group_m15_20260510T165500Z
+export_id = 20260510T165605Z
+
+collector_url = http://127.0.0.1:28114/api/v1/m14/vrp/upload
+validator = routinator
+validator_version = Routinator 0.15.1
+
+generatedTime = 2026-05-10T16:56:05Z
+export_started_at = 2026-05-10T16:56:05Z
+export_finished_at = 2026-05-10T16:58:07Z
+
+upload_response = data/probe/e4a_vrp_group_auto/latest/upload_responses/probe-cd_group_m15_20260510T165500Z_vrp_upload_response.json
+upload_status = success
+
+P8_vrp_upload_acceptance = True

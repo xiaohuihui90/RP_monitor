@@ -1,0 +1,39 @@
+P11_C_ANNOUNCED_VIEW_GROUP=DONE
+
+created_at_utc = 2026-05-10T15:08:32.849144+00:00
+
+snapshot_group_id = group_joint_20260509T094400Z
+collection_mode = retrofit_or_diagnostic
+
+received_probes = ['probe-bj', 'probe-cd', 'probe-sg']
+announced_view_group_complete = True
+
+pp_scope = ['arin', 'ripe', 'apnic']
+
+generated_time_min = 2026-05-09T16:12:16.740106+00:00
+generated_time_max = 2026-05-10T13:29:15.728688+00:00
+generated_time_skew_seconds = 76618
+window_mapping_level = weak_or_unknown
+
+strict_announced_view_aligned = False
+semantic_announced_view_aligned = True
+all_pairwise_diff_count = 8
+
+warnings = []
+blockers = []
+
+runtime_changes:
+  collector_main_service_restarted = False
+  probe_restarted = False
+  new_validator_installed = False
+  bgp_data_loaded = False
+  cron_enabled = False
+
+outputs:
+  /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_p11/p11_c_announced_view_group_20260510T145915Z/outputs/announced_view_group_manifest.json
+  /home/zhangxiaohui/s3_stage3_v3_code/data/p3_collector/e4a_joint_p11/p11_c_announced_view_group_20260510T145915Z/diffs/announced_view_pairwise_diff.json
+
+next_batch:
+  Batch 3 / A3 / P11-D three_layer_final_gate
+
+P11_C_acceptance = True

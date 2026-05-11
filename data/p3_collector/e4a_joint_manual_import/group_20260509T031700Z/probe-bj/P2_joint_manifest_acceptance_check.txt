@@ -1,0 +1,37 @@
+P2_JOINT_SNAPSHOT_MANIFEST=DONE
+
+probe_id = probe-bj
+location = beijing
+snapshot_group_id = group_20260509T031700Z
+joint_snapshot_id = probe-bj_20260509T060739Z
+export_id = 20260509T060739Z
+
+vrp_snapshot_available = True
+object_snapshot_available = True
+joint_snapshot_manifest_exists = True
+joint_snapshot_upload_ready = True
+
+vrp_generatedTime = 2026-05-08T06:54:10Z
+object_export_started_at = 2026-05-09T06:07:39.800683+00:00
+vrp_object_time_skew_seconds = 83609
+window_mapping_level = weak_or_unknown
+
+object_inventory_count = 156490
+active_manifest_count = 156148
+object_set_root = sha256:93e2d19dd7a5f98226057602d219bc1e13b51931d4410f8ae53c3a46c87ba53b
+effective_object_root = sha256:2e7341774893bf85f49a038a6c7df64b015dd797ead4ed68c9326eab390dd32e
+
+warnings = ['vrp_object_time_skew_above_600_seconds']
+blockers = []
+
+reserved_interfaces:
+  e4b_cross_validator = reserved_only
+  control_plane_impact = reserved_only
+
+runtime_service_changed = False
+collector_restarted = False
+probe_restarted = False
+new_validator_installed = False
+bgp_data_loaded = False
+
+P2_acceptance = True

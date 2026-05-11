@@ -1,0 +1,33 @@
+{
+  "schema": "s3.stage3.m14.real_preliminary_verdict.v1",
+  "run_id": "m14a_auto_group_20260508T064858Z",
+  "created_at_utc": "2026-05-08T09:15:32.792207+00:00",
+  "snapshot_group_id": "group_20260508T064858Z",
+  "status": "real_vrp_output_diff_observed",
+  "e4_status": "not_yet_e4",
+  "confirmed_allowed": false,
+  "reason": "P5 auto run only performs VRP output comparison. Same-window object/window/validator/fetch/infrastructure contexts are not yet joined.",
+  "key_metrics": {
+    "all_vrp_roots_aligned": false,
+    "all_pairwise_entry_level_diff_count": 440,
+    "min_pairwise_jaccard_similarity": 0.999749378692293,
+    "generated_time_skew_seconds": 442,
+    "probe_unique_vrp_count": {
+      "probe-cd": 857819,
+      "probe-bj": 857716,
+      "probe-sg": 857805
+    },
+    "probe_parse_error_count": {
+      "probe-cd": 0,
+      "probe-bj": 0,
+      "probe-sg": 0
+    }
+  },
+  "next_required_contexts": [
+    "object_layer_context",
+    "validator_config_context",
+    "window_mapping_context",
+    "fetch_completeness_context",
+    "infrastructure_context"
+  ]
+}
