@@ -1,0 +1,73 @@
+目前 S3 / RP_monitor 系统已经完成阶段性工程收口，代码已更新到 GitHub 仓库：
+
+https://github.com/xiaohuihui90/RP_monitor.git
+
+当前系统主要具备以下能力：
+
+1. 三地跨地域 RPKI 观测能力
+
+系统已在成都、北京、新加坡三个节点完成部署与联调，能够从不同地理位置采集 RPKI 相关观测数据，并在 collector 侧统一聚合。
+
+2. 三层视图联合分析能力
+
+系统围绕 RPKI 差异归因构建了三层视图：
+
+- L1 宣告视图：采集 RRDP notification 中的 session_id、serial、notification_digest、snapshot_hash、delta hash chain 等信息；
+- L2 对象视图：采集 object inventory、active manifest、object_set_root、effective_object_root 等信息；
+- L3 验证输出视图：采集 Routinator 导出的 VRP 输出，计算 VRP root，并进行跨节点 pairwise diff。
+
+3. 对象层与 VRP 层差异检测能力
+
+系统可以对三地对象集合和 VRP 输出进行 root 对比、pairwise diff、summary 生成和 verdict 判定。
+
+4. 三层联合归因 gate 能力
+
+当前已完成 P11 / M15 三层联合归因闭环。系统已经观测到一个 strict same-window 样例：三地 L1 宣告视图一致，但 L2 对象视图分歧，L3 VRP 输出也分歧。
+
+该案例不能简单归因于 validator-only E4 输出差异，而应阻断在对象层，归因为 object_view divergence。
+
+5. 证据包与工程归档能力
+
+系统可以输出 acceptance、manifest、verdict、summary、SHA256SUMS 和 closeout archive，方便后续复现实验、阶段性汇报和论文分析。
+
+当前重点代码目录：
+
+scripts/p3/
+  当前阶段最核心的工程脚本目录。
+  主要包括 L1 宣告视图采集、L2 对象快照导出与上传、L3 VRP 导出与上传、对象层对比、VRP pairwise diff、P10/P11/M15 三层归因 gate、closeout 证据包生成等脚本。
+
+config_templates/
+  配置模板目录。
+  主要提供 M15 object upload、VRP upload、announced view collect 等配置模板，便于后续在不同节点上快速生成本地配置文件。
+
+data/
+  轻量级阶段性结果目录。
+  当前保留了部分 acceptance、manifest、verdict、summary、stage_report 等结果文件，用于说明系统运行过程、阶段性验收结果和观测证据摘要。
+  注意：仓库中不应长期保存大规模 raw VRP、object snapshot、日志和压缩归档。
+
+collector/
+  collector 中心侧服务代码。
+  主要负责接收和聚合来自各 probe 的观测数据，提供 collector API、健康检查接口、基础数据入库与调度入口。
+  在当前系统中，成都节点作为 collector，用于统一汇总三地 probe 上传的对象层、VRP 层以及相关上下文信息。
+  最近两周的 M15/P11 收口主要通过 scripts/p3 和 sidecar 脚本实现，因此 collector 主服务代码近期改动较少。
+
+probe/
+  probe 节点侧服务代码。
+  主要负责在各地域节点上运行 probe 服务，提供 /health 等接口，并作为本地观测与上报的基础运行环境。
+  成都、北京、新加坡三个节点均运行 probe 服务。近期新增的 L1/L2/L3 采集动作主要通过 scripts/p3 下的批处理脚本触发，而不是大规模修改 probe 主服务代码。
+
+rp_adapters/
+  RPKI validator / RP 适配层代码。
+  主要用于屏蔽不同 validator 的接口差异，例如 Routinator 的状态采集、版本记录、输出摘要和 VRP 导出等。
+  当前系统主要接入 Routinator，后续可扩展到 rpki-client、OctoRPKI、Fort 等其他 RP / validator，实现跨 validator 对比。
+
+shared/
+  系统共享组件目录。
+  主要放置跨 collector、probe、scripts 复用的通用逻辑，例如公共数据结构、工具函数、hash/root 计算、事件字段、时间窗/状态处理等。
+  该目录是系统公共基础层，近期 M15/P11 收口主要是在上层脚本和数据闭环中推进，因此 shared 目录近期改动较少。
+
+补充说明：
+
+collector/probe/rp_adapters/shared 是系统底座；最近两周主要开发集中在 scripts/p3、config、data 和 docs，用于完成 P8/P9/P10/P11/M15 的三层联合归因闭环。
+
+目前系统已经具备三层联合归因的工程能力，但完整 M15/P11 三层归因流程仍主要是人工触发的批处理流程；后续计划再推进 M16 低频自动化持续监测流水线。
