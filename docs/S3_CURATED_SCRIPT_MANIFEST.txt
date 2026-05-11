@@ -1,0 +1,21 @@
+S3 curated script manifest
+
+Copied scripts:
+  - scripts/p3/run_m14a_vrp_min_closure.py
+  - scripts/p3/run_m14b_attach_object_verdict.py
+  - scripts/p3/run_m14_p4_upload_sidecar_v2_group_auto.py
+  - scripts/p3/e4a_vrp_group_auto_export_upload.sh
+  - scripts/p3/e4a_object_auto_export_upload.sh
+  - scripts/p3/run_e4a_object_upload_sidecar.py
+  - scripts/p3/run_e4a_object_layer_compare.py
+  - scripts/p3/probe_export_object_snapshot_once.py
+  - scripts/p3/probe_export_object_snapshot_from_cache.py
+  - scripts/p3/probe_build_joint_snapshot_manifest.py
+  - scripts/p3/check_e4a_joint_object_snapshot_quality.py
+  - scripts/p3/discover_m14_same_window_object_context.py
+  - scripts/p3/p10_final_joint_e4a_gate.py
+  - scripts/p3/p11_collect_announced_view_once.py
+  - scripts/p3/p11_build_announced_view_group.py
+
+Missing scripts:
+

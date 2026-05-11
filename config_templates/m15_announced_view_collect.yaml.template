@@ -1,0 +1,13 @@
+pps:
+  - pp_id: arin
+    notification_uri: https://rrdp-rps.arin.net/notification.xml
+    enabled: true
+  - pp_id: ripe
+    notification_uri: https://rrdp.ripe.net/notification.xml
+    enabled: true
+  - pp_id: apnic
+    notification_uri: https://rrdp.apnic.net/notification.xml
+    enabled: true
+
+http_timeout_seconds: 15
+collection_mode: retrofit_or_diagnostic

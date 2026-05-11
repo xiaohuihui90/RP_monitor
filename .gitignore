@@ -1,0 +1,48 @@
+# Runtime data
+data/
+logs/
+tmp/
+cache/
+artifacts/
+outputs/
+archive/
+archives/
+
+# RPKI / validator outputs
+*.raw.json
+*.raw.json.gz
+*.jsonl.gz
+*.tar.gz
+*.tgz
+*.zip
+*.xz
+*.bz2
+
+# Local env / configs
+*.env
+.env
+*.local
+*.secret
+*.key
+*.pem
+*.crt
+*.p12
+*.pfx
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.ipynb_checkpoints/
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+
+# Project-specific runtime folders
+data/p3_collector/
+data/probe/
+logs/p3/
+config/p3/*.env
