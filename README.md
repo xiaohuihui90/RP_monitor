@@ -1,6 +1,6 @@
 # RP_monitor
 
-Curated scripts for the S3 RPKI multi-view monitoring and attribution prototype.
+Curated scripts for the RPKI multi-view monitoring and attribution prototype.
 
 ## Scope
 
@@ -14,7 +14,7 @@ This repository contains selected engineering scripts for:
 
 ## Current design model
 
-The S3 prototype follows a three-layer RPKI view model:
+The prototype follows a three-layer RPKI view model:
 
 - L1: Announced view
   - RRDP notification/session/serial/digest/snapshot/delta chain.
