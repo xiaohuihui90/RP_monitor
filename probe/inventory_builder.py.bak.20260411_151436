@@ -1,0 +1,35 @@
+from __future__ import annotations
+import xml.etree.ElementTree as ET
+from pathlib import Path
+
+def build_inventory_from_snapshot(snapshot_path: str) -> tuple[list[dict], dict]:
+    p = Path(snapshot_path)
+    root = ET.parse(p).getroot()
+    ns = ""
+    if root.tag.startswith("{"):
+        ns = root.tag.split("}")[0] + "}"
+    items = []
+    publish_count = 0
+    invalid_count = 0
+    for elem in root.findall(f".//{ns}publish"):
+        uri = elem.attrib.get("uri")
+        h = elem.attrib.get("hash")
+        if not uri or not h:
+            invalid_count += 1
+            continue
+        items.append({
+            "uri": uri,
+            "hash": h,
+            "source": "snapshot",
+            "op": "present",
+            "object_type": None,
+            "origin_ref": str(p),
+        })
+        publish_count += 1
+    stats = {
+        "total_objects": len(items),
+        "publish_count": publish_count,
+        "withdraw_count": 0,
+        "invalid_item_count": invalid_count,
+    }
+    return items, stats
