@@ -1,0 +1,28 @@
+probe_id: probe-sg
+location: singapore
+listen_host: 0.0.0.0
+listen_port: 28089
+public_base_url: http://8.219.129.95:28089
+collector_url: http://47.108.137.128:28081
+poll_interval_seconds: 300
+http_timeout_seconds: 15
+store_artifacts: true
+artifact_dir: ./artifacts
+log_file: ./logs/probes/probe-sg.log
+pps:
+  - pp_id: arin-rrdp
+    notification_uri: https://rrdp-rps.arin.net/notification.xml
+    enabled: true
+  - pp_id: ripe-rrdp
+    notification_uri: https://rrdp.ripe.net/notification.xml
+    enabled: true
+  - pp_id: apnic-rrdp
+    notification_uri: https://rrdp.apnic.net/notification.xml
+    enabled: true
+routinator:
+  enabled: false
+  base_url: http://127.0.0.1:8323
+  timeout_seconds: 10
+  collect_status: true
+  collect_metrics: true
+  collect_validity: false

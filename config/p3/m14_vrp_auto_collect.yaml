@@ -1,0 +1,108 @@
+schema: s3.stage3.m14.auto_collect.config.v1
+
+collector:
+  role: collector
+  node_id: collector-cd
+  location: chengdu
+  base_url: "http://47.108.137.128:28081"
+  upload_api: "/api/v1/m14/vrp/upload"
+  listen_host: "0.0.0.0"
+  listen_port: 28081
+
+probes:
+  required:
+    - probe-cd
+    - probe-bj
+    - probe-sg
+
+  probe-cd:
+    location: chengdu
+    validator: routinator
+    upload_mode: local_or_http
+    expected_export_filename: probe-cd_vrps.raw.json.gz
+
+  probe-bj:
+    location: beijing
+    validator: routinator
+    upload_mode: http_post
+    expected_export_filename: probe-bj_vrps.raw.json.gz
+
+  probe-sg:
+    location: singapore
+    validator: routinator
+    upload_mode: http_post
+    expected_export_filename: probe-sg_vrps.raw.json.gz
+
+probe_export:
+  export_interval_seconds: 1800
+  validator: routinator
+  prefer_noupdate: true
+  allow_refresh_fallback: true
+  min_roa_count: 100000
+  min_raw_json_size_bytes: 10000000
+  gzip_enabled: true
+  keep_raw_json: true
+  keep_history_count: 24
+  command_primary:
+    - routinator
+    - vrps
+    - --format
+    - json
+    - --noupdate
+    - --output
+  command_refresh_fallback:
+    - routinator
+    - vrps
+    - --format
+    - json
+    - --output
+
+upload:
+  enabled: true
+  method: multipart_form
+  timeout_seconds: 120
+  retry_count: 3
+  retry_backoff_seconds: 30
+  fields:
+    - probe_id
+    - validator
+    - validator_version
+    - generatedTime
+    - manifest
+    - file
+
+snapshot_grouping:
+  enabled: true
+  group_window_seconds: 300
+  max_generated_time_skew_seconds: 600
+  required_probes:
+    - probe-cd
+    - probe-bj
+    - probe-sg
+  required_validator: routinator
+  complete_when_all_required_probes_ready: true
+
+m14_auto_run:
+  enabled: true
+  auto_trigger: true
+  run_id_prefix: m14a_auto_group
+  use_lowmem_diff: true
+  sample_limit: 100
+  never_use_highmem_pairwise_diff_for_real_data: true
+  preliminary_verdict_enabled: true
+
+context_join:
+  enabled: false
+  require_same_window_object_context: true
+  require_validator_config_context_for_confirmed: true
+  require_window_mapping_for_confirmed: true
+  require_fetch_completeness_for_confirmed: true
+  require_infrastructure_context_for_confirmed: true
+
+safety:
+  reject_empty_vrp: true
+  reject_roa_count_below_min: true
+  reject_invalid_gzip: true
+  verify_sha256_gzip: true
+  verify_manifest_schema: true
+  do_not_reuse_historical_object_verdict_for_new_vrp_run: true

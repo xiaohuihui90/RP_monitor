@@ -1,0 +1,105 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import argparse
+import json
+import subprocess
+import sys
+import tempfile
+from pathlib import Path
+from typing import Any
+
+
+def read_json(path: Path) -> Any:
+    return json.loads(path.read_text(encoding="utf-8", errors="ignore"))
+
+
+def write_json(path: Path, obj: Any) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(obj, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+
+def load_selected_windows(path: Path) -> list[dict[str, Any]]:
+    obj = read_json(path)
+    if not isinstance(obj, dict):
+        raise RuntimeError(f"selected_windows is not an object: {path}")
+    wins = obj.get("selected_windows", [])
+    if not isinstance(wins, list):
+        raise RuntimeError(f"selected_windows field is not a list: {path}")
+    return [x for x in wins if isinstance(x, dict)]
+
+
+def pick_target_windows(selected: list[dict[str, Any]], target_window_id: str | None) -> list[dict[str, Any]]:
+    if not target_window_id:
+        return selected
+    picked = [x for x in selected if x.get("window_id") == target_window_id]
+    if not picked:
+        raise RuntimeError(f"target_window_not_found_in_selected_windows: {target_window_id}")
+    return picked
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser(
+        description="Compatibility wrapper for incremental M17 pipeline. "
+                    "It filters selected_windows to the target window, then calls run_m17_vrp_entry_diff --step all."
+    )
+
+    ap.add_argument("--selected-windows", required=True)
+    ap.add_argument("--out-root", required=True)
+    ap.add_argument("--target-window-id", default="")
+    ap.add_argument("--plan-json", default="")
+    ap.add_argument("--run-id", default="")
+    ap.add_argument("--plan-out-dir", default="")
+
+    # 兼容旧 wrapper 可能传入的额外参数
+    args, unknown = ap.parse_known_args()
+
+    selected_path = Path(args.selected_windows)
+    out_root = Path(args.out_root)
+
+    selected = load_selected_windows(selected_path)
+    filtered = pick_target_windows(selected, args.target_window_id or None)
+
+    tmp_dir = Path(tempfile.mkdtemp(prefix="m17_incremental_selected_"))
+    tmp_selected = tmp_dir / "selected_windows.json"
+
+    write_json(tmp_selected, {
+        "schema": "s3.m17.incremental_selected_windows.compat.v1",
+        "source_selected_windows": str(selected_path),
+        "target_window_id": args.target_window_id,
+        "run_id": args.run_id,
+        "selected_window_count": len(filtered),
+        "selected_windows": filtered,
+    })
+
+    cmd = [
+        sys.executable,
+        "-m",
+        "scripts.p3.m17.run_m17_vrp_entry_diff",
+        "--selected-windows",
+        str(tmp_selected),
+        "--out-root",
+        str(out_root),
+        "--step",
+        "all",
+    ]
+
+    print("M17_INCREMENTAL_PIPELINE_COMPAT=START")
+    print(f"target_window_id = {args.target_window_id}")
+    print(f"run_id = {args.run_id}")
+    print(f"source_selected_windows = {selected_path}")
+    print(f"filtered_selected_windows = {tmp_selected}")
+    print(f"filtered_window_count = {len(filtered)}")
+    print(f"out_root = {out_root}")
+    print("command = " + " ".join(cmd))
+
+    proc = subprocess.run(cmd, text=True)
+
+    print("M17_INCREMENTAL_PIPELINE_COMPAT=PASS" if proc.returncode == 0 else "M17_INCREMENTAL_PIPELINE_COMPAT=FAIL")
+    print(f"returncode = {proc.returncode}")
+
+    raise SystemExit(proc.returncode)
+
+
+if __name__ == "__main__":
+    main()

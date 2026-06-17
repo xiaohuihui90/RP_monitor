@@ -1,0 +1,75 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+: "${PROBE_ID:?missing PROBE_ID}"
+: "${TARGET_WINDOW_ID:?missing TARGET_WINDOW_ID}"
+: "${COLLECTOR_URL:?missing COLLECTOR_URL}"
+: "${RAW_SIDECAR_URL:?missing RAW_SIDECAR_URL}"
+: "${TOKEN:?missing TOKEN}"
+
+cd ~/s3_stage3_v3_code
+export PYTHONNOUSERSITE=1
+export PYTHONPATH="$PWD:${PYTHONPATH:-}"
+
+echo "===== M17C PROBE ONCE START ====="
+echo "PROBE_ID=$PROBE_ID"
+echo "TARGET_WINDOW_ID=$TARGET_WINDOW_ID"
+echo "COLLECTOR_URL=$COLLECTOR_URL"
+echo "RAW_SIDECAR_URL=$RAW_SIDECAR_URL"
+echo "TOKEN_LENGTH=${#TOKEN}"
+date -u
+
+echo
+echo "===== STEP 1: M245 collect/upload ====="
+python scripts/p3/m245/continuous/probe_collect_upload_once.py \
+  --project-dir ~/s3_stage3_v3_code \
+  --probe-id "$PROBE_ID" \
+  --collector-url "$COLLECTOR_URL" \
+  --token "$TOKEN" \
+  --out-dir "data/probe/m245_three_layer_baseline/h1_runs/${TARGET_WINDOW_ID}/${PROBE_ID}" \
+  --window-id "$TARGET_WINDOW_ID" \
+  --timeout-sec 1800 \
+  --vrp-timeout-sec 1200 \
+  --validator-update-mode noupdate \
+  --vrp-count-low-threshold 100000 \
+  --window-quality late
+
+echo
+echo "===== STEP 2: raw VRP sidecar export ====="
+python scripts/p3/m245/continuous/export_raw_vrp_sidecar.py \
+  --probe-id "$PROBE_ID" \
+  --window-id "$TARGET_WINDOW_ID" \
+  --format json \
+  --timeout-sec 1200
+
+echo
+echo "===== STEP 3: raw VRP sidecar upload ====="
+python -m scripts.p3.m17c.raw_vrp_sidecar_uploader \
+  --project-dir ~/s3_stage3_v3_code \
+  --probe-id "$PROBE_ID" \
+  --window-id "$TARGET_WINDOW_ID" \
+  --collector-url "$RAW_SIDECAR_URL" \
+  --token "$TOKEN" \
+  --out-dir /tmp
+
+echo
+echo "===== STEP 4: local checks ====="
+
+H1_CHECK="data/probe/m245_three_layer_baseline/h1_runs/${TARGET_WINDOW_ID}/${PROBE_ID}/H1_probe_collect_upload_once_check_${PROBE_ID}_${TARGET_WINDOW_ID}.txt"
+SIDECAR_CHECK="data/probe/m245_three_layer_baseline/raw_vrp_sidecar/${TARGET_WINDOW_ID}/${PROBE_ID}/raw_vrp_export_check.txt"
+UPLOAD_RESULT="/tmp/raw_vrp_sidecar_upload_result_${PROBE_ID}_${TARGET_WINDOW_ID}.json"
+
+echo
+echo "----- H1 check -----"
+cat "$H1_CHECK"
+
+echo
+echo "----- raw sidecar check -----"
+cat "$SIDECAR_CHECK"
+
+echo
+echo "----- upload result -----"
+python -m json.tool "$UPLOAD_RESULT" | head -n 120
+
+echo
+echo "M17C_PROBE_ONCE=PASS"

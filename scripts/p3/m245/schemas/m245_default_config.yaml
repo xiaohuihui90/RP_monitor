@@ -1,0 +1,53 @@
+schema: s3.m245.default_config.v1
+
+window:
+  size_sec: 600
+  id_suffix: 10m
+
+probes:
+  expected:
+    - probe-bj
+    - probe-cd
+    - probe-sg
+
+advertised_view:
+  enabled: true
+  frequency_sec: 600
+  rrdp_notification_uris:
+    arin: "https://rrdp-rps.arin.net/notification.xml"
+    ripe: "https://rrdp.ripe.net/notification.xml"
+    apnic: "https://rrdp.apnic.net/notification.xml"
+
+object_view:
+  enabled: true
+  frequency_sec: 600
+  mode: light
+  save_full_inventory_by_default: false
+  save_full_inventory_on_diff: true
+
+validation_output:
+  enabled: true
+  frequency_sec: 600
+  validator: routinator
+  validator_refresh_interval_sec: 600
+  save_full_vrp_by_default: false
+  save_full_vrp_on_root_change: true
+  save_full_vrp_on_diff: true
+  save_full_vrp_hourly_baseline: true
+
+baseline_diff:
+  enabled: true
+  object_count_skew_threshold: 0
+  vrp_count_skew_threshold: 0
+  trigger_m25_on_advertised_view_diff: true
+  trigger_m25_on_object_root_diff: true
+  trigger_m25_on_vrp_root_diff: true
+
+storage:
+  filesystem_first: true
+  db_ready_manifest: true
+  compress_full_artifacts: true
+  summary_retention_days: 90
+  full_vrp_retention_days: 7
+  anomaly_full_retention_days: 30
+  case_archive_retention_days: 3650

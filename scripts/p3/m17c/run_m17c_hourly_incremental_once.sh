@@ -1,0 +1,481 @@
+#!/usr/bin/env bash
+set -u
+set -o pipefail
+
+cd ~/s3_stage3_v3_code || exit 1
+# --- Shared conda init for cron / non-interactive shell ---
+source scripts/p3/m17c/conda_bootstrap.sh
+# --- End shared conda init ---
+export PYTHONNOUSERSITE=1
+export PYTHONPATH="$PWD:${PYTHONPATH:-}"
+# --- M17 output root default ---
+export M17_ROOT="${M17_ROOT:-data/p3_collector/m17_vrp_entry_diff/history}"
+# --- End M17 output root default ---
+
+source ~/.s3_m245_ingest.env
+
+M17C_ROOT="data/p3_collector/m17_continuous_lite"
+M17_OUT_ROOT="data/p3_collector/m17_vrp_entry_diff"
+M245_HISTORY_ROOT="data/p3_collector/m245_three_layer_baseline/history"
+M18_ROOT="data/p3_collector/m18_diff_lifetime"
+
+mkdir -p "$M17C_ROOT/locks" "$M17C_ROOT/history" "$M17C_ROOT/reports" ~/s3_runtime
+
+LOCK_FILE="$M17C_ROOT/locks/m17c_hourly_incremental.lock"
+
+TARGET_WINDOW_ID=""
+RUN_ID=""
+DRY_RUN=0
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --target-window-id)
+      TARGET_WINDOW_ID="$2"
+      shift 2
+      ;;
+    --run-id)
+      RUN_ID="$2"
+      shift 2
+      ;;
+    --dry-run)
+      DRY_RUN=1
+      shift
+      ;;
+    *)
+      echo "unknown_arg=$1"
+      exit 2
+      ;;
+  esac
+done
+
+TARGET_STAMP="$(date -u +%Y%m%dT%H0000Z)"
+NOW_STAMP="$(date -u +%Y%m%dT%H%M%SZ)"
+
+if [[ -z "$TARGET_WINDOW_ID" ]]; then
+  TARGET_WINDOW_ID="win_${TARGET_STAMP}_10m"
+fi
+
+if [[ -z "$RUN_ID" ]]; then
+  SAFE_TARGET="$(echo "$TARGET_WINDOW_ID" | tr -c 'A-Za-z0-9_' '_')"
+  RUN_ID="m17c_hourly_${SAFE_TARGET}_${NOW_STAMP}"
+fi
+
+RUN_DIR="$M17C_ROOT/history/$RUN_ID"
+CHECK_DIR="$RUN_DIR/checks"
+OUTPUT_DIR="$RUN_DIR/outputs"
+LOG_DIR="$RUN_DIR/logs"
+
+mkdir -p "$CHECK_DIR" "$OUTPUT_DIR" "$LOG_DIR"
+
+if [[ "$DRY_RUN" -eq 1 ]]; then
+  cat <<EOF
+M17C_HOURLY_AUTO=DRY_RUN
+run_id = ${RUN_ID}
+target_window_id = ${TARGET_WINDOW_ID}
+run_dir = ${RUN_DIR}
+EOF
+  exit 0
+fi
+
+exec 9>"$LOCK_FILE"
+if ! flock -n 9; then
+  cat > "$CHECK_DIR/M17C_HOURLY_AUTO_CHECK.txt" <<EOF
+M17C_HOURLY_AUTO=SKIP_LOCK_HELD
+created_at_utc = $(date -u +%Y-%m-%dT%H:%M:%SZ)
+run_id = ${RUN_ID}
+target_window_id = ${TARGET_WINDOW_ID}
+reason = previous_run_still_active
+EOF
+  cat "$CHECK_DIR/M17C_HOURLY_AUTO_CHECK.txt"
+  exit 0
+fi
+
+export M17C_RUN_ID="$RUN_ID"
+export M17C_TARGET_WINDOW_ID="$TARGET_WINDOW_ID"
+export M17C_RUN_DIR="$RUN_DIR"
+
+mkdir -p "$M17C_ROOT/state"
+cat > "$M17C_ROOT/state/current_m17c_run.env" <<EOF
+export M17C_RUN_ID="$M17C_RUN_ID"
+export M17C_TARGET_WINDOW_ID="$M17C_TARGET_WINDOW_ID"
+export M17C_RUN_DIR="$M17C_RUN_DIR"
+EOF
+
+export M17_INC_PLAN_DIR="$M17C_RUN_DIR/outputs/m17_incremental_plan_${M17C_TARGET_WINDOW_ID}"
+export M17_WINDOW_DIR="$M17_OUT_ROOT/history/m17_window_${M17C_TARGET_WINDOW_ID}"
+export M17_WINDOW_OUT_DIR="$M17_WINDOW_DIR/outputs"
+export M17_RESULT_DIGEST_DIR="$M17_OUT_ROOT/reports/${M17C_TARGET_WINDOW_ID}"
+export M17C_REPORT_DIR="$M17C_ROOT/reports"
+export M18_INPUT_MANIFEST="$M17C_REPORT_DIR/M17C_m18_input_manifest.json"
+
+mkdir -p "$M17_INC_PLAN_DIR" "$M17_RESULT_DIGEST_DIR" "$M17C_REPORT_DIR"
+
+run_step() {
+  local name="$1"
+  shift
+  local stdout="$LOG_DIR/${name}.stdout"
+  local stderr="$LOG_DIR/${name}.stderr"
+  local started finished rc
+
+  started="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+  echo "===== STEP ${name} START ${started} ====="
+
+  "$@" >"$stdout" 2>"$stderr"
+  rc=$?
+
+  finished="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+
+  cat > "$LOG_DIR/${name}.meta" <<EOF
+step = ${name}
+started_at_utc = ${started}
+finished_at_utc = ${finished}
+returncode = ${rc}
+stdout = ${stdout}
+stderr = ${stderr}
+EOF
+
+  if [[ "$rc" -ne 0 ]]; then
+    echo "STEP_${name}=FAIL"
+    echo "stderr=$stderr"
+    tail -n 80 "$stderr" || true
+    return "$rc"
+  fi
+
+  echo "STEP_${name}=PASS"
+  return 0
+}
+
+fail_check() {
+  local reason="$1"
+  cat > "$CHECK_DIR/M17C_HOURLY_AUTO_CHECK.txt" <<EOF
+M17C_HOURLY_AUTO=FAIL
+created_at_utc = $(date -u +%Y-%m-%dT%H:%M:%SZ)
+run_id = ${M17C_RUN_ID}
+target_window_id = ${M17C_TARGET_WINDOW_ID}
+reason = ${reason}
+log_dir = ${LOG_DIR}
+semantic_boundary = weak_mapping_only_no_strong_causal_claim
+EOF
+  cat "$CHECK_DIR/M17C_HOURLY_AUTO_CHECK.txt"
+  exit 1
+}
+
+wait_check() {
+  local reason="$1"
+  cat > "$CHECK_DIR/M17C_HOURLY_AUTO_CHECK.txt" <<EOF
+M17C_HOURLY_AUTO=WAIT
+created_at_utc = $(date -u +%Y-%m-%dT%H:%M:%SZ)
+run_id = ${M17C_RUN_ID}
+target_window_id = ${M17C_TARGET_WINDOW_ID}
+reason = ${reason}
+log_dir = ${LOG_DIR}
+semantic_boundary = weak_mapping_only_no_strong_causal_claim
+EOF
+  cat "$CHECK_DIR/M17C_HOURLY_AUTO_CHECK.txt"
+  exit 0
+}
+
+cat > "$CHECK_DIR/M17C_HOURLY_AUTO_START.txt" <<EOF
+M17C_HOURLY_AUTO_START=PASS
+created_at_utc = $(date -u +%Y-%m-%dT%H:%M:%SZ)
+run_id = ${M17C_RUN_ID}
+target_window_id = ${M17C_TARGET_WINDOW_ID}
+fixed_schedule = 2h
+window_size = 10m
+EOF
+
+echo "===== M17C hourly auto started ====="
+cat "$CHECK_DIR/M17C_HOURLY_AUTO_START.txt"
+
+# I1 plan
+run_step "01_m17_incremental_plan" \
+  python -m scripts.p3.m17.run_m17_incremental_plan \
+    --selected-windows data/p3_collector/m245_three_layer_baseline/m17_vrp_entry_diff_inputs/selected_windows.json \
+    --out-root data/p3_collector/m17_vrp_entry_diff \
+    --target-window-id "$M17C_TARGET_WINDOW_ID" \
+    --plan-out-dir "$M17_INC_PLAN_DIR" \
+    --force-current-window \
+    --repair-missing-windows \
+  || wait_check "incremental_plan_not_ready_or_target_not_selected"
+
+cat > "$CHECK_DIR/M17_INCREMENTAL_I1_PLAN_ACCEPTANCE.txt" <<EOF
+M17_INCREMENTAL_I1_PLAN_ACCEPTANCE=PASS
+created_at_utc = $(date -u +%Y-%m-%dT%H:%M:%SZ)
+run_id = ${M17C_RUN_ID}
+target_window_id = ${M17C_TARGET_WINDOW_ID}
+incremental_plan_check = ${M17_INC_PLAN_DIR}/M17_INCREMENTAL_PLAN_CHECK.txt
+next_batch = M17_INCREMENTAL_I2_PIPELINE_EXECUTOR
+EOF
+
+# I2 pipeline
+run_step "02_m17_incremental_pipeline" \
+  python -m scripts.p3.m17.run_m17_incremental_pipeline \
+    --plan-dir "$M17_INC_PLAN_DIR" \
+    --run-dir "$M17C_RUN_DIR" \
+    --force-current-window \
+    --repair-missing-windows \
+    --verbose \
+  || fail_check "m17_incremental_pipeline_failed"
+
+cat > "$CHECK_DIR/M17_INCREMENTAL_I2_PLAN_ACCEPTANCE.txt" <<EOF
+M17_INCREMENTAL_I2_PLAN_ACCEPTANCE=PASS
+created_at_utc = $(date -u +%Y-%m-%dT%H:%M:%SZ)
+run_id = ${M17C_RUN_ID}
+target_window_id = ${M17C_TARGET_WINDOW_ID}
+incremental_pipeline_check = ${M17_INC_PLAN_DIR}/M17_INCREMENTAL_I2_PIPELINE_CHECK.txt
+next_batch = M17_INCREMENTAL_I3_POST_PROCESSOR
+EOF
+
+# I3 postprocess
+run_step "03_m17_validator_cycle_record" \
+  python -m scripts.p3.m17.run_m17_validator_cycle_record \
+    --window-id "$M17C_TARGET_WINDOW_ID" \
+    --m245-history-root "$M245_HISTORY_ROOT" \
+    --m17-root "$M17_ROOT" \
+  || fail_check "m17_validator_cycle_record_failed"
+
+run_step "04_m17_quality_annotation" \
+  python -m scripts.p3.m17.run_m17_quality_annotation \
+    --window-id "$M17C_TARGET_WINDOW_ID" \
+    --m17-root "$M17_ROOT" \
+    --m245-root "$M245_HISTORY_ROOT" \
+  || fail_check "m17_quality_annotation_failed"
+
+run_step "05_m17_effective_input_summary" \
+  python -m scripts.p3.m17.run_m17_effective_input_summary \
+    --window-id "$M17C_TARGET_WINDOW_ID" \
+    --m245-history-root "$M245_HISTORY_ROOT" \
+    --m17-root "$M17_ROOT" \
+  || fail_check "m17_effective_input_summary_failed"
+
+run_step "06_m17_result_digest" \
+  python -m scripts.p3.m17.run_m17_result_digest \
+    --m17-window-dir "$M17_WINDOW_DIR" \
+    --out-dir "$M17_RESULT_DIGEST_DIR" \
+    --top-n 30 \
+  || fail_check "m17_result_digest_failed"
+
+run_step "07_m17c_window_report" \
+  python -m scripts.p3.m17c.run_m17c_window_report \
+    --m17-root "$M17_ROOT" \
+    --report-dir "$M17C_REPORT_DIR" \
+  || fail_check "m17c_window_report_failed"
+
+cat > "$M17_INC_PLAN_DIR/M17_INCREMENTAL_I3_POSTPROCESS_CHECK.txt" <<EOF
+M17_INCREMENTAL_I3_POSTPROCESS=PASS
+created_at_utc = $(date -u +%Y-%m-%dT%H:%M:%SZ)
+run_id = ${M17C_RUN_ID}
+target_window_id = ${M17C_TARGET_WINDOW_ID}
+m17c_report_check = ${M17C_REPORT_DIR}/M17C_window_report_check.txt
+m18_input_manifest = ${M17C_REPORT_DIR}/M17C_m18_input_manifest.json
+semantic_boundary = weak_mapping_only_no_strong_causal_claim
+next_batch = M17_INCREMENTAL_I4_M18_REFRESH_OR_TIMING_COMPARE
+EOF
+
+cat > "$CHECK_DIR/M17_INCREMENTAL_I3_POSTPROCESS_ACCEPTANCE.txt" <<EOF
+M17_INCREMENTAL_I3_POSTPROCESS_ACCEPTANCE=PASS
+created_at_utc = $(date -u +%Y-%m-%dT%H:%M:%SZ)
+run_id = ${M17C_RUN_ID}
+target_window_id = ${M17C_TARGET_WINDOW_ID}
+i3_postprocess_check = ${M17_INC_PLAN_DIR}/M17_INCREMENTAL_I3_POSTPROCESS_CHECK.txt
+next_batch = M17_INCREMENTAL_I4_M18_REFRESH_OR_TIMING_COMPARE
+EOF
+
+# I4 M18
+export M18_RUN_ID="m18_2h_${M17C_RUN_ID}_${M17C_TARGET_WINDOW_ID}"
+export M18_RUN_DIR="$M18_ROOT/history/$M18_RUN_ID"
+export M18_OUT_DIR="$M18_RUN_DIR/outputs"
+export M18_CHECK_DIR="$M18_RUN_DIR/checks"
+export M18_REPORT_DIR="$M18_ROOT/reports"
+
+mkdir -p "$M18_OUT_DIR" "$M18_CHECK_DIR" "$M18_REPORT_DIR" "$M18_ROOT/state"
+
+cat > "$M18_ROOT/state/current_m18_run.env" <<EOF
+export M18_RUN_ID="$M18_RUN_ID"
+export M18_ROOT="$M18_ROOT"
+export M18_RUN_DIR="$M18_RUN_DIR"
+export M18_OUT_DIR="$M18_OUT_DIR"
+export M18_CHECK_DIR="$M18_CHECK_DIR"
+export M18_REPORT_DIR="$M18_REPORT_DIR"
+export M18_INPUT_MANIFEST="$M18_INPUT_MANIFEST"
+export M17C_RUN_ID="$M17C_RUN_ID"
+export M17C_TARGET_WINDOW_ID="$M17C_TARGET_WINDOW_ID"
+EOF
+
+run_step "08_m18_input_precheck" \
+  python -m scripts.p3.m18.run_m18_input_precheck \
+    --manifest "$M18_INPUT_MANIFEST" \
+    --out-dir "$M18_OUT_DIR" \
+    --check-dir "$M18_CHECK_DIR" \
+  || fail_check "m18_input_precheck_failed"
+
+run_step "09_m18_lifetime_tracker" \
+  python -m scripts.p3.m18.run_m18_lifetime_tracker \
+    --manifest "$M18_INPUT_MANIFEST" \
+    --out-dir "$M18_OUT_DIR" \
+    --check-dir "$M18_CHECK_DIR" \
+    --window-interval-minutes 120 \
+    --window-size-minutes 10 \
+  || fail_check "m18_lifetime_tracker_failed"
+
+run_step "10_m18_convergence_report" \
+  python -m scripts.p3.m18.run_m18_convergence_report \
+    --input-dir "$M18_OUT_DIR" \
+    --check-dir "$M18_CHECK_DIR" \
+    --report-dir "$M18_REPORT_DIR" \
+  || fail_check "m18_convergence_report_failed"
+
+run_step "11_m18_timing_evidence" \
+  python -m scripts.p3.m18.run_m18_timing_evidence_integration \
+    --manifest "$M18_INPUT_MANIFEST" \
+    --run-dir "$M18_RUN_DIR" \
+  || fail_check "m18_timing_evidence_failed"
+
+run_step "12_m18_acceptance_first" \
+  python -m scripts.p3.m18.run_m18_acceptance \
+    --run-dir "$M18_RUN_DIR" \
+  || true
+
+if ! grep -q '^M18_ACCEPTANCE=PASS' "$M18_CHECK_DIR/M18_ACCEPTANCE.txt" 2>/dev/null; then
+  echo "M18_ACCEPTANCE_FIRST=NOT_PASS_TRY_REPAIR"
+
+  if python -m scripts.p3.m18.repair_m18_m19_candidate_scope --help >/dev/null 2>&1; then
+    export M18_REPAIR_DIR="$M18_RUN_DIR/repair_m19_candidate_scope"
+    mkdir -p "$M18_REPAIR_DIR"
+
+    run_step "13_m18_repair_candidate_scope" \
+      python -m scripts.p3.m18.repair_m18_m19_candidate_scope \
+        --out-dir "$M18_OUT_DIR" \
+        --repair-dir "$M18_REPAIR_DIR" \
+        --max-candidates 5000 \
+      || fail_check "m18_repair_candidate_scope_failed"
+
+    run_step "14_m18_convergence_after_repair" \
+      python -m scripts.p3.m18.run_m18_convergence_report \
+        --input-dir "$M18_OUT_DIR" \
+        --check-dir "$M18_CHECK_DIR" \
+        --report-dir "$M18_REPORT_DIR" \
+      || fail_check "m18_convergence_after_repair_failed"
+
+    run_step "15_m18_timing_after_repair" \
+      python -m scripts.p3.m18.run_m18_timing_evidence_integration \
+        --manifest "$M18_INPUT_MANIFEST" \
+        --run-dir "$M18_RUN_DIR" \
+      || fail_check "m18_timing_after_repair_failed"
+
+    run_step "16_m18_acceptance_after_repair" \
+      python -m scripts.p3.m18.run_m18_acceptance \
+        --run-dir "$M18_RUN_DIR" \
+      || fail_check "m18_acceptance_after_repair_failed"
+  fi
+fi
+
+if ! grep -q '^M18_ACCEPTANCE=PASS' "$M18_CHECK_DIR/M18_ACCEPTANCE.txt" 2>/dev/null; then
+  fail_check "m18_acceptance_not_pass"
+fi
+
+cat > "$M17_INC_PLAN_DIR/M17_INCREMENTAL_I4_M18_REFRESH_CHECK.txt" <<EOF
+M17_INCREMENTAL_I4_M18_REFRESH=PASS
+created_at_utc = $(date -u +%Y-%m-%dT%H:%M:%SZ)
+run_id = ${M17C_RUN_ID}
+target_window_id = ${M17C_TARGET_WINDOW_ID}
+m18_run_id = ${M18_RUN_ID}
+m18_run_dir = ${M18_RUN_DIR}
+m18_acceptance = ${M18_CHECK_DIR}/M18_ACCEPTANCE.txt
+semantic_boundary = weak_mapping_only_no_strong_causal_claim
+next_batch = M17_INCREMENTAL_I5_TIMING_COMPARE_FINALIZER
+EOF
+
+cat > "$CHECK_DIR/M17_INCREMENTAL_I4_M18_REFRESH_ACCEPTANCE.txt" <<EOF
+M17_INCREMENTAL_I4_M18_REFRESH_ACCEPTANCE=PASS
+created_at_utc = $(date -u +%Y-%m-%dT%H:%M:%SZ)
+run_id = ${M17C_RUN_ID}
+target_window_id = ${M17C_TARGET_WINDOW_ID}
+i4_m18_refresh_check = ${M17_INC_PLAN_DIR}/M17_INCREMENTAL_I4_M18_REFRESH_CHECK.txt
+m18_acceptance = ${M18_CHECK_DIR}/M18_ACCEPTANCE.txt
+next_batch = M17_INCREMENTAL_I5_TIMING_COMPARE_FINALIZER
+EOF
+
+cat > "$CHECK_DIR/M17_INCREMENTAL_I4B_M18_REPAIR_ACCEPTANCE.txt" <<EOF
+M17_INCREMENTAL_I4B_M18_REPAIR_ACCEPTANCE=PASS
+created_at_utc = $(date -u +%Y-%m-%dT%H:%M:%SZ)
+run_id = ${M17C_RUN_ID}
+target_window_id = ${M17C_TARGET_WINDOW_ID}
+repair_policy = automatic_if_needed
+m18_acceptance = ${M18_CHECK_DIR}/M18_ACCEPTANCE.txt
+next_batch = M17_INCREMENTAL_I5_TIMING_COMPARE_FINALIZER
+EOF
+
+# I5 timing finalizer
+export M17_I5_DIR="$M17C_RUN_DIR/outputs/m17_incremental_i5_timing_finalizer_${M17C_TARGET_WINDOW_ID}"
+mkdir -p "$M17_I5_DIR"
+
+run_step "17_m17_incremental_timing_finalizer" \
+  python -m scripts.p3.m17.run_m17_incremental_timing_finalizer \
+    --plan-dir "$M17_INC_PLAN_DIR" \
+    --m17c-run-dir "$M17C_RUN_DIR" \
+    --m18-run-dir "$M18_RUN_DIR" \
+    --out-dir "$M17_I5_DIR" \
+  || fail_check "m17_incremental_timing_finalizer_failed"
+
+cat > "$CHECK_DIR/M17_INCREMENTAL_I5_TIMING_FINALIZER_ACCEPTANCE.txt" <<EOF
+M17_INCREMENTAL_I5_TIMING_FINALIZER_ACCEPTANCE=PASS
+created_at_utc = $(date -u +%Y-%m-%dT%H:%M:%SZ)
+run_id = ${M17C_RUN_ID}
+target_window_id = ${M17C_TARGET_WINDOW_ID}
+i5_timing_finalizer_check = ${M17_I5_DIR}/M17_INCREMENTAL_I5_TIMING_FINALIZER_CHECK.txt
+m18_acceptance = ${M18_CHECK_DIR}/M18_ACCEPTANCE.txt
+next_batch = M19_ROA_TO_VRP_MAPPING_PRECHECK
+EOF
+
+cat > "$CHECK_DIR/M17_INCREMENTAL_MODE_FINAL_ACCEPTANCE.txt" <<EOF
+M17_INCREMENTAL_MODE_FINAL_ACCEPTANCE=PASS
+created_at_utc = $(date -u +%Y-%m-%dT%H:%M:%SZ)
+run_id = ${M17C_RUN_ID}
+target_window_id = ${M17C_TARGET_WINDOW_ID}
+batch_i1 = ${CHECK_DIR}/M17_INCREMENTAL_I1_PLAN_ACCEPTANCE.txt
+batch_i2 = ${CHECK_DIR}/M17_INCREMENTAL_I2_PLAN_ACCEPTANCE.txt
+batch_i3 = ${CHECK_DIR}/M17_INCREMENTAL_I3_POSTPROCESS_ACCEPTANCE.txt
+batch_i4 = ${CHECK_DIR}/M17_INCREMENTAL_I4_M18_REFRESH_ACCEPTANCE.txt
+batch_i4b = ${CHECK_DIR}/M17_INCREMENTAL_I4B_M18_REPAIR_ACCEPTANCE.txt
+batch_i5 = ${CHECK_DIR}/M17_INCREMENTAL_I5_TIMING_FINALIZER_ACCEPTANCE.txt
+m18_acceptance = ${M18_CHECK_DIR}/M18_ACCEPTANCE.txt
+semantic_boundary = weak_mapping_only_no_strong_causal_claim
+strong_causal_claim_allowed = False
+next_stage = M19_ROA_TO_VRP_MAPPING_PRECHECK
+EOF
+
+# duration summary, non-blocking
+export M17C_DURATION_DIR="$M17C_RUN_DIR/outputs/m17c_automation_duration_summary_${M17C_TARGET_WINDOW_ID}"
+mkdir -p "$M17C_DURATION_DIR"
+
+if python -m scripts.p3.m17c.run_m17c_duration_summary --help >/dev/null 2>&1; then
+  run_step "18_m17c_duration_summary" \
+    python -m scripts.p3.m17c.run_m17c_duration_summary \
+      --m17c-run-dir "$M17C_RUN_DIR" \
+      --target-window-id "$M17C_TARGET_WINDOW_ID" \
+      --plan-dir "$M17_INC_PLAN_DIR" \
+      --i5-dir "$M17_I5_DIR" \
+      --m18-run-dir "$M18_RUN_DIR" \
+      --out-dir "$M17C_DURATION_DIR" \
+      --manual-gap-threshold-sec 1800 \
+    || true
+fi
+
+cat > "$CHECK_DIR/M17C_HOURLY_AUTO_CHECK.txt" <<EOF
+M17C_HOURLY_AUTO=PASS
+created_at_utc = $(date -u +%Y-%m-%dT%H:%M:%SZ)
+run_id = ${M17C_RUN_ID}
+target_window_id = ${M17C_TARGET_WINDOW_ID}
+run_dir = ${M17C_RUN_DIR}
+log_dir = ${LOG_DIR}
+incremental_final_acceptance = ${CHECK_DIR}/M17_INCREMENTAL_MODE_FINAL_ACCEPTANCE.txt
+m18_acceptance = ${M18_CHECK_DIR}/M18_ACCEPTANCE.txt
+duration_summary_dir = ${M17C_DURATION_DIR}
+fixed_schedule = 2h
+window_size = 10m
+semantic_boundary = weak_mapping_only_no_strong_causal_claim
+next_stage = M19_ROA_TO_VRP_MAPPING_PRECHECK
+EOF
+
+cat "$CHECK_DIR/M17C_HOURLY_AUTO_CHECK.txt"

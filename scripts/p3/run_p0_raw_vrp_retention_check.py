@@ -1,0 +1,483 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import argparse
+from pathlib import Path
+from typing import Any
+
+from s3lib.p0.jsonio import read_json, read_jsonl, sha256_file, write_json
+from s3lib.p0.scanner import scan_window_dirs, window_id_from_dir
+from s3lib.p0.timeutil import utc_now
+
+
+RAW_VRP_NAME_HINTS = (
+    "raw_vrp",
+    "raw-vrp",
+    "routinator_vrp",
+    "routinator-vrp",
+    "routinator_vrps",
+    "routinator-vrps",
+    "vrp_output",
+    "vrp-output",
+    "vrps_output",
+    "vrps-output",
+    "exported_vrp",
+    "exported-vrp",
+)
+
+VRP_FILE_HINTS = (
+    "vrp",
+    "vrps",
+    "roa",
+    "roas",
+)
+
+NON_RAW_NAME_HINTS = (
+    "summary",
+    "status_matrix",
+    "mapping_context",
+    "h7_overlay",
+    "trigger",
+    "diff_records",
+    "baseline_diff",
+    "m25",
+    "evidence",
+    "manifest.json",
+    "run_manifest",
+    "check",
+    "receipt",
+    "metadata",
+    "cache_view",
+    "validator_cache",
+    "runtime_metadata",
+    "raw_vrp_output_manifest",
+)
+
+PROBE_IDS = ("probe-cd", "probe-bj", "probe-sg")
+
+
+def is_probably_non_raw(path: Path) -> bool:
+    name = path.name.lower()
+    full = str(path).lower()
+
+    for hint in NON_RAW_NAME_HINTS:
+        if hint in name or hint in full:
+            return True
+
+    return False
+
+
+def path_has_vrp_hint(path: Path) -> bool:
+    name = path.name.lower()
+    full = str(path).lower()
+
+    if not path.suffix.lower() in {".json", ".jsonl", ".jsonext"}:
+        return False
+
+    if any(h in name or h in full for h in RAW_VRP_NAME_HINTS):
+        return True
+
+    if any(h in name for h in VRP_FILE_HINTS):
+        return True
+
+    return False
+
+
+def is_vrp_like_record(obj: Any) -> bool:
+    if not isinstance(obj, dict):
+        return False
+
+    keys = set(obj.keys())
+
+    prefix_keys = {"prefix", "prefixes", "ipPrefix", "ip_prefix"}
+    asn_keys = {"asn", "asID", "as_id", "origin_asn", "origin", "asn_id"}
+    maxlen_keys = {"maxLength", "max_length", "maxlength", "maxLen", "max_len"}
+
+    has_prefix = bool(keys & prefix_keys)
+    has_asn = bool(keys & asn_keys)
+    has_maxlen = bool(keys & maxlen_keys)
+
+    if has_prefix and has_asn:
+        return True
+
+    # Routinator jsonext variants may include nested payload-ish fields.
+    if has_prefix and ("payload" in keys or "uri" in keys or "tal" in keys or "ta" in keys):
+        return True
+
+    return False
+
+
+def count_vrp_like_records_in_list(values: Any, limit: int = 5000) -> int:
+    if not isinstance(values, list):
+        return 0
+
+    count = 0
+    for item in values[:limit]:
+        if is_vrp_like_record(item):
+            count += 1
+    return count
+
+
+def classify_json_vrp(path: Path) -> dict[str, Any]:
+    obj = read_json(path)
+    if obj is None:
+        return {
+            "is_raw_vrp": False,
+            "reason": "json_parse_failed",
+            "vrp_like_record_count": 0,
+            "format_guess": "json_parse_failed",
+        }
+
+    if isinstance(obj, list):
+        count = count_vrp_like_records_in_list(obj)
+        return {
+            "is_raw_vrp": count > 0,
+            "reason": "top_level_list" if count > 0 else "top_level_list_without_vrp_like_records",
+            "vrp_like_record_count": count,
+            "format_guess": "json_list",
+        }
+
+    if isinstance(obj, dict):
+        # Reject obvious summaries.
+        if "vrp_count" in obj and "vrp_root" in obj and not any(k in obj for k in ["roas", "vrps", "records"]):
+            return {
+                "is_raw_vrp": False,
+                "reason": "summary_only_vrp_count_root",
+                "vrp_like_record_count": 0,
+                "format_guess": "summary",
+            }
+
+        candidate_keys = [
+            "roas",
+            "vrps",
+            "validated_roa_payloads",
+            "validated_roas",
+            "records",
+            "data",
+            "items",
+        ]
+
+        best_key = None
+        best_count = 0
+
+        for key in candidate_keys:
+            value = obj.get(key)
+            count = count_vrp_like_records_in_list(value)
+            if count > best_count:
+                best_count = count
+                best_key = key
+
+        if best_count > 0:
+            return {
+                "is_raw_vrp": True,
+                "reason": f"dict_array_key:{best_key}",
+                "vrp_like_record_count": best_count,
+                "format_guess": "json_dict",
+                "top_level_key": best_key,
+            }
+
+        # Some outputs may be a dict keyed by prefix or generated ID.
+        nested_count = 0
+        for value in list(obj.values())[:5000]:
+            if is_vrp_like_record(value):
+                nested_count += 1
+
+        return {
+            "is_raw_vrp": nested_count > 0,
+            "reason": "dict_values_vrp_like" if nested_count > 0 else "dict_without_vrp_like_records",
+            "vrp_like_record_count": nested_count,
+            "format_guess": "json_dict",
+        }
+
+    return {
+        "is_raw_vrp": False,
+        "reason": f"unsupported_json_type:{type(obj).__name__}",
+        "vrp_like_record_count": 0,
+        "format_guess": "unknown",
+    }
+
+
+def classify_jsonl_vrp(path: Path) -> dict[str, Any]:
+    records = read_jsonl(path)
+    if not records:
+        return {
+            "is_raw_vrp": False,
+            "reason": "jsonl_empty_or_unparseable",
+            "vrp_like_record_count": 0,
+            "format_guess": "jsonl",
+        }
+
+    count = 0
+    for rec in records[:5000]:
+        if is_vrp_like_record(rec):
+            count += 1
+
+    return {
+        "is_raw_vrp": count > 0,
+        "reason": "jsonl_vrp_like_records" if count > 0 else "jsonl_without_vrp_like_records",
+        "vrp_like_record_count": count,
+        "format_guess": "jsonl",
+    }
+
+
+def classify_candidate(path: Path) -> dict[str, Any]:
+    suffix = path.suffix.lower()
+
+    if suffix == ".jsonl":
+        result = classify_jsonl_vrp(path)
+    else:
+        result = classify_json_vrp(path)
+
+    result["path"] = str(path)
+    result["filename"] = path.name
+    result["size_bytes"] = path.stat().st_size if path.exists() else 0
+    result["sha256"] = sha256_file(path)
+    return result
+
+
+def infer_probe_id(path: Path, obj: dict[str, Any] | None = None) -> str:
+    s = str(path).lower()
+
+    for probe_id in PROBE_IDS:
+        if probe_id in s:
+            return probe_id
+
+    if obj:
+        for key in ["probe_id", "probe", "source_probe"]:
+            value = obj.get(key)
+            if isinstance(value, str) and value:
+                return value
+
+    return "unknown_probe"
+
+
+def expected_probes_from_status_matrix(window_dir: Path) -> list[str]:
+    p = window_dir / "outputs" / "M245_three_layer_status_matrix.json"
+    obj = read_json(p)
+    if not isinstance(obj, dict):
+        return []
+
+    for key in ["probe_status", "probe_health", "probes"]:
+        value = obj.get(key)
+        if isinstance(value, dict):
+            probes = [k for k in value.keys() if isinstance(k, str) and k.startswith("probe-")]
+            if probes:
+                return sorted(set(probes))
+
+    # Try common nested structures.
+    for value in obj.values():
+        if isinstance(value, dict):
+            probes = [k for k in value.keys() if isinstance(k, str) and k.startswith("probe-")]
+            if probes:
+                return sorted(set(probes))
+
+    return []
+
+
+def validation_output_divergent(window_dir: Path) -> bool:
+    p = window_dir / "outputs" / "M245_three_layer_status_matrix.json"
+    obj = read_json(p)
+    if not isinstance(obj, dict):
+        return False
+
+    vo = obj.get("validation_output")
+    if isinstance(vo, dict):
+        status = vo.get("layer_status") or vo.get("status")
+        if status == "divergent":
+            return True
+
+    # Fallback: string search in status matrix.
+    text = p.read_text(encoding="utf-8", errors="ignore") if p.exists() else ""
+    return "validation_output" in text and "divergent" in text
+
+
+def suspicious_low_count(window_dir: Path) -> bool:
+    p = window_dir / "outputs" / "M245_three_layer_status_matrix.json"
+    obj = read_json(p)
+    if not isinstance(obj, dict):
+        return False
+
+    validation_output = obj.get("validation_output")
+    if isinstance(validation_output, dict):
+        by_probe = validation_output.get("suspicious_low_count_by_probe")
+        if isinstance(by_probe, dict):
+            return any(v is True for v in by_probe.values())
+
+        value = validation_output.get("suspicious_low_count")
+        if isinstance(value, bool):
+            return value
+
+    # Fallback for older schemas only. Keep conservative and avoid matching
+    # unrelated true values elsewhere in the status matrix.
+    value = obj.get("suspicious_low_count")
+    if isinstance(value, bool):
+        return value
+
+    return False
+
+
+def find_candidate_files(window_dir: Path) -> list[Path]:
+    candidates: list[Path] = []
+
+    for path in window_dir.rglob("*"):
+        if not path.is_file():
+            continue
+        if is_probably_non_raw(path):
+            continue
+        if path_has_vrp_hint(path):
+            candidates.append(path)
+
+    return sorted(candidates)
+
+
+def write_window_manifest(window_dir: Path, manifest: dict[str, Any]) -> None:
+    out_path = window_dir / "outputs" / "raw_vrp_output_manifest.json"
+    write_json(out_path, manifest)
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--history-root",
+        default="data/p3_collector/m245_three_layer_baseline/history",
+    )
+    parser.add_argument(
+        "--out-dir",
+        default="data/p3_collector/m245_three_layer_baseline/p0_acceptance",
+    )
+    args = parser.parse_args()
+
+    history_root = Path(args.history_root)
+    out_dir = Path(args.out_dir)
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    window_dirs = scan_window_dirs(history_root)
+
+    per_window_records: list[dict[str, Any]] = []
+    total_raw_files = 0
+    m17_ready_windows = 0
+    validation_output_divergent_windows = 0
+    divergent_windows_missing_raw = 0
+
+    for window_dir in window_dirs:
+        window_id = window_id_from_dir(window_dir)
+        expected_probes = expected_probes_from_status_matrix(window_dir)
+        is_l3_divergent = validation_output_divergent(window_dir)
+        is_suspicious = suspicious_low_count(window_dir)
+
+        if is_l3_divergent:
+            validation_output_divergent_windows += 1
+
+        candidates = find_candidate_files(window_dir)
+        classified = [classify_candidate(p) for p in candidates]
+        raw_candidates = [c for c in classified if c.get("is_raw_vrp")]
+
+        by_probe: dict[str, dict[str, Any]] = {}
+
+        for cand in raw_candidates:
+            obj = read_json(Path(cand["path"]))
+            probe_id = infer_probe_id(Path(cand["path"]), obj if isinstance(obj, dict) else None)
+
+            existing = by_probe.get(probe_id)
+            if existing is None or int(cand.get("vrp_like_record_count", 0)) > int(existing.get("vrp_like_record_count", 0)):
+                by_probe[probe_id] = cand
+
+        missing_expected_probes = []
+        if expected_probes:
+            missing_expected_probes = [p for p in expected_probes if p not in by_probe]
+
+        raw_vrp_outputs_retained = bool(raw_candidates)
+        all_expected_probe_raw_retained = bool(expected_probes) and not missing_expected_probes
+
+        # Conservative M17 readiness: L3 divergent, non-suspicious, raw VRP for all expected probes.
+        m17_ready = bool(is_l3_divergent and not is_suspicious and all_expected_probe_raw_retained)
+
+        if m17_ready:
+            m17_ready_windows += 1
+
+        if is_l3_divergent and not raw_vrp_outputs_retained:
+            divergent_windows_missing_raw += 1
+
+        total_raw_files += len(raw_candidates)
+
+        manifest = {
+            "schema": "s3.p0.raw_vrp_output_manifest.v1",
+            "generated_at_utc": utc_now(),
+            "window_id": window_id,
+            "window_dir": str(window_dir),
+            "expected_probes": expected_probes,
+            "validation_output_divergent": is_l3_divergent,
+            "suspicious_low_count": is_suspicious,
+            "raw_vrp_outputs_retained": raw_vrp_outputs_retained,
+            "all_expected_probe_raw_retained": all_expected_probe_raw_retained,
+            "m17_ready": m17_ready,
+            "raw_vrp_by_probe": by_probe,
+            "missing_expected_probes": missing_expected_probes,
+            "raw_candidate_count": len(raw_candidates),
+            "all_candidate_count": len(classified),
+            "all_candidates": classified,
+        }
+
+        write_window_manifest(window_dir, manifest)
+
+        per_window_records.append({
+            "window_id": window_id,
+            "window_dir": str(window_dir),
+            "expected_probes": expected_probes,
+            "validation_output_divergent": is_l3_divergent,
+            "suspicious_low_count": is_suspicious,
+            "raw_vrp_outputs_retained": raw_vrp_outputs_retained,
+            "all_expected_probe_raw_retained": all_expected_probe_raw_retained,
+            "m17_ready": m17_ready,
+            "raw_candidate_count": len(raw_candidates),
+            "all_candidate_count": len(classified),
+            "missing_expected_probes": missing_expected_probes,
+            "raw_vrp_by_probe": by_probe,
+        })
+
+    if total_raw_files == 0:
+        status = "FAIL_NO_RAW_VRP"
+    elif m17_ready_windows == 0:
+        status = "PARTIAL"
+    else:
+        status = "PASS"
+
+    summary = {
+        "schema": "s3.p0.raw_vrp_retention_summary.v1",
+        "generated_at_utc": utc_now(),
+        "status": status,
+        "history_root": str(history_root),
+        "out_dir": str(out_dir),
+        "windows_scanned": len(window_dirs),
+        "raw_vrp_file_count": total_raw_files,
+        "validation_output_divergent_windows": validation_output_divergent_windows,
+        "divergent_windows_missing_raw": divergent_windows_missing_raw,
+        "m17_ready_windows": m17_ready_windows,
+        "ready_for_m17_vrp_entry_diff": m17_ready_windows > 0,
+        "records": per_window_records,
+    }
+
+    write_json(out_dir / "p0_raw_vrp_retention_summary.json", summary)
+
+    txt_lines = [
+        f"P0_RAW_VRP_RETENTION={status}",
+        f"generated_at_utc = {summary['generated_at_utc']}",
+        f"history_root = {summary['history_root']}",
+        f"windows_scanned = {summary['windows_scanned']}",
+        f"raw_vrp_file_count = {summary['raw_vrp_file_count']}",
+        f"validation_output_divergent_windows = {summary['validation_output_divergent_windows']}",
+        f"divergent_windows_missing_raw = {summary['divergent_windows_missing_raw']}",
+        f"m17_ready_windows = {summary['m17_ready_windows']}",
+        f"ready_for_m17_vrp_entry_diff = {summary['ready_for_m17_vrp_entry_diff']}",
+    ]
+
+    (out_dir / "p0_raw_vrp_retention_summary.txt").write_text(
+        "\n".join(txt_lines) + "\n",
+        encoding="utf-8",
+    )
+
+    print("\n".join(txt_lines))
+
+
+if __name__ == "__main__":
+    main()

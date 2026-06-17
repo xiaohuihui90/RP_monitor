@@ -1,0 +1,156 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+cd "$(dirname "$0")/../.."
+
+export PYTHONNOUSERSITE=1
+export PYTHONPATH="$PWD:${PYTHONPATH:-}"
+
+CONFIG_FILE="${1:-config/p3/e4a_object_auto_upload.env}"
+
+if [ ! -f "$CONFIG_FILE" ]; then
+  echo "[ERROR] config file not found: $CONFIG_FILE" >&2
+  exit 2
+fi
+
+# shellcheck disable=SC1090
+source "$CONFIG_FILE"
+
+: "${P5A_PROBE_ID:?missing P5A_PROBE_ID}"
+: "${P5A_LOCATION:?missing P5A_LOCATION}"
+: "${P5A_COLLECTOR_OBJECT_URL:?missing P5A_COLLECTOR_OBJECT_URL}"
+
+P5A_PERIOD_MINUTES="${P5A_PERIOD_MINUTES:-10}"
+P5A_OUT_ROOT="${P5A_OUT_ROOT:-data/probe/e4a_joint}"
+P5A_LOCK_FILE="${P5A_LOCK_FILE:-data/probe/e4a_joint_auto_upload.lock}"
+
+mkdir -p "$(dirname "$P5A_LOCK_FILE")" logs/p3 "$P5A_OUT_ROOT"
+
+exec 9>"$P5A_LOCK_FILE"
+if ! flock -n 9; then
+  echo "[SKIP] previous e4a object auto upload still running"
+  exit 0
+fi
+
+P5A_GROUP_ID="$(python - <<'PY'
+import os
+import time
+from datetime import datetime, timezone
+
+period_minutes = int(os.environ.get("P5A_PERIOD_MINUTES", "10"))
+period = period_minutes * 60
+now = int(time.time())
+bucket = (now // period) * period
+print(datetime.fromtimestamp(bucket, timezone.utc).strftime("group_auto_%Y%m%dT%H%M00Z"))
+PY
+)"
+
+EXPORT_ID="$(date -u +%Y%m%dT%H%M%SZ)"
+
+echo "========== E4A OBJECT AUTO UPLOAD =========="
+echo "time_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+echo "probe_id=$P5A_PROBE_ID"
+echo "location=$P5A_LOCATION"
+echo "group_id=$P5A_GROUP_ID"
+echo "export_id=$EXPORT_ID"
+echo "collector_url=$P5A_COLLECTOR_OBJECT_URL"
+echo "period_minutes=$P5A_PERIOD_MINUTES"
+
+SOURCE_ARGS=()
+if [ -n "${P5A_SOURCE_ROOT:-}" ] && [ -d "${P5A_SOURCE_ROOT:-}" ]; then
+  SOURCE_ARGS=(--source-root "$P5A_SOURCE_ROOT")
+  echo "source_root=$P5A_SOURCE_ROOT"
+else
+  echo "source_root=auto_discovery"
+fi
+
+python scripts/p3/probe_export_object_snapshot_from_cache.py \
+  --probe-id "$P5A_PROBE_ID" \
+  --location "$P5A_LOCATION" \
+  --snapshot-group-id "$P5A_GROUP_ID" \
+  --export-id "$EXPORT_ID" \
+  --out-root "$P5A_OUT_ROOT" \
+  "${SOURCE_ARGS[@]}"
+
+python scripts/p3/probe_build_joint_snapshot_manifest.py \
+  --probe-id "$P5A_PROBE_ID" \
+  --location "$P5A_LOCATION" \
+  --snapshot-group-id "$P5A_GROUP_ID" \
+  --export-id "$EXPORT_ID" \
+  --vrp-dir data/probe/m14_vrp_export/latest \
+  --object-dir "$P5A_OUT_ROOT/latest/object" \
+  --out-dir "$P5A_OUT_ROOT/latest"
+
+python scripts/p3/check_e4a_joint_object_snapshot_quality.py \
+  --joint-dir "$P5A_OUT_ROOT/latest"
+
+python - <<'PY'
+import json
+from pathlib import Path
+
+p = Path("data/probe/e4a_joint/latest/object/object_snapshot_quality_check.json")
+obj = json.loads(p.read_text(encoding="utf-8"))
+
+if not obj.get("semantic_object_snapshot_ok"):
+    raise SystemExit("[ERROR] semantic_object_snapshot_ok is False: " + str(obj.get("blockers")))
+
+print("[OK] semantic_object_snapshot_ok = True")
+PY
+
+OBJECT_RECORD="$PWD/$P5A_OUT_ROOT/latest/object/object_snapshot_record.json"
+OBJECT_TAR="$PWD/$P5A_OUT_ROOT/latest/object/object_snapshot.tar.gz"
+OBJECT_SHA="$PWD/$P5A_OUT_ROOT/latest/object/sha256.txt"
+
+JOINT_SNAPSHOT_ID="$(python - <<'PY'
+import json
+from pathlib import Path
+obj = json.loads(Path("data/probe/e4a_joint/latest/object/object_snapshot_record.json").read_text())
+print(obj["joint_snapshot_id"])
+PY
+)"
+
+OBJECT_GENERATED_TIME="$(python - <<'PY'
+import json
+from pathlib import Path
+obj = json.loads(Path("data/probe/e4a_joint/latest/object/object_snapshot_record.json").read_text())
+print(obj.get("object_export_started_at") or "")
+PY
+)"
+
+RESP_DIR="$P5A_OUT_ROOT/latest/auto_upload_responses"
+mkdir -p "$RESP_DIR"
+RESP_FILE="$RESP_DIR/${P5A_PROBE_ID}_${P5A_GROUP_ID}_object_upload_response.json"
+
+curl -sS \
+  --connect-timeout "${P5A_CONNECT_TIMEOUT_SECONDS:-10}" \
+  --max-time "${P5A_MAX_TIME_SECONDS:-900}" \
+  --retry "${P5A_CURL_RETRY:-2}" \
+  --retry-delay "${P5A_CURL_RETRY_DELAY:-5}" \
+  -X POST "$P5A_COLLECTOR_OBJECT_URL" \
+  -F "probe_id=${P5A_PROBE_ID}" \
+  -F "snapshot_group_id=${P5A_GROUP_ID}" \
+  -F "joint_snapshot_id=${JOINT_SNAPSHOT_ID}" \
+  -F "generated_time=${OBJECT_GENERATED_TIME}" \
+  -F "object_snapshot_record=@${OBJECT_RECORD};type=application/json" \
+  -F "object_snapshot_tar_gz=@${OBJECT_TAR};type=application/gzip" \
+  -F "sha256=@${OBJECT_SHA};type=text/plain" \
+  | tee "$RESP_FILE" \
+  | python -m json.tool
+
+python - <<PY
+import json
+from pathlib import Path
+
+p = Path("$RESP_FILE")
+obj = json.loads(p.read_text(encoding="utf-8"))
+if obj.get("status") != "ok":
+    raise SystemExit("[ERROR] upload status is not ok: " + str(obj.get("status")))
+
+rec = obj.get("object_upload_record", {})
+if rec.get("status") != "ok" or rec.get("sha256_ok") is not True or rec.get("tar_valid") is not True:
+    raise SystemExit("[ERROR] upload record failed: " + str(rec))
+
+print("[OK] upload success:", p)
+PY
+
+echo "[DONE] e4a object auto upload success"

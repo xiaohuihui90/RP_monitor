@@ -1,0 +1,69 @@
+schema: s3.stage3.e4a_joint_collect_config.v1
+
+scope:
+  active: m14_e4a_cross_region_same_validator
+  e4b_cross_validator: reserved_only
+  control_plane_impact: reserved_only
+
+collector:
+  host: 0.0.0.0
+  vrp_upload_port: 28114
+  object_upload_port: 28115
+  base_url: http://47.108.137.128
+  vrp_upload_api: /api/v1/m14/vrp/upload
+  object_upload_api: /api/v1/e4a/object/upload
+  joint_group_root: data/p3_collector/e4a_joint_snapshots/groups
+  joint_run_root: data/p3_collector/e4a_joint_runs
+
+probes:
+  - probe_id: probe-cd
+    location: chengdu
+  - probe_id: probe-bj
+    location: beijing
+  - probe_id: probe-sg
+    location: singapore
+
+window:
+  group_window_seconds: 300
+  strong_mapping_seconds: 300
+  max_generated_time_skew_seconds: 600
+
+vrp_snapshot:
+  enabled: true
+  validator: routinator
+  reuse_existing_m14_export_script: true
+  gzip: true
+  sha256: true
+
+object_snapshot:
+  enabled: true
+  include_active_manifest_records: true
+  include_object_inventory_summary: true
+  include_full_object_inventory: false
+  include_raw_objects: false
+  upload_raw_objects: false
+
+joint_snapshot:
+  enabled: true
+  required_probes:
+    - probe-cd
+    - probe-bj
+    - probe-sg
+  require_vrp_group_complete: true
+  require_object_group_complete: true
+
+reserved_interfaces:
+  e4b_cross_validator:
+    enabled: false
+    mode: reserved_only
+  control_plane_impact:
+    enabled: false
+    mode: reserved_only
+    default_status: impact_not_evaluated
+
+safety:
+  do_not_install_new_validators_now: true
+  do_not_load_bgp_data_now: true
+  do_not_promote_to_e4_confirmed_without_object_context: true
+  do_not_reuse_historical_object_verdict_as_same_window: true
+  prefer_sidecar_for_new_upload_api: true

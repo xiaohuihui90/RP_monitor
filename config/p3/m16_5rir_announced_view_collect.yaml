@@ -1,0 +1,42 @@
+schema: s3.stage3.m16.announced_view_collect_config.v1
+
+collection_mode: m16_5rir
+
+http:
+  timeout_seconds: 60
+  user_agent: "s3-radar-m16-announced-view/1.0"
+
+pp_scope:
+  - pp_id: arin
+    rir: arin
+    notification_uri: https://rrdp-rps.arin.net/notification.xml
+    enabled: true
+
+  - pp_id: ripe
+    rir: ripe
+    notification_uri: https://rrdp.ripe.net/notification.xml
+    enabled: true
+
+  - pp_id: apnic
+    rir: apnic
+    notification_uri: https://rrdp.apnic.net/notification.xml
+    enabled: true
+
+  - pp_id: lacnic
+    rir: lacnic
+    notification_uri: https://rrdp.lacnic.net/rrdp/notification.xml
+    enabled: true
+
+  - pp_id: afrinic
+    rir: afrinic
+    notification_uri: https://rrdp.afrinic.net/notification.xml
+    enabled: true
+
+digest_policy:
+  notification_digest_mode: raw_bytes_sha256
+  delta_hash_chain_root_mode: canonical_serial_uri_hash_v1
+  announced_view_root_mode: canonical_pp_record_v1
+
+output:
+  out_root: data/probe/e4a_announced_view
+  store_raw_notification: true

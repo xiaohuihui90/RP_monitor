@@ -1,0 +1,229 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any
+
+
+def utc_now() -> str:
+    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+
+
+def read_json(path: Path) -> Any:
+    if not path.exists():
+        return None
+    return json.loads(path.read_text(encoding="utf-8", errors="ignore"))
+
+
+def write_json(path: Path, obj: Any) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(obj, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+
+def write_jsonl(path: Path, records: list[dict[str, Any]]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", encoding="utf-8") as f:
+        for r in records:
+            f.write(json.dumps(r, ensure_ascii=False, sort_keys=True) + "\n")
+
+
+def sha256_file(path: Path) -> str | None:
+    if not path.exists() or not path.is_file():
+        return None
+    h = hashlib.sha256()
+    with path.open("rb") as f:
+        for chunk in iter(lambda: f.read(1024 * 1024), b""):
+            h.update(chunk)
+    return "sha256:" + h.hexdigest()
+
+
+def read_jsonl_count(path: Path) -> int | None:
+    if not path.exists():
+        return None
+    count = 0
+    with path.open("r", encoding="utf-8", errors="ignore") as f:
+        for line in f:
+            if line.strip():
+                count += 1
+    return count
+
+
+def get_probe_meta(validator_meta: dict[str, Any], probe_id: str) -> dict[str, Any]:
+    pmeta = validator_meta.get("probe_metadata", {})
+    if isinstance(pmeta, dict) and isinstance(pmeta.get(probe_id), dict):
+        return pmeta[probe_id]
+    return {}
+
+
+def find_raw_vrp_file(raw_probe_dir: Path) -> Path | None:
+    files = sorted(raw_probe_dir.glob("*_raw_vrp.json"))
+    return files[0] if files else None
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--window-id", required=True)
+    ap.add_argument("--m245-history-root", default="data/p3_collector/m245_three_layer_baseline/history")
+    ap.add_argument("--m17-root", default="data/p3_collector/m17_vrp_entry_diff/history")
+    args = ap.parse_args()
+
+    window_id = args.window_id
+    m245_dir = Path(args.m245_history_root) / f"m245_window_{window_id}"
+    m17_dir = Path(args.m17_root) / f"m17_window_{window_id}"
+    out_dir = m17_dir / "outputs"
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    validator_meta = read_json(m245_dir / "outputs" / "validator_runtime_metadata.json")
+    if not isinstance(validator_meta, dict):
+        validator_meta = {}
+
+    canonical_manifest = read_json(out_dir / "canonical_vrp_manifest.json")
+    if not isinstance(canonical_manifest, dict):
+        canonical_manifest = {}
+
+    canonical_by_probe = canonical_manifest.get("probes", {})
+    if not isinstance(canonical_by_probe, dict):
+        canonical_by_probe = {}
+
+    raw_root = m245_dir / "outputs" / "raw_vrp"
+
+    records: list[dict[str, Any]] = []
+    warnings: list[str] = []
+
+    for raw_probe_dir in sorted(raw_root.glob("probe-*")):
+        if not raw_probe_dir.is_dir():
+            continue
+
+        probe_id = raw_probe_dir.name
+        raw_manifest_path = raw_probe_dir / "raw_vrp_export_manifest.json"
+        raw_check_path = raw_probe_dir / "raw_vrp_export_check.txt"
+        raw_manifest = read_json(raw_manifest_path)
+        if not isinstance(raw_manifest, dict):
+            raw_manifest = {}
+            warnings.append(f"{probe_id}:raw_vrp_export_manifest_missing_or_bad")
+
+        raw_vrp_file = find_raw_vrp_file(raw_probe_dir)
+        probe_meta = get_probe_meta(validator_meta, probe_id)
+        canonical_info = canonical_by_probe.get(probe_id, {})
+        if not isinstance(canonical_info, dict):
+            canonical_info = {}
+
+        canonical_path = Path(canonical_info.get("canonical_vrp_path", "")) if canonical_info.get("canonical_vrp_path") else None
+        canonical_count = read_jsonl_count(canonical_path) if canonical_path else None
+
+        raw_vrp_size = None
+        raw_vrp_hash = None
+        if raw_vrp_file and raw_vrp_file.exists():
+            raw_vrp_size = raw_vrp_file.stat().st_size
+            raw_vrp_hash = sha256_file(raw_vrp_file)
+
+        vrp_count = (
+            probe_meta.get("vrp_count")
+            or raw_manifest.get("vrp_count_guess")
+            or canonical_count
+        )
+
+        raw_guess = raw_manifest.get("vrp_count_guess")
+        consistency = "unknown"
+        if vrp_count is not None and raw_guess is not None:
+            try:
+                consistency = "consistent" if abs(int(vrp_count) - int(raw_guess)) <= 10 else "mismatch"
+            except Exception:
+                consistency = "unknown"
+
+        if canonical_count is not None and raw_guess is not None:
+            try:
+                if abs(int(canonical_count) - int(raw_guess)) > 10:
+                    warnings.append(f"{probe_id}:canonical_count_vs_raw_guess_mismatch")
+            except Exception:
+                pass
+
+        record = {
+            "schema": "s3.m17.validator_cycle_record.v1",
+            "generated_at_utc": utc_now(),
+            "window_id": window_id,
+            "probe_id": probe_id,
+
+            "validator": probe_meta.get("validator") or raw_manifest.get("validator") or "routinator",
+            "validator_version": probe_meta.get("validator_version") or raw_manifest.get("validator_version"),
+
+            "validator_update_mode": probe_meta.get("validator_update_mode") or "noupdate",
+            "validator_update_policy": "observation_window_noupdate",
+
+            "raw_vrp_path": str(raw_vrp_file) if raw_vrp_file else None,
+            "raw_vrp_sha256": raw_vrp_hash,
+            "raw_vrp_size_bytes": raw_vrp_size,
+            "vrp_count": vrp_count,
+            "raw_vrp_vrp_count_guess": raw_guess,
+            "canonical_vrp_count": canonical_count,
+            "vrp_count_consistency": consistency,
+
+            "suspicious_low_count": probe_meta.get("suspicious_low_count"),
+            "validation_output_quality": probe_meta.get("validation_output_quality"),
+            "metadata_quality": probe_meta.get("metadata_quality"),
+
+            "raw_vrp_export_status": raw_manifest.get("status"),
+            "raw_vrp_format": raw_manifest.get("format"),
+
+            "source_files": {
+                "raw_vrp_export_manifest": str(raw_manifest_path),
+                "raw_vrp_export_check": str(raw_check_path),
+                "validator_runtime_metadata": str(m245_dir / "outputs" / "validator_runtime_metadata.json"),
+                "canonical_vrp_manifest": str(out_dir / "canonical_vrp_manifest.json"),
+            },
+
+            "accepted_object_set_available": False,
+            "mapping_strength_candidate": "weak",
+            "strong_causal_claim_allowed": False,
+        }
+
+        records.append(record)
+
+    status = "PASS" if len(records) >= 3 else "FAIL"
+
+    summary = {
+        "schema": "s3.m17.validator_cycle_summary.v1",
+        "generated_at_utc": utc_now(),
+        "window_id": window_id,
+        "status": status,
+        "cycle_record_count": len(records),
+        "probe_count": len({r["probe_id"] for r in records}),
+        "validator_update_mode_set": sorted(set(str(r.get("validator_update_mode")) for r in records)),
+        "vrp_counts_by_probe": {r["probe_id"]: r.get("vrp_count") for r in records},
+        "canonical_counts_by_probe": {r["probe_id"]: r.get("canonical_vrp_count") for r in records},
+        "suspicious_low_count_by_probe": {r["probe_id"]: r.get("suspicious_low_count") for r in records},
+        "validation_output_quality_by_probe": {r["probe_id"]: r.get("validation_output_quality") for r in records},
+        "warnings": warnings,
+        "accepted_object_set_available": False,
+        "mapping_strength_candidate": "weak",
+        "strong_causal_claim_allowed": False,
+    }
+
+    write_jsonl(out_dir / "validator_cycle_records.jsonl", records)
+    write_json(out_dir / "validator_cycle_summary.json", summary)
+
+    txt = [
+        f"M17_VALIDATOR_CYCLE_RECORD={status}",
+        f"generated_at_utc = {summary['generated_at_utc']}",
+        f"window_id = {window_id}",
+        f"cycle_record_count = {summary['cycle_record_count']}",
+        f"probe_count = {summary['probe_count']}",
+        f"validator_update_mode_set = {summary['validator_update_mode_set']}",
+        f"accepted_object_set_available = False",
+        f"mapping_strength_candidate = weak",
+        f"strong_causal_claim_allowed = False",
+        f"warnings = {warnings}",
+        f"records_path = {out_dir / 'validator_cycle_records.jsonl'}",
+        f"summary_path = {out_dir / 'validator_cycle_summary.json'}",
+    ]
+
+    (out_dir / "M17_validator_cycle_record_check.txt").write_text("\n".join(txt) + "\n", encoding="utf-8")
+    print("\n".join(txt))
+
+
+if __name__ == "__main__":
+    main()
