@@ -5,6 +5,7 @@ cd ~/s3_stage3_v3_code
 
 export PYTHONNOUSERSITE=1
 export PYTHONPATH="$PWD"
+export PATH="/home/zhangxiaohui/.cargo/bin:$PATH"
 
 PYTHON_BIN="${PYTHON_BIN:-/home/zhangxiaohui/installers/ENTER/envs/s3-radar/bin/python}"
 
@@ -22,7 +23,7 @@ mkdir -p "$RUN_DIR" logs
   --probe-id probe-cd \
   --snapshot-root data/probe/live_vrp_snapshots \
   --out-dir "$RUN_DIR" \
-  --routinator-bin routinator \
+  --routinator-bin /home/zhangxiaohui/.cargo/bin/routinator \
   --command-format json \
   --command-timeout-sec 1200 \
   --source-pp-coverage "$SRC_PP" \
