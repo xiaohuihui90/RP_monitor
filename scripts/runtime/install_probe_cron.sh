@@ -21,11 +21,13 @@ usage() {
     "  --routinator-bin PATH  Routinator binary. Default: ${ROUTINATOR_BIN}" \
     "  --cron-minute MIN      Minute field for hourly E2 cycle. Default: ${CRON_MINUTE}" \
     "  --enable               Install the planned managed crontab block" \
-    "  --dry-run              Print planned crontab only; never install" \
+    "  --dry-run              Print planned crontab and wrapper only; never install" \
     "  -h, --help             Show this help" \
     "" \
     "The script prints the planned crontab first. It preserves existing crontab" \
-    "content and only replaces the RP Monitor managed block for this probe."
+    "content and only replaces the RP Monitor managed block for this probe." \
+    "The managed cron line calls a short generated wrapper at:" \
+    "  scripts/runtime/run_<probe_id>_live_msal_cycle_once.sh"
 }
 
 while [[ $# -gt 0 ]]; do
@@ -99,17 +101,62 @@ shell_quote() {
 }
 
 safe_probe_id="$(printf '%s' "$PROBE_ID" | sed 's/[^A-Za-z0-9_.-]/_/g')"
+wrapper_rel="scripts/runtime/run_${safe_probe_id}_live_msal_cycle_once.sh"
+wrapper_path="$REPO_ROOT/$wrapper_rel"
 mark_begin="# BEGIN RP_MONITOR_LIVE_MSAL_${safe_probe_id}"
 mark_end="# END RP_MONITOR_LIVE_MSAL_${safe_probe_id}"
 
-q_repo="$(shell_quote "$REPO_ROOT")"
-q_python="$(shell_quote "$PYTHON_BIN")"
-q_routinator="$(shell_quote "$ROUTINATOR_BIN")"
-q_probe="$(shell_quote "$PROBE_ID")"
-q_cron_log="$(shell_quote "logs/${safe_probe_id}_live_msal_cycle_cron.log")"
+render_wrapper() {
+  cat <<EOF
+#!/usr/bin/env bash
+set -Eeuo pipefail
 
-cycle_cmd="cd $q_repo && export PYTHONNOUSERSITE=1 && export PYTHONPATH=$q_repo:\${PYTHONPATH:-} && mkdir -p logs data/probe/e2e_msal_cycles/$q_probe && $q_python probe/run_probe_live_msal_cycle.py --probe-id $q_probe --snapshot-root data/probe/live_vrp_snapshots --out-dir data/probe/e2e_msal_cycles/$q_probe/hourly_\$(date -u +\\%Y\\%m\\%dT\\%H\\%M\\%SZ) --routinator-bin $q_routinator --allow-empty-events --source-pp-coverage data/p3_analysis/sec27/coverage_candidate/source_pp_coverage.jsonl --l2-object-index data/p3_analysis/sec27/l2b_effective_input_r2/l2b_candidate_effective_input.jsonl --manifest-filelist-index data/p3_analysis/sec27/b5_paper_stats/object_or_manifest_supported_subset.jsonl --candidate-evidence-table data/p3_analysis/sec27/b4c_candidate_evidence_table/candidate_evidence_table.jsonl --hash-evidence-index data/p3_analysis/sec27/b6_final_paper_tables/selected_persistent_cases.jsonl >> $q_cron_log 2>&1"
-cycle_cron_line="${CRON_MINUTE} * * * * /bin/bash -lc $(shell_quote "$cycle_cmd")"
+PROBE_ID=$(shell_quote "$PROBE_ID")
+SAFE_PROBE_ID=$(shell_quote "$safe_probe_id")
+REPO_ROOT=$(shell_quote "$REPO_ROOT")
+PYTHON_BIN=$(shell_quote "$PYTHON_BIN")
+ROUTINATOR_BIN=$(shell_quote "$ROUTINATOR_BIN")
+
+cd "\$REPO_ROOT"
+export PYTHONNOUSERSITE=1
+export PYTHONPATH="\$REPO_ROOT:\${PYTHONPATH:-}"
+
+LOG_PATH="logs/\${SAFE_PROBE_ID}_live_msal_cycle_cron.log"
+mkdir -p logs "data/probe/e2e_msal_cycles/\$PROBE_ID"
+exec >> "\$LOG_PATH" 2>&1
+
+run_id="hourly_\$(date -u +%Y%m%dT%H%M%SZ)"
+out_dir="data/probe/e2e_msal_cycles/\$PROBE_ID/\$run_id"
+
+echo "[\$(date -u +%Y-%m-%dT%H:%M:%SZ)] starting E2 live MSAL cycle probe_id=\$PROBE_ID out_dir=\$out_dir"
+set +e
+"\$PYTHON_BIN" probe/run_probe_live_msal_cycle.py \\
+  --probe-id "\$PROBE_ID" \\
+  --snapshot-root data/probe/live_vrp_snapshots \\
+  --out-dir "\$out_dir" \\
+  --routinator-bin "\$ROUTINATOR_BIN" \\
+  --allow-empty-events \\
+  --source-pp-coverage data/p3_analysis/sec27/coverage_candidate/source_pp_coverage.jsonl \\
+  --l2-object-index data/p3_analysis/sec27/l2b_effective_input_r2/l2b_candidate_effective_input.jsonl \\
+  --manifest-filelist-index data/p3_analysis/sec27/b5_paper_stats/object_or_manifest_supported_subset.jsonl \\
+  --candidate-evidence-table data/p3_analysis/sec27/b4c_candidate_evidence_table/candidate_evidence_table.jsonl \\
+  --hash-evidence-index data/p3_analysis/sec27/b6_final_paper_tables/selected_persistent_cases.jsonl
+status=\$?
+set -e
+echo "[\$(date -u +%Y-%m-%dT%H:%M:%SZ)] finished E2 live MSAL cycle probe_id=\$PROBE_ID status=\$status out_dir=\$out_dir"
+exit "\$status"
+EOF
+}
+
+write_wrapper() {
+  local tmp_wrapper
+  tmp_wrapper="$(mktemp "${wrapper_path}.tmp.XXXXXX")"
+  render_wrapper > "$tmp_wrapper"
+  chmod 0755 "$tmp_wrapper"
+  mv -f "$tmp_wrapper" "$wrapper_path"
+}
+
+cycle_cron_line="${CRON_MINUTE} * * * * /bin/bash $(shell_quote "$wrapper_path")"
 
 current_cron="$(mktemp)"
 planned_cron="$(mktemp)"
@@ -141,6 +188,7 @@ fi
   echo "$mark_begin"
   echo "# Probe: $PROBE_ID"
   echo "# Installed by scripts/runtime/install_probe_cron.sh"
+  echo "# Wrapper: $wrapper_rel"
   echo "# Runs one E2 live MSAL cycle per hour. E3/E4/E5 remain explicit acceptance steps."
   echo "$cycle_cron_line"
   echo "$mark_end"
@@ -149,15 +197,23 @@ fi
 printf '%s\n' "----- planned crontab begin -----"
 cat "$planned_cron"
 printf '%s\n' "----- planned crontab end -----"
+printf '%s\n' "----- planned wrapper path -----"
+printf '%s\n' "$wrapper_path"
+printf '%s\n' "----- planned wrapper begin -----"
+render_wrapper
+printf '%s\n' "----- planned wrapper end -----"
 
 if [[ "$ENABLE" != "true" || "$DRY_RUN" == "true" ]]; then
   printf 'P1_INSTALL_PROBE_CRON=DRY_RUN\n'
   printf 'enable=%s\n' "$ENABLE"
   printf 'dry_run=%s\n' "$DRY_RUN"
+  printf 'wrapper_path=%s\n' "$wrapper_path"
   exit 0
 fi
 
+write_wrapper
 crontab "$planned_cron"
 printf 'P1_INSTALL_PROBE_CRON=INSTALLED\n'
 printf 'probe_id=%s\n' "$PROBE_ID"
 printf 'cron_minute=%s\n' "$CRON_MINUTE"
+printf 'wrapper_path=%s\n' "$wrapper_path"

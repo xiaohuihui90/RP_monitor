@@ -22,8 +22,23 @@ DEFAULT_CRON_LOG = "logs/probe_cd_live_msal_cycle_cron.log"
 E2_ACCEPTANCE_RELATIVE_PATH = Path("checks") / "E2_LIVE_MSAL_CYCLE_ACCEPTANCE.txt"
 HEALTH_ACCEPTANCE_RELATIVE_PATH = Path("checks") / "E3_CRON_HEALTH_ACCEPTANCE.txt"
 RUN_DIR_PATTERNS = ("hourly_*", "e2_cycle_*", "cycle_*")
-CRITICAL_LOG_RE = re.compile(r"\b(ERROR|Traceback|Killed|OOM|timeout)\b|out of memory", re.IGNORECASE)
+CRITICAL_LOG_PATTERNS: tuple[tuple[str, re.Pattern[str]], ...] = (
+    ("traceback", re.compile(r"Traceback")),
+    ("exception", re.compile(r"\b(?:[A-Za-z]+)?Exception\b")),
+    ("file_not_found", re.compile(r"\bFileNotFoundError\b|No such file", re.IGNORECASE)),
+    ("permission_denied", re.compile(r"Permission denied", re.IGNORECASE)),
+    ("command_capture_failed", re.compile(r"\bcommand_capture_failed\b")),
+    ("killed", re.compile(r"\bKilled\b")),
+    ("oom", re.compile(r"\bOOM\b|out of memory", re.IGNORECASE)),
+    ("http_error", re.compile(r"HTTP Error(?:\s+\d{3})?", re.IGNORECASE)),
+    ("timeout", re.compile(r"\bTimeoutError\b|\btimed out\b", re.IGNORECASE)),
+    ("e2_fail", re.compile(r"\bE2_LIVE_MSAL_CYCLE=FAIL\b")),
+    ("exit_code_nonzero", re.compile(r"\bexit[_ -]?code\b[\"']?\s*[:=]\s*[\"']?(?!0(?:\D|$))([1-9]\d*)\b", re.IGNORECASE)),
+    ("error_uppercase", re.compile(r"\bERROR\b")),
+)
 WARNING_LOG_RE = re.compile(r"\b(WARN|WARNING)\b", re.IGNORECASE)
+BENIGN_ERROR_FIELD_RE = re.compile(r"[\"']?error[\"']?\s*[:=]\s*(?:null|none|[\"'][\"'])\s*(?:[,}\]]|$)", re.IGNORECASE)
+COMMAND_TIMEOUT_OPTION_RE = re.compile(r"--command-timeout-sec\b")
 
 
 @dataclass(frozen=True, slots=True)
@@ -123,6 +138,29 @@ def parse_time_token(text: str) -> datetime | None:
             )
         except ValueError:
             return None
+    return None
+
+
+def parse_log_line_timestamp(line: str) -> datetime | None:
+    iso_match = re.search(
+        r"(\d{4}-\d{2}-\d{2}[T ][0-2]\d:[0-5]\d:[0-5]\d(?:\.\d{1,6})?(?:Z|[+-]\d{2}:\d{2})?)",
+        line,
+    )
+    if iso_match:
+        text = iso_match.group(1).replace(" ", "T")
+        if text.endswith("Z"):
+            text = text[:-1] + "+00:00"
+        try:
+            dt = datetime.fromisoformat(text)
+            if dt.tzinfo is None:
+                dt = dt.replace(tzinfo=timezone.utc)
+            return dt.astimezone(timezone.utc)
+        except ValueError:
+            pass
+
+    compact_match = re.search(r"\d{8}T\d{6}\d{0,6}Z", line)
+    if compact_match:
+        return parse_time_token(compact_match.group(0))
     return None
 
 
@@ -325,6 +363,92 @@ def matching_lines(text: str | None, pattern: re.Pattern[str], limit: int = 20) 
     return matches
 
 
+def matching_log_entries(text: str | None, pattern: re.Pattern[str], limit: int = 20) -> dict[str, Any]:
+    if text is None:
+        return {"count": 0, "matches": []}
+    count = 0
+    matches: list[dict[str, Any]] = []
+    for line in text.splitlines():
+        line = line.lstrip("\ufeff")
+        match = pattern.search(line)
+        if not match:
+            continue
+        count += 1
+        if len(matches) >= limit:
+            continue
+        ts = parse_log_line_timestamp(line)
+        matches.append(
+            {
+                "line": line[-1000:],
+                "matched_text": match.group(0),
+                "observed_at_utc": iso_z(ts) if ts else None,
+            }
+        )
+    return {"count": count, "matches": matches}
+
+
+def critical_log_match(line: str) -> tuple[str, str] | None:
+    """Return the first real critical log match while ignoring known benign fields."""
+    if not line:
+        return None
+
+    # These strings appear in healthy command echoes / JSON summaries and should
+    # not turn a PASS cycle into a cron-health FAIL by themselves.
+    line_without_timeout_option = COMMAND_TIMEOUT_OPTION_RE.sub("", line)
+    line_without_empty_error = BENIGN_ERROR_FIELD_RE.sub("", line_without_timeout_option)
+
+    for rule_name, pattern in CRITICAL_LOG_PATTERNS:
+        match = pattern.search(line_without_empty_error)
+        if match:
+            return rule_name, match.group(0)
+    return None
+
+
+def split_critical_log_entries(log_text: str | None, ignore_before: datetime | None, limit: int = 20) -> dict[str, Any]:
+    if log_text is None:
+        return {
+            "total_count": 0,
+            "current_count": 0,
+            "historical_count": 0,
+            "current_matches": [],
+            "historical_matches": [],
+        }
+    total_count = 0
+    current_count = 0
+    historical_count = 0
+    current_matches: list[dict[str, Any]] = []
+    historical_matches: list[dict[str, Any]] = []
+    for line in log_text.splitlines():
+        line = line.lstrip("\ufeff")
+        critical = critical_log_match(line)
+        if not critical:
+            continue
+        matched_rule, matched_text = critical
+        total_count += 1
+        ts = parse_log_line_timestamp(line)
+        entry = {
+            "line": line[-1000:],
+            "matched_rule": matched_rule,
+            "matched_text": matched_text,
+            "observed_at_utc": iso_z(ts) if ts else None,
+        }
+        if ignore_before is not None and ts is not None and ts < ignore_before:
+            historical_count += 1
+            if len(historical_matches) < limit:
+                historical_matches.append(entry)
+        else:
+            current_count += 1
+            if len(current_matches) < limit:
+                current_matches.append(entry)
+    return {
+        "total_count": total_count,
+        "current_count": current_count,
+        "historical_count": historical_count,
+        "current_matches": current_matches,
+        "historical_matches": historical_matches,
+    }
+
+
 def existing_path_for_disk(paths: list[Path]) -> Path:
     for path in paths:
         current = path.resolve()
@@ -424,12 +548,15 @@ def acceptance_text(summary: dict[str, Any]) -> str:
         ("cron_log", summary.get("cron_log", {}).get("path") if isinstance(summary.get("cron_log"), dict) else None),
         ("lookback_hours", summary.get("lookback_hours")),
         ("expected_interval_min", summary.get("expected_interval_min")),
+        ("ignore_before_utc", summary.get("ignore_before_utc")),
         ("run_count", summary.get("run_count")),
         ("missing_run_window_count", summary.get("missing_run_window_count")),
         ("latest_cycle_status", summary.get("latest_cycle", {}).get("status") if isinstance(summary.get("latest_cycle"), dict) else None),
         ("missing_acceptance_count", summary.get("missing_acceptance_count")),
         ("e2_fail_count", summary.get("e2_fail_count")),
         ("critical_log_match_count", summary.get("cron_log", {}).get("critical_match_count") if isinstance(summary.get("cron_log"), dict) else None),
+        ("current_cycle_error_count", summary.get("current_cycle_error_count")),
+        ("historical_log_error_count", summary.get("historical_log_error_count")),
         ("disk_free_gb", summary.get("disk", {}).get("free_gb") if isinstance(summary.get("disk"), dict) else None),
         ("disk_min_free_gb", summary.get("disk", {}).get("min_free_gb") if isinstance(summary.get("disk"), dict) else None),
         ("event_spike", summary.get("event_spike", {}).get("spike") if isinstance(summary.get("event_spike"), dict) else None),
@@ -453,15 +580,26 @@ def report_text(summary: dict[str, Any]) -> str:
         f"Live MSAL cron health: {summary.get('status')}",
         f"probe_id: {summary.get('probe_id')}",
         f"lookback: {summary.get('lookback_hours')}h, expected interval: {summary.get('expected_interval_min')} min",
+        f"ignore log entries before: {summary.get('ignore_before_utc')}",
         f"runs in lookback: {summary.get('run_count')}",
         f"latest cycle: {latest.get('run_name')} {latest.get('status')} at {latest.get('observed_at_utc')}",
         f"missing run windows: {summary.get('missing_run_window_count')}",
         f"missing acceptance: {summary.get('missing_acceptance_count')}",
         f"E2 FAIL count: {summary.get('e2_fail_count')}",
         f"disk free: {summary.get('disk', {}).get('free_gb')} GB / min {summary.get('disk', {}).get('min_free_gb')} GB",
-        f"critical log matches: {summary.get('cron_log', {}).get('critical_match_count')}",
+        f"critical log matches (current): {summary.get('cron_log', {}).get('current_critical_match_count')}",
+        f"historical log errors ignored: {summary.get('historical_log_error_count')}",
+        f"current cycle errors: {summary.get('current_cycle_error_count')}",
         f"warning log matches: {summary.get('cron_log', {}).get('warning_match_count')}",
     ]
+    if summary.get("current_cycle_errors"):
+        lines.extend(["", "Current cycle errors:"])
+        for item in summary.get("current_cycle_errors", [])[:20]:
+            lines.append(f"- {format_value(item)}")
+    if summary.get("historical_log_errors"):
+        lines.extend(["", "Historical log errors ignored by --ignore-before-utc:"])
+        for item in summary.get("historical_log_errors", [])[:20]:
+            lines.append(f"- {format_value(item)}")
     if summary.get("fail_reasons"):
         lines.extend(["", "FAIL reasons:"])
         lines.extend(f"- {item}" for item in summary.get("fail_reasons", []))
@@ -484,11 +622,32 @@ def compact_cycle(row: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def build_current_cycle_errors(
+    missing_acceptance_rows: list[dict[str, Any]],
+    e2_fail_rows: list[dict[str, Any]],
+    timeout_rows: list[dict[str, Any]],
+    current_critical_log_matches: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    errors: list[dict[str, Any]] = []
+    for row in missing_acceptance_rows:
+        errors.append({"error_type": "missing_e2_acceptance", "cycle": compact_cycle(row)})
+    for row in e2_fail_rows:
+        errors.append({"error_type": "e2_cycle_fail", "cycle": compact_cycle(row)})
+    for row in timeout_rows:
+        errors.append({"error_type": "cycle_duration_timeout", "cycle": compact_cycle(row)})
+    for match in current_critical_log_matches:
+        errors.append({"error_type": "current_critical_cron_log_match", "log_match": match})
+    return errors
+
+
 def build_health_summary(args: argparse.Namespace) -> dict[str, Any]:
     started_at_utc = utc_now()
     started = time.monotonic()
     now = utc_now_dt()
     cutoff = now - timedelta(hours=float(args.lookback_hours))
+    ignore_before_dt = parse_iso_datetime(args.ignore_before_utc)
+    if args.ignore_before_utc and ignore_before_dt is None:
+        raise RuntimeError(f"invalid --ignore-before-utc value: {args.ignore_before_utc}")
     cycle_root = Path(args.cycle_root).resolve()
     probe_cycle_root = resolve_probe_cycle_root(cycle_root, args.probe_id)
     cron_log_path = Path(args.cron_log).resolve()
@@ -512,7 +671,9 @@ def build_health_summary(args: argparse.Namespace) -> dict[str, Any]:
     timeout_rows = [row for row in rows_lookback if (as_float(row.get("duration_sec")) or 0) > timeout_sec]
 
     log_text = tail_text(cron_log_path)
-    critical_log_lines = matching_lines(log_text, CRITICAL_LOG_RE)
+    critical_log_split = split_critical_log_entries(log_text, ignore_before_dt)
+    current_critical_log_matches = critical_log_split["current_matches"]
+    historical_critical_log_matches = critical_log_split["historical_matches"]
     warning_log_lines = matching_lines(log_text, WARNING_LOG_RE)
     log_missing = log_text is None
     disk = disk_check([probe_cycle_root, cycle_root, out_dir], float(args.min_free_gb))
@@ -528,7 +689,14 @@ def build_health_summary(args: argparse.Namespace) -> dict[str, Any]:
         fail_reasons.append("missing_e2_acceptance")
     if e2_fail_rows:
         fail_reasons.append("e2_cycle_fail")
-    if critical_log_lines:
+    current_cycle_errors = build_current_cycle_errors(
+        missing_acceptance_rows,
+        e2_fail_rows,
+        timeout_rows,
+        current_critical_log_matches,
+    )
+
+    if current_critical_log_matches:
         fail_reasons.append("critical_cron_log_match")
     if not disk["ok"]:
         fail_reasons.append("disk_free_below_threshold")
@@ -536,7 +704,7 @@ def build_health_summary(args: argparse.Namespace) -> dict[str, Any]:
         fail_reasons.append("cycle_duration_timeout")
     if event_spike.get("spike"):
         warn_reasons.append("event_count_spike")
-    if warning_log_lines and not critical_log_lines:
+    if warning_log_lines and not current_critical_log_matches:
         warn_reasons.append("cron_log_warning_match")
     if log_missing:
         warn_reasons.append("cron_log_missing")
@@ -547,7 +715,7 @@ def build_health_summary(args: argparse.Namespace) -> dict[str, Any]:
         "latest_cycle_pass": latest_cycle_status == "PASS",
         "missing_acceptance_count_zero": not missing_acceptance_rows,
         "e2_fail_count_zero": not e2_fail_rows,
-        "critical_log_match_count_zero": not critical_log_lines,
+        "critical_log_match_count_zero": not current_critical_log_matches,
         "disk_free_gb_ok": bool(disk["ok"]),
         "cycle_duration_timeout_count_zero": not timeout_rows,
     }
@@ -565,6 +733,7 @@ def build_health_summary(args: argparse.Namespace) -> dict[str, Any]:
         "lookback_hours": float(args.lookback_hours),
         "expected_interval_min": int(args.expected_interval_min),
         "min_free_gb": float(args.min_free_gb),
+        "ignore_before_utc": iso_z(ignore_before_dt) if ignore_before_dt else None,
         "lookback_started_at_utc": iso_z(cutoff),
         "checked_at_utc": iso_z(now),
         "run_count": len(rows_lookback),
@@ -578,12 +747,26 @@ def build_health_summary(args: argparse.Namespace) -> dict[str, Any]:
         "e2_fail_runs": [compact_cycle(row) for row in e2_fail_rows],
         "timeout_count": len(timeout_rows),
         "timeout_runs": [compact_cycle(row) for row in timeout_rows],
+        "current_cycle_error_count": len(current_cycle_errors),
+        "current_cycle_errors": current_cycle_errors,
+        "current_critical_match_count": int(critical_log_split["current_count"]),
+        "current_critical_matches": current_critical_log_matches,
+        "historical_critical_match_count": int(critical_log_split["historical_count"]),
+        "historical_critical_matches": historical_critical_log_matches,
+        "historical_log_error_count": int(critical_log_split["historical_count"]),
+        "historical_log_errors": historical_critical_log_matches,
         "event_spike": event_spike,
         "cron_log": {
             "path": str(cron_log_path),
             "exists": cron_log_path.exists(),
-            "critical_match_count": len(critical_log_lines),
-            "critical_matches": critical_log_lines,
+            "ignore_before_utc": iso_z(ignore_before_dt) if ignore_before_dt else None,
+            "critical_match_count": int(critical_log_split["current_count"]),
+            "critical_matches": [match["line"] for match in current_critical_log_matches],
+            "current_critical_match_count": int(critical_log_split["current_count"]),
+            "current_critical_matches": current_critical_log_matches,
+            "historical_critical_match_count": int(critical_log_split["historical_count"]),
+            "historical_critical_matches": historical_critical_log_matches,
+            "unfiltered_critical_match_count": int(critical_log_split["total_count"]),
             "warning_match_count": len(warning_log_lines),
             "warning_matches": warning_log_lines,
         },
@@ -628,6 +811,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--lookback-hours", type=float, default=24)
     parser.add_argument("--expected-interval-min", type=int, default=60)
     parser.add_argument("--min-free-gb", type=float, default=10)
+    parser.add_argument("--ignore-before-utc", help="Ignore critical cron log matches with a parseable timestamp before this UTC instant.")
     parser.add_argument("--out-dir", required=True)
     return parser.parse_args(argv)
 
