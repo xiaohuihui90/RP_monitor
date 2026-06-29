@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import argparse
+import bz2
+import gzip
 import json
 import os
 import re
@@ -127,6 +129,67 @@ def atomic_write_json(path: Path, obj: Any) -> None:
     atomic_write_text(path, json.dumps(obj, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
 
 
+def read_compressed_stream(path: Path, opener: Any) -> None:
+    with opener(path, "rb") as f:
+        for chunk in iter(lambda: f.read(1024 * 1024), b""):
+            if not chunk:
+                break
+
+
+def check_rib_integrity(path: Path) -> dict[str, Any]:
+    exists = path.is_file()
+    size_bytes = path.stat().st_size if exists else 0
+    result = {
+        "path": str(path),
+        "exists": exists,
+        "size_bytes": size_bytes,
+        "ok": False,
+        "method": "",
+        "error": "",
+        "exit_code": None,
+    }
+    if not exists:
+        result["error"] = "rib file missing"
+        return result
+    if size_bytes <= 0:
+        result["error"] = "rib file is empty"
+        return result
+
+    suffix = path.suffix.lower()
+    if suffix == ".bz2":
+        bzip2_bin = shutil.which("bzip2")
+        if bzip2_bin:
+            result["method"] = "bzip2_tv"
+            try:
+                proc = subprocess.run([bzip2_bin, "-tv", str(path)], text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=900)
+                result["exit_code"] = proc.returncode
+                result["ok"] = proc.returncode == 0
+                result["error"] = "" if result["ok"] else (proc.stderr or proc.stdout or "")[-4000:]
+            except Exception as exc:
+                result["error"] = str(exc)
+            return result
+        result["method"] = "python_bz2"
+        try:
+            read_compressed_stream(path, bz2.open)
+            result["ok"] = True
+        except Exception as exc:
+            result["error"] = str(exc)
+        return result
+
+    if suffix == ".gz":
+        result["method"] = "python_gzip"
+        try:
+            read_compressed_stream(path, gzip.open)
+            result["ok"] = True
+        except Exception as exc:
+            result["error"] = str(exc)
+        return result
+
+    result["method"] = "size_only_uncompressed"
+    result["ok"] = True
+    return result
+
+
 def sha256_file(path: Path) -> str:
     h = sha256()
     with path.open("rb") as f:
@@ -248,6 +311,11 @@ def initial_summary(rib_path: Path, collector: str, rib_time_utc: str, out_dir: 
         "schema": SCHEMA_SUMMARY,
         "rib_path": str(rib_path),
         "rib_sha256": sha256_file(rib_path) if rib_path.is_file() else "",
+        "rib_size_bytes": rib_path.stat().st_size if rib_path.is_file() else 0,
+        "rib_integrity_ok": False,
+        "rib_integrity_check_method": "",
+        "rib_integrity_error": "",
+        "rib_integrity": {},
         "collector": collector,
         "rib_time_utc": rib_time_utc,
         "raw_route_count": 0,
@@ -278,6 +346,9 @@ def write_acceptance(out_dir: Path, status: str, summary: dict[str, Any], checks
         f"rib_path={summary.get('rib_path', '')}",
         f"collector={summary.get('collector', '')}",
         f"rib_time_utc={summary.get('rib_time_utc', '')}",
+        f"rib_size_bytes={summary.get('rib_size_bytes', 0)}",
+        f"rib_integrity_ok={str(summary.get('rib_integrity_ok', False)).lower()}",
+        f"rib_integrity_check_method={summary.get('rib_integrity_check_method', '')}",
         f"raw_route_count={summary.get('raw_route_count', 0)}",
         f"unique_prefix_origin_count={summary.get('unique_prefix_origin_count', 0)}",
         f"parse_error_count={summary.get('parse_error_count', 0)}",
@@ -314,17 +385,24 @@ def build_routes_from_rib(
     summary = initial_summary(rib_path, collector, rib_time_utc, out_dir)
     routes_path = out_dir / "routes.jsonl"
     rib_exists = rib_path.is_file()
+    integrity = check_rib_integrity(rib_path)
+    summary["rib_size_bytes"] = int(integrity.get("size_bytes") or 0)
+    summary["rib_integrity_ok"] = bool(integrity.get("ok"))
+    summary["rib_integrity_check_method"] = integrity.get("method") or ""
+    summary["rib_integrity_error"] = integrity.get("error") or ""
+    summary["rib_integrity"] = integrity
     bgpdump_cmd = normalize_executable_path(bgpdump_bin)
     available = bgpdump_available(bgpdump_cmd)
     summary["bgpdump_available"] = available
 
-    if not rib_exists or not available:
+    if not rib_exists or not integrity.get("ok") or not available:
         empty_routes_file(out_dir)
         summary["finished_at_utc"] = utc_now()
         atomic_write_json(out_dir / "route_build_summary.json", summary)
         checks = {
             "bgpdump_available": available,
             "rib_exists": rib_exists,
+            "rib_integrity_ok": bool(integrity.get("ok")),
             "routes_jsonl_written": routes_path.is_file(),
             "route_count_gt_zero": False,
             "summary_json_ok": (out_dir / "route_build_summary.json").is_file(),
@@ -397,6 +475,7 @@ def build_routes_from_rib(
     checks = {
         "bgpdump_available": available,
         "rib_exists": rib_exists,
+        "rib_integrity_ok": bool(integrity.get("ok")),
         "routes_jsonl_written": routes_path.is_file(),
         "route_count_gt_zero": summary["unique_prefix_origin_count"] > 0,
         "summary_json_ok": (out_dir / "route_build_summary.json").is_file(),
