@@ -27,6 +27,9 @@ usage() {
 '  --continue-on-error true|false' \
 '  --skip-existing' \
 '  --min-p8-skew-ok true|false' \
+'  --vrp-input-mode latest|window_bound' \
+'  --p8-input-vrp-root data/probe/p8_input_vrps' \
+'  --require-window-bound-vrp true|false' \
 '' \
 'Example:' \
 '  bash scripts/runtime/run_p10d_batch_rov_impact_once.sh \' \
@@ -38,6 +41,8 @@ usage() {
 '    --download false \' \
 '    --bgpdump-bin "$(command -v bgpdump)" \' \
 '    --max-routes 100000 \' \
+'    --vrp-input-mode window_bound \' \
+'    --p8-input-vrp-root data/probe/p8_input_vrps \' \
 '    --out-dir data/probe/p10d_batch_rov_impact/p10d_latest6_routeviews2'
 }
 

@@ -39,6 +39,10 @@ WINDOW_SUMMARY_FIELDS = [
     "usable_window",
     "normal_impact_analysis_executed",
     "exclusion_reasons",
+    "vrp_input_mode",
+    "p8_input_vrp_manifest",
+    "window_bound_vrp_available",
+    "skip_reason",
 ]
 TRANSITION_MATRIX_FIELDS = [
     "batch_id",
@@ -264,7 +268,7 @@ def run_command(cmd: list[str], cwd: Path) -> dict[str, Any]:
     }
 
 
-def p10c_command(root: Path, args: argparse.Namespace, p8_run_dir: Path, p10c_run_dir: Path) -> list[str]:
+def p10c_command(root: Path, args: argparse.Namespace, p8_run_dir: Path, p10c_run_dir: Path, p8_input_vrp_manifest: Path | None) -> list[str]:
     bash = shutil.which("bash")
     wrapper = root / "scripts" / "runtime" / "run_p10c_time_aligned_rov_once.sh"
     cmd = [bash, str(wrapper)] if bash else [sys.executable, "-m", "probe.rov.select_bgp_rib_for_window"]
@@ -283,10 +287,19 @@ def p10c_command(root: Path, args: argparse.Namespace, p8_run_dir: Path, p10c_ru
         args.bgpdump_bin,
         "--out-dir",
         str(p10c_run_dir),
+        "--vrp-input-mode",
+        args.vrp_input_mode,
     ]
+    if p8_input_vrp_manifest is not None:
+        cmd += ["--p8-input-vrp-manifest", str(p8_input_vrp_manifest)]
     if args.max_routes is not None:
         cmd += ["--max-routes", str(args.max_routes)]
     return cmd
+
+
+def find_window_bound_manifest(root: Path, p8_input_vrp_root: str, window_id: str) -> Path:
+    base = resolve_path(p8_input_vrp_root, root)
+    return base / f"window_id={window_id}" / "p8_input_vrp_manifest.json"
 
 
 def read_csv_rows(path: Path) -> list[dict[str, Any]]:
@@ -311,7 +324,17 @@ def append_transition_events_sample(source_path: Path, target_f: Any, remaining:
     return written
 
 
-def collect_window_result(batch_id: str, collector: str, p8_run_dir: Path, p10c_run_dir: Path, command_result: dict[str, Any] | None) -> dict[str, Any]:
+def collect_window_result(
+    batch_id: str,
+    collector: str,
+    p8_run_dir: Path,
+    p10c_run_dir: Path,
+    command_result: dict[str, Any] | None,
+    vrp_input_mode: str,
+    p8_input_vrp_manifest: Path | None,
+    window_bound_vrp_available: bool,
+    skip_reason: str = "",
+) -> dict[str, Any]:
     p10c_acceptance = parse_key_value_file(p10c_run_dir / "checks" / "P10C_TIME_ALIGNED_ROV_ACCEPTANCE.txt")
     p10c_summary = load_json(p10c_run_dir / "p10c_summary.json")
     p10a_run_dir = Path(str(p10c_summary.get("p10a_run_dir") or p10c_acceptance.get("p10a_run_dir") or ""))
@@ -347,10 +370,52 @@ def collect_window_result(batch_id: str, collector: str, p8_run_dir: Path, p10c_
         "usable_window": p10a_acceptance.get("usable_window") or str(p10a_summary.get("usable_window", "")).lower(),
         "normal_impact_analysis_executed": p10a_acceptance.get("normal_impact_analysis_executed") or str(p10a_summary.get("normal_impact_analysis_executed", "")).lower(),
         "exclusion_reasons": exclusion_text,
+        "vrp_input_mode": vrp_input_mode,
+        "p8_input_vrp_manifest": str(p8_input_vrp_manifest) if p8_input_vrp_manifest else "",
+        "window_bound_vrp_available": str(window_bound_vrp_available).lower(),
+        "skip_reason": skip_reason,
         "_p10a_run_dir_path": p10a_run_dir if str(p10a_run_dir) and str(p10a_run_dir) != "." else None,
         "_command_result": command_result or {},
     }
     return row
+
+
+def skipped_window_row(
+    batch_id: str,
+    collector: str,
+    item: dict[str, Any],
+    p10c_run_dir: Path,
+    vrp_input_mode: str,
+    p8_input_vrp_manifest: Path | None,
+    skip_reason: str,
+) -> dict[str, Any]:
+    return {
+        "batch_id": batch_id,
+        "window_id": item.get("window_id", ""),
+        "p8_run_dir": str(item.get("p8_run_dir", "")),
+        "p10c_run_dir": str(p10c_run_dir),
+        "p10a_run_dir": "",
+        "p10b_run_dir": "",
+        "collector": collector,
+        "selected_rib_time_utc": "",
+        "rib_time_delta_sec": "",
+        "p10c_status": "SKIPPED",
+        "p10a_status": "",
+        "p10b_status": "",
+        "route_count": 0,
+        "transition_event_count": 0,
+        "affected_prefix_count": 0,
+        "affected_origin_as_count": 0,
+        "usable_window": "false",
+        "normal_impact_analysis_executed": "false",
+        "exclusion_reasons": skip_reason,
+        "vrp_input_mode": vrp_input_mode,
+        "p8_input_vrp_manifest": str(p8_input_vrp_manifest) if p8_input_vrp_manifest else "",
+        "window_bound_vrp_available": "false",
+        "skip_reason": skip_reason,
+        "_p10a_run_dir_path": None,
+        "_command_result": {},
+    }
 
 
 def int_value(value: Any) -> int:
@@ -366,6 +431,7 @@ def write_acceptance(out_dir: Path, status: str, summary: dict[str, Any], checks
         f"batch_id={summary.get('batch_id', '')}",
         f"window_count_selected={summary.get('window_count_selected', 0)}",
         f"window_count_succeeded={summary.get('window_count_succeeded', 0)}",
+        f"window_count_skipped={summary.get('window_count_skipped', 0)}",
         f"window_count_failed={summary.get('window_count_failed', 0)}",
         f"total_transition_event_count={summary.get('total_transition_event_count', 0)}",
         f"unique_affected_prefix_count={summary.get('unique_affected_prefix_count', 0)}",
@@ -395,6 +461,7 @@ def run_batch(args: argparse.Namespace) -> int:
     invoked_or_existing_count = 0
     invoked_count = 0
     failed_runtime_count = 0
+    skipped_missing_window_bound_count = 0
     sample_remaining = int(args.transition_event_sample_limit)
     sample_path = out_dir / "p10d_transition_event_sample.jsonl"
     sample_tmp = sample_path.with_name(f"{sample_path.name}.tmp.{os.getpid()}.{time.time_ns()}")
@@ -403,15 +470,33 @@ def run_batch(args: argparse.Namespace) -> int:
     with sample_tmp.open("w", encoding="utf-8", newline="\n") as sample_f:
         for item in selected:
             window_id = item["window_id"]
-            p10c_run_dir = out_dir / "p10c_runs" / f"{sanitize_run_part(window_id)}_{sanitize_run_part(args.collector)}"
+            p10c_run_dir = out_dir / "p10c_runs" / f"{sanitize_run_part(window_id)}_{sanitize_run_part(args.collector)}_{sanitize_run_part(args.vrp_input_mode)}"
             p10c_acceptance_path = p10c_run_dir / "checks" / "P10C_TIME_ALIGNED_ROV_ACCEPTANCE.txt"
             command_result: dict[str, Any] | None = None
+            p8_input_vrp_manifest = None
+            window_bound_vrp_available = True
+            if args.vrp_input_mode == "window_bound":
+                p8_input_vrp_manifest = find_window_bound_manifest(root, args.p8_input_vrp_root, window_id)
+                window_bound_vrp_available = p8_input_vrp_manifest.is_file()
+                if not window_bound_vrp_available:
+                    skipped_missing_window_bound_count += 1
+                    row = skipped_window_row(
+                        batch_id,
+                        args.collector,
+                        item,
+                        p10c_run_dir,
+                        args.vrp_input_mode,
+                        p8_input_vrp_manifest,
+                        "NO_WINDOW_BOUND_VRP_INPUT",
+                    )
+                    window_rows.append(row)
+                    continue
             if args.skip_existing and p10c_acceptance_path.is_file():
                 invoked_or_existing_count += 1
             else:
                 invoked_count += 1
                 invoked_or_existing_count += 1
-                cmd = p10c_command(root, args, item["p8_run_dir"], p10c_run_dir)
+                cmd = p10c_command(root, args, item["p8_run_dir"], p10c_run_dir, p8_input_vrp_manifest)
                 command_result = run_command(cmd, root)
                 command_results.append({
                     "window_id": window_id,
@@ -422,11 +507,29 @@ def run_batch(args: argparse.Namespace) -> int:
                 if command_result.get("exit_code") not in (0,):
                     failed_runtime_count += 1
                     if not args.continue_on_error:
-                        row = collect_window_result(batch_id, args.collector, item["p8_run_dir"], p10c_run_dir, command_result)
+                        row = collect_window_result(
+                            batch_id,
+                            args.collector,
+                            item["p8_run_dir"],
+                            p10c_run_dir,
+                            command_result,
+                            args.vrp_input_mode,
+                            p8_input_vrp_manifest,
+                            window_bound_vrp_available,
+                        )
                         window_rows.append(row)
                         break
 
-            row = collect_window_result(batch_id, args.collector, item["p8_run_dir"], p10c_run_dir, command_result)
+            row = collect_window_result(
+                batch_id,
+                args.collector,
+                item["p8_run_dir"],
+                p10c_run_dir,
+                command_result,
+                args.vrp_input_mode,
+                p8_input_vrp_manifest,
+                window_bound_vrp_available,
+            )
             window_rows.append(row)
             p10a_run_dir = row.get("_p10a_run_dir_path")
             if isinstance(p10a_run_dir, Path):
@@ -483,6 +586,7 @@ def run_batch(args: argparse.Namespace) -> int:
         for row in window_rows
         if row.get("p10c_status") == "PASS_WITH_EXCLUSIONS" or row.get("p10a_status") in {"PASS_WITH_EXCLUSIONS", "SKIPPED"}
     )
+    window_count_skipped = sum(1 for row in window_rows if row.get("p10c_status") == "SKIPPED" or row.get("skip_reason"))
     window_count_failed = sum(1 for row in window_rows if row.get("p10c_status") in {"", "FAIL"} or row.get("p10a_status") == "FAIL")
     total_route_count = sum(int_value(row.get("route_count")) for row in window_rows)
     total_transition_event_count = sum(int_value(row.get("transition_event_count")) for row in window_rows)
@@ -497,10 +601,11 @@ def run_batch(args: argparse.Namespace) -> int:
         "batch_summary_json_ok": False,
         "no_strong_root_cause_claim": True,
         "continue_on_error_respected": bool(args.continue_on_error) or failed_runtime_count == 0,
+        "window_bound_vrp_available_if_required": args.vrp_input_mode != "window_bound" or skipped_missing_window_bound_count == 0 or not args.require_window_bound_vrp,
     }
     if not checks["p8_pass_windows_found"] or not checks["p10c_invoked"]:
         status = "FAIL"
-    elif window_count_succeeded > 0 and window_count_failed == 0 and window_count_pass_with_exclusions == 0:
+    elif window_count_succeeded > 0 and window_count_failed == 0 and window_count_pass_with_exclusions == 0 and window_count_skipped == 0:
         status = "PASS"
     elif window_count_succeeded + window_count_pass_with_exclusions > 0:
         status = "PASS_WITH_EXCLUSIONS"
@@ -516,6 +621,8 @@ def run_batch(args: argparse.Namespace) -> int:
         "window_count_selected": len(selected),
         "window_count_succeeded": window_count_succeeded,
         "window_count_pass_with_exclusions": window_count_pass_with_exclusions,
+        "window_count_skipped": window_count_skipped,
+        "skipped_missing_window_bound_count": skipped_missing_window_bound_count,
         "window_count_failed": window_count_failed,
         "total_route_count": total_route_count,
         "total_transition_event_count": total_transition_event_count,
@@ -529,6 +636,9 @@ def run_batch(args: argparse.Namespace) -> int:
         "rib_time_policy": args.rib_time_policy,
         "max_routes": args.max_routes,
         "download": bool(args.download),
+        "vrp_input_mode": args.vrp_input_mode,
+        "p8_input_vrp_root": str(resolve_path(args.p8_input_vrp_root, root)),
+        "require_window_bound_vrp": bool(args.require_window_bound_vrp),
         "skip_existing": bool(args.skip_existing),
         "continue_on_error": bool(args.continue_on_error),
         "upload_minio": bool(args.upload_minio),
@@ -573,6 +683,9 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--skip-existing", action="store_true")
     parser.add_argument("--min-p8-skew-ok", type=parse_bool, default=True)
     parser.add_argument("--upload-minio", type=parse_bool, default=False)
+    parser.add_argument("--vrp-input-mode", choices=["latest", "window_bound"], default="latest")
+    parser.add_argument("--p8-input-vrp-root", default="data/probe/p8_input_vrps")
+    parser.add_argument("--require-window-bound-vrp", type=parse_bool, default=True)
     parser.add_argument("--transition-event-sample-limit", type=int, default=10000)
     parser.add_argument("--batch-id")
     return parser

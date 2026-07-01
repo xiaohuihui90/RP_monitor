@@ -28,6 +28,8 @@ usage() {
 '  --bgpdump-bin PATH' \
 '  --max-routes N' \
 '  --max-route-time-skew-sec N' \
+'  --vrp-input-mode latest|window_bound' \
+'  --p8-input-vrp-manifest PATH' \
 '' \
 'Example:' \
 '  bash scripts/runtime/run_p10c_time_aligned_rov_once.sh \' \

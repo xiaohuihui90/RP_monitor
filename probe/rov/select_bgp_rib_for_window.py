@@ -475,6 +475,107 @@ def prepare_probe_inputs(root: Path, vrp_args: list[str], metadata_args: list[st
     return {k: str(resolve_path(v, root)) for k, v in sorted(vrps.items())}, {k: str(resolve_path(v, root)) for k, v in sorted(metadata.items())}
 
 
+def load_json_object(path: Path) -> dict[str, Any]:
+    try:
+        with path.open("r", encoding="utf-8-sig") as f:
+            obj = json.load(f)
+        return obj if isinstance(obj, dict) else {}
+    except Exception:
+        return {}
+
+
+def resolve_manifest_path(value: str, manifest_dir: Path, root: Path) -> Path:
+    path = Path(value)
+    if path.is_absolute():
+        return path
+    candidate = (manifest_dir / path).resolve()
+    if candidate.exists():
+        return candidate
+    return resolve_path(value, root)
+
+
+def copy_or_decompress_vrp(src: Path, dest: Path) -> None:
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    tmp = dest.with_name(f"{dest.name}.tmp.{os.getpid()}.{time.time_ns()}")
+    opener = gzip.open if src.suffix.lower() == ".gz" else open
+    with opener(src, "rb") as inf, tmp.open("wb") as outf:
+        shutil.copyfileobj(inf, outf, length=1024 * 1024)
+        outf.flush()
+        os.fsync(outf.fileno())
+    os.replace(tmp, dest)
+    fsync_parent(dest)
+
+
+def prepare_window_bound_probe_inputs(manifest_path: Path | None, out_dir: Path, root: Path) -> dict[str, Any]:
+    if manifest_path is None:
+        return {"available": False, "error": "p8 input VRP manifest not provided", "vrps": {}, "metadata": {}, "probe_inputs": {}}
+    if not manifest_path.is_file():
+        return {"available": False, "error": "p8 input VRP manifest missing", "manifest_path": str(manifest_path), "vrps": {}, "metadata": {}, "probe_inputs": {}}
+
+    manifest = load_json_object(manifest_path)
+    manifest_status = str(manifest.get("status") or "")
+    if manifest_status and manifest_status != "PASS":
+        return {
+            "available": False,
+            "error": f"manifest status is {manifest_status}",
+            "manifest_path": str(manifest_path),
+            "manifest_status": manifest_status,
+            "vrps": {},
+            "metadata": {},
+            "probe_inputs": {},
+        }
+    raw_inputs = manifest.get("probe_inputs") if isinstance(manifest.get("probe_inputs"), dict) else manifest.get("vrp_inputs")
+    if not isinstance(raw_inputs, dict) or not raw_inputs:
+        return {"available": False, "error": "manifest has no probe_inputs", "manifest_path": str(manifest_path), "vrps": {}, "metadata": {}, "probe_inputs": {}}
+
+    vrps: dict[str, str] = {}
+    metadata: dict[str, str] = {}
+    prepared: dict[str, Any] = {}
+    errors: list[str] = []
+    manifest_dir = manifest_path.parent
+    input_dir = out_dir / "input_vrps"
+    for probe_id, record in sorted(raw_inputs.items()):
+        if not isinstance(record, dict):
+            errors.append(f"{probe_id}:invalid_record")
+            continue
+        metadata_path = resolve_manifest_path(str(record.get("metadata_path") or ""), manifest_dir, root)
+        vrp_path = resolve_manifest_path(str(record.get("vrp_path") or ""), manifest_dir, root)
+        if not metadata_path.is_file():
+            errors.append(f"{probe_id}:metadata_missing")
+            continue
+        if not vrp_path.is_file():
+            errors.append(f"{probe_id}:vrp_missing")
+            continue
+        if vrp_path.suffix.lower() == ".gz":
+            prepared_vrp = input_dir / f"probe_id={probe_id}" / "latest_normalized_vrp.jsonl"
+            copy_or_decompress_vrp(vrp_path, prepared_vrp)
+        else:
+            prepared_vrp = vrp_path
+        vrps[probe_id] = str(prepared_vrp)
+        metadata[probe_id] = str(metadata_path)
+        prepared[probe_id] = {
+            "metadata_path": str(metadata_path),
+            "source_vrp_path": str(vrp_path),
+            "prepared_vrp_path": str(prepared_vrp),
+            "compression": record.get("compression", "gzip" if vrp_path.suffix.lower() == ".gz" else "none"),
+            "snapshot_id": record.get("snapshot_id"),
+            "capture_time_utc": record.get("capture_time_utc"),
+            "vrp_count": record.get("vrp_count"),
+            "validator_health": record.get("validator_health"),
+        }
+
+    return {
+        "available": bool(vrps) and not errors,
+        "error": "|".join(errors),
+        "manifest_path": str(manifest_path),
+        "manifest_status": manifest.get("status"),
+        "window_id": manifest.get("window_id"),
+        "vrps": vrps,
+        "metadata": metadata,
+        "probe_inputs": prepared,
+    }
+
+
 def p10b_route_count(summary_path: Path) -> int:
     try:
         with summary_path.open("r", encoding="utf-8-sig") as f:
@@ -507,6 +608,9 @@ def write_acceptance(out_dir: Path, status: str, summary: dict[str, Any], checks
         f"rib_integrity_ok={str(summary.get('rib_integrity_ok', False)).lower()}",
         f"rib_integrity_check_method={summary.get('rib_integrity_check_method', '')}",
         f"download_skipped_existing={str(summary.get('download_skipped_existing', False)).lower()}",
+        f"vrp_input_mode={summary.get('vrp_input_mode', 'latest')}",
+        f"p8_input_vrp_manifest={summary.get('p8_input_vrp_manifest', '')}",
+        f"window_bound_vrp_available={str(summary.get('window_bound_vrp_available', False)).lower()}",
         f"p10b_run_dir={summary.get('p10b_run_dir', '')}",
         f"p10a_run_dir={summary.get('p10a_run_dir', '')}",
         "",
@@ -526,6 +630,12 @@ def run_p10c(args: argparse.Namespace) -> int:
 
     p10b_run_dir = resolve_path(args.p10b_out_dir, root) if args.p10b_out_dir else None
     p10a_run_dir = resolve_path(args.p10a_out_dir, root) if args.p10a_out_dir else None
+    p8_input_vrp_manifest = resolve_path(args.p8_input_vrp_manifest, root) if args.p8_input_vrp_manifest else None
+    window_bound_inputs = (
+        prepare_window_bound_probe_inputs(p8_input_vrp_manifest, out_dir, root)
+        if args.vrp_input_mode == "window_bound"
+        else {"available": True, "error": "", "vrps": {}, "metadata": {}, "probe_inputs": {}}
+    )
     rib_selection: dict[str, Any] = {
         "schema": SCHEMA_RIB_SELECTION,
         "p8_run_dir": str(p8_run_dir),
@@ -565,7 +675,8 @@ def run_p10c(args: argparse.Namespace) -> int:
 
     p10b_acceptance_path = None
     p10a_acceptance_path = None
-    if rib_selected and rib_integrity.get("ok"):
+    vrp_inputs_available = args.vrp_input_mode == "latest" or bool(window_bound_inputs.get("available"))
+    if rib_selected and rib_integrity.get("ok") and vrp_inputs_available:
         p10b_run_dir = p10b_run_dir or default_p10b_dir(root, args.collector, rib_selection["selected_rib_time_utc"], args.max_routes)
         p10b_cmd, p10b_entrypoint = executable_command_for_module(
             root / "scripts" / "runtime" / "run_p10_build_route_table_once.sh",
@@ -593,7 +704,11 @@ def run_p10c(args: argparse.Namespace) -> int:
     route_count = p10b_route_count(p10b_run_dir / "route_build_summary.json") if p10b_run_dir else 0
     if p10b_status == "PASS" and route_count > 0:
         p10a_run_dir = p10a_run_dir or default_p10a_dir(root, p8, args.collector, rib_selection["selected_rib_time_utc"], args.max_routes)
-        vrps, metadata = prepare_probe_inputs(root, args.vrp or [], args.metadata or [])
+        if args.vrp_input_mode == "window_bound":
+            vrps = dict(window_bound_inputs.get("vrps") or {})
+            metadata = dict(window_bound_inputs.get("metadata") or {})
+        else:
+            vrps, metadata = prepare_probe_inputs(root, args.vrp or [], args.metadata or [])
         p10a_cmd, p10a_entrypoint = executable_command_for_module(
             root / "scripts" / "runtime" / "run_p10_rov_impact_once.sh",
             "probe.rov.analyze_rov_impact",
@@ -626,6 +741,7 @@ def run_p10c(args: argparse.Namespace) -> int:
         "rib_downloaded_or_exists": bool(rib_integrity.get("ok")),
         "rib_local_exists": bool(rib_integrity.get("exists")),
         "rib_integrity_ok": bool(rib_integrity.get("ok")),
+        "window_bound_vrp_available": vrp_inputs_available,
         "p10b_acceptance_pass": p10b_status == "PASS",
         "p10b_route_count_gt_zero": route_count > 0,
         "p10a_acceptance_exists": bool(p10a_acceptance_path and p10a_acceptance_path.is_file()),
@@ -653,6 +769,11 @@ def run_p10c(args: argparse.Namespace) -> int:
         "window_id": p8.get("window_id", ""),
         "collector": args.collector,
         "source": args.source,
+        "vrp_input_mode": args.vrp_input_mode,
+        "p8_input_vrp_manifest": str(p8_input_vrp_manifest) if p8_input_vrp_manifest else "",
+        "window_bound_vrp_available": bool(window_bound_inputs.get("available")) if args.vrp_input_mode == "window_bound" else True,
+        "window_bound_vrp_error": window_bound_inputs.get("error", ""),
+        "window_bound_vrp_inputs": window_bound_inputs.get("probe_inputs", {}),
         "selected_rib_time_utc": rib_selection.get("selected_rib_time_utc", ""),
         "rib_time_delta_sec": rib_selection.get("rib_time_delta_sec"),
         "rib_local_path": str(rib_path) if rib_selected else "",
@@ -702,6 +823,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--no-include-ipv6", action="store_true")
     parser.add_argument("--max-route-time-skew-sec", type=int, default=7200)
     parser.add_argument("--prefer-wrappers", type=parse_bool, default=True)
+    parser.add_argument("--p8-input-vrp-manifest")
+    parser.add_argument("--vrp-input-mode", choices=["latest", "window_bound"], default="latest")
     parser.add_argument("--vrp", action="append", default=[], help="Optional PROBE_ID=normalized_vrp.jsonl override. Repeatable.")
     parser.add_argument("--metadata", action="append", default=[], help="Optional PROBE_ID=metadata.json override. Repeatable.")
     return parser
