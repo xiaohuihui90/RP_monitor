@@ -24,11 +24,21 @@ usage() {
 '  --mc-bin mc' \
 '  --metadata PROBE=PATH' \
 '  --vrp PROBE=PATH' \
+'  --source-mode latest|stable_copy' \
+'  --input-root PATH' \
 '' \
 'Example:' \
 '  bash scripts/runtime/run_p8_input_vrp_archive_once.sh \' \
 '    --p8-run-dir data/probe/cross_probe_pipeline/<P8_PASS_RUN> \' \
 '    --out-dir data/probe/p8_input_vrps \' \
+'    --upload-minio false' \
+'' \
+'Stable-copy example, normally called by P8 coordinator:' \
+'  bash scripts/runtime/run_p8_input_vrp_archive_once.sh \' \
+'    --p8-run-dir data/probe/cross_probe_pipeline/<P8_RUN> \' \
+'    --out-dir data/probe/p8_input_vrps \' \
+'    --source-mode stable_copy \' \
+'    --input-root data/probe/cross_probe_pipeline/<P8_RUN>/input_vrps \' \
 '    --upload-minio false'
 }
 

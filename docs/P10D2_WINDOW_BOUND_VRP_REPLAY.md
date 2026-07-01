@@ -15,6 +15,56 @@ This avoids false exclusions such as:
 when the only problem was that current `latest_*` files no longer matched the
 historical P8 window.
 
+## Integrated Stable Input Capture In P8
+
+The CD2 P8 runner now captures stable input copies before P2 runs:
+
+```bash
+scripts/runtime/run_cd2_cross_probe_archive_once.sh
+```
+
+Default environment switches:
+
+```bash
+export P8_STABLE_INPUTS=1
+export P8_INPUT_VRP_ARCHIVE=1
+export P8_INPUT_VRP_UPLOAD=0
+export P8_INPUT_VRP_ARCHIVE_REQUIRED=0
+```
+
+For each P8 run, the runner first copies the mutable `latest_*` inputs into:
+
+```text
+data/probe/cross_probe_pipeline/<run_id>/input_vrps/
+  probe_id=probe-cd/latest_metadata.json
+  probe_id=probe-cd/latest_normalized_vrp.jsonl
+  probe_id=probe-sg/latest_metadata.json
+  probe_id=probe-sg/latest_normalized_vrp.jsonl
+  probe_id=probe-k02/latest_metadata.json
+  probe_id=probe-k02/latest_normalized_vrp.jsonl
+```
+
+P2/P3/P4/P6 then use these stable copies instead of direct `latest_*` paths.
+After P2 writes `cross_probe_summary.json`, the runner calls the P8 input VRP
+archive in `stable_copy` mode and writes:
+
+```text
+data/probe/p8_input_vrps/window_id=<window_id>/p8_input_vrp_manifest.json
+```
+
+The P8 acceptance file records:
+
+```text
+stable_input_materialized=true
+p2_used_stable_inputs=true
+p8_input_vrp_archive_status=PASS
+p8_input_metadata_consistent=true
+p8_input_archive_from_stable_copy=true
+```
+
+This removes the race where an independent archive command read a newer
+`latest_*` file after the hourly probe cron had already overwritten it.
+
 ## Archive A P8 Window Input
 
 ```bash
@@ -91,6 +141,18 @@ If a source VRP or metadata file is missing, the archive status is `FAIL`. If
 the current metadata does not match P8 summary fields when those fields are
 available, the archive status is `PASS_WITH_EXCLUSIONS` rather than silently
 claiming success.
+
+For compatibility, the standalone archive command still defaults to
+`--source-mode latest`. To archive from stable copies explicitly:
+
+```bash
+bash scripts/runtime/run_p8_input_vrp_archive_once.sh \
+  --p8-run-dir data/probe/cross_probe_pipeline/<P8_RUN> \
+  --out-dir data/probe/p8_input_vrps \
+  --source-mode stable_copy \
+  --input-root data/probe/cross_probe_pipeline/<P8_RUN>/input_vrps \
+  --upload-minio false
+```
 
 ## Optional MinIO Upload
 

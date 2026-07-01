@@ -19,6 +19,11 @@ RSYNC_BIN="${RSYNC_BIN:-rsync}"
 SSH_COMMAND="${SSH_COMMAND:-}"
 P8_SAMPLE_DOWNLOAD="${P8_SAMPLE_DOWNLOAD:-${SAMPLE_DOWNLOAD:-0}}"
 P8_COMPRESS_JSONL="${P8_COMPRESS_JSONL:-1}"
+P8_STABLE_INPUTS="${P8_STABLE_INPUTS:-1}"
+P8_INPUT_VRP_ARCHIVE="${P8_INPUT_VRP_ARCHIVE:-1}"
+P8_INPUT_VRP_UPLOAD="${P8_INPUT_VRP_UPLOAD:-0}"
+P8_INPUT_VRP_ARCHIVE_REQUIRED="${P8_INPUT_VRP_ARCHIVE_REQUIRED:-0}"
+P8_INPUT_VRP_OUT_ROOT="${P8_INPUT_VRP_OUT_ROOT:-${REPO_ROOT}/data/probe/p8_input_vrps}"
 
 cd "${REPO_ROOT}"
 
@@ -55,6 +60,11 @@ P8_ARGS=(
   --ssh-command "${SSH_COMMAND}" \
   --mc-bin "${MC_BIN}" \
   --sample-download "${P8_SAMPLE_DOWNLOAD}"
+  --stable-inputs "${P8_STABLE_INPUTS}" \
+  --p8-input-vrp-archive "${P8_INPUT_VRP_ARCHIVE}" \
+  --p8-input-vrp-upload "${P8_INPUT_VRP_UPLOAD}" \
+  --p8-input-vrp-archive-required "${P8_INPUT_VRP_ARCHIVE_REQUIRED}" \
+  --p8-input-vrp-out-root "${P8_INPUT_VRP_OUT_ROOT}"
 )
 
 P8_ARGS+=("${COMPRESS_ARGS[@]}")

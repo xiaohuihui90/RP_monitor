@@ -221,19 +221,48 @@ def mc_copy_and_stat(mc_bin: str, local_path: Path, remote: str) -> dict[str, An
     return result
 
 
-def build_inputs(root: Path, metadata_overrides: list[str], vrp_overrides: list[str]) -> dict[str, dict[str, Path]]:
+def stable_input_path(input_root: Path, probe_id: str, filename: str) -> Path:
+    return input_root / f"probe_id={probe_id}" / filename
+
+
+def build_inputs(
+    root: Path,
+    metadata_overrides: list[str],
+    vrp_overrides: list[str],
+    source_mode: str,
+    input_root_value: str | None,
+) -> dict[str, dict[str, Path | str]]:
     metadata = {probe_id: item["metadata"] for probe_id, item in DEFAULT_INPUTS.items()}
     vrps = {probe_id: item["vrp"] for probe_id, item in DEFAULT_INPUTS.items()}
     metadata.update(parse_assignments(metadata_overrides, "--metadata"))
     vrps.update(parse_assignments(vrp_overrides, "--vrp"))
     probes = sorted(set(metadata) | set(vrps))
-    return {
-        probe_id: {
-            "metadata": resolve_path(metadata.get(probe_id, ""), root) if metadata.get(probe_id) else Path(""),
-            "vrp": resolve_path(vrps.get(probe_id, ""), root) if vrps.get(probe_id) else Path(""),
+    input_root = resolve_path(input_root_value, root) if input_root_value else Path("")
+    inputs: dict[str, dict[str, Path | str]] = {}
+    for probe_id in probes:
+        original_metadata = resolve_path(metadata.get(probe_id, ""), root) if metadata.get(probe_id) else Path("")
+        original_vrp = resolve_path(vrps.get(probe_id, ""), root) if vrps.get(probe_id) else Path("")
+        if source_mode == "stable_copy":
+            if not input_root_value:
+                raise ValueError("--input-root is required when --source-mode stable_copy")
+            metadata_path = stable_input_path(input_root, probe_id, "latest_metadata.json")
+            vrp_path = stable_input_path(input_root, probe_id, "latest_normalized_vrp.jsonl")
+            stable_metadata = metadata_path
+            stable_vrp = vrp_path
+        else:
+            metadata_path = original_metadata
+            vrp_path = original_vrp
+            stable_metadata = Path("")
+            stable_vrp = Path("")
+        inputs[probe_id] = {
+            "metadata": metadata_path,
+            "vrp": vrp_path,
+            "source_metadata": str(original_metadata),
+            "source_vrp": str(original_vrp),
+            "stable_metadata": str(stable_metadata) if source_mode == "stable_copy" else "",
+            "stable_vrp": str(stable_vrp) if source_mode == "stable_copy" else "",
         }
-        for probe_id in probes
-    }
+    return inputs
 
 
 def run_archive(args: argparse.Namespace) -> int:
@@ -242,11 +271,13 @@ def run_archive(args: argparse.Namespace) -> int:
     p8_run_dir = resolve_path(args.p8_run_dir, root)
     p8_acceptance_path = p8_run_dir / "checks" / "P8_CROSS_PROBE_PIPELINE_ACCEPTANCE.txt"
     p8_acceptance = parse_key_value_file(p8_acceptance_path)
-    p8_status = p8_acceptance.get("P8_CROSS_PROBE_PIPELINE") or p8_acceptance.get("P8_CROSS_PROBE_OBSERVATION") or ""
-    window_id = p8_acceptance.get("window_id", "")
-    window_quality = p8_acceptance.get("window_quality", "")
-    p8_probe_ids = parse_probe_ids(p8_acceptance.get("probe_ids"))
     p8_summary = load_p8_summary(p8_run_dir)
+    p8_status = p8_acceptance.get("P8_CROSS_PROBE_PIPELINE") or p8_acceptance.get("P8_CROSS_PROBE_OBSERVATION") or ""
+    window_id = p8_acceptance.get("window_id", "") or str(p8_summary.get("window_id") or "")
+    window_quality = p8_acceptance.get("window_quality", "") or str(p8_summary.get("window_quality") or "")
+    p8_probe_ids = parse_probe_ids(p8_acceptance.get("probe_ids")) or parse_probe_ids(p8_summary.get("probe_ids"))
+    if not p8_status and p8_summary and window_quality == "OK":
+        p8_status = "PASS"
     snapshot_id_by_probe = p8_summary.get("snapshot_id_by_probe") if isinstance(p8_summary.get("snapshot_id_by_probe"), dict) else {}
     capture_time_by_probe = p8_summary.get("capture_time_by_probe") if isinstance(p8_summary.get("capture_time_by_probe"), dict) else {}
     vrp_count_by_probe = p8_summary.get("vrp_record_count_by_probe") if isinstance(p8_summary.get("vrp_record_count_by_probe"), dict) else {}
@@ -255,7 +286,7 @@ def run_archive(args: argparse.Namespace) -> int:
     out_dir = out_base / f"window_id={window_id}" if window_id and out_base.name != f"window_id={window_id}" else out_base
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    inputs = build_inputs(root, args.metadata or [], args.vrp or [])
+    inputs = build_inputs(root, args.metadata or [], args.vrp or [], args.source_mode, args.input_root)
     probe_ids = p8_probe_ids or sorted(inputs)
     probe_records: dict[str, Any] = {}
     missing_inputs: list[str] = []
@@ -267,8 +298,8 @@ def run_archive(args: argparse.Namespace) -> int:
 
     for probe_id in probe_ids:
         srcs = inputs.get(probe_id, {})
-        metadata_src = srcs.get("metadata", Path(""))
-        vrp_src = srcs.get("vrp", Path(""))
+        metadata_src = Path(str(srcs.get("metadata", "")))
+        vrp_src = Path(str(srcs.get("vrp", "")))
         if not metadata_src.is_file():
             missing_inputs.append(f"{probe_id}:metadata")
             continue
@@ -307,8 +338,12 @@ def run_archive(args: argparse.Namespace) -> int:
             "vrp_size_bytes": vrp_dest.stat().st_size,
             "compression": args.compress,
             "sha256sums_path": str(sha_path),
-            "source_metadata_path": str(metadata_src),
-            "source_vrp_path": str(vrp_src),
+            "source_metadata_path": str(srcs.get("source_metadata") or metadata_src),
+            "source_vrp_path": str(srcs.get("source_vrp") or vrp_src),
+            "stable_metadata_path": str(srcs.get("stable_metadata") or ""),
+            "stable_vrp_path": str(srcs.get("stable_vrp") or ""),
+            "archived_from_metadata_path": str(metadata_src),
+            "archived_from_vrp_path": str(vrp_src),
             "snapshot_id": snapshot_id,
             "capture_time_utc": capture_time,
             "vrp_count": metadata_obj.get("normalized_vrp_count", metadata_obj.get("vrp_count", vrp_count_by_probe.get(probe_id))),
@@ -329,10 +364,12 @@ def run_archive(args: argparse.Namespace) -> int:
         "window_id": window_id,
         "p8_run_dir": str(p8_run_dir),
         "p8_acceptance_file": str(p8_acceptance_path),
+        "source_mode": args.source_mode,
+        "input_root": str(resolve_path(args.input_root, root)) if args.input_root else "",
         "p8_status": p8_status,
         "window_quality": window_quality,
         "probe_ids": probe_ids,
-        "capture_time_skew_sec": p8_acceptance.get("capture_time_skew_sec"),
+        "capture_time_skew_sec": p8_acceptance.get("capture_time_skew_sec") or p8_summary.get("capture_time_skew_sec"),
         "probe_inputs": probe_records,
         "missing_inputs": missing_inputs,
         "mismatches": mismatches,
@@ -376,6 +413,10 @@ def run_archive(args: argparse.Namespace) -> int:
         "probe_count_eq_expected": len(probe_records) == len(probe_ids) and len(probe_records) > 0,
         "missing_inputs_empty": not missing_inputs,
         "metadata_p8_consistent": not mismatches,
+        "archive_from_stable_copy": args.source_mode != "stable_copy" or all(
+            bool(record.get("stable_metadata_path")) and bool(record.get("stable_vrp_path"))
+            for record in probe_records.values()
+        ),
         "manifest_written": manifest_path.is_file(),
         "uploaded_if_requested": (not args.upload_minio) or uploaded,
         "minio_stat_ok_if_uploaded": (not args.upload_minio) or minio_stat_ok,
@@ -393,6 +434,8 @@ def write_acceptance(out_dir: Path, status: str, manifest: dict[str, Any], check
         f"uploaded={str(manifest.get('uploaded', False)).lower()}",
         f"minio_stat_ok={str(manifest.get('minio_stat_ok', False)).lower()}",
         f"manifest_json={out_dir / 'p8_input_vrp_manifest.json'}",
+        f"source_mode={manifest.get('source_mode', '')}",
+        f"input_root={manifest.get('input_root', '')}",
         "",
         "[checks]",
     ]
@@ -410,6 +453,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--mc-bin", default="mc")
     parser.add_argument("--metadata", action="append", default=[], help="Optional PROBE_ID=latest_metadata.json override.")
     parser.add_argument("--vrp", action="append", default=[], help="Optional PROBE_ID=latest_normalized_vrp.jsonl override.")
+    parser.add_argument("--source-mode", choices=["latest", "stable_copy"], default="latest")
+    parser.add_argument("--input-root", help="Stable input root containing probe_id=<probe>/latest_* files.")
     return parser
 
 
