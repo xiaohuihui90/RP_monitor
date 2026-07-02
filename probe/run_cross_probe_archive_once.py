@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import shutil
 import subprocess
 import sys
 import time
@@ -17,6 +18,7 @@ ACCEPTANCE_NAME = "P8_CROSS_PROBE_PIPELINE"
 LATEST_METADATA = "latest_metadata.json"
 LATEST_NORMALIZED = "latest_normalized_vrp.jsonl"
 DEFAULT_OUT_ROOT = "data/probe/cross_probe_pipeline"
+DEFAULT_MINIO_ALIAS = ""
 DEFAULT_MINIO_BUCKET = "rpki-probe-artifacts"
 DEFAULT_MINIO_PREFIX = "rp-monitor"
 
@@ -302,6 +304,110 @@ def materialize_probe_file(
     return local_path, source, None
 
 
+def copy_stable_file(src: Path, dest: Path, root: Path) -> dict[str, Any]:
+    result: dict[str, Any] = {
+        "source": str(src),
+        "dest": str(dest),
+        "exists": False,
+        "copy_method": "",
+        "exit_code": None,
+        "error": "",
+    }
+    if not file_nonempty(src):
+        result["error"] = "source missing or empty"
+        return result
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    tmp = dest.with_name(f"{dest.name}.tmp.{os.getpid()}.{time.time_ns()}")
+    cp_bin = shutil.which("cp")
+    if os.name != "nt" and cp_bin:
+        proc = subprocess.run(
+            [cp_bin, "--reflink=auto", "--", str(src), str(tmp)],
+            cwd=str(root),
+            text=True,
+            capture_output=True,
+        )
+        result["exit_code"] = proc.returncode
+        if proc.returncode == 0:
+            os.replace(tmp, dest)
+            fsync_parent(dest)
+            result["exists"] = file_nonempty(dest)
+            result["copy_method"] = "cp_reflink_auto"
+            return result
+        result["error"] = (proc.stderr or proc.stdout or "")[-1000:]
+        try:
+            tmp.unlink()
+        except FileNotFoundError:
+            pass
+    try:
+        with src.open("rb") as inf, tmp.open("wb") as outf:
+            shutil.copyfileobj(inf, outf, length=1024 * 1024)
+            outf.flush()
+            os.fsync(outf.fileno())
+        shutil.copystat(src, tmp, follow_symlinks=True)
+        os.replace(tmp, dest)
+        fsync_parent(dest)
+        result["exists"] = file_nonempty(dest)
+        result["copy_method"] = "shutil_copy"
+        result["exit_code"] = 0
+        result["error"] = ""
+    except Exception as exc:
+        result["exit_code"] = 1
+        result["error"] = str(exc)
+        try:
+            tmp.unlink()
+        except FileNotFoundError:
+            pass
+    return result
+
+
+def materialize_stable_inputs(
+    records: dict[str, dict[str, Any]],
+    run_dir: Path,
+    root: Path,
+) -> tuple[dict[str, dict[str, Any]], dict[str, Any]]:
+    input_root = run_dir / "input_vrps"
+    stable_records: dict[str, dict[str, Any]] = {}
+    copy_results: list[dict[str, Any]] = []
+    missing_inputs: list[str] = []
+    for probe_id, record in records.items():
+        probe_dir = input_root / f"probe_id={probe_id}"
+        normalized_src = Path(str(record.get("normalized_path") or ""))
+        metadata_src = Path(str(record.get("metadata_path") or ""))
+        normalized_dest = probe_dir / LATEST_NORMALIZED
+        metadata_dest = probe_dir / LATEST_METADATA
+        normalized_copy = copy_stable_file(normalized_src, normalized_dest, root)
+        metadata_copy = copy_stable_file(metadata_src, metadata_dest, root)
+        copy_results.extend([
+            {"probe_id": probe_id, "kind": "normalized_vrp", **normalized_copy},
+            {"probe_id": probe_id, "kind": "metadata", **metadata_copy},
+        ])
+        if not normalized_copy.get("exists"):
+            missing_inputs.append(f"{probe_id}:normalized_vrp")
+        if not metadata_copy.get("exists"):
+            missing_inputs.append(f"{probe_id}:metadata")
+        stable_record = snapshot_record(
+            probe_id,
+            normalized_dest,
+            metadata_dest,
+            f"stable_copy:{normalized_src}",
+            f"stable_copy:{metadata_src}",
+        )
+        stable_record["original_normalized_path"] = str(normalized_src)
+        stable_record["original_metadata_path"] = str(metadata_src)
+        stable_records[probe_id] = stable_record
+    metadata_json_ok = all(record.get("metadata_json_ok") for record in stable_records.values())
+    report = {
+        "enabled": True,
+        "input_root": str(input_root),
+        "copy_results": copy_results,
+        "missing_inputs": missing_inputs,
+        "stable_inputs_exist": not missing_inputs and all(record.get("normalized_exists") and record.get("metadata_exists") for record in stable_records.values()),
+        "stable_metadata_json_ok": metadata_json_ok,
+        "ok": not missing_inputs and metadata_json_ok,
+    }
+    return stable_records, report
+
+
 def parse_acceptance(path: Path) -> dict[str, str]:
     if not path.is_file():
         return {}
@@ -331,6 +437,27 @@ def is_truthy_text(value: Any) -> bool:
 
 def bool_text(value: Any) -> str:
     return "true" if bool(value) else "false"
+
+
+def parse_bool_arg(value: str | bool) -> bool:
+    if isinstance(value, bool):
+        return value
+    text = str(value).strip().lower()
+    if text in {"1", "true", "yes", "y", "on"}:
+        return True
+    if text in {"0", "false", "no", "n", "off"}:
+        return False
+    raise argparse.ArgumentTypeError(f"expected true or false, got {value}")
+
+
+def env_bool(name: str, default: bool) -> bool:
+    value = os.environ.get(name)
+    if value is None:
+        return default
+    try:
+        return parse_bool_arg(value)
+    except argparse.ArgumentTypeError:
+        return default
 
 
 def p2_command(
@@ -458,6 +585,52 @@ def p7_command(
     ]
 
 
+def p8_input_archive_command(
+    python_bin: str,
+    root: Path,
+    p8_run_dir: Path,
+    out_root: Path,
+    upload_minio: bool,
+    minio_alias: str,
+    minio_bucket: str,
+    minio_prefix: str,
+    mc_bin: str,
+    stable_inputs: bool,
+    input_root: Path,
+    snapshot_assignments: dict[str, str],
+    metadata_assignments: dict[str, str],
+) -> list[str]:
+    command = [
+        python_bin,
+        str(root / "probe" / "archive_p8_input_vrps.py"),
+        "--p8-run-dir",
+        str(p8_run_dir),
+        "--out-dir",
+        str(out_root),
+        "--upload-minio",
+        bool_text(upload_minio),
+        "--compress",
+        "gzip",
+        "--minio-alias",
+        minio_alias,
+        "--minio-bucket",
+        minio_bucket,
+        "--minio-prefix",
+        minio_prefix,
+        "--mc-bin",
+        mc_bin,
+        "--source-mode",
+        "stable_copy" if stable_inputs else "latest",
+    ]
+    if stable_inputs:
+        command.extend(["--input-root", str(input_root)])
+    for probe_id, path_text in sorted(metadata_assignments.items()):
+        command.extend(["--metadata", f"{probe_id}={path_text}"])
+    for probe_id, path_text in sorted(snapshot_assignments.items()):
+        command.extend(["--vrp", f"{probe_id}={path_text}"])
+    return command
+
+
 def no_normalized_vrp_in_manifest(manifest: dict[str, Any]) -> bool:
     artifacts = manifest.get("artifacts")
     if not isinstance(artifacts, list):
@@ -531,7 +704,7 @@ def causal_claim_allowed_zero(*objects: dict[str, Any]) -> bool:
 
 def build_acceptance(summary: dict[str, Any]) -> str:
     checks = summary.get("acceptance_checks") if isinstance(summary.get("acceptance_checks"), dict) else {}
-    status = "PASS" if checks and all(bool(value) for value in checks.values()) else "FAIL"
+    status = str(summary.get("status") or ("PASS" if checks and all(bool(value) for value in checks.values()) else "FAIL"))
     outputs = summary.get("outputs") if isinstance(summary.get("outputs"), dict) else {}
     lines = [
         f"{ACCEPTANCE_NAME}={status}",
@@ -552,6 +725,13 @@ def build_acceptance(summary: dict[str, Any]) -> str:
         f"upload_attempted={bool_text(summary.get('upload_attempted'))}",
         f"causal_claim_allowed_count={summary.get('causal_claim_allowed_count', 0)}",
         f"root_cause_confirmed={bool_text(summary.get('root_cause_confirmed'))}",
+        f"stable_input_materialized={bool_text(summary.get('stable_input_materialized'))}",
+        f"p2_used_stable_inputs={bool_text(summary.get('p2_used_stable_inputs'))}",
+        f"p8_input_vrp_archive_enabled={bool_text(summary.get('p8_input_vrp_archive_enabled'))}",
+        f"p8_input_vrp_archive_status={summary.get('p8_input_vrp_archive_status') or 'SKIPPED'}",
+        f"p8_input_vrp_manifest={summary.get('p8_input_vrp_manifest') or ''}",
+        f"p8_input_metadata_consistent={bool_text(summary.get('p8_input_metadata_consistent'))}",
+        f"p8_input_archive_from_stable_copy={bool_text(summary.get('p8_input_archive_from_stable_copy'))}",
         "",
         "[checks]",
     ]
@@ -605,17 +785,88 @@ def run_pipeline(args: argparse.Namespace) -> int:
                 remote_pull_results.append({"probe_id": probe_id, "kind": label, **result})
         records[probe_id] = snapshot_record(probe_id, normalized_path, metadata_path, normalized_source, metadata_source)
 
+    original_records = records
+    stable_input_report: dict[str, Any] = {
+        "enabled": bool(args.stable_inputs),
+        "input_root": str(run_dir / "input_vrps"),
+        "copy_results": [],
+        "missing_inputs": [],
+        "stable_inputs_exist": not args.stable_inputs,
+        "stable_metadata_json_ok": not args.stable_inputs,
+        "ok": not args.stable_inputs,
+    }
+    p2_used_stable_inputs = False
+    if args.stable_inputs:
+        stable_records, stable_input_report = materialize_stable_inputs(records, run_dir, root)
+        records = stable_records
+        p2_used_stable_inputs = bool(stable_input_report.get("ok"))
+
     skew_sec = capture_time_skew(records)
     commands: dict[str, dict[str, Any]] = {}
 
-    p2_result = run_command(
-        p2_command(args.python_bin, root, records, p2_dir, args.window_size_sec, args.max_skew_sec),
-        root,
-    )
+    if (not args.stable_inputs) or stable_input_report.get("ok"):
+        p2_result = run_command(
+            p2_command(args.python_bin, root, records, p2_dir, args.window_size_sec, args.max_skew_sec),
+            root,
+        )
+    else:
+        p2_result = {
+            "command": [],
+            "exit_code": 2,
+            "stdout_tail": "",
+            "stderr_tail": "stable input materialization failed",
+            "duration_sec": 0,
+        }
     commands["p2"] = p2_result
     p2_summary, p2_summary_error = load_json_if_exists(p2_dir / "cross_probe_summary.json")
     p2_acceptance = parse_acceptance(p2_dir / "checks" / "P2_CROSS_PROBE_DIFF_ACCEPTANCE.txt")
     p2_window_quality_ok = p2_summary.get("window_quality") == "OK"
+
+    p8_input_archive_result: dict[str, Any] | None = None
+    p8_input_archive_manifest: dict[str, Any] = {}
+    p8_input_archive_error: str | None = "not_run"
+    p8_input_archive_acceptance: dict[str, str] = {}
+    p8_input_archive_status = "SKIPPED"
+    p8_input_manifest_path = ""
+    p8_input_metadata_consistent = not args.p8_input_vrp_archive
+    p8_input_archive_from_stable_copy = False
+    if args.p8_input_vrp_archive and p2_summary:
+        p8_archive_out_root = resolve_path(args.p8_input_vrp_out_root, root)
+        p8_input_archive_result = run_command(
+            p8_input_archive_command(
+                args.python_bin,
+                root,
+                run_dir,
+                p8_archive_out_root,
+                args.p8_input_vrp_upload,
+                args.minio_alias,
+                args.minio_bucket,
+                args.minio_prefix,
+                args.mc_bin,
+                bool(args.stable_inputs),
+                Path(str(stable_input_report.get("input_root") or (run_dir / "input_vrps"))),
+                snapshot_assignments,
+                metadata_assignments,
+            ),
+            root,
+        )
+        commands["p8_input_vrp_archive"] = p8_input_archive_result
+        archive_window_id = str(p2_summary.get("window_id") or "")
+        archive_dir = p8_archive_out_root / f"window_id={archive_window_id}" if archive_window_id else p8_archive_out_root
+        p8_input_manifest = archive_dir / "p8_input_vrp_manifest.json"
+        p8_input_manifest_path = str(p8_input_manifest)
+        p8_input_archive_manifest, p8_input_archive_error = load_json_if_exists(p8_input_manifest)
+        p8_input_archive_acceptance = parse_acceptance(archive_dir / "checks" / "P8_INPUT_VRP_ARCHIVE_ACCEPTANCE.txt")
+        p8_input_archive_status = (
+            str(p8_input_archive_manifest.get("status") or "")
+            or first_acceptance_value(p8_input_archive_acceptance, "P8_INPUT_VRP_ARCHIVE")
+            or "FAIL"
+        )
+        mismatches = p8_input_archive_manifest.get("mismatches")
+        p8_input_metadata_consistent = isinstance(mismatches, list) and len(mismatches) == 0
+        p8_input_archive_from_stable_copy = p8_input_archive_manifest.get("source_mode") == "stable_copy"
+    elif args.p8_input_vrp_archive:
+        p8_input_archive_status = "SKIPPED"
 
     p3_result: dict[str, Any] | None = None
     p3_summary: dict[str, Any] = {}
@@ -697,6 +948,11 @@ def run_pipeline(args: argparse.Namespace) -> int:
     no_normalized_upload = no_normalized_vrp_in_manifest(p4_manifest) and p6_no_normalized_upload(p6_report)
     causal_ok = causal_claim_allowed_zero(p2_summary, p3_summary, p6_report, p7_report)
     root_ok = root_cause_confirmed_false(p2_summary, p3_summary, p6_report, p7_report)
+    p8_input_archive_pass_or_not_required = (
+        (not args.p8_input_vrp_archive)
+        or p8_input_archive_status == "PASS"
+        or not args.p8_input_vrp_archive_required
+    )
 
     checks = {
         "probe_id_count_gt_one": len(probe_ids) >= 2,
@@ -704,12 +960,17 @@ def run_pipeline(args: argparse.Namespace) -> int:
         "all_metadata_exist": all(record.get("metadata_exists") for record in records.values()),
         "remote_inputs_materialized": all(result.get("exit_code") == 0 for result in remote_pull_results),
         "metadata_json_ok": all(record.get("metadata_json_ok") for record in records.values()),
+        "stable_inputs_exist": (not args.stable_inputs) or bool(stable_input_report.get("stable_inputs_exist")),
+        "stable_metadata_json_ok": (not args.stable_inputs) or bool(stable_input_report.get("stable_metadata_json_ok")),
+        "p2_used_stable_inputs": (not args.stable_inputs) or p2_used_stable_inputs,
         "all_validator_healthy": all(record.get("validator_healthy") for record in records.values()),
         "capture_time_skew_within_threshold": skew_sec is not None and skew_sec <= args.max_skew_sec,
         "p2_exit_zero": p2_result.get("exit_code") == 0,
         "p2_summary_json_ok": bool(p2_summary) and p2_summary_error is None,
         "p2_window_quality_ok": p2_window_quality_ok,
         "p2_acceptance_pass": p2_acceptance_pass,
+        "p8_input_vrp_archive_pass_or_not_required": p8_input_archive_pass_or_not_required,
+        "p8_input_metadata_consistent": p8_input_metadata_consistent,
         "p3_ran_if_p2_ok": p3_requirement_ok,
         "p3_acceptance_pass_or_not_required": p3_acceptance_pass,
         "p4_exit_zero": p4_result is not None and p4_result.get("exit_code") == 0,
@@ -721,12 +982,15 @@ def run_pipeline(args: argparse.Namespace) -> int:
         "causal_claim_allowed_zero": causal_ok,
         "root_cause_confirmed_false": root_ok,
     }
+    blocking_checks = dict(checks)
+    if args.p8_input_vrp_archive and not args.p8_input_vrp_archive_required:
+        blocking_checks["p8_input_metadata_consistent"] = True
 
     summary = {
         "schema": SCHEMA_SUMMARY,
         "run_id": run_id,
         "run_dir": str(run_dir),
-        "status": "PASS" if all(checks.values()) else "FAIL",
+        "status": "PASS" if all(blocking_checks.values()) else "FAIL",
         "mode": args.mode,
         "archive_mode_effective": archive_mode_effective,
         "started_at_utc": started_at,
@@ -734,7 +998,19 @@ def run_pipeline(args: argparse.Namespace) -> int:
         "duration_sec": round(time.monotonic() - started_monotonic, 6),
         "probe_ids": probe_ids,
         "probe_records": records,
+        "original_probe_records": original_records,
         "remote_pull_results": remote_pull_results,
+        "stable_inputs_enabled": bool(args.stable_inputs),
+        "stable_input_materialized": bool(args.stable_inputs and stable_input_report.get("ok")),
+        "stable_input_report": stable_input_report,
+        "p2_used_stable_inputs": p2_used_stable_inputs,
+        "p8_input_vrp_archive_enabled": bool(args.p8_input_vrp_archive),
+        "p8_input_vrp_archive_required": bool(args.p8_input_vrp_archive_required),
+        "p8_input_vrp_archive_status": p8_input_archive_status,
+        "p8_input_vrp_manifest": p8_input_manifest_path,
+        "p8_input_metadata_consistent": p8_input_metadata_consistent,
+        "p8_input_archive_from_stable_copy": p8_input_archive_from_stable_copy,
+        "p8_input_vrp_archive_upload_requested": bool(args.p8_input_vrp_upload),
         "capture_time_by_probe": {probe_id: record.get("capture_time_utc") for probe_id, record in records.items()},
         "capture_time_skew_sec": skew_sec,
         "max_skew_sec": args.max_skew_sec,
@@ -756,6 +1032,7 @@ def run_pipeline(args: argparse.Namespace) -> int:
         "causal_claim_allowed_count": 0 if causal_ok else "nonzero",
         "root_cause_confirmed": not root_ok,
         "minio_endpoint": args.minio_endpoint or "",
+        "minio_alias": args.minio_alias,
         "minio_bucket": args.minio_bucket,
         "minio_prefix": args.minio_prefix,
         "outputs": {
@@ -764,11 +1041,13 @@ def run_pipeline(args: argparse.Namespace) -> int:
             "p4_run_dir": str(p4_dir) if p4_result else "",
             "p6_run_dir": str(p6_dir) if p6_result else "",
             "p7_run_dir": str(p7_dir) if p7_result else "",
+            "p8_input_vrp_archive_manifest": p8_input_manifest_path,
             "pipeline_summary_json": str(run_dir / "pipeline_summary.json"),
             "acceptance_check_file": str(checks_dir / "P8_CROSS_PROBE_PIPELINE_ACCEPTANCE.txt"),
         },
         "stage_summary_errors": {
             "p2_summary": p2_summary_error,
+            "p8_input_vrp_archive": p8_input_archive_error,
             "p3_summary": p3_summary_error,
             "p4_manifest": p4_manifest_error,
             "p6_report": p6_report_error,
@@ -776,6 +1055,7 @@ def run_pipeline(args: argparse.Namespace) -> int:
         },
         "acceptance": {
             "p2": p2_acceptance,
+            "p8_input_vrp_archive": p8_input_archive_acceptance,
             "p3": p3_acceptance,
             "p4": p4_acceptance,
             "p6": p6_acceptance,
@@ -799,6 +1079,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--metadata", action="append", default=[], help="Probe metadata assignment: probe_id=path/to/latest_metadata.json or probe_id=dir. Repeatable.")
     parser.add_argument("--out-root", default=DEFAULT_OUT_ROOT)
     parser.add_argument("--minio-endpoint", default=os.environ.get("MINIO_ENDPOINT", ""))
+    parser.add_argument("--minio-alias", default=os.environ.get("MINIO_ALIAS", DEFAULT_MINIO_ALIAS))
     parser.add_argument("--minio-bucket", default=os.environ.get("MINIO_BUCKET", DEFAULT_MINIO_BUCKET))
     parser.add_argument("--minio-prefix", default=os.environ.get("MINIO_PREFIX", DEFAULT_MINIO_PREFIX))
     parser.add_argument("--max-skew-sec", type=int, default=600)
@@ -811,6 +1092,11 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--mc-bin", default="mc", help="MinIO mc CLI path for P7 verification.")
     parser.add_argument("--sample-download", type=int, default=0, help="P7 restore sample count for upload/verify mode.")
     parser.add_argument("--compress-jsonl", action="store_true", help="Pass --compress-jsonl to P6 archive tool.")
+    parser.add_argument("--stable-inputs", type=parse_bool_arg, default=env_bool("P8_STABLE_INPUTS", True), help="Copy P8 VRP inputs into the run directory before P2 and use those stable copies.")
+    parser.add_argument("--p8-input-vrp-archive", type=parse_bool_arg, default=env_bool("P8_INPUT_VRP_ARCHIVE", True), help="Archive the stable P8 input VRPs for window-bound P10 replay.")
+    parser.add_argument("--p8-input-vrp-upload", type=parse_bool_arg, default=env_bool("P8_INPUT_VRP_UPLOAD", False), help="Upload P8 input VRP archive to MinIO. Defaults false.")
+    parser.add_argument("--p8-input-vrp-archive-required", type=parse_bool_arg, default=env_bool("P8_INPUT_VRP_ARCHIVE_REQUIRED", False), help="Fail P8 if the input VRP archive fails.")
+    parser.add_argument("--p8-input-vrp-out-root", default=os.environ.get("P8_INPUT_VRP_OUT_ROOT", "data/probe/p8_input_vrps"))
     return parser
 
 
