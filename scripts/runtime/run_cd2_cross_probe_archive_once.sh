@@ -12,6 +12,7 @@ P8_MAX_SKEW_SEC="${P8_MAX_SKEW_SEC:-${MAX_SKEW_SEC:-600}}"
 MIN_CONSECUTIVE="${MIN_CONSECUTIVE:-2}"
 WINDOW_SIZE_SEC="${WINDOW_SIZE_SEC:-3600}"
 MINIO_ENDPOINT="${MINIO_ENDPOINT:-}"
+P8_MINIO_ALIAS="${P8_MINIO_ALIAS:-${MINIO_ALIAS:-}}"
 MINIO_BUCKET="${MINIO_BUCKET:-rpki-probe-artifacts}"
 P8_MINIO_PREFIX="${P8_MINIO_PREFIX:-${MINIO_PREFIX:-rp-monitor}}"
 MC_BIN="${MC_BIN:-mc}"
@@ -53,6 +54,7 @@ P8_ARGS=(
   --window-size-sec "${WINDOW_SIZE_SEC}" \
   --min-consecutive "${MIN_CONSECUTIVE}" \
   --minio-endpoint "${MINIO_ENDPOINT}" \
+  --minio-alias "${P8_MINIO_ALIAS}" \
   --minio-bucket "${MINIO_BUCKET}" \
   --minio-prefix "${P8_MINIO_PREFIX}" \
   --python-bin "${PYTHON_BIN}" \

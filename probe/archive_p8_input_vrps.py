@@ -199,25 +199,71 @@ def write_sha256sums(path: Path, entries: list[tuple[str, Path]]) -> None:
     atomic_write_text(path, "\n".join(lines) + "\n")
 
 
-def minio_dest(prefix: str, window_id: str, probe_id: str | None = None) -> str:
-    base = prefix.rstrip("/") + f"/p8_input_vrps/window_id={window_id}"
-    if probe_id:
-        base += f"/probe_id={probe_id}"
-    return base
+def minio_remote_root(alias: str, bucket: str, prefix: str, window_id: str) -> str:
+    parts = [alias.strip("/"), bucket.strip("/")]
+    clean_prefix = prefix.strip("/")
+    if clean_prefix:
+        parts.append(clean_prefix)
+    parts.extend(["p8_input_vrps", f"window_id={window_id}"])
+    return "/".join(part for part in parts if part) + "/"
 
 
-def mc_copy_and_stat(mc_bin: str, local_path: Path, remote: str) -> dict[str, Any]:
-    result = {"local_path": str(local_path), "remote": remote, "cp_exit_code": None, "stat_exit_code": None, "ok": False, "error": ""}
-    cp = subprocess.run([mc_bin, "cp", str(local_path), remote], text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    result["cp_exit_code"] = cp.returncode
-    if cp.returncode != 0:
-        result["error"] = (cp.stderr or cp.stdout or "")[-4000:]
+def upload_stat_paths(probe_records: dict[str, Any]) -> list[str]:
+    paths = ["p8_input_vrp_manifest.json"]
+    preferred_order = ["probe-cd", "probe-k02", "probe-sg"]
+    remaining = sorted(probe_id for probe_id in probe_records if probe_id not in preferred_order)
+    for probe_id in preferred_order + remaining:
+        record = probe_records.get(probe_id)
+        if not isinstance(record, dict):
+            continue
+        metadata_path = Path(str(record.get("metadata_path", "")))
+        vrp_path = Path(str(record.get("vrp_path", "")))
+        if metadata_path.name:
+            paths.append(f"probe_id={probe_id}/{metadata_path.name}")
+        if vrp_path.name:
+            paths.append(f"probe_id={probe_id}/{vrp_path.name}")
+    return paths
+
+
+def mc_mirror_and_stat(mc_bin: str, local_dir: Path, remote_root: str, required_paths: list[str]) -> dict[str, Any]:
+    result: dict[str, Any] = {
+        "operation": "mc_mirror",
+        "local_dir": str(local_dir),
+        "remote_root": remote_root,
+        "mirror_exit_code": None,
+        "stat_results": [],
+        "ok": False,
+        "error": "",
+    }
+    local_source = str(local_dir) + os.sep
+    mirror = subprocess.run(
+        [mc_bin, "mirror", "--overwrite", local_source, remote_root],
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    result["mirror_exit_code"] = mirror.returncode
+    if mirror.returncode != 0:
+        result["error"] = (mirror.stderr or mirror.stdout or "")[-4000:]
         return result
-    stat = subprocess.run([mc_bin, "stat", remote.rstrip("/") + "/" + local_path.name], text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    result["stat_exit_code"] = stat.returncode
-    result["ok"] = stat.returncode == 0
-    if stat.returncode != 0:
-        result["error"] = (stat.stderr or stat.stdout or "")[-4000:]
+
+    all_stat_ok = True
+    for rel_path in required_paths:
+        normalized_rel = rel_path.replace("\\", "/").lstrip("/")
+        remote_path = remote_root.rstrip("/") + "/" + normalized_rel
+        stat = subprocess.run([mc_bin, "stat", remote_path], text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        stat_result = {
+            "relative_path": normalized_rel,
+            "remote": remote_path,
+            "stat_exit_code": stat.returncode,
+            "ok": stat.returncode == 0,
+            "error": "" if stat.returncode == 0 else (stat.stderr or stat.stdout or "")[-2000:],
+        }
+        result["stat_results"].append(stat_result)
+        all_stat_ok = all_stat_ok and stat.returncode == 0
+    result["ok"] = all_stat_ok
+    if not all_stat_ok and not result["error"]:
+        result["error"] = "one or more mc stat checks failed"
     return result
 
 
@@ -386,24 +432,34 @@ def run_archive(args: argparse.Namespace) -> int:
     upload_results: list[dict[str, Any]] = []
     minio_stat_ok = False
     uploaded = False
+    minio_alias = args.minio_alias or os.environ.get("MINIO_ALIAS", "")
+    minio_bucket = args.minio_bucket or os.environ.get("MINIO_BUCKET", "")
+    minio_prefix = args.minio_prefix or os.environ.get("MINIO_PREFIX", "")
+    minio_remote = ""
     if args.upload_minio and status in {"PASS", "PASS_WITH_EXCLUSIONS"}:
-        prefix = args.minio_prefix or os.environ.get("MINIO_PREFIX", "")
-        if not prefix:
-            upload_results.append({"ok": False, "error": "MINIO_PREFIX missing"})
+        if not minio_alias:
+            upload_results.append({"ok": False, "error": "MINIO_ALIAS missing"})
+        elif not minio_bucket:
+            upload_results.append({"ok": False, "error": "MINIO_BUCKET missing"})
         else:
             mc_bin = shutil.which(args.mc_bin) or args.mc_bin
-            window_remote = minio_dest(prefix, window_id)
-            upload_results.append(mc_copy_and_stat(mc_bin, manifest_path, window_remote))
-            for probe_id, record in probe_records.items():
-                remote = minio_dest(prefix, window_id, probe_id)
-                for key in ("metadata_path", "vrp_path", "sha256sums_path"):
-                    upload_results.append(mc_copy_and_stat(mc_bin, Path(record[key]), remote))
-            uploaded = bool(upload_results) and all(item.get("cp_exit_code") == 0 for item in upload_results)
-            minio_stat_ok = bool(upload_results) and all(item.get("ok") for item in upload_results)
+            minio_remote = minio_remote_root(minio_alias, minio_bucket, minio_prefix, window_id)
+            mirror_result = mc_mirror_and_stat(mc_bin, out_dir, minio_remote, upload_stat_paths(probe_records))
+            upload_results.append(mirror_result)
+            uploaded = mirror_result.get("mirror_exit_code") == 0
+            minio_stat_ok = bool(mirror_result.get("ok"))
+        if status == "PASS" and (not uploaded or not minio_stat_ok):
+            status = "PASS_WITH_EXCLUSIONS"
 
     manifest["upload_minio"] = bool(args.upload_minio)
+    manifest["status"] = status
     manifest["uploaded"] = uploaded
     manifest["minio_stat_ok"] = minio_stat_ok
+    manifest["minio_alias"] = minio_alias
+    manifest["minio_bucket"] = minio_bucket
+    manifest["minio_prefix"] = minio_prefix
+    manifest["minio_remote_root"] = minio_remote
+    manifest["remote_root"] = minio_remote
     manifest["upload_results"] = upload_results
     atomic_write_json(manifest_path, manifest)
 
@@ -449,6 +505,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--out-dir", required=True)
     parser.add_argument("--upload-minio", type=parse_bool, default=False)
     parser.add_argument("--compress", choices=["gzip", "none"], default="gzip")
+    parser.add_argument("--minio-alias", default=os.environ.get("MINIO_ALIAS", ""))
+    parser.add_argument("--minio-bucket", default=os.environ.get("MINIO_BUCKET", ""))
     parser.add_argument("--minio-prefix", default=os.environ.get("MINIO_PREFIX", ""))
     parser.add_argument("--mc-bin", default="mc")
     parser.add_argument("--metadata", action="append", default=[], help="Optional PROBE_ID=latest_metadata.json override.")

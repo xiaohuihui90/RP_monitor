@@ -20,6 +20,8 @@ usage() {
 'Options:' \
 '  --upload-minio true|false' \
 '  --compress gzip|none' \
+'  --minio-alias ALIAS      Defaults to MINIO_ALIAS' \
+'  --minio-bucket BUCKET    Defaults to MINIO_BUCKET' \
 '  --minio-prefix PREFIX' \
 '  --mc-bin mc' \
 '  --metadata PROBE=PATH' \
